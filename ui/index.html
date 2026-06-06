@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worker Digital Rights Audit</title>
+  <link rel="stylesheet" href="/static/css/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+  <div class="app">
+
+    <aside class="sidebar">
+      <div class="logo">WDRA <span>Audit</span></div>
+
+      <div class="nav-label">Navegación</div>
+      <button class="nav-btn active" data-section="dashboard" onclick="showSection('dashboard', this)">📊
+        Dashboard</button>
+      <button class="nav-btn" data-section="findings" onclick="showSection('findings', this)">🔍 Hallazgos</button>
+      <button class="nav-btn" data-section="legal" onclick="showSection('legal', this)">⚖️ Legal</button>
+      <button class="nav-btn" data-section="compare" onclick="showSection('compare', this)">⚖ Comparar</button>
+
+      <div class="nav-label" style="margin-top:8px">Informes</div>
+      <div id="reportList"></div>
+
+      <div style="flex:1"></div>
+
+      <div class="nav-label" style="margin-top:8px">Ejecución</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:10px">
+        <select id="recommendationMode" class="search-input" style="width:100%"
+          onchange="onRecommendationModeChanged()">
+          <option value="completo" selected>Modo: completo</option>
+          <option value="urgente">Modo: urgente</option>
+          <option value="personalizado">Modo: personalizado</option>
+        </select>
+        <input id="customCategories" type="text" class="search-input" placeholder="Categorías (solo personalizado)"
+          style="width:100%;display:none" />
+        <input id="customRisks" type="text" class="search-input" placeholder="Riesgos: high,very_high"
+          style="width:100%;display:none" />
+        <input id="runSkills" type="text" class="search-input" placeholder="Skills opcional: event_viewer,mdm"
+          style="width:100%" />
+      </div>
+
+      <button class="btn btn-secondary" style="width:100%;justify-content:center;margin-bottom:8px"
+        onclick="toggleTheme()" id="themeBtn">☀ Modo claro</button>
+      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="runAudit()" id="runBtn">▶ Nueva
+        Auditoría</button>
+    </aside>
+
+    <main class="main">
+      <!-- ── Empty state ── -->
+      <div id="emptyState" class="empty" style="display:none">
+        <div class="empty-icon">🛡️</div>
+        <div class="empty-title">Sin informes</div>
+        <p>Ejecuta una auditoría para ver resultados</p>
+        <br>
+        <button class="btn btn-primary" onclick="runAudit()">▶ Iniciar Auditoría</button>
+      </div>
+
+      <!-- ── Dashboard ── -->
+      <div id="section-dashboard" class="section active">
+        <div class="page-header">
+          <div>
+            <div class="page-title">Dashboard</div>
+            <div class="page-sub" id="reportDate">—</div>
+          </div>
+          <div style="display:flex;gap:10px">
+            <button class="btn btn-secondary" onclick="downloadJson()">⬇ JSON</button>
+            <button class="btn btn-secondary" onclick="downloadPdf()">⬇ PDF</button>
+          </div>
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <div class="card-label">Riesgo máximo</div>
+            <div class="card-value" id="maxRisk">—</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Hallazgos</div>
+            <div class="card-value" id="totalFindings">—</div>
+            <div class="card-sub" id="findingCount">detectados</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Issues legales</div>
+            <div class="card-value" id="legalCount">—</div>
+            <div class="card-sub">identificados</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Informe</div>
+            <div class="card-value" style="font-size:16px" id="reportName">—</div>
+          </div>
+        </div>
+
+        <!-- Donut + barras de riesgo -->
+        <div style="display:grid;grid-template-columns:240px 1fr;gap:20px;margin-bottom:28px">
+          <div class="card" style="display:flex;flex-direction:column;align-items:center;
+            justify-content:center;padding:20px">
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:.8px;
+              color:var(--text-muted);margin-bottom:12px">Distribución</div>
+            <canvas id="riskDonut" width="180" height="180"></canvas>
+            <div id="donutLegend" style="margin-top:12px;font-size:11px;width:100%"></div>
+          </div>
+          <div id="riskBars"></div>
+        </div>
+
+        <div style="margin-bottom:10px;font-size:11px;text-transform:uppercase;
+          letter-spacing:.8px;color:var(--text-muted)">Por Skill</div>
+        <div id="skillSummary" class="cards" style="grid-template-columns:repeat(3,1fr);margin-bottom:28px"></div>
+
+        <div class="table-wrap">
+          <div class="table-header">
+            Resumen de Hallazgos
+            <span id="" style="font-size:12px;color:var(--text-muted)"></span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Skill</th>
+                <th>Hallazgo</th>
+                <th>Categoría</th>
+                <th>Riesgo</th>
+              </tr>
+            </thead>
+            <tbody id="summaryTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── Hallazgos ── -->
+      <div id="section-findings" class="section">
+        <div class="page-header">
+          <div>
+            <div class="page-title">Hallazgos Detallados</div>
+            <div class="page-sub">Análisis técnico con contexto explicativo</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input id="findingsSearch" type="search" placeholder="Buscar hallazgos..." class="search-input"
+              oninput="filterFindings(this.value)">
+            <select id="riskFilter" class="search-input" onchange="filterFindings()" style="width:130px">
+              <option value="">Todos los riesgos</option>
+              <option value="red">Rojo</option>
+              <option value="orange">Naranja</option>
+              <option value="yellow">Amarillo</option>
+              <option value="green">Verde</option>
+            </select>
+          </div>
+        </div>
+        <div id="findingsDetail"></div>
+      </div>
+
+      <!-- ── Legal ── -->
+      <div id="section-legal" class="section">
+        <div class="page-header">
+          <div>
+            <div class="page-title">Evaluación Legal</div>
+            <div class="page-sub">RGPD · LOPDGDD · ET art. 20bis · Doctrina Barbulescu</div>
+          </div>
+        </div>
+        <div id="legalDetail"></div>
+      </div>
+
+      <!-- ── Comparar ── -->
+      <div id="section-compare" class="section">
+        <div class="page-header">
+          <div>
+            <div class="page-title">Comparar Auditorías</div>
+            <div class="page-sub">Diferencias entre dos informes</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:24px;padding:20px">
+          <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end">
+            <div>
+              <div class="card-label" style="margin-bottom:6px">Informe A (base)</div>
+              <select id="compareA" class="search-input" style="width:100%"></select>
+            </div>
+            <div>
+              <div class="card-label" style="margin-bottom:6px">Informe B (nuevo)</div>
+              <select id="compareB" class="search-input" style="width:100%"></select>
+            </div>
+            <button class="btn btn-primary" onclick="runCompare()">Comparar</button>
+          </div>
+        </div>
+
+        <div id="compareResult"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/ui.js"></script>
+  <script src="/static/js/dashboard.js"></script>
+  <script src="/static/js/findings.js"></script>
+  <script src="/static/js/legal.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+
+</html>

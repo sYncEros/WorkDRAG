@@ -1,0 +1,208 @@
+{
+  "generated_at": "2025-05-15T09:30:00",
+  "total_findings": 8,
+  "max_risk": "red",
+  "integrity_hash": "EXAMPLE_HASH_NOT_REAL_abcdef1234567890abcdef1234567890abcdef12",
+  "_note": "Este es un ejemplo anonimizado para demostración. Los datos son ficticios.",
+  "findings": [
+    {
+      "skill": "surveillance_audit",
+      "category": "productivity_monitoring",
+      "title": "Software de monitorización de productividad activo (ActivTrak detectado)",
+      "description": "Se ha detectado ActivTrak instalado y en ejecución. Este software captura capturas de pantalla periódicas, registra aplicaciones usadas y tiempo activo.",
+      "risk_level": "red",
+      "technical_risk": "ActivTrak puede tomar capturas de pantalla cada 5 minutos, registrar todas las aplicaciones abiertas, URLs visitadas y tiempo de actividad/inactividad. Los datos se envían a servidores en la nube de ActivTrak accesibles por el administrador.",
+      "legal_risk": "La vigilancia continua mediante capturas de pantalla y registro de actividad es extremadamente invasiva. Difícilmente supera el test de proporcionalidad del TEDH (Barbulescu II). Requiere información muy detallada previa bajo LOPDGDD art. 87 y ET art. 20bis.",
+      "what_it_is": "Software de employee monitoring comercial que registra toda la actividad del trabajador en el ordenador corporativo.",
+      "what_it_is_not": "No es una herramienta de seguridad EDR. Está específicamente diseñada para monitorizar empleados.",
+      "raw_data": {
+        "installed_name": "ActivTrak Agent",
+        "publisher": "Birch Grove Software",
+        "running_process": "atd.exe"
+      },
+      "timestamp": "2025-05-15T09:30:05"
+    },
+    {
+      "skill": "persistence_audit",
+      "category": "persistence_untrusted_certs",
+      "title": "Certificado raíz corporativo para inspección SSL detectado",
+      "description": "Se ha encontrado un certificado raíz de una CA corporativa 'Empresa XYZ IT Security CA' que permite la inspección del tráfico HTTPS.",
+      "risk_level": "orange",
+      "technical_risk": "Con este certificado, el proxy corporativo puede descifrar y leer todo el tráfico HTTPS del navegador: emails web, portales bancarios, comunicaciones personales.",
+      "legal_risk": "La inspección SSL requiere información previa al trabajador (doctrina Barbulescu II). Sin comunicación documentada puede vulnerar el secreto de las comunicaciones.",
+      "what_it_is": "Certificado de una CA interna corporativa instalado en el almacén de confianza del sistema para permitir la inspección del tráfico cifrado.",
+      "what_it_is_not": "No es un certificado malicioso. Es una práctica corporativa estándar de seguridad, pero requiere transparencia con el trabajador.",
+      "raw_data": {
+        "non_standard_certs": [
+          {
+            "subject": "CN=Empresa XYZ IT Security CA, O=Empresa XYZ S.L., C=ES",
+            "issuer": "CN=Empresa XYZ IT Security CA, O=Empresa XYZ S.L., C=ES",
+            "thumbprint": "A1B2C3D4E5F6A1B2C3D4E5F6A1B2C3D4E5F6A1B2",
+            "ssl_inspection_indicator": true
+          }
+        ],
+        "total_root_certs": 48
+      },
+      "timestamp": "2025-05-15T09:31:12"
+    },
+    {
+      "skill": "user_behavior_audit",
+      "category": "behavior_logging_capabilities",
+      "title": "Capacidades de logging de actividad activas (3): WEF, PS ScriptBlock, AppLocker",
+      "description": "Windows Event Forwarding activo enviando logs a servidor corporativo. PowerShell ScriptBlock Logging registrando todos los scripts ejecutados. AppLocker controlando la ejecución de aplicaciones.",
+      "risk_level": "orange",
+      "technical_risk": "Los logs de seguridad se envían en tiempo real al SIEM corporativo. Todo script PowerShell ejecutado queda registrado con su contenido completo. AppLocker registra cada aplicación que el trabajador intenta ejecutar.",
+      "legal_risk": "La centralización y análisis de logs de actividad puede requerir DPIA bajo RGPD art. 35 si se usa para perfilar o evaluar al trabajador.",
+      "what_it_is": "Funciones de auditoría avanzada de Windows que registran y centralizan la actividad del equipo.",
+      "what_it_is_not": "Estas capacidades son herramientas de seguridad estándar. No implican análisis de comportamiento por sí solas.",
+      "raw_data": {
+        "capabilities": [
+          {
+            "capability": "Windows Event Forwarding (WEF)",
+            "detail": "Logs se envían a: Server=http://siem.empresa.local:5985/wsman/SubscriptionManager/WEC",
+            "severity": "high"
+          },
+          {
+            "capability": "PowerShell ScriptBlock Logging",
+            "detail": "Se registra el contenido de todos los scripts PowerShell ejecutados.",
+            "severity": "medium"
+          },
+          {
+            "capability": "AppLocker activo",
+            "detail": "AppLocker registra qué aplicaciones ejecuta el usuario.",
+            "severity": "medium"
+          }
+        ]
+      },
+      "timestamp": "2025-05-15T09:33:45"
+    },
+    {
+      "skill": "mdm_audit",
+      "category": "Corporate Control",
+      "title": "MDM / Gestión corporativa del dispositivo",
+      "description": "El dispositivo está gestionado mediante MDM (Microsoft Intune). Organización detectada: empresa-xyz.com. Flags: mdm_enrolled, intune_management_extension_present, manual_unenrollment_disabled, azure_ad_joined.",
+      "risk_level": "yellow",
+      "technical_risk": "MDM permite a la organización instalar software, aplicar políticas, borrar el dispositivo remotamente y restringir aplicaciones.",
+      "legal_risk": "La gestión MDM en dispositivos corporativos es generalmente legítima bajo el ET y LOPDGDD si está informada al trabajador.",
+      "what_it_is": "MDM (Mobile Device Management) es software que permite a las empresas gestionar dispositivos corporativos: aplicar políticas de seguridad, instalar apps, configurar VPN y, en caso extremo, borrar el dispositivo.",
+      "what_it_is_not": "MDM por sí solo no implica monitorización de actividad, lectura de mensajes personales ni vigilancia en tiempo real. Gestiona el dispositivo, no espía al usuario.",
+      "raw_data": {
+        "mdm_enrolled": true,
+        "managed_by": "empresa-xyz.com",
+        "intune_present": true,
+        "applocker_active": true,
+        "unenrollment_blocked": true,
+        "azure_ad_joined": { "azure_ad_joined": true, "domain_joined": true, "workplace_joined": false },
+        "flags": ["mdm_enrolled", "intune_management_extension_present", "manual_unenrollment_disabled", "azure_ad_joined"]
+      },
+      "timestamp": "2025-05-15T09:28:30"
+    },
+    {
+      "skill": "network_monitor",
+      "category": "ssl_inspection",
+      "title": "Inspección SSL activa — proxy corporativo descifra tráfico HTTPS",
+      "description": "Se ha detectado un proxy corporativo con certificado raíz instalado que permite la inspección del tráfico HTTPS. Todo el tráfico web cifrado puede ser leído por la empresa.",
+      "risk_level": "orange",
+      "technical_risk": "El proxy corporativo actúa como Man-in-the-Middle para el tráfico HTTPS. Puede registrar URLs visitadas, contenido de formularios, tokens de sesión y datos personales transmitidos.",
+      "legal_risk": "La inspección SSL permite al empleador leer contenido de comunicaciones cifradas. La doctrina Barbulescu II exige informar previamente al trabajador del alcance.",
+      "what_it_is": "Proxy corporativo que descifra el tráfico HTTPS usando el certificado raíz instalado en el equipo, lo inspecciona y lo re-cifra antes de enviarlo al destino.",
+      "what_it_is_not": "No es un ataque malicioso. Es una práctica corporativa de seguridad para prevenir amenazas en el tráfico cifrado.",
+      "raw_data": {
+        "proxy_detected": true,
+        "proxy_address": "proxy.empresa.local:8080",
+        "ssl_inspection": true,
+        "corporate_cert_present": true
+      },
+      "timestamp": "2025-05-15T09:29:10"
+    },
+    {
+      "skill": "email_audit",
+      "category": "email_archiving",
+      "title": "Indicadores de archivado de email (1 software, 2 archivos OST)",
+      "description": "Se ha detectado Proofpoint Email Archiver instalado. Sistema de archivado corporativo que copia todos los emails a un repositorio accesible por la empresa.",
+      "risk_level": "orange",
+      "technical_risk": "El software de archivado copia automáticamente todos los emails corporativos a un repositorio centralizado. El empleador tiene acceso a este archivo en herramientas de eDiscovery.",
+      "legal_risk": "El archivado de emails requiere información previa al trabajador bajo LOPDGDD art. 87 sobre el período de retención y quién tiene acceso.",
+      "what_it_is": "Sistema que copia automáticamente todos los emails corporativos a un repositorio centralizado, accesible por la empresa.",
+      "what_it_is_not": "El archivado por obligación legal (compliance financiero, sector sanitario) es un requisito normativo, no vigilancia.",
+      "raw_data": {
+        "archiving": [
+          { "software": "Proofpoint", "installed_name": "Proofpoint Email Security", "type": "email_archiving" },
+          { "type": "ost_file", "path": "C:\\Users\\usuario\\AppData\\Local\\Microsoft\\Outlook\\usuario@empresa.ost", "size_mb": 2847.3 },
+          { "type": "ost_file", "path": "C:\\Users\\usuario\\AppData\\Local\\Microsoft\\Outlook\\Archivos de datos.ost", "size_mb": 456.1 }
+        ]
+      },
+      "timestamp": "2025-05-15T09:34:20"
+    },
+    {
+      "skill": "scheduled_tasks_audit",
+      "category": "scheduled_tasks_monitoring",
+      "title": "Tareas con indicadores de monitorización (2)",
+      "description": "Tareas programadas con nombres o ejecutables asociados a software de monitorización.",
+      "risk_level": "orange",
+      "technical_risk": "Estas tareas pueden ejecutar periódicamente agentes de monitorización, recolección de logs o envío de telemetría a servidores externos.",
+      "legal_risk": "La ejecución periódica de software de monitorización sin información previa puede vulnerar LOPDGDD art. 87, ET art. 20bis y la doctrina Barbulescu II del TEDH.",
+      "what_it_is": "Tareas cuyo nombre o ejecutable contienen términos asociados a monitorización, telemetría o vigilancia corporativa.",
+      "what_it_is_not": "No toda coincidencia implica espionaje. Muchas herramientas legítimas usan estos términos: antivirus, SIEM, auditoría de TI.",
+      "raw_data": {
+        "suspicious_tasks": [
+          {
+            "name": "ActivTrak Agent Update",
+            "path": "\\ActivTrak\\",
+            "author": "Birch Grove Software",
+            "created": "2025-03-10T08:00:00",
+            "run_as": "SYSTEM",
+            "executable": "C:\\Program Files\\ActivTrak\\atd.exe",
+            "matched_keywords": ["agent", "monitor", "activity"],
+            "last_run": "2025-05-15T08:00:00",
+            "last_result": 0
+          },
+          {
+            "name": "TelemCollect",
+            "path": "\\Microsoft\\Windows\\",
+            "author": null,
+            "created": "2025-04-22T10:30:00",
+            "run_as": "SYSTEM",
+            "executable": "C:\\Windows\\System32\\telemetry_custom.exe",
+            "matched_keywords": ["collect", "telemetry"],
+            "last_run": "2025-05-15T09:00:00",
+            "last_result": 0
+          }
+        ]
+      },
+      "timestamp": "2025-05-15T09:32:00"
+    },
+    {
+      "skill": "incident_response",
+      "category": "incident_response_playbook",
+      "title": "Playbook de respuesta al trabajador — Urgencia: INMEDIATA (< 24 horas)",
+      "description": "Resumen de situación: Hallazgos de riesgo muy alto — vigilancia específica de empleados detectada. Hallazgos activos: 7. Categorías detectadas: 7.",
+      "risk_level": "red",
+      "technical_risk": "Este playbook sintetiza los hallazgos técnicos de todos los skills de auditoría ejecutados y los traduce en pasos de acción concretos para el trabajador.",
+      "legal_risk": "Las recomendaciones están basadas en RGPD, LOPDGDD, ET art. 20bis y la doctrina Barbulescu II del TEDH. No sustituyen al asesoramiento jurídico profesional.",
+      "what_it_is": "Guía de acción paso a paso para el trabajador, adaptada específicamente a los hallazgos de esta auditoría.",
+      "what_it_is_not": "No es asesoramiento jurídico profesional. Para casos graves, consultar con abogado laboralista o sindicato.",
+      "raw_data": {
+        "max_risk": "red",
+        "urgency": "INMEDIATA (< 24 horas)",
+        "immediate_actions": [
+          "No usar el equipo para comunicaciones personales hasta aclarar la situación.",
+          "Hacer una captura de pantalla del informe de auditoría completo.",
+          "Anotar la fecha y hora exacta de este análisis.",
+          "Contactar con un asesor laboral o sindicato antes de tomar cualquier acción.",
+          "No borrar ni modificar ningún archivo del equipo (puede ser evidencia)."
+        ],
+        "specific_steps": [
+          {
+            "priority": "CRÍTICO",
+            "finding": "Software de captura de pantalla o employee monitoring",
+            "action": "No usar el equipo para asuntos personales. Solicitar al DPO información sobre qué capturas se realizan. Consultar con asesor laboral sobre CP art. 197."
+          }
+        ],
+        "total_findings": 7,
+        "generated_at": "2025-05-15T09:35:00"
+      },
+      "timestamp": "2025-05-15T09:35:00"
+    }
+  ]
+}

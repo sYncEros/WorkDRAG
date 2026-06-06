@@ -1,0 +1,98 @@
+{
+  "generated_at": "2025-05-15T09:30:00",
+  "total_findings": 5,
+  "max_risk": "yellow",
+  "integrity_hash": "EXAMPLE_HASH_NOT_REAL_standard_00000000000000000000000000000000",
+  "_note": "Este es un ejemplo anonimizado de un entorno corporativo estándar. Los datos son ficticios.",
+  "findings": [
+    {
+      "skill": "mdm_audit",
+      "category": "Corporate Control",
+      "title": "MDM / Gestión corporativa del dispositivo",
+      "description": "El dispositivo está gestionado mediante MDM (Microsoft Intune). Organización detectada: empresa-ejemplo.com.",
+      "risk_level": "yellow",
+      "technical_risk": "MDM permite a la organización instalar software, aplicar políticas, borrar el dispositivo remotamente y restringir aplicaciones.",
+      "legal_risk": "La gestión MDM en dispositivos corporativos es generalmente legítima bajo el ET y LOPDGDD si está informada al trabajador.",
+      "what_it_is": "MDM (Mobile Device Management) gestiona el dispositivo corporativo de forma centralizada.",
+      "what_it_is_not": "MDM por sí solo no implica monitorización de actividad ni vigilancia en tiempo real.",
+      "raw_data": {
+        "mdm_enrolled": true,
+        "managed_by": "empresa-ejemplo.com",
+        "intune_present": true,
+        "applocker_active": false,
+        "unenrollment_blocked": false,
+        "azure_ad_joined": { "azure_ad_joined": true, "domain_joined": true }
+      },
+      "timestamp": "2025-05-15T09:28:30"
+    },
+    {
+      "skill": "cloud_sync_audit",
+      "category": "cloud_sync_onedrive_detail",
+      "title": "OneDrive sincronizando carpetas del sistema (KFM activo)",
+      "description": "Known Folder Move detectado. Las carpetas Escritorio y Documentos están sincronizándose automáticamente con OneDrive corporativo.",
+      "risk_level": "yellow",
+      "technical_risk": "Cualquier archivo guardado en Escritorio o Documentos va automáticamente a OneDrive, accesible por el administrador de M365.",
+      "legal_risk": "Requiere información previa al trabajador de que sus carpetas principales se sincronizan a OneDrive corporativo bajo LOPDGDD art. 87.",
+      "what_it_is": "Función de Microsoft que redirige carpetas locales del usuario a OneDrive para sincronización automática.",
+      "what_it_is_not": "No permite al empleador espiar en tiempo real, pero sí tiene acceso a los archivos almacenados.",
+      "raw_data": {
+        "kfm_active": true,
+        "redirected_folders": ["Desktop", "Documents"],
+        "tenant_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+      },
+      "timestamp": "2025-05-15T09:29:00"
+    },
+    {
+      "skill": "browser_audit",
+      "category": "browser_policies",
+      "title": "Políticas corporativas de navegador activas (Chrome)",
+      "description": "Se han detectado políticas GPO de Chrome activas: CloudReportingEnabled, desactivación del modo incógnito.",
+      "risk_level": "yellow",
+      "technical_risk": "CloudReportingEnabled envía actividad del navegador al administrador. El bloqueo del modo incógnito elimina una herramienta de privacidad del trabajador.",
+      "legal_risk": "Requiere información sobre qué datos de navegación se recopilan.",
+      "what_it_is": "Configuraciones forzadas por GPO corporativa sobre el comportamiento del navegador Chrome.",
+      "what_it_is_not": "Muchas políticas son de seguridad estándar: desactivar macros, forzar cifrado TLS.",
+      "raw_data": {
+        "policies": [
+          { "name": "CloudReportingEnabled", "value": "1" },
+          { "name": "IncognitoModeAvailability", "value": "1" }
+        ]
+      },
+      "timestamp": "2025-05-15T09:30:15"
+    },
+    {
+      "skill": "ai_telemetry_audit",
+      "category": "telemetry_windows_level",
+      "title": "Telemetría completa de Windows activa (nivel Enhanced)",
+      "description": "El nivel de telemetría de Windows está configurado en Enhanced (nivel 2), enviando datos de actividad y uso de aplicaciones a Microsoft.",
+      "risk_level": "yellow",
+      "technical_risk": "Windows envía datos de actividad, contenido de documentos y uso de aplicaciones a Microsoft en EEUU.",
+      "legal_risk": "Transferencia internacional de datos. El empleador como responsable del tratamiento debe garantizar una base legal adecuada bajo RGPD cap. V.",
+      "what_it_is": "Nivel de telemetría que determina qué datos de diagnóstico y actividad envía Windows a Microsoft.",
+      "what_it_is_not": "No es espionaje corporativo directo. Los datos van a Microsoft, no al empleador.",
+      "raw_data": {
+        "telemetry_level": 2,
+        "telemetry_label": "Enhanced",
+        "diagtrack_running": true
+      },
+      "timestamp": "2025-05-15T09:31:00"
+    },
+    {
+      "skill": "hardening_audit",
+      "category": "hardening_encryption",
+      "title": "Cifrado de disco no activo — datos en claro",
+      "description": "BitLocker no está habilitado en la unidad del sistema. Los datos del equipo no están protegidos ante pérdida o robo físico.",
+      "risk_level": "yellow",
+      "technical_risk": "Sin BitLocker, en caso de pérdida o robo del equipo, todos los datos son accesibles sin autenticación.",
+      "legal_risk": "El empleador incumple RGPD art. 32 al no aplicar cifrado en equipos corporativos que tratan datos personales.",
+      "what_it_is": "Ausencia de cifrado de disco completo en el dispositivo corporativo.",
+      "what_it_is_not": "No es una amenaza activa de vigilancia. Es una deficiencia de seguridad que afecta al trabajador en caso de pérdida del equipo.",
+      "raw_data": {
+        "bitlocker_enabled": false,
+        "bitlocker_status": "FullyDecrypted",
+        "protection_status": "Protection Off"
+      },
+      "timestamp": "2025-05-15T09:32:30"
+    }
+  ]
+}

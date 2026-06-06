@@ -1,0 +1,1765 @@
+{
+  "generated_at": "2026-05-22T13:31:15.064430",
+  "total_findings": 35,
+  "max_risk": "red",
+  "findings": [
+    {
+      "skill": "mdm_audit",
+      "category": "Corporate Control",
+      "title": "MDM / Gestión corporativa del dispositivo",
+      "description": "El dispositivo está gestionado mediante MDM. Organización detectada: 3048dc87-43f0-4100-9acb-ae1971c79395. Flags: mdm_enrolled, corporate_root_certificates_present (39), azure_ad_joined.",
+      "risk_level": "yellow",
+      "technical_risk": "MDM permite a la organización instalar software, aplicar políticas, borrar el dispositivo remotamente y restringir aplicaciones.",
+      "legal_risk": "La gestión MDM en dispositivos corporativos es generalmente legítima bajo el ET y LOPDGDD si está informada al trabajador.",
+      "what_it_is": "MDM (Mobile Device Management) es software que permite a las empresas gestionar dispositivos corporativos: aplicar políticas de seguridad, instalar apps, configurar VPN y, en caso extremo, borrar el dispositivo.",
+      "what_it_is_not": "MDM por sí solo no implica monitorización de actividad, lectura de mensajes personales ni vigilancia en tiempo real. Gestiona el dispositivo, no espía al usuario.",
+      "raw_data": {
+        "mdm_enrolled": true,
+        "managed_by": "3048dc87-43f0-4100-9acb-ae1971c79395",
+        "intune_present": false,
+        "applocker_active": false,
+        "unenrollment_blocked": false,
+        "corporate_certificates": [
+          {
+            "subject": "CN=MDONE Desktop Root",
+            "thumbprint": "F94AC90B7DFA17422BE66976327C067E5E7F73B7"
+          },
+          {
+            "subject": "CN=NTTDATA-RO TLS RSA Root G1",
+            "thumbprint": "EADF4E23656A55C1303CD3D6D2EB1DB750D18255"
+          },
+          {
+            "subject": "E=support@zscaler.com, CN=Zscaler Root CA, OU=Zscaler Inc., O=Zscaler Inc., L=San Jose, S=California, C=US",
+            "thumbprint": "D72F47D87420E3F0F9BDCAC6F03A566743C481B9"
+          },
+          {
+            "subject": "CN=NTTDATA-RO TLS Global Root G2",
+            "thumbprint": "C7D461193201614077D09DDCDF497FBF639A0217"
+          },
+          {
+            "subject": "CN=Thawte Timestamping CA, OU=Thawte Certification, O=Thawte, L=Durbanville, S=Western Cape, C=ZA",
+            "thumbprint": "BE36A4562FB2EE05DBB3D32323ADF445084ED656"
+          },
+          {
+            "subject": "E=jessica.navarroquirantes@emeal.nttdata.com, CN=jnavaqui",
+            "thumbprint": "BB714B958889264550B9E0D663DD359A867BE7B2"
+          },
+          {
+            "subject": "CN=emealRootCA",
+            "thumbprint": "93AE32B8B667C890A88DC3B9D8E6D9AF0F453986"
+          },
+          {
+            "subject": "CN=NTTData EMEA Root CA, O=NTTData, C=IT",
+            "thumbprint": "891E14D92CD16848E0D53F9D9803A2DFB2CDBF87"
+          },
+          {
+            "subject": "CN=NTTD-90G6TV3",
+            "thumbprint": "5828694FA5EFE9EC16CC17D28908155A414A70BA"
+          },
+          {
+            "subject": "CN=qgs-global-root.proxy, E=qgs@qualys.com, OU=qualys, O=Qualys, L=Foster City, S=California, C=US",
+            "thumbprint": "5784E3135A88C7BCC716CB692A6E4F8FA90C5106"
+          },
+          {
+            "subject": "CN=EBS Group CA, DC=ebs, DC=msft",
+            "thumbprint": "4897C927C15BB93E395CA6243345E22EF40A023F"
+          },
+          {
+            "subject": "CN=DO_NOT_TRUST_FiddlerRoot, O=DO_NOT_TRUST, OU=Created by http://www.fiddler2.com",
+            "thumbprint": "3C7726919470D9E7A1728E2286B4F5FE9B9AF6CE"
+          },
+          {
+            "subject": "CN=NTTD-90G6TV3",
+            "thumbprint": "3B0D5559354F30D80BC3C8C3E145241D8F243CC8"
+          },
+          {
+            "subject": "CN=everisRootCA",
+            "thumbprint": "31BA59A40019833F551FF18FC81D4C1B28E4317F"
+          },
+          {
+            "subject": "CN=Fibanc EC Raiz, OU=Departamento de Sistemas, O=Fibanc, L=Barcelona, S=Barcelona, C=ES, E=managerit@fibanc.es",
+            "thumbprint": "2962F1B095E237D7C50621E8EB83883A30D70FF5"
+          },
+          {
+            "subject": "CN=NTTD-90G6TV3, OU=Created by Azure DevOps Server",
+            "thumbprint": "1592EF3A25CAE5671629B489C5BDC0AC5B0B8474"
+          },
+          {
+            "subject": "E=support@zscaler.com, CN=Zscaler Root CA, OU=Zscaler Inc., O=Zscaler Inc., L=San Jose, S=California, C=US",
+            "thumbprint": "0D23EE8F0F0560B9F68F2437C526D3CDF1FAF0C5"
+          },
+          {
+            "subject": "OU=AC RAIZ FNMT-RCM, O=FNMT-RCM, C=ES",
+            "thumbprint": "EC503507B215C4956219E2A89A5B42992C4C2C20"
+          },
+          {
+            "subject": "CN=QuoVadis Root Certification Authority, OU=Root Certification Authority, O=QuoVadis Limited, C=BM",
+            "thumbprint": "DE3F40BD5093D39B6C60F6DABC076201008976C9"
+          },
+          {
+            "subject": "CN=DST Root CA X3, O=Digital Signature Trust Co.",
+            "thumbprint": "DAC9024F54D8F6DF94935FB1732638CA6AD77C13"
+          },
+          {
+            "subject": "CN=Certum Trusted Network CA 2, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL",
+            "thumbprint": "D3DD483E2BBF4C05E8AF10F5FA7626CFD3DC3092"
+          },
+          {
+            "subject": "CN=ISRG Root X1, O=Internet Security Research Group, C=US",
+            "thumbprint": "CABD2A79A1076A31F21D253635CB039D4329A5E8"
+          },
+          {
+            "subject": "OU=AC RAIZ FNMT-RCM, O=FNMT-RCM, C=ES",
+            "thumbprint": "B865130BEDCA38D27F69929420770BED86EFBC10"
+          },
+          {
+            "subject": "CN=SSL.com Root Certification Authority RSA, O=SSL Corporation, L=Houston, S=Texas, C=US",
+            "thumbprint": "B7AB3308D1EA4477BA1480125A6FBDA936490CBB"
+          },
+          {
+            "subject": "CN=Autoridad de Certificacion Firmaprofesional CIF A62634068, C=ES",
+            "thumbprint": "AEC5FB3FC8E1BFC4E54F03075A9AE800B7F7B6FA"
+          },
+          {
+            "subject": "C=ES, O=ACCV, OU=PKIACCV, CN=ACCVRAIZ1",
+            "thumbprint": "93057A8815C64FCE882FFA9116522878BC536417"
+          },
+          {
+            "subject": "CN=thawte Primary Root CA, OU=\"(c) 2006 thawte, Inc. - For authorized use only\", OU=Certification Services Division, O=\"thawte, Inc.\", C=US",
+            "thumbprint": "91C6D6EE3E8AC86384E548C299295C756C817B81"
+          },
+          {
+            "subject": "CN=SSL.com EV Root Certification Authority RSA R2, O=SSL Corporation, L=Houston, S=Texas, C=US",
+            "thumbprint": "743AF0529BD032A0F44A83CDD4BAA97B7C2EC49A"
+          },
+          {
+            "subject": "CN=AC RAIZ FNMT-RCM SERVIDORES SEGUROS, OID.2.5.4.97=VATES-Q2826004J, OU=Ceres, O=FNMT-RCM, C=ES",
+            "thumbprint": "62FFD99EC0650D03CE7593D2ED3F2D32C9E3E54A"
+          },
+          {
+            "subject": "E=premium-server@thawte.com, CN=Thawte Premium Server CA, OU=Certification Services Division, O=Thawte Consulting cc, L=Cape Town, S=Western Cape, C=ZA",
+            "thumbprint": "627F8D7827656399D27D7F9044C9FEB3F33EFA9A"
+          },
+          {
+            "subject": "CN=Hotspot 2.0 Trust Root CA - 03, O=WFA Hotspot 2.0, C=US",
+            "thumbprint": "51501FBFCE69189D609CFAF140C576755DCC1FDF"
+          },
+          {
+            "subject": "CN=Go Daddy Root Certificate Authority - G2, O=\"GoDaddy.com, Inc.\", L=Scottsdale, S=Arizona, C=US",
+            "thumbprint": "47BEABC922EAE80E78783462A79F45C254FDE68B"
+          },
+          {
+            "subject": "OU=Go Daddy Class 2 Certification Authority, O=\"The Go Daddy Group, Inc.\", C=US",
+            "thumbprint": "2796BAE63F1801E277261BA0D77770028F20EEE4"
+          },
+          {
+            "subject": "CN=Autoridad de Certificacion Firmaprofesional CIF A62634068, C=ES",
+            "thumbprint": "0BBEC2272249CB39AADB355C53E38CAE78FFB6FE"
+          },
+          {
+            "subject": "CN=Certum Trusted Network CA, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL",
+            "thumbprint": "07E032E020B72C3F192F0628A2593A19A70F069E"
+          },
+          {
+            "subject": "CN=AddTrust External CA Root, OU=AddTrust External TTP Network, O=AddTrust AB, C=SE",
+            "thumbprint": "02FAF3E291435468607857694DF5E45B68851868"
+          },
+          {
+            "subject": "CN=HARICA TLS RSA Root CA 2021, O=Hellenic Academic and Research Institutions CA, C=GR",
+            "thumbprint": "022D0582FA88CE140C0679DE7F1410E945D7A56D"
+          },
+          {
+            "subject": "CN=Hellenic Academic and Research Institutions RootCA 2015, O=Hellenic Academic and Research Institutions Cert. Authority, L=Athens, C=GR",
+            "thumbprint": "010C0695A6981914FFBF5FC6B0B695EA29E912A6"
+          },
+          {
+            "subject": "CN=Sareb Colabora",
+            "thumbprint": "8C9018256825515AC801A2D38DACA670FB9639B1"
+          }
+        ],
+        "azure_ad_joined": {
+          "azure_ad_joined": true,
+          "domain_joined": false,
+          "workplace_joined": false
+        },
+        "flags": [
+          "mdm_enrolled",
+          "corporate_root_certificates_present (39)",
+          "azure_ad_joined"
+        ]
+      },
+      "timestamp": "2026-05-22T13:27:37.575670"
+    },
+    {
+      "skill": "surveillance_audit",
+      "category": "edr_xdr",
+      "title": "CrowdStrike Falcon detectado",
+      "description": "Agente EDR/XDR detectado. Estos sistemas monitorizan comportamiento del sistema en tiempo real para detectar amenazas.",
+      "risk_level": "yellow",
+      "technical_risk": "Monitoriza procesos, red y comportamiento del sistema.",
+      "legal_risk": "Riesgo legal estimado: low-medium. Ver compliance engine para análisis LOPDGDD/RGPD.",
+      "what_it_is": "Agente EDR/XDR detectado. Estos sistemas monitorizan comportamiento del sistema en tiempo real para detectar amenazas.",
+      "what_it_is_not": "No implica necesariamente lectura de contenido personal. Es seguridad corporativa estándar en empresas medianas y grandes.",
+      "raw_data": {
+        "product": "CrowdStrike Falcon",
+        "category": "edr_xdr",
+        "detection": {
+          "found": true,
+          "processes": [
+            "csfalconservice",
+            "csfalconcontainer"
+          ],
+          "services": [
+            "csagent",
+            "csfalconservice"
+          ],
+          "registry": []
+        }
+      },
+      "timestamp": "2026-05-22T13:27:37.602155"
+    },
+    {
+      "skill": "surveillance_audit",
+      "category": "edr_xdr",
+      "title": "Microsoft Defender for Endpoint detectado",
+      "description": "Agente EDR/XDR detectado. Estos sistemas monitorizan comportamiento del sistema en tiempo real para detectar amenazas.",
+      "risk_level": "yellow",
+      "technical_risk": "Monitoriza procesos, red y comportamiento del sistema.",
+      "legal_risk": "Riesgo legal estimado: low-medium. Ver compliance engine para análisis LOPDGDD/RGPD.",
+      "what_it_is": "Agente EDR/XDR detectado. Estos sistemas monitorizan comportamiento del sistema en tiempo real para detectar amenazas.",
+      "what_it_is_not": "No implica necesariamente lectura de contenido personal. Es seguridad corporativa estándar en empresas medianas y grandes.",
+      "raw_data": {
+        "product": "Microsoft Defender for Endpoint",
+        "category": "edr_xdr",
+        "detection": {
+          "found": true,
+          "processes": [],
+          "services": [
+            "sense"
+          ],
+          "registry": []
+        }
+      },
+      "timestamp": "2026-05-22T13:27:37.615294"
+    },
+    {
+      "skill": "surveillance_audit",
+      "category": "ssl_inspection",
+      "title": "Certificado raíz de inspección SSL/TLS detectado",
+      "description": "Se han encontrado certificados raíz corporativos que permiten interceptar y descifrar tráfico HTTPS.",
+      "risk_level": "orange",
+      "technical_risk": "Con este certificado instalado, un proxy corporativo puede descifrar, analizar y registrar todo el tráfico HTTPS, incluyendo contraseñas y contenido de páginas web.",
+      "legal_risk": "Requiere informar explícitamente al trabajador. Sin información previa puede vulnerar art. 87 LOPDGDD y doctrina Barbulescu II (TEDH).",
+      "what_it_is": "Un certificado raíz de inspección SSL permite al proxy corporativo actuar como intermediario en conexiones HTTPS, descifrando el tráfico para inspeccionarlo.",
+      "what_it_is_not": "No demuestra que el tráfico se esté leyendo activamente, pero sí que existe la capacidad técnica.",
+      "raw_data": {
+        "ssl_inspection_certs": [
+          "E=support@zscaler.com, CN=Zscaler Root CA, OU=Zscaler Inc., O=Zscaler Inc., L=San Jose, S=California, C=US",
+          "CN=Symantec Enterprise Mobile Root for Microsoft, O=Symantec Corporation, C=US",
+          "E=support@zscaler.com, CN=Zscaler Root CA, OU=Zscaler Inc., O=Zscaler Inc., L=San Jose, S=California, C=US"
+        ]
+      },
+      "timestamp": "2026-05-22T13:27:39.322310"
+    },
+    {
+      "skill": "surveillance_audit",
+      "category": "browser_inspection",
+      "title": "Extensiones de navegador forzadas por política corporativa",
+      "description": "El navegador tiene extensiones instaladas obligatoriamente por política corporativa.",
+      "risk_level": "orange",
+      "technical_risk": "Las extensiones forzadas pueden tener acceso completo al contenido de páginas web, historial y formularios.",
+      "legal_risk": "Depende de la funcionalidad de cada extensión. Si capturan contenido web personal, aplica LOPDGDD art. 87.",
+      "what_it_is": "Extensiones instaladas por GPO/política que el usuario no puede desinstalar.",
+      "what_it_is_not": "No implica necesariamente espionaje. Muchas son extensiones de seguridad o DLP legítimas.",
+      "raw_data": {
+        "forced_extensions": {
+          "Chrome": [
+            "maafgiompdekodanheihhgilkjchcakm;https://outlook.office.com/owa/SmimeCrxUpdate.ashx"
+          ],
+          "Edge": [
+            "maafgiompdekodanheihhgilkjchcakm;https://outlook.office.com/owa/SmimeCrxUpdate.ashx"
+          ]
+        }
+      },
+      "timestamp": "2026-05-22T13:27:39.333254"
+    },
+    {
+      "skill": "persistence_audit",
+      "category": "persistence_services",
+      "title": "Servicios con características de monitorización (25 detectados)",
+      "description": "Se han encontrado servicios de Windows con nombres o descripciones relacionadas con telemetría o monitorización.",
+      "risk_level": "yellow",
+      "technical_risk": "Los servicios de Windows se ejecutan en segundo plano con privilegios elevados y pueden monitorizar el sistema.",
+      "legal_risk": "Depende de la funcionalidad real. Requiere análisis individual de cada servicio.",
+      "what_it_is": "Servicios de Windows que se ejecutan continuamente en segundo plano.",
+      "what_it_is_not": "No todo servicio con estas palabras es espionaje. Windows incluye muchos servicios de telemetría propios.",
+      "raw_data": {
+        "services": [
+          {
+            "name": "CaptureService",
+            "displayname": "@%SystemRoot%\\system32\\CaptureService.dll,-100",
+            "description": "@%SystemRoot%\\system32\\CaptureService.dll,-101",
+            "imagepath": "%SystemRoot%\\system32\\svchost.exe -k LocalService -p",
+            "start": "3"
+          },
+          {
+            "name": "CaptureService_24f8cd",
+            "displayname": "CaptureService_24f8cd",
+            "description": "@%SystemRoot%\\system32\\CaptureService.dll,-101",
+            "imagepath": "C:\\WINDOWS\\system32\\svchost.exe -k LocalService -p",
+            "start": "3"
+          },
+          {
+            "name": "CSAgent",
+            "displayname": "CrowdStrike Falcon",
+            "imagepath": "\\??\\C:\\WINDOWS\\system32\\drivers\\CrowdStrike\\csagent.sys",
+            "start": "1"
+          },
+          {
+            "name": "csc_vpnagent",
+            "displayname": "Cisco Secure Client - AnyConnect VPN Agent",
+            "description": "Cisco Secure Client AnyConnect VPN Agent for Windows",
+            "imagepath": "\"C:\\Program Files (x86)\\Cisco\\Cisco Secure Client\\vpnagent.exe\"",
+            "start": "2"
+          },
+          {
+            "name": "DiagTrack",
+            "displayname": "@%SystemRoot%\\system32\\diagtrack.dll,-3001",
+            "description": "@%SystemRoot%\\system32\\diagtrack.dll,-3002",
+            "imagepath": "%SystemRoot%\\System32\\svchost.exe -k utcsvc -p",
+            "start": "2"
+          },
+          {
+            "name": "DialogBlockingService",
+            "displayname": "@%SystemRoot%\\system32\\DialogBlockingService.dll,-100",
+            "description": "@%SystemRoot%\\system32\\DialogBlockingService.dll,-101",
+            "imagepath": "%SystemRoot%\\system32\\svchost.exe -k DialogBlockingService",
+            "start": "4"
+          },
+          {
+            "name": "EventLog",
+            "displayname": "@%SystemRoot%\\system32\\wevtsvc.dll,-200",
+            "description": "@%SystemRoot%\\system32\\wevtsvc.dll,-201",
+            "imagepath": "%SystemRoot%\\System32\\svchost.exe -k LocalServiceNetworkRestricted -p",
+            "start": "2"
+          },
+          {
+            "name": "FrameServerMonitor",
+            "displayname": "@%systemroot%\\system32\\FrameServerMonitor.dll,-100",
+            "description": "@%systemroot%\\system32\\FrameServerMonitor.dll,-101",
+            "imagepath": "%SystemRoot%\\System32\\svchost.exe -k CameraMonitor",
+            "start": "3"
+          },
+          {
+            "name": "monitor",
+            "displayname": "@monitor.inf,%Monitor.SVCDESC%;Microsoft Monitor Class Function Driver Service",
+            "imagepath": "\\SystemRoot\\System32\\drivers\\monitor.sys",
+            "start": "3"
+          },
+          {
+            "name": "napagent"
+          },
+          {
+            "name": "Netlogon",
+            "displayname": "@%SystemRoot%\\System32\\netlogon.dll,-102",
+            "description": "@%SystemRoot%\\System32\\netlogon.dll,-103",
+            "imagepath": "%systemroot%\\system32\\lsass.exe",
+            "start": "3"
+          },
+          {
+            "name": "nvagent",
+            "displayname": "@%systemroot%\\system32\\NvAgent.dll,-100",
+            "description": "@%systemroot%\\system32\\NvAgent.dll,-101",
+            "imagepath": "%systemroot%\\system32\\svchost.exe -k NetSvcs",
+            "start": "3"
+          },
+          {
+            "name": "PolicyAgent",
+            "displayname": "@%SystemRoot%\\System32\\polstore.dll,-5010",
+            "description": "@%SystemRoot%\\system32\\polstore.dll,-5011",
+            "imagepath": "%SystemRoot%\\system32\\svchost.exe -k NetworkServiceNetworkRestricted -p",
+            "start": "3"
+          },
+          {
+            "name": "QualysAgent",
+            "displayname": "Qualys Cloud Agent",
+            "description": "Qualys Cloud Agent helps protect your computer from unauthorized access by monitoring your system to identify and report software vulnerabilities and system misconfigurations that can be exploited.",
+            "imagepath": "\"C:\\Program Files\\Qualys\\QualysAgent\\QualysAgent.exe\"",
+            "start": "2"
+          },
+          {
+            "name": "seclogon",
+            "displayname": "@%SystemRoot%\\system32\\seclogon.dll,-7001",
+            "description": "@%SystemRoot%\\system32\\seclogon.dll,-7000",
+            "imagepath": "%windir%\\system32\\svchost.exe -k netsvcs -p",
+            "start": "3"
+          },
+          {
+            "name": "SensorDataService",
+            "displayname": "@%SystemRoot%\\system32\\SensorDataService.exe,-101",
+            "description": "@%SystemRoot%\\system32\\SensorDataService.exe,-102",
+            "imagepath": "%SystemRoot%\\System32\\SensorDataService.exe",
+            "start": "3"
+          },
+          {
+            "name": "SensorService",
+            "displayname": "@%SystemRoot%\\System32\\sensorservice.dll,-1000",
+            "description": "@%SystemRoot%\\System32\\sensorservice.dll,-1001",
+            "imagepath": "%SystemRoot%\\system32\\svchost.exe -k LocalSystemNetworkRestricted -p",
+            "start": "3"
+          },
+          {
+            "name": "SnowInventoryAgent5",
+            "displayname": "Snow Inventory Agent",
+            "description": "Snow Inventory Agent for Windows",
+            "imagepath": "\"C:\\Program Files\\Snow Software\\Inventory\\Agent\\snowagent.exe\" -w \"%programfiles%\\Snow Software\\Inventory\\Agent\"",
+            "start": "2"
+          },
+          {
+            "name": "SQLAgent$SQLEXPRESS",
+            "displayname": "Agente SQL Server (SQLEXPRESS)",
+            "description": "Ejecuta tareas, realiza el seguimiento de SQL Server, activa alertas y permite la automatización de algunas tareas administrativas.",
+            "imagepath": "\"C:\\Program Files\\Microsoft SQL Server\\MSSQL12.SQLEXPRESS\\MSSQL\\Binn\\SQLAGENT.EXE\" -i SQLEXPRESS",
+            "start": "4"
+          },
+          {
+            "name": "SQLSERVERAGENT",
+            "displayname": "Agente SQL Server (MSSQLSERVER)",
+            "description": "Ejecuta tareas, realiza el seguimiento de SQL Server, activa alertas y permite la automatización de algunas tareas administrativas.",
+            "imagepath": "\"C:\\Program Files\\Microsoft SQL Server\\MSSQL16.MSSQLSERVER\\MSSQL\\Binn\\SQLAGENT.EXE\" -i MSSQLSERVER",
+            "start": "3"
+          },
+          {
+            "name": "SQLTELEMETRY",
+            "displayname": "SQL Server CEIP service (MSSQLSERVER)",
+            "description": "CEIP service for Sql server ",
+            "imagepath": "\"C:\\Program Files\\Microsoft SQL Server\\MSSQL16.MSSQLSERVER\\MSSQL\\Binn\\sqlceip.exe\" -Service ",
+            "start": "2"
+          },
+          {
+            "name": "ssh-agent",
+            "displayname": "OpenSSH Authentication Agent",
+            "description": "Agent to hold private keys used for public key authentication.",
+            "imagepath": "%SystemRoot%\\System32\\OpenSSH\\ssh-agent.exe",
+            "start": "4"
+          },
+          {
+            "name": "UevAgentDriver",
+            "displayname": "@%systemroot%\\system32\\drivers\\UevAgentDriver.sys,-101",
+            "description": "@%systemroot%\\system32\\drivers\\UevAgentDriver.sys,-102",
+            "imagepath": "\\SystemRoot\\system32\\drivers\\UevAgentDriver.sys",
+            "start": "4"
+          },
+          {
+            "name": "UevAgentService",
+            "displayname": "@%systemroot%\\system32\\AgentService.exe,-102",
+            "description": "@%systemroot%\\system32\\AgentService.exe,-101",
+            "imagepath": "%systemroot%\\system32\\AgentService.exe",
+            "start": "4"
+          },
+          {
+            "name": "VSStandardCollectorService150",
+            "displayname": "Visual Studio Standard Collector Service 150",
+            "description": "Visual Studio Data Collection Service. When running, this service collects real-time ETW events and processes them.",
+            "imagepath": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Common\\DiagnosticsHub.Collection.Service\\StandardCollector.Service.exe\"",
+            "start": "3"
+          }
+        ]
+      },
+      "timestamp": "2026-05-22T13:27:39.353731"
+    },
+    {
+      "skill": "persistence_audit",
+      "category": "persistence_drivers",
+      "title": "Drivers con características de monitorización (28)",
+      "description": "Drivers de kernel con nombres o funciones relacionadas con captura o filtrado de datos.",
+      "risk_level": "yellow",
+      "technical_risk": "Los drivers de kernel tienen acceso privilegiado a todo el sistema: red, ficheros, procesos, entrada.",
+      "legal_risk": "Depende del fabricante y función. EDR/antivirus usan drivers legítimamente.",
+      "what_it_is": "Drivers de Windows que operan a nivel de kernel para interceptar o filtrar actividad del sistema.",
+      "what_it_is_not": "La mayoría son componentes de seguridad legítimos (antivirus, EDR). No implican espionaje por definición.",
+      "raw_data": {
+        "drivers": [
+          {
+            "name": "bindflt",
+            "display": "Windows Bind Filter Driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\bindflt.sys"
+          },
+          {
+            "name": "CldFlt",
+            "display": "Windows Cloud Files Filter Driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\cldflt.sys"
+          },
+          {
+            "name": "EhStorClass",
+            "display": "Enhanced Storage Filter Driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\EhStorClass.sys"
+          },
+          {
+            "name": "FileInfo",
+            "display": "File Information FS MiniFilter",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\fileinfo.sys"
+          },
+          {
+            "name": "FsDepends",
+            "display": "File System Dependency Minifilter",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\drivers\\FsDepends.sys"
+          },
+          {
+            "name": "HidEventFilter",
+            "display": "Intel(R) HID Event Filter",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\DriverStore\\FileRepository\\hideventfilter.inf_amd64_50bf579d62a9971a\\HidEventFilter.sys"
+          },
+          {
+            "name": "IntelPMT",
+            "display": "Servicio de la plataforma de tecnolog¡a de monitorizaci¢n de Intel(R)",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\IntelPMT.sys"
+          },
+          {
+            "name": "IpFilterDriver",
+            "display": "Controlador de filtro de tr fico IP",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\DRIVERS\\ipfltdrv.sys"
+          },
+          {
+            "name": "ISH",
+            "display": "Intel(R) Integrated Sensor Solution",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\DriverStore\\FileRepository\\ish.inf_amd64_1a7d13466c714429\\ISH.sys"
+          },
+          {
+            "name": "LT6911Au",
+            "display": "HDMI Capture/I2S Audio Bridge (LT6911UXC)",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\DriverStore\\FileRepository\\lt6911au.inf_amd64_62449180becc5735\\LT6911Au.sys"
+          },
+          {
+            "name": "monitor",
+            "display": "Servicio de controladores de funci¢n de clase para monitores de Microsoft",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\monitor.sys"
+          },
+          {
+            "name": "mshidkmdf",
+            "display": "Pass-through HID to KMDF Filter Driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\mshidkmdf.sys"
+          },
+          {
+            "name": "Ndu",
+            "display": "Windows Network Data Usage Monitoring Driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\Ndu.sys"
+          },
+          {
+            "name": "PktMon",
+            "display": "Packet Monitor Driver",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\drivers\\PktMon.sys"
+          },
+          {
+            "name": "PktMonApi",
+            "display": "Packet Monitor Export Driver",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\drivers\\PktMonApi.sys"
+          },
+          {
+            "name": "scfilter",
+            "display": "Controlador de filtro de clase PnP de tarjeta inteligente",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\DRIVERS\\scfilter.sys"
+          },
+          {
+            "name": "ThermalFilter",
+            "display": "Controlador de filtro t‚rmico de Microsoft",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\DriverStore\\FileRepository\\c_thermal.inf_amd64_4d6f690088125741\\ThermalFilter.sys"
+          },
+          {
+            "name": "UevAgentDriver",
+            "display": "UevAgentDriver",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\drivers\\UevAgentDriver.sys"
+          },
+          {
+            "name": "VfpExt",
+            "display": "Microsoft Azure VFP Switch Filter Extension",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\vfpext.sys"
+          },
+          {
+            "name": "VMSVSF",
+            "display": "VmSwitch Extensibility Filter",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\drivers\\vmswitch.sys"
+          },
+          {
+            "name": "vwififlt",
+            "display": "Virtual WiFi Filter Driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\vwififlt.sys"
+          },
+          {
+            "name": "WdFilter",
+            "display": "Controlador de minifiltro de Antivirus de Microsoft Defender",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\drivers\\wd\\WdFilter.sys"
+          },
+          {
+            "name": "WdmCompanionFilter",
+            "display": "WdmCompanionFilter",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\drivers\\WdmCompanionFilter.sys"
+          },
+          {
+            "name": "Wof",
+            "display": "Windows Overlay File System Filter Driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\Wof.sys"
+          },
+          {
+            "name": "WpdUpFltr",
+            "display": "WPD Upper Class Filter Driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\WpdUpFltr.sys"
+          },
+          {
+            "name": "zapprd",
+            "display": "Zscaler LightWeight Filter",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\DRIVERS\\zapprd.sys"
+          },
+          {
+            "name": "zepprotect",
+            "display": "ZEP Protect filter driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\zepprotect.sys"
+          },
+          {
+            "name": "ZSAWDRV",
+            "display": "Zscaler Filtering Platform (WFP)",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\zsawdrv.sys"
+          }
+        ]
+      },
+      "timestamp": "2026-05-22T13:27:58.368721"
+    },
+    {
+      "skill": "network_monitor",
+      "category": "network_external",
+      "title": "Conexiones externas activas (16 establecidas)",
+      "description": "Se han detectado 16 conexiones de red establecidas hacia IPs externas desde 7 procesos distintos.",
+      "risk_level": "yellow",
+      "technical_risk": "Las conexiones externas establecidas pueden corresponder a agentes corporativos enviando telemetría, datos de monitorización o actualizaciones.",
+      "legal_risk": "Las conexiones en sí no implican ilegalidad. El riesgo depende del tipo de datos transmitidos.",
+      "what_it_is": "Conexiones TCP activas desde este equipo hacia servidores en Internet.",
+      "what_it_is_not": "No implica exfiltración de datos personales. La mayoría son actualizaciones, telemetría de SO y aplicaciones legítimas.",
+      "raw_data": {
+        "total_external": 16,
+        "by_process": {
+          "msedge.exe": [
+            "35.190.80.1:443",
+            "160.79.104.10:443"
+          ],
+          "ZSATunnel.exe": [
+            "4.207.247.139:49408",
+            "136.226.215.248:443",
+            "87.58.85.129:443",
+            "87.58.85.133:443",
+            "87.58.84.129:443"
+          ],
+          "nxtcoordinator.exe": [
+            "16.18.82.196:443"
+          ],
+          "Code.exe": [
+            "150.171.109.82:443",
+            "20.199.39.224:443",
+            "20.42.65.88:443",
+            "140.82.114.22:443",
+            "20.111.1.3:443"
+          ],
+          "backgroundTaskHost.exe": [
+            "40.126.53.17:443"
+          ],
+          "svchost.exe": [
+            "4.207.247.139:443"
+          ],
+          "System": [
+            "3.121.238.86:443"
+          ]
+        }
+      },
+      "timestamp": "2026-05-22T13:27:58.385433"
+    },
+    {
+      "skill": "activity_monitor",
+      "category": "activity_resources",
+      "title": "Procesos con alto consumo de recursos (12 detectados)",
+      "description": "Se han encontrado procesos con consumo elevado sostenido de CPU o memoria que pueden estar realizando análisis o transmisión de datos.",
+      "risk_level": "yellow",
+      "technical_risk": "Los procesos con alto consumo pueden estar procesando o transmitiendo grandes volúmenes de datos del sistema.",
+      "legal_risk": "Por sí solo no implica ilegalidad. Requiere identificación del proceso.",
+      "what_it_is": "Procesos que consumen más recursos de lo normal, lo que puede indicar actividad de análisis en segundo plano.",
+      "what_it_is_not": "Puede ser actividad legítima: compilaciones, antivirus escaneando, actualizaciones, backups.",
+      "raw_data": {
+        "processes": [
+          {
+            "pid": 1984,
+            "name": "dwm.exe",
+            "cpu_pct": 43.0,
+            "mem_mb": 102.0,
+            "exe": "C:\\Windows\\System32\\dwm.exe",
+            "user": null
+          },
+          {
+            "pid": 4280,
+            "name": "MemCompression",
+            "cpu_pct": 0.0,
+            "mem_mb": 784.0,
+            "exe": "MemCompression",
+            "user": null
+          },
+          {
+            "pid": 6296,
+            "name": "CSFalconService.exe",
+            "cpu_pct": 28.4,
+            "mem_mb": 106.2,
+            "exe": "C:\\Program Files\\CrowdStrike\\CSFalconService.exe",
+            "user": null
+          },
+          {
+            "pid": 6980,
+            "name": "WavesSysSvc64.exe",
+            "cpu_pct": 0.0,
+            "mem_mb": 227.7,
+            "exe": "C:\\Windows\\System32\\DriverStore\\FileRepository\\wavesapo11de.inf_amd64_c6cd4cf632788a8e\\WavesSysSvc64.exe",
+            "user": null
+          },
+          {
+            "pid": 11096,
+            "name": "Dell.TechHub.Instrumentation.SubAgent.exe",
+            "cpu_pct": 0.0,
+            "mem_mb": 225.4,
+            "exe": "C:\\Program Files\\Dell\\DTP\\InstrumentationSubAgent\\Dell.TechHub.Instrumentation.SubAgent.exe",
+            "user": null
+          },
+          {
+            "pid": 11272,
+            "name": "Code.exe",
+            "cpu_pct": 0.0,
+            "mem_mb": 368.0,
+            "exe": "C:\\Users\\jnavaqui\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+            "user": "USERSAD\\jnavaqui"
+          },
+          {
+            "pid": 12448,
+            "name": "explorer.exe",
+            "cpu_pct": 15.6,
+            "mem_mb": 321.2,
+            "exe": "C:\\Windows\\explorer.exe",
+            "user": "USERSAD\\jnavaqui"
+          },
+          {
+            "pid": 12808,
+            "name": "ZSATrayManager.exe",
+            "cpu_pct": 87.4,
+            "mem_mb": 44.0,
+            "exe": "C:\\Program Files\\Zscaler\\ZSATrayManager\\ZSATrayManager.exe",
+            "user": null
+          },
+          {
+            "pid": 16648,
+            "name": "msedge.exe",
+            "cpu_pct": 0.0,
+            "mem_mb": 516.6,
+            "exe": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+            "user": "USERSAD\\jnavaqui"
+          },
+          {
+            "pid": 17180,
+            "name": "Code.exe",
+            "cpu_pct": 0.0,
+            "mem_mb": 380.5,
+            "exe": "C:\\Users\\jnavaqui\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+            "user": "USERSAD\\jnavaqui"
+          },
+          {
+            "pid": 18000,
+            "name": "msedge.exe",
+            "cpu_pct": 0.0,
+            "mem_mb": 273.2,
+            "exe": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+            "user": "USERSAD\\jnavaqui"
+          },
+          {
+            "pid": 20104,
+            "name": "omadmclient.exe",
+            "cpu_pct": 100.5,
+            "mem_mb": 49.0,
+            "exe": "C:\\Windows\\System32\\omadmclient.exe",
+            "user": null
+          }
+        ]
+      },
+      "timestamp": "2026-05-22T13:29:24.577968"
+    },
+    {
+      "skill": "activity_monitor",
+      "category": "activity_new_services",
+      "title": "Servicios instalados en los últimos 7 días (5)",
+      "description": "Se han instalado nuevos servicios de Windows recientemente.",
+      "risk_level": "yellow",
+      "technical_risk": "Los servicios nuevos pueden incluir agentes de monitorización instalados recientemente.",
+      "legal_risk": "Documentar servicios instalados recientemente es relevante para establecer el momento de implantación de herramientas de vigilancia.",
+      "what_it_is": "Registro de servicios de Windows instalados en la última semana.",
+      "what_it_is_not": "Puede ser actualizaciones de Windows, software corporativo estándar o drivers.",
+      "raw_data": {
+        "new_services": [
+          {
+            "time": "/Date(1779428935329)/",
+            "message": "Se instal¢ un servicio en el sistema.\r\n\r\nNombre del servicio:  CrowdStrike Falcon Sensor Service\r\nNombre del archivo del servicio:  \"C:\\Program Files\\CrowdStrike\\CSFalconService.exe\"\r\nTipo de servicio"
+          },
+          {
+            "time": "/Date(1779428932409)/",
+            "message": "Se instal¢ un servicio en el sistema.\r\n\r\nNombre del servicio:  CrowdStrike Falcon Sensor Boot Driver\r\nNombre del archivo del servicio:  C:\\WINDOWS\\system32\\drivers\\CrowdStrike\\\\CSBoot.sys\r\nTipo de ser"
+          },
+          {
+            "time": "/Date(1779428932409)/",
+            "message": "Se instal¢ un servicio en el sistema.\r\n\r\nNombre del servicio:  CrowdStrike Falcon\r\nNombre del archivo del servicio:  C:\\WINDOWS\\system32\\drivers\\CrowdStrike\\\\csagent.sys\r\nTipo de servicio:  controlado"
+          },
+          {
+            "time": "/Date(1779428831062)/",
+            "message": "Se instal¢ un servicio en el sistema.\r\n\r\nNombre del servicio:  CsInstallService\r\nNombre del archivo del servicio:  %SystemRoot%\\system32\\Drivers\\Crowdstrike\\20805-CsInstallerService.exe\r\nTipo de servi"
+          },
+          {
+            "time": "/Date(1779022311429)/",
+            "message": "Se instal¢ un servicio en el sistema.\r\n\r\nNombre del servicio:  Intel© Graphics Software\r\nNombre del archivo del servicio:  \"C:\\Program Files\\WindowsApps\\AppUp.IntelArcSoftware_26.14.2306.0_x64__8j3eq9"
+          }
+        ]
+      },
+      "timestamp": "2026-05-22T13:29:48.184260"
+    },
+    {
+      "skill": "activity_monitor",
+      "category": "activity_data_senders",
+      "title": "Procesos con múltiples conexiones salientes (1)",
+      "description": "Procesos no-sistema con 3 o más conexiones salientes simultáneas activas.",
+      "risk_level": "yellow",
+      "technical_risk": "Múltiples conexiones simultáneas pueden indicar envío de datos a varios servidores en paralelo.",
+      "legal_risk": "Requiere identificación de los procesos y sus destinos para evaluar el riesgo real.",
+      "what_it_is": "Procesos que mantienen varias conexiones de red abiertas simultáneamente.",
+      "what_it_is_not": "Navegadores y aplicaciones modernas mantienen múltiples conexiones por diseño.",
+      "raw_data": {
+        "senders": [
+          {
+            "pid": 12360,
+            "name": "ZSATunnel.exe",
+            "connections": 5,
+            "exe": "C:\\Program Files\\Zscaler\\ZSATunnel\\ZSATunnel.exe"
+          }
+        ]
+      },
+      "timestamp": "2026-05-22T13:29:51.098599"
+    },
+    {
+      "skill": "privacy_audit",
+      "category": "privacy_clipboard",
+      "title": "Posible acceso al portapapeles detectado (1 apps)",
+      "description": "Se han encontrado aplicaciones que pueden leer el portapapeles del sistema.",
+      "risk_level": "orange",
+      "technical_risk": "El portapapeles puede contener contraseñas, tokens, datos bancarios y comunicaciones privadas copiadas recientemente.",
+      "legal_risk": "El acceso al portapapeles sin consentimiento puede capturar datos especialmente sensibles. Alto riesgo bajo RGPD art. 9 si incluye datos de categoría especial.",
+      "what_it_is": "Software con acceso al portapapeles del sistema, que puede leer lo que el usuario copia.",
+      "what_it_is_not": "Gestores de portapapeles como Ditto o ClipX son herramientas legítimas de productividad.",
+      "raw_data": {
+        "clipboard_apps": [
+          {
+            "name": "widgetboard",
+            "pid": 13760
+          }
+        ]
+      },
+      "timestamp": "2026-05-22T13:29:51.163091"
+    },
+    {
+      "skill": "ai_telemetry_audit",
+      "category": "telemetry_windows_level",
+      "title": "Nivel de telemetría de Windows: Completa (por defecto, sin política restrictiva)",
+      "description": "Windows está configurado para enviar telemetría en nivel: Completa (por defecto, sin política restrictiva). Sin política restrictiva aplicada.",
+      "risk_level": "red",
+      "technical_risk": "Nivel Completo (3): Microsoft recopila contenido de documentos, historial de navegación, uso de aplicaciones, búsquedas, voz, tinta digital y diagnósticos detallados del sistema. Nivel Básico (1): hardware, crashes, compatibilidad. Nivel Mejorado (2): uso de apps y rendimiento.",
+      "legal_risk": "La telemetría de nivel completo transfiere datos personales a Microsoft fuera del EEE sin control explícito del trabajador. Requiere análisis bajo RGPD capítulo V (transferencias internacionales) y base legal bajo art. 6 RGPD.",
+      "what_it_is": "Windows envía datos de uso, diagnóstico y en niveles altos contenido de documentos y actividad del usuario a servidores de Microsoft en EEUU.",
+      "what_it_is_not": "No todo dato enviado es ilegal. La base legal puede ser interés legítimo o contrato de servicio. El problema es la falta de transparencia y control.",
+      "raw_data": {
+        "telemetry_level": null,
+        "label": "Completa (por defecto, sin política restrictiva)",
+        "source": ""
+      },
+      "timestamp": "2026-05-22T13:29:53.983785"
+    },
+    {
+      "skill": "ai_telemetry_audit",
+      "category": "telemetry_services",
+      "title": "Servicios de telemetría activos (4 en ejecución)",
+      "description": "Servicios de Windows activos dedicados a recopilar y enviar datos de uso y diagnóstico a Microsoft.",
+      "risk_level": "red",
+      "technical_risk": "DiagTrack (Connected User Experiences) es el servicio principal de telemetría. Recopila continuamente datos de actividad y los envía a Microsoft. No se puede desactivar completamente en Windows 11 Home.",
+      "legal_risk": "Los servicios de telemetría operan como tratamiento continuo de datos personales. En equipos corporativos el empleador es corresponsable del tratamiento bajo RGPD art. 26.",
+      "what_it_is": "Servicios de Windows que recopilan y transmiten datos de uso, errores y diagnóstico a Microsoft.",
+      "what_it_is_not": "No todos los datos son personales en sentido estricto. Muchos son datos técnicos de hardware y estabilidad.",
+      "raw_data": {
+        "active_telemetry_services": {
+          "DiagTrack": "Connected User Experiences and Telemetry (telemetría completa)",
+          "dmwappushservice": "WAP Push Message Routing (telemetría móvil)",
+          "PcaSvc": "Program Compatibility Assistant",
+          "CDPSvc": "Connected Devices Platform"
+        }
+      },
+      "timestamp": "2026-05-22T13:30:07.477874"
+    },
+    {
+      "skill": "ai_telemetry_audit",
+      "category": "telemetry_office",
+      "title": "Telemetría de Microsoft Office/365",
+      "description": "Microsoft Office recopila datos de uso de documentos, funciones utilizadas y en configuración por defecto fragmentos de contenido para mejora del producto.",
+      "risk_level": "orange",
+      "technical_risk": "Office 365 puede enviar: nombres de archivos, tipos de contenido, funciones usadas, errores, y con servicios conectados activos: fragmentos de texto para traducción, corrección y sugerencias de IA.",
+      "legal_risk": "El envío de contenido de documentos laborales a Microsoft puede incluir datos personales de terceros (clientes, empleados) sin base legal adecuada. Responsabilidad del empleador como responsable del tratamiento.",
+      "what_it_is": "Sistema de telemetría de Microsoft Office que recopila datos de uso y en algunos casos contenido de documentos.",
+      "what_it_is_not": "Microsoft afirma que el contenido de documentos no se usa sin consentimiento. Los Terms of Service tienen excepciones amplias.",
+      "raw_data": {
+        "office_privacy_settings": {
+          "estado": "Sin política restrictiva — telemetría completa por defecto"
+        }
+      },
+      "timestamp": "2026-05-22T13:30:07.546203"
+    },
+    {
+      "skill": "ai_telemetry_audit",
+      "category": "ai_connected_experiences",
+      "title": "Experiencias conectadas de Office activas — contenido enviado a Microsoft",
+      "description": "Las 'experiencias conectadas' de Microsoft 365 están activas. Esto permite a Office analizar contenido de documentos para ofrecer funciones de IA y nube.",
+      "risk_level": "orange",
+      "technical_risk": "Las experiencias conectadas incluyen: traducción automática de documentos, sugerencias de escritura con IA (Editor), búsqueda inteligente (contenido enviado a Bing), PowerPoint Designer (imágenes y contenido de diapositivas), y análisis de datos en Excel con IA.",
+      "legal_risk": "El contenido de documentos laborales que se envía a Microsoft para procesamiento de IA puede incluir datos personales de clientes o empleados. El empleador debe tener DPA con Microsoft y base legal bajo RGPD art. 6 y 28.",
+      "what_it_is": "Funciones de Microsoft 365 que requieren enviar contenido a servidores de Microsoft para funcionar: traducción, diseño, sugerencias de IA.",
+      "what_it_is_not": "No es espionaje directo. Es el modelo de negocio de SaaS: el servicio requiere acceso al contenido para funcionar. El problema es la transparencia y el control del usuario.",
+      "raw_data": {
+        "connected_experiences_policy": {},
+        "enabled_by_default": true
+      },
+      "timestamp": "2026-05-22T13:30:10.393518"
+    },
+    {
+      "skill": "cloud_sync_audit",
+      "category": "cloud_sync_service",
+      "title": "Microsoft OneDrive activo — sincronización en segundo plano",
+      "description": "Microsoft OneDrive está activo y sincronizando archivos hacia Microsoft Azure (EEUU/UE según configuración).",
+      "risk_level": "orange",
+      "technical_risk": "Datos sincronizados: Archivos del perfil de usuario, documentos, escritorio. Destino: Microsoft Azure (EEUU/UE según configuración). La sincronización ocurre automáticamente en segundo plano sin intervención del usuario.",
+      "legal_risk": "La sincronización automática puede constituir transferencia internacional de datos personales bajo RGPD cap. V. En equipos corporativos el empleador debe tener DPA con el proveedor de nube y base legal adecuada.",
+      "what_it_is": "Microsoft OneDrive sincroniza automáticamente archivos locales hacia servidores en la nube, manteniéndolos accesibles desde cualquier dispositivo.",
+      "what_it_is_not": "La sincronización en nube no implica acceso no autorizado por terceros. El riesgo es la transferencia de datos sin control explícito y la accesibilidad desde otros dispositivos.",
+      "raw_data": {
+        "service": "Microsoft OneDrive",
+        "detection": {
+          "registry": true
+        },
+        "destination": "Microsoft Azure (EEUU/UE según configuración)"
+      },
+      "timestamp": "2026-05-22T13:30:10.467452"
+    },
+    {
+      "skill": "cloud_sync_audit",
+      "category": "cloud_sync_service",
+      "title": "SharePoint / OneDrive Empresarial activo — sincronización en segundo plano",
+      "description": "SharePoint / OneDrive Empresarial está activo y sincronizando archivos hacia Microsoft 365 (tenant corporativo).",
+      "risk_level": "orange",
+      "technical_risk": "Datos sincronizados: Documentos corporativos, librerías de SharePoint. Destino: Microsoft 365 (tenant corporativo). La sincronización ocurre automáticamente en segundo plano sin intervención del usuario.",
+      "legal_risk": "La sincronización automática puede constituir transferencia internacional de datos personales bajo RGPD cap. V. En equipos corporativos el empleador debe tener DPA con el proveedor de nube y base legal adecuada.",
+      "what_it_is": "SharePoint / OneDrive Empresarial sincroniza automáticamente archivos locales hacia servidores en la nube, manteniéndolos accesibles desde cualquier dispositivo.",
+      "what_it_is_not": "La sincronización en nube no implica acceso no autorizado por terceros. El riesgo es la transferencia de datos sin control explícito y la accesibilidad desde otros dispositivos.",
+      "raw_data": {
+        "service": "SharePoint / OneDrive Empresarial",
+        "detection": {
+          "registry": true
+        },
+        "destination": "Microsoft 365 (tenant corporativo)"
+      },
+      "timestamp": "2026-05-22T13:30:10.512763"
+    },
+    {
+      "skill": "cloud_sync_audit",
+      "category": "cloud_sync_folder_redirect",
+      "title": "Carpetas del sistema redirigidas a nube (7 carpetas)",
+      "description": "Carpetas principales de Windows (Escritorio, Documentos, etc.) están redirigidas hacia OneDrive o SharePoint.",
+      "risk_level": "red",
+      "technical_risk": "Cada archivo que el trabajador guarda en estas carpetas se sincroniza automáticamente a la nube sin ninguna acción adicional. Incluye: documentos de trabajo, archivos personales, screenshots, descargas guardadas en escritorio.",
+      "legal_risk": "La redirección automática de carpetas del sistema implica que el empleador (a través de Microsoft 365) tiene acceso inmediato a cualquier archivo guardado. Esto puede incluir notas personales, documentos sindicales o comunicaciones privadas. LOPDGDD art. 87 y ET art. 20bis requieren información previa y proporcionalidad.",
+      "what_it_is": "Redirección de carpetas de Windows hacia OneDrive/SharePoint, convirtiendo el almacenamiento local en almacenamiento corporativo en la nube.",
+      "what_it_is_not": "Es una práctica común en entornos corporativos para backup y acceso multi-dispositivo. No implica lectura activa de contenidos, pero sí acceso técnico posible.",
+      "raw_data": {
+        "redirected_folders": [
+          {
+            "folder": "My Pictures",
+            "target": "C:\\Users\\jnavaqui\\OneDrive - NTT DATA EMEAL\\Imágenes"
+          },
+          {
+            "folder": "{AB5FB87B-7CE2-4F83-915D-550846C9537B}",
+            "target": "C:\\Users\\jnavaqui\\OneDrive - NTT DATA EMEAL\\Imágenes\\Álbum de la cámara"
+          },
+          {
+            "folder": "{B7BEDE81-DF94-4682-A7D8-57A52620B86F}",
+            "target": "C:\\Users\\jnavaqui\\OneDrive - NTT DATA EMEAL\\Imágenes\\Capturas de pantalla"
+          },
+          {
+            "folder": "Desktop",
+            "target": "C:\\Users\\jnavaqui\\OneDrive - NTT DATA EMEAL\\Escritorio"
+          },
+          {
+            "folder": "Personal",
+            "target": "C:\\Users\\jnavaqui\\OneDrive - NTT DATA EMEAL\\Documentos"
+          },
+          {
+            "folder": "{F42EE2D3-909F-4907-8871-4C22FC0BF756}",
+            "target": "%USERPROFILE%\\OneDrive - NTT DATA EMEAL\\Documentos"
+          },
+          {
+            "folder": "{0DDD015D-B06C-45D5-8C4C-F59713854639}",
+            "target": "%USERPROFILE%\\OneDrive - NTT DATA EMEAL\\Imágenes"
+          }
+        ]
+      },
+      "timestamp": "2026-05-22T13:30:10.570480"
+    },
+    {
+      "skill": "cloud_sync_audit",
+      "category": "cloud_sync_policy",
+      "title": "Políticas corporativas de OneDrive activas — KFM forzado por GPO",
+      "description": "Se han detectado políticas GPO que configuran el comportamiento de OneDrive en este equipo.",
+      "risk_level": "orange",
+      "technical_risk": "Las políticas GPO de OneDrive pueden forzar la sincronización de carpetas del sistema sin que el usuario pueda desactivarla. 'KFMBlockOptOut' impide que el trabajador desactive la sincronización de Escritorio y Documentos.",
+      "legal_risk": "Forzar KFM mediante GPO sin información previa al trabajador puede vulnerar LOPDGDD art. 87. El trabajador no puede controlar qué datos se sincronizan a la nube corporativa.",
+      "what_it_is": "Configuración GPO que controla cómo OneDrive se comporta en los equipos de la organización.",
+      "what_it_is_not": "Las políticas GPO de OneDrive son gestión IT corporativa legítima. El problema es la transparencia hacia el trabajador.",
+      "raw_data": {
+        "policies": {
+          "KFM silencioso forzado por GPO": "3048dc87-43f0-4100-9acb-ae1971c79395",
+          "Bloqueo de desactivación KFM": 1
+        },
+        "kfm_forced": true
+      },
+      "timestamp": "2026-05-22T13:30:10.605375"
+    },
+    {
+      "skill": "browser_audit",
+      "category": "browser_forced_extensions",
+      "title": "Extensiones forzadas por política corporativa (1 extensiones)",
+      "description": "1 extensiones instaladas obligatoriamente por política GPO que el usuario no puede eliminar. ",
+      "risk_level": "orange",
+      "technical_risk": "Las extensiones forzadas tienen acceso completo al navegador: contenido de páginas, formularios, contraseñas introducidas, historial y cookies. Algunas pueden interceptar o modificar el tráfico web.",
+      "legal_risk": "Las extensiones con permisos amplios instaladas sin conocimiento explícito del trabajador pueden vulnerar LOPDGDD art. 87. Requieren información previa sobre su función y datos que recopilan.",
+      "what_it_is": "Extensiones de navegador instaladas por la empresa mediante política GPO que no pueden ser eliminadas por el usuario.",
+      "what_it_is_not": "No todas son espionaje. Muchas son herramientas de seguridad, SSO o DLP legítimas. El problema es la falta de transparencia sobre qué datos recopilan.",
+      "raw_data": {
+        "forced_extensions": {
+          "maafgiompdekodanheihhgilkjchcakm": {
+            "browser": "Google Chrome",
+            "type": "ExtensionInstallForcelist",
+            "known": null
+          }
+        },
+        "high_risk_count": 0
+      },
+      "timestamp": "2026-05-22T13:30:10.641212"
+    },
+    {
+      "skill": "browser_audit",
+      "category": "browser_policies",
+      "title": "Políticas corporativas en Google Chrome (3 activas)",
+      "description": "Google Chrome tiene 3 políticas corporativas activas que controlan su comportamiento.",
+      "risk_level": "orange",
+      "technical_risk": "CloudReportingEnabled envía datos de actividad del navegador al administrador corporativo. El bloqueo del modo incógnito impide al trabajador tener sesiones de navegación privadas. BrowserSignin forzado vincula la actividad al perfil corporativo y la sincroniza.",
+      "legal_risk": "CloudReportingEnabled sin información previa al trabajador puede vulnerar LOPDGDD art. 87. El bloqueo del modo incógnito elimina una herramienta de privacidad del trabajador.",
+      "what_it_is": "Políticas GPO que controlan el comportamiento del navegador: qué puede hacer el usuario, qué datos se envían y cómo se gestiona la sesión.",
+      "what_it_is_not": "Las políticas de navegador son gestión corporativa estándar. El problema es cuándo incluyen reporting de actividad sin transparencia.",
+      "raw_data": {
+        "browser": "Google Chrome",
+        "policies": {
+          "PasswordManagerEnabled": {
+            "value": 0,
+            "description": "Gestor de contraseñas del navegador"
+          },
+          "AutofillAddressEnabled": {
+            "value": 0,
+            "description": "Autocompletado de direcciones"
+          },
+          "AutofillCreditCardEnabled": {
+            "value": 0,
+            "description": "Autocompletado de tarjetas de crédito"
+          }
+        },
+        "cloud_reporting": false,
+        "incognito_blocked": false
+      },
+      "timestamp": "2026-05-22T13:30:10.692825"
+    },
+    {
+      "skill": "browser_audit",
+      "category": "browser_policies",
+      "title": "Políticas corporativas en Microsoft Edge (4 activas)",
+      "description": "Microsoft Edge tiene 4 políticas corporativas activas que controlan su comportamiento.",
+      "risk_level": "orange",
+      "technical_risk": "CloudReportingEnabled envía datos de actividad del navegador al administrador corporativo. El bloqueo del modo incógnito impide al trabajador tener sesiones de navegación privadas. BrowserSignin forzado vincula la actividad al perfil corporativo y la sincroniza.",
+      "legal_risk": "CloudReportingEnabled sin información previa al trabajador puede vulnerar LOPDGDD art. 87. El bloqueo del modo incógnito elimina una herramienta de privacidad del trabajador.",
+      "what_it_is": "Políticas GPO que controlan el comportamiento del navegador: qué puede hacer el usuario, qué datos se envían y cómo se gestiona la sesión.",
+      "what_it_is_not": "Las políticas de navegador son gestión corporativa estándar. El problema es cuándo incluyen reporting de actividad sin transparencia.",
+      "raw_data": {
+        "browser": "Microsoft Edge",
+        "policies": {
+          "BrowserSignin": {
+            "value": 2,
+            "description": "Inicio de sesión en navegador (1=obligatorio, 2=forzado)"
+          },
+          "PasswordManagerEnabled": {
+            "value": 0,
+            "description": "Gestor de contraseñas del navegador"
+          },
+          "AutofillAddressEnabled": {
+            "value": 0,
+            "description": "Autocompletado de direcciones"
+          },
+          "AutofillCreditCardEnabled": {
+            "value": 0,
+            "description": "Autocompletado de tarjetas de crédito"
+          }
+        },
+        "cloud_reporting": false,
+        "incognito_blocked": false
+      },
+      "timestamp": "2026-05-22T13:30:10.722781"
+    },
+    {
+      "skill": "browser_audit",
+      "category": "browser_policies",
+      "title": "Políticas corporativas en Mozilla Firefox (1 activas)",
+      "description": "Mozilla Firefox tiene 1 políticas corporativas activas que controlan su comportamiento.",
+      "risk_level": "orange",
+      "technical_risk": "CloudReportingEnabled envía datos de actividad del navegador al administrador corporativo. El bloqueo del modo incógnito impide al trabajador tener sesiones de navegación privadas. BrowserSignin forzado vincula la actividad al perfil corporativo y la sincroniza.",
+      "legal_risk": "CloudReportingEnabled sin información previa al trabajador puede vulnerar LOPDGDD art. 87. El bloqueo del modo incógnito elimina una herramienta de privacidad del trabajador.",
+      "what_it_is": "Políticas GPO que controlan el comportamiento del navegador: qué puede hacer el usuario, qué datos se envían y cómo se gestiona la sesión.",
+      "what_it_is_not": "Las políticas de navegador son gestión corporativa estándar. El problema es cuándo incluyen reporting de actividad sin transparencia.",
+      "raw_data": {
+        "browser": "Mozilla Firefox",
+        "policies": {
+          "PasswordManagerEnabled": {
+            "value": 0,
+            "description": "Gestor de contraseñas del navegador"
+          }
+        },
+        "cloud_reporting": false,
+        "incognito_blocked": false
+      },
+      "timestamp": "2026-05-22T13:30:10.749876"
+    },
+    {
+      "skill": "hardening_audit",
+      "category": "hardening_missing",
+      "title": "Configuraciones de seguridad ausentes (8 de 14)",
+      "description": "Se han detectado 8 configuraciones de seguridad no activas: 1 críticas, 3 altas, 4 medias.",
+      "risk_level": "red",
+      "technical_risk": "Las configuraciones de seguridad ausentes reducen la protección del sistema y pueden facilitar la instalación o ejecución de software no autorizado, incluyendo herramientas de vigilancia.",
+      "legal_risk": "El empleador tiene obligación de garantizar la seguridad de los equipos corporativos bajo RGPD art. 32. La ausencia de medidas técnicas básicas puede constituir incumplimiento de esta obligación.",
+      "what_it_is": "Configuraciones de seguridad de Windows que deberían estar activas en un equipo corporativo gestionado pero no lo están.",
+      "what_it_is_not": "No implica que el equipo esté comprometido. Indica que las protecciones estándar no se han aplicado, lo que aumenta la superficie de riesgo.",
+      "raw_data": {
+        "missing": [
+          "bitlocker",
+          "secure_boot",
+          "firewall",
+          "defender_realtime",
+          "rdp_encryption",
+          "audit_policy",
+          "controlled_folder_access",
+          "exploit_protection"
+        ],
+        "present": [
+          "uac",
+          "windows_update",
+          "smb_v1",
+          "powershell_logging",
+          "lsass_protection",
+          "credential_guard"
+        ],
+        "critical_missing": [
+          {
+            "id": "bitlocker",
+            "title": "BitLocker — Cifrado de disco",
+            "worker_impact": "Sin cifrado, si el equipo se pierde o es robado, cualquier persona puede acceder a todos tus datos sin contraseña. Incluye documentos, correos y credenciales."
+          }
+        ],
+        "high_missing": [
+          {
+            "id": "secure_boot",
+            "title": "Secure Boot — Arranque seguro",
+            "worker_impact": "Sin Secure Boot, software malicioso puede instalarse antes de que Windows arranque, invisible para el antivirus."
+          },
+          {
+            "id": "firewall",
+            "title": "Windows Firewall — Cortafuegos",
+            "worker_impact": "Sin firewall activo, conexiones entrantes no autorizadas pueden acceder al equipo desde la red corporativa."
+          },
+          {
+            "id": "defender_realtime",
+            "title": "Windows Defender — Protección en tiempo real",
+            "worker_impact": "Sin protección en tiempo real, software malicioso puede ejecutarse sin ser detectado, incluyendo keyloggers o software de vigilancia no autorizado."
+          }
+        ],
+        "medium_missing": [
+          {
+            "id": "rdp_encryption",
+            "title": "RDP — Nivel de cifrado del escritorio remoto",
+            "worker_impact": "RDP sin cifrado adecuado permite interceptar sesiones de escritorio remoto. Si IT accede remotamente, la sesión puede ser observada o grabada."
+          },
+          {
+            "id": "audit_policy",
+            "title": "Política de auditoría — Registro de eventos",
+            "worker_impact": "Sin política de auditoría activa, accesos a archivos y cambios de configuración no quedan registrados. El trabajador no puede demostrar qué ocurrió si hay una disputa."
+          },
+          {
+            "id": "controlled_folder_access",
+            "title": "Acceso controlado a carpetas (Ransomware Protection)",
+            "worker_impact": "Sin protección contra ransomware, software malicioso puede cifrar o eliminar todos los documentos del trabajador."
+          },
+          {
+            "id": "exploit_protection",
+            "title": "Windows Exploit Protection (DEP/ASLR)",
+            "worker_impact": "Sin protección de memoria, exploits en aplicaciones pueden ejecutar código malicioso con mayor facilidad."
+          }
+        ]
+      },
+      "timestamp": "2026-05-22T13:30:53.225933"
+    },
+    {
+      "skill": "hardening_audit",
+      "category": "hardening_encryption",
+      "title": "AUSENTE: BitLocker — Cifrado de disco",
+      "description": "Esta protección de seguridad no está activa. Importancia: CRITICAL.",
+      "risk_level": "red",
+      "technical_risk": "Los datos del disco son accesibles sin autenticación si se extrae el disco o se arranca desde medio externo.",
+      "legal_risk": "El empleador tiene obligación bajo RGPD art. 32 de implementar medidas técnicas apropiadas. La ausencia de esta medida puede ser relevante en caso de incidente de seguridad.",
+      "what_it_is": "BitLocker — Cifrado de disco",
+      "what_it_is_not": "No implica que haya ocurrido un incidente. Es una protección que debería estar activa y no lo está.",
+      "raw_data": {
+        "check_id": "bitlocker",
+        "importance": "critical",
+        "worker_impact": "Sin cifrado, si el equipo se pierde o es robado, cualquier persona puede acceder a todos tus datos sin contraseña. Incluye documentos, correos y credenciales.",
+        "absence_means": "Los datos del disco son accesibles sin autenticación si se extrae el disco o se arranca desde medio externo."
+      },
+      "timestamp": "2026-05-22T13:30:53.241884"
+    },
+    {
+      "skill": "hardening_audit",
+      "category": "hardening_boot",
+      "title": "AUSENTE: Secure Boot — Arranque seguro",
+      "description": "Esta protección de seguridad no está activa. Importancia: HIGH.",
+      "risk_level": "orange",
+      "technical_risk": "El sistema puede ser comprometido a nivel de firmware sin que ninguna herramienta de seguridad lo detecte.",
+      "legal_risk": "El empleador tiene obligación bajo RGPD art. 32 de implementar medidas técnicas apropiadas. La ausencia de esta medida puede ser relevante en caso de incidente de seguridad.",
+      "what_it_is": "Secure Boot — Arranque seguro",
+      "what_it_is_not": "No implica que haya ocurrido un incidente. Es una protección que debería estar activa y no lo está.",
+      "raw_data": {
+        "check_id": "secure_boot",
+        "importance": "high",
+        "worker_impact": "Sin Secure Boot, software malicioso puede instalarse antes de que Windows arranque, invisible para el antivirus.",
+        "absence_means": "El sistema puede ser comprometido a nivel de firmware sin que ninguna herramienta de seguridad lo detecte."
+      },
+      "timestamp": "2026-05-22T13:30:53.259430"
+    },
+    {
+      "skill": "hardening_audit",
+      "category": "hardening_network",
+      "title": "AUSENTE: Windows Firewall — Cortafuegos",
+      "description": "Esta protección de seguridad no está activa. Importancia: HIGH.",
+      "risk_level": "orange",
+      "technical_risk": "El equipo está expuesto a conexiones entrantes desde la red local sin filtrado.",
+      "legal_risk": "El empleador tiene obligación bajo RGPD art. 32 de implementar medidas técnicas apropiadas. La ausencia de esta medida puede ser relevante en caso de incidente de seguridad.",
+      "what_it_is": "Windows Firewall — Cortafuegos",
+      "what_it_is_not": "No implica que haya ocurrido un incidente. Es una protección que debería estar activa y no lo está.",
+      "raw_data": {
+        "check_id": "firewall",
+        "importance": "high",
+        "worker_impact": "Sin firewall activo, conexiones entrantes no autorizadas pueden acceder al equipo desde la red corporativa.",
+        "absence_means": "El equipo está expuesto a conexiones entrantes desde la red local sin filtrado."
+      },
+      "timestamp": "2026-05-22T13:30:53.275486"
+    },
+    {
+      "skill": "hardening_audit",
+      "category": "hardening_antimalware",
+      "title": "AUSENTE: Windows Defender — Protección en tiempo real",
+      "description": "Esta protección de seguridad no está activa. Importancia: HIGH.",
+      "risk_level": "orange",
+      "technical_risk": "Malware puede ejecutarse libremente sin detección hasta el próximo análisis manual.",
+      "legal_risk": "El empleador tiene obligación bajo RGPD art. 32 de implementar medidas técnicas apropiadas. La ausencia de esta medida puede ser relevante en caso de incidente de seguridad.",
+      "what_it_is": "Windows Defender — Protección en tiempo real",
+      "what_it_is_not": "No implica que haya ocurrido un incidente. Es una protección que debería estar activa y no lo está.",
+      "raw_data": {
+        "check_id": "defender_realtime",
+        "importance": "high",
+        "worker_impact": "Sin protección en tiempo real, software malicioso puede ejecutarse sin ser detectado, incluyendo keyloggers o software de vigilancia no autorizado.",
+        "absence_means": "Malware puede ejecutarse libremente sin detección hasta el próximo análisis manual."
+      },
+      "timestamp": "2026-05-22T13:30:53.291367"
+    },
+    {
+      "skill": "identity_audit",
+      "category": "identity_local_accounts",
+      "title": "Cuentas locales detectadas (8 total, 2 sospechosas)",
+      "description": "El sistema tiene 8 cuentas locales. 2 tienen características que merecen revisión.",
+      "risk_level": "orange",
+      "technical_risk": "Cuentas locales con contraseña que no expira o nunca usadas pueden ser puertas traseras para acceso remoto no autorizado al equipo.",
+      "legal_risk": "Cuentas de servicio o soporte no documentadas pueden permitir acceso al equipo del trabajador sin su conocimiento. Bajo LOPDGDD art. 87 el trabajador tiene derecho a saber quién puede acceder a su dispositivo.",
+      "what_it_is": "Cuentas de usuario locales creadas en el equipo, distintas de las cuentas de dominio corporativo.",
+      "what_it_is_not": "Las cuentas de sistema (DefaultAccount, WDAGUtilityAccount) son normales en Windows. El riesgo está en cuentas habilitadas no documentadas.",
+      "raw_data": {
+        "total_accounts": 8,
+        "suspicious": [
+          {
+            "name": "DevToolsUser",
+            "enabled": true,
+            "last_logon": "None",
+            "flags": [
+              "enabled_never_used"
+            ]
+          },
+          {
+            "name": "Local-Admin",
+            "enabled": true,
+            "last_logon": "/Date(1779366426728)/",
+            "flags": [
+              "suspicious_name"
+            ]
+          }
+        ],
+        "all_accounts": [
+          {
+            "name": "DefaultAccount",
+            "enabled": false
+          },
+          {
+            "name": "defaultuser0",
+            "enabled": false
+          },
+          {
+            "name": "DevToolsUser",
+            "enabled": true
+          },
+          {
+            "name": "EMEAL-IT",
+            "enabled": true
+          },
+          {
+            "name": "local-AD",
+            "enabled": false
+          },
+          {
+            "name": "Local-Admin",
+            "enabled": true
+          },
+          {
+            "name": "WDAGUtilityAccount",
+            "enabled": false
+          },
+          {
+            "name": "XGuest",
+            "enabled": false
+          }
+        ]
+      },
+      "timestamp": "2026-05-22T13:30:55.970936"
+    },
+    {
+      "skill": "identity_audit",
+      "category": "identity_admin_group",
+      "title": "Grupo Administradores: 4 miembros",
+      "description": "El grupo de administradores locales tiene 4 miembros. 4 son grupos o servicios, no usuarios individuales.",
+      "risk_level": "orange",
+      "technical_risk": "Los administradores locales tienen acceso completo al equipo: pueden leer cualquier archivo, instalar software, acceder a credenciales y monitorizar toda la actividad.",
+      "legal_risk": "El trabajador tiene derecho a saber qué cuentas tienen acceso administrativo a su equipo. Un número elevado de administradores aumenta el riesgo de acceso no autorizado. LOPDGDD art. 87 y RGPD art. 32.",
+      "what_it_is": "Lista de cuentas con privilegios de administrador local en el equipo del trabajador.",
+      "what_it_is_not": "Tener administradores corporativos en el equipo es normal en entornos gestionados. El problema es la falta de transparencia sobre quién tiene acceso y con qué finalidad.",
+      "raw_data": {
+        "admin_members": [
+          {
+            "name": "NTTD-90G6TV3\\EMEAL-IT",
+            "type": "Usuario",
+            "source": 1
+          },
+          {
+            "name": "NTTD-90G6TV3\\Local-Admin",
+            "type": "Usuario",
+            "source": 1
+          },
+          {
+            "name": "S-1-12-1-1448379796-1164560967-3097909924-3582504540",
+            "type": "Otros",
+            "source": 3
+          },
+          {
+            "name": "S-1-12-1-3371438515-1222673354-1701492662-1927321971",
+            "type": "Otros",
+            "source": 3
+          }
+        ],
+        "non_user_admins": [
+          {
+            "Name": "NTTD-90G6TV3\\EMEAL-IT",
+            "ObjectClass": "Usuario",
+            "PrincipalSource": 1
+          },
+          {
+            "Name": "NTTD-90G6TV3\\Local-Admin",
+            "ObjectClass": "Usuario",
+            "PrincipalSource": 1
+          },
+          {
+            "Name": "S-1-12-1-1448379796-1164560967-3097909924-3582504540",
+            "ObjectClass": "Otros",
+            "PrincipalSource": 3
+          },
+          {
+            "Name": "S-1-12-1-3371438515-1222673354-1701492662-1927321971",
+            "ObjectClass": "Otros",
+            "PrincipalSource": 3
+          }
+        ]
+      },
+      "timestamp": "2026-05-22T13:31:01.878264"
+    },
+    {
+      "skill": "identity_audit",
+      "category": "identity_remote_access",
+      "title": "Acceso remoto habilitado",
+      "description": "RDP está habilitado en este equipo. Procesos de acceso remoto activos: dwm. ",
+      "risk_level": "orange",
+      "technical_risk": "Con RDP habilitado, cualquier administrador puede conectarse remotamente al escritorio del trabajador y ver o controlar todo. Una conexión RDP activa significa que alguien puede estar viendo el escritorio ahora mismo.",
+      "legal_risk": "El acceso remoto al escritorio sin notificación al trabajador puede constituir vigilancia encubierta bajo LOPDGDD art. 87. Una conexión RDP activa no consentida podría vulnerar adicionalmente el art. 197 del Código Penal.",
+      "what_it_is": "Protocolo de escritorio remoto que permite a terceros ver y controlar el equipo a través de la red.",
+      "what_it_is_not": "RDP habilitado es normal en entornos corporativos para soporte técnico. El problema es el acceso sin notificación ni consentimiento del trabajador.",
+      "raw_data": {
+        "rdp_enabled": true,
+        "remote_processes": [
+          "dwm"
+        ],
+        "active_rdp_connections": []
+      },
+      "timestamp": "2026-05-22T13:31:08.408448"
+    },
+    {
+      "skill": "identity_audit",
+      "category": "identity_stored_credentials",
+      "title": "Credenciales almacenadas en Windows Credential Manager (41)",
+      "description": "Windows tiene 41 credenciales almacenadas. 2 son credenciales corporativas de acceso remoto.",
+      "risk_level": "orange",
+      "technical_risk": "Las credenciales almacenadas en Windows Credential Manager están cifradas con la clave del perfil de usuario. Un proceso con privilegios de administrador puede extraerlas usando herramientas estándar.",
+      "legal_risk": "Las credenciales almacenadas pueden incluir contraseñas de sistemas personales del trabajador. Su acceso no autorizado vulnera LOPDGDD y puede constituir delito bajo CP art. 197.",
+      "what_it_is": "Almacén seguro de Windows donde se guardan credenciales para acceso automático a recursos de red, RDP y otros servicios.",
+      "what_it_is_not": "No es un keylogger. Son credenciales que el usuario guardó voluntariamente para no introducirlas cada vez.",
+      "raw_data": {
+        "stored_credentials": [
+          {
+            "target": "LegacyGeneric:target=https://github.com/",
+            "type": "Gen‚rico",
+            "user": "jnquirantes"
+          },
+          {
+            "target": "LegacyGeneric:target=Olk/PushNotificationsBackupKey",
+            "type": "Gen‚rico",
+            "user": "Olk/PushNotificationsBackupKey"
+          },
+          {
+            "target": "LegacyGeneric:target=Adobe App Info (QWNyb2JhdFJlYWRlcjF7fTIwMTgwNzIwMDE)(Part5)",
+            "type": "Gen‚rico",
+            "user": "App Info"
+          },
+          {
+            "target": "LegacyGeneric:target=Adobe User Info(Part2)",
+            "type": "Gen‚rico",
+            "user": "User DT"
+          },
+          {
+            "target": "LegacyGeneric:target=git:https://github.com",
+            "type": "Gen‚rico",
+            "user": "jnquirantes"
+          },
+          {
+            "target": "LegacyGeneric:target=git:https://jessicanavarroquirantes@bitbucket.org/refresh_token",
+            "type": "Gen‚rico",
+            "user": "jessicanavarroquirantes"
+          },
+          {
+            "target": "LegacyGeneric:target=Microsoft_VS_LiveShare/microsoft/jnavaqui@emeal.nttdata.com",
+            "type": "Gen‚rico",
+            "user": null
+          },
+          {
+            "target": "LegacyGeneric:target=axetToken",
+            "type": "Gen‚rico",
+            "user": "axetToken"
+          },
+          {
+            "target": "LegacyGeneric:target=Microsoft:SSMS:20:tcp:d4i-framework.database.windows.net,1433:d4i-framework:8c91a03d-f9b4-46c0-a305-b5dcc79ff907:1",
+            "type": "Gen‚rico",
+            "user": "d4i-framework"
+          },
+          {
+            "target": "LegacyGeneric:target=axetData",
+            "type": "Gen‚rico",
+            "user": "axetData"
+          },
+          {
+            "target": "LegacyGeneric:target=git:https://dev.azure.com/d4ivalencia",
+            "type": "Gen‚rico",
+            "user": "jnavaqui@emeal.nttdata.com"
+          },
+          {
+            "target": "LegacyGeneric:target=Microsoft_VS_LiveShare/(default)/microsoft",
+            "type": "Gen‚rico",
+            "user": null
+          },
+          {
+            "target": "LegacyGeneric:target=Adobe App Info (QWNyb2JhdFJlYWRlcjF7fTIwMTgwNzIwMDE)(Part1)",
+            "type": "Gen‚rico",
+            "user": "App Info"
+          },
+          {
+            "target": "LegacyGeneric:target=azureAccountProviderCredentials|accessTokenCache-key",
+            "type": "Gen‚rico",
+            "user": "*"
+          },
+          {
+            "target": "LegacyGeneric:target=Adobe User Info(Part1)",
+            "type": "Gen‚rico",
+            "user": "User DT"
+          },
+          {
+            "target": "LegacyGeneric:target=JetBrains.UserLicenses",
+            "type": "Gen‚rico",
+            "user": null
+          },
+          {
+            "target": "LegacyGeneric:target=git:https://dev.azure.com/sareb",
+            "type": "Gen‚rico",
+            "user": "UPE10429@sareb.es"
+          },
+          {
+            "target": "LegacyGeneric:target=Adobe User OS Info(Part1)",
+            "type": "Gen‚rico",
+            "user": "User OS Info"
+          },
+          {
+            "target": "LegacyGeneric:target=Microsoft_VS_LiveShare/(default)/jnavaqui@emeal.nttdata.com",
+            "type": "Gen‚rico",
+            "user": null
+          },
+          {
+            "target": "LegacyGeneric:target=Adobe App Info (QWNyb2JhdFJlYWRlcjF7fTIwMTgwNzIwMDE)(Part3)",
+            "type": "Gen‚rico",
+            "user": "App Info"
+          },
+          {
+            "target": "LegacyGeneric:target=Microsoft:SSMS:20:SRBWRED02:escritura:8c91a03d-f9b4-46c0-a305-b5dcc79ff907:1",
+            "type": "Gen‚rico",
+            "user": "escritura"
+          },
+          {
+            "target": "LegacyGeneric:target=hg:https://jessicanavarroquirantes@bitbucket.org/refresh_token",
+            "type": "Gen‚rico",
+            "user": "jessicanavarroquirantes"
+          },
+          {
+            "target": "LegacyGeneric:target=git:https://dev.azure.com/jnavaqui",
+            "type": "Gen‚rico",
+            "user": "jnavaqui@emeal.nttdata.com"
+          },
+          {
+            "target": "LegacyGeneric:target=git:https://sareb.visualstudio.com",
+            "type": "Gen‚rico",
+            "user": "UPE10429@sareb.es"
+          },
+          {
+            "target": "LegacyGeneric:target=git:https://jessicanavarroquirantes@bitbucket.org",
+            "type": "Gen‚rico",
+            "user": "jessicanavarroquirantes"
+          },
+          {
+            "target": "LegacyGeneric:target=azureAccountProviderCredentials|accessTokenCache-iv",
+            "type": "Gen‚rico",
+            "user": "*"
+          },
+          {
+            "target": "LegacyGeneric:target=Adobe App Info (QWNyb2JhdFJlYWRlcjF7fTIwMTgwNzIwMDE)(Part2)",
+            "type": "Gen‚rico",
+            "user": "App Info"
+          },
+          {
+            "target": "LegacyGeneric:target=Microsoft_VS_LiveShare/UserInfo/microsoft|jnavaqui@emeal.nttdata.com",
+            "type": "Gen‚rico",
+            "user": null
+          },
+          {
+            "target": "LegacyGeneric:target=OKTA_VERIFY_STORE_/zP7B414pvmDJ56npLorq+y3GTxFuYiirGWj6Qf8tPo=",
+            "type": "Gen‚rico",
+            "user": null
+          },
+          {
+            "target": "LegacyGeneric:target=GitHub for Visual Studio - https://github.com/",
+            "type": "Gen‚rico",
+            "user": "jnquirantes"
+          },
+          {
+            "target": "WindowsLive:target=virtualapp/didlogical",
+            "type": "Gen‚rico",
+            "user": "02advsrgthigqnri"
+          },
+          {
+            "target": "LegacyGeneric:target=VSCredentials_packages.infragistics.com",
+            "type": "Gen‚rico",
+            "user": "packages.infragistics.com\\zamla"
+          },
+          {
+            "target": "LegacyGeneric:target=Microsoft_VS_LiveShare/(default)/(default)",
+            "type": "Gen‚rico",
+            "user": null
+          },
+          {
+            "target": "LegacyGeneric:target=Adobe App Info (QWNyb2JhdFJlYWRlcjF7fTIwMTgwNzIwMDE)(Part4)",
+            "type": "Gen‚rico",
+            "user": "App Info"
+          },
+          {
+            "target": "LegacyGeneric:target=Olk/PushNotificationsKey",
+            "type": "Gen‚rico",
+            "user": "Olk/PushNotificationsKey"
+          },
+          {
+            "target": "LegacyGeneric:target=Adobe App Info (QWNyb2JhdFJlYWRlcjF7fTIwMTgwNzIwMDE)(Part6)",
+            "type": "Gen‚rico",
+            "user": "App Info"
+          },
+          {
+            "target": "LegacyGeneric:target=https://srvtfoundation.fibanc.intranet/",
+            "type": "Gen‚rico",
+            "user": "CAVALLER\\jnavarroqu"
+          },
+          {
+            "target": "LegacyGeneric:target=https://srvtfoundation.fibanc.intranet/defaultcollection",
+            "type": "Gen‚rico",
+            "user": "cavaller/JNAVARROQU"
+          },
+          {
+            "target": "LegacyGeneric:target=electron-okta-oauth/jnavaqui",
+            "type": "Gen‚rico",
+            "user": "jnavaqui"
+          },
+          {
+            "target": "LegacyGeneric:target=teamsIv/teams",
+            "type": "Gen‚rico",
+            "user": "teams"
+          },
+          {
+            "target": "LegacyGeneric:target=teamsKey/teams",
+            "type": "Gen‚rico",
+            "user": "teams"
+          }
+        ],
+        "corporate_credentials_count": 2
+      },
+      "timestamp": "2026-05-22T13:31:08.543125"
+    },
+    {
+      "skill": "identity_audit",
+      "category": "identity_service_accounts",
+      "title": "Servicios con cuentas de usuario específicas (8)",
+      "description": "8 servicios de Windows se ejecutan bajo cuentas de usuario específicas, no cuentas de sistema estándar.",
+      "risk_level": "yellow",
+      "technical_risk": "Servicios que corren bajo cuentas de usuario específicas tienen acceso a los recursos de esa cuenta: archivos, red, credenciales. Si la cuenta tiene privilegios elevados, el servicio también.",
+      "legal_risk": "Servicios de monitorización que corren bajo cuentas de dominio pueden acceder a recursos corporativos con privilegios del usuario. Relevante para determinar el alcance real de la vigilancia.",
+      "what_it_is": "Servicios de Windows que utilizan cuentas de usuario con credenciales específicas en lugar de las cuentas de sistema estándar.",
+      "what_it_is_not": "Es una práctica común en entornos corporativos para servicios que necesitan acceso a recursos de red. No implica actividad maliciosa.",
+      "raw_data": {
+        "service_accounts": [
+          {
+            "service": "McmSvc",
+            "display": "@%SystemRoot%\\System32\\mcmsvc.dll,-257",
+            "account": "NT SERVICE\\McmSvc"
+          },
+          {
+            "service": "MSSQL$SQLEXPRESS",
+            "display": "SQL Server (SQLEXPRESS)",
+            "account": "NT Service\\MSSQL$SQLEXPRESS"
+          },
+          {
+            "service": "MSSQLSERVER",
+            "display": "SQL Server (MSSQLSERVER)",
+            "account": "NT Service\\MSSQLSERVER"
+          },
+          {
+            "service": "SQLSERVERAGENT",
+            "display": "Agente SQL Server (MSSQLSERVER)",
+            "account": "NT Service\\SQLSERVERAGENT"
+          },
+          {
+            "service": "SQLTELEMETRY",
+            "display": "SQL Server CEIP service (MSSQLSERVER)",
+            "account": "NT Service\\SQLTELEMETRY"
+          },
+          {
+            "service": "vmsmp",
+            "display": "vmsmp",
+            "account": "\\Driver\\VMSP"
+          },
+          {
+            "service": "WUDFWpdFs",
+            "display": "@wpdfs.inf,%WPDFS_SvcName%;Controlador de sistema de archivos WPD",
+            "account": "\\Driver\\WudfRd"
+          },
+          {
+            "service": "WUDFWpdMtp",
+            "display": "WUDFWpdMtp",
+            "account": "\\Driver\\WudfRd"
+          }
+        ]
+      },
+      "timestamp": "2026-05-22T13:31:08.629191"
+    },
+    {
+      "skill": "identity_audit",
+      "category": "identity_privileged_monitoring",
+      "title": "Procesos de monitorización con privilegios de sistema (1)",
+      "description": "Agentes de seguridad/monitorización ejecutándose con privilegios de SISTEMA, el nivel más alto de acceso en Windows.",
+      "risk_level": "yellow",
+      "technical_risk": "Los procesos de SISTEMA tienen acceso sin restricciones a todos los archivos, memoria, red y configuración del equipo. Es el contexto de mayor privilegio posible.",
+      "legal_risk": "Agentes corporativos con privilegios de SISTEMA tienen capacidad técnica para acceder a cualquier dato del trabajador. Su alcance real depende de su configuración, no de sus privilegios técnicos.",
+      "what_it_is": "Servicios de seguridad que operan con la cuenta SYSTEM de Windows, necesaria para proteger el sistema a nivel de kernel.",
+      "what_it_is_not": "Es normal que los agentes EDR/AV corran como SYSTEM. Es un requisito técnico para su función de seguridad, no indica uso indebido.",
+      "raw_data": {
+        "monitoring_as_system": [
+          "csfalconservice"
+        ]
+      },
+      "timestamp": "2026-05-22T13:31:14.850568"
+    }
+  ],
+  "integrity_hash": "2eb7cd157625a96c10b2168a7e537c23ac3913489ee066523536b0f36203b57c"
+}

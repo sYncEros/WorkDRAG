@@ -1,0 +1,657 @@
+{
+  "generated_at": "2026-05-20T06:18:51.603863",
+  "total_findings": 7,
+  "max_risk": "orange",
+  "findings": [
+    {
+      "skill": "mdm_audit",
+      "category": "Corporate Control",
+      "title": "MDM / Gestión corporativa del dispositivo",
+      "description": "El dispositivo está gestionado mediante MDM. Organización detectada: 3048dc87-43f0-4100-9acb-ae1971c79395. Flags: mdm_enrolled, corporate_root_certificates_present (39), azure_ad_joined.",
+      "risk_level": "yellow",
+      "technical_risk": "MDM permite a la organización instalar software, aplicar políticas, borrar el dispositivo remotamente y restringir aplicaciones.",
+      "legal_risk": "La gestión MDM en dispositivos corporativos es generalmente legítima bajo el ET y LOPDGDD si está informada al trabajador.",
+      "what_it_is": "MDM (Mobile Device Management) es software que permite a las empresas gestionar dispositivos corporativos: aplicar políticas de seguridad, instalar apps, configurar VPN y, en caso extremo, borrar el dispositivo.",
+      "what_it_is_not": "MDM por sí solo no implica monitorización de actividad, lectura de mensajes personales ni vigilancia en tiempo real. Gestiona el dispositivo, no espía al usuario.",
+      "raw_data": {
+        "mdm_enrolled": true,
+        "managed_by": "3048dc87-43f0-4100-9acb-ae1971c79395",
+        "intune_present": false,
+        "applocker_active": false,
+        "unenrollment_blocked": false,
+        "corporate_certificates": [
+          {
+            "subject": "CN=MDONE Desktop Root",
+            "thumbprint": "F94AC90B7DFA17422BE66976327C067E5E7F73B7"
+          },
+          {
+            "subject": "CN=NTTDATA-RO TLS RSA Root G1",
+            "thumbprint": "EADF4E23656A55C1303CD3D6D2EB1DB750D18255"
+          },
+          {
+            "subject": "E=support@zscaler.com, CN=Zscaler Root CA, OU=Zscaler Inc., O=Zscaler Inc., L=San Jose, S=California, C=US",
+            "thumbprint": "D72F47D87420E3F0F9BDCAC6F03A566743C481B9"
+          },
+          {
+            "subject": "CN=NTTDATA-RO TLS Global Root G2",
+            "thumbprint": "C7D461193201614077D09DDCDF497FBF639A0217"
+          },
+          {
+            "subject": "CN=Thawte Timestamping CA, OU=Thawte Certification, O=Thawte, L=Durbanville, S=Western Cape, C=ZA",
+            "thumbprint": "BE36A4562FB2EE05DBB3D32323ADF445084ED656"
+          },
+          {
+            "subject": "E=jessica.navarroquirantes@emeal.nttdata.com, CN=jnavaqui",
+            "thumbprint": "BB714B958889264550B9E0D663DD359A867BE7B2"
+          },
+          {
+            "subject": "CN=emealRootCA",
+            "thumbprint": "93AE32B8B667C890A88DC3B9D8E6D9AF0F453986"
+          },
+          {
+            "subject": "CN=NTTData EMEA Root CA, O=NTTData, C=IT",
+            "thumbprint": "891E14D92CD16848E0D53F9D9803A2DFB2CDBF87"
+          },
+          {
+            "subject": "CN=NTTD-90G6TV3",
+            "thumbprint": "5828694FA5EFE9EC16CC17D28908155A414A70BA"
+          },
+          {
+            "subject": "CN=qgs-global-root.proxy, E=qgs@qualys.com, OU=qualys, O=Qualys, L=Foster City, S=California, C=US",
+            "thumbprint": "5784E3135A88C7BCC716CB692A6E4F8FA90C5106"
+          },
+          {
+            "subject": "CN=EBS Group CA, DC=ebs, DC=msft",
+            "thumbprint": "4897C927C15BB93E395CA6243345E22EF40A023F"
+          },
+          {
+            "subject": "CN=DO_NOT_TRUST_FiddlerRoot, O=DO_NOT_TRUST, OU=Created by http://www.fiddler2.com",
+            "thumbprint": "3C7726919470D9E7A1728E2286B4F5FE9B9AF6CE"
+          },
+          {
+            "subject": "CN=NTTD-90G6TV3",
+            "thumbprint": "3B0D5559354F30D80BC3C8C3E145241D8F243CC8"
+          },
+          {
+            "subject": "CN=everisRootCA",
+            "thumbprint": "31BA59A40019833F551FF18FC81D4C1B28E4317F"
+          },
+          {
+            "subject": "CN=Fibanc EC Raiz, OU=Departamento de Sistemas, O=Fibanc, L=Barcelona, S=Barcelona, C=ES, E=managerit@fibanc.es",
+            "thumbprint": "2962F1B095E237D7C50621E8EB83883A30D70FF5"
+          },
+          {
+            "subject": "CN=NTTD-90G6TV3, OU=Created by Azure DevOps Server",
+            "thumbprint": "1592EF3A25CAE5671629B489C5BDC0AC5B0B8474"
+          },
+          {
+            "subject": "E=support@zscaler.com, CN=Zscaler Root CA, OU=Zscaler Inc., O=Zscaler Inc., L=San Jose, S=California, C=US",
+            "thumbprint": "0D23EE8F0F0560B9F68F2437C526D3CDF1FAF0C5"
+          },
+          {
+            "subject": "OU=AC RAIZ FNMT-RCM, O=FNMT-RCM, C=ES",
+            "thumbprint": "EC503507B215C4956219E2A89A5B42992C4C2C20"
+          },
+          {
+            "subject": "CN=QuoVadis Root Certification Authority, OU=Root Certification Authority, O=QuoVadis Limited, C=BM",
+            "thumbprint": "DE3F40BD5093D39B6C60F6DABC076201008976C9"
+          },
+          {
+            "subject": "CN=DST Root CA X3, O=Digital Signature Trust Co.",
+            "thumbprint": "DAC9024F54D8F6DF94935FB1732638CA6AD77C13"
+          },
+          {
+            "subject": "CN=Certum Trusted Network CA 2, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL",
+            "thumbprint": "D3DD483E2BBF4C05E8AF10F5FA7626CFD3DC3092"
+          },
+          {
+            "subject": "CN=ISRG Root X1, O=Internet Security Research Group, C=US",
+            "thumbprint": "CABD2A79A1076A31F21D253635CB039D4329A5E8"
+          },
+          {
+            "subject": "OU=AC RAIZ FNMT-RCM, O=FNMT-RCM, C=ES",
+            "thumbprint": "B865130BEDCA38D27F69929420770BED86EFBC10"
+          },
+          {
+            "subject": "CN=SSL.com Root Certification Authority RSA, O=SSL Corporation, L=Houston, S=Texas, C=US",
+            "thumbprint": "B7AB3308D1EA4477BA1480125A6FBDA936490CBB"
+          },
+          {
+            "subject": "CN=Autoridad de Certificacion Firmaprofesional CIF A62634068, C=ES",
+            "thumbprint": "AEC5FB3FC8E1BFC4E54F03075A9AE800B7F7B6FA"
+          },
+          {
+            "subject": "C=ES, O=ACCV, OU=PKIACCV, CN=ACCVRAIZ1",
+            "thumbprint": "93057A8815C64FCE882FFA9116522878BC536417"
+          },
+          {
+            "subject": "CN=thawte Primary Root CA, OU=\"(c) 2006 thawte, Inc. - For authorized use only\", OU=Certification Services Division, O=\"thawte, Inc.\", C=US",
+            "thumbprint": "91C6D6EE3E8AC86384E548C299295C756C817B81"
+          },
+          {
+            "subject": "CN=SSL.com EV Root Certification Authority RSA R2, O=SSL Corporation, L=Houston, S=Texas, C=US",
+            "thumbprint": "743AF0529BD032A0F44A83CDD4BAA97B7C2EC49A"
+          },
+          {
+            "subject": "CN=AC RAIZ FNMT-RCM SERVIDORES SEGUROS, OID.2.5.4.97=VATES-Q2826004J, OU=Ceres, O=FNMT-RCM, C=ES",
+            "thumbprint": "62FFD99EC0650D03CE7593D2ED3F2D32C9E3E54A"
+          },
+          {
+            "subject": "E=premium-server@thawte.com, CN=Thawte Premium Server CA, OU=Certification Services Division, O=Thawte Consulting cc, L=Cape Town, S=Western Cape, C=ZA",
+            "thumbprint": "627F8D7827656399D27D7F9044C9FEB3F33EFA9A"
+          },
+          {
+            "subject": "CN=Hotspot 2.0 Trust Root CA - 03, O=WFA Hotspot 2.0, C=US",
+            "thumbprint": "51501FBFCE69189D609CFAF140C576755DCC1FDF"
+          },
+          {
+            "subject": "CN=Go Daddy Root Certificate Authority - G2, O=\"GoDaddy.com, Inc.\", L=Scottsdale, S=Arizona, C=US",
+            "thumbprint": "47BEABC922EAE80E78783462A79F45C254FDE68B"
+          },
+          {
+            "subject": "OU=Go Daddy Class 2 Certification Authority, O=\"The Go Daddy Group, Inc.\", C=US",
+            "thumbprint": "2796BAE63F1801E277261BA0D77770028F20EEE4"
+          },
+          {
+            "subject": "CN=Autoridad de Certificacion Firmaprofesional CIF A62634068, C=ES",
+            "thumbprint": "0BBEC2272249CB39AADB355C53E38CAE78FFB6FE"
+          },
+          {
+            "subject": "CN=Certum Trusted Network CA, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL",
+            "thumbprint": "07E032E020B72C3F192F0628A2593A19A70F069E"
+          },
+          {
+            "subject": "CN=AddTrust External CA Root, OU=AddTrust External TTP Network, O=AddTrust AB, C=SE",
+            "thumbprint": "02FAF3E291435468607857694DF5E45B68851868"
+          },
+          {
+            "subject": "CN=HARICA TLS RSA Root CA 2021, O=Hellenic Academic and Research Institutions CA, C=GR",
+            "thumbprint": "022D0582FA88CE140C0679DE7F1410E945D7A56D"
+          },
+          {
+            "subject": "CN=Hellenic Academic and Research Institutions RootCA 2015, O=Hellenic Academic and Research Institutions Cert. Authority, L=Athens, C=GR",
+            "thumbprint": "010C0695A6981914FFBF5FC6B0B695EA29E912A6"
+          },
+          {
+            "subject": "CN=Sareb Colabora",
+            "thumbprint": "8C9018256825515AC801A2D38DACA670FB9639B1"
+          }
+        ],
+        "azure_ad_joined": {
+          "azure_ad_joined": true,
+          "domain_joined": false,
+          "workplace_joined": false
+        },
+        "flags": [
+          "mdm_enrolled",
+          "corporate_root_certificates_present (39)",
+          "azure_ad_joined"
+        ]
+      },
+      "timestamp": "2026-05-20T06:18:28.895554"
+    },
+    {
+      "skill": "surveillance_audit",
+      "category": "edr_xdr",
+      "title": "CrowdStrike Falcon detectado",
+      "description": "Agente EDR/XDR detectado. Estos sistemas monitorizan comportamiento del sistema en tiempo real para detectar amenazas.",
+      "risk_level": "yellow",
+      "technical_risk": "Monitoriza procesos, red y comportamiento del sistema.",
+      "legal_risk": "Riesgo legal estimado: low-medium. Ver compliance engine para análisis LOPDGDD/RGPD.",
+      "what_it_is": "Agente EDR/XDR detectado. Estos sistemas monitorizan comportamiento del sistema en tiempo real para detectar amenazas.",
+      "what_it_is_not": "No implica necesariamente lectura de contenido personal. Es seguridad corporativa estándar en empresas medianas y grandes.",
+      "raw_data": {
+        "product": "CrowdStrike Falcon",
+        "category": "edr_xdr",
+        "detection": {
+          "found": true,
+          "processes": [
+            "csfalconservice",
+            "csfalconcontainer"
+          ],
+          "services": [
+            "csagent",
+            "csfalconservice"
+          ],
+          "registry": []
+        }
+      },
+      "timestamp": "2026-05-20T06:18:28.945732"
+    },
+    {
+      "skill": "surveillance_audit",
+      "category": "edr_xdr",
+      "title": "Microsoft Defender for Endpoint detectado",
+      "description": "Agente EDR/XDR detectado. Estos sistemas monitorizan comportamiento del sistema en tiempo real para detectar amenazas.",
+      "risk_level": "yellow",
+      "technical_risk": "Monitoriza procesos, red y comportamiento del sistema.",
+      "legal_risk": "Riesgo legal estimado: low-medium. Ver compliance engine para análisis LOPDGDD/RGPD.",
+      "what_it_is": "Agente EDR/XDR detectado. Estos sistemas monitorizan comportamiento del sistema en tiempo real para detectar amenazas.",
+      "what_it_is_not": "No implica necesariamente lectura de contenido personal. Es seguridad corporativa estándar en empresas medianas y grandes.",
+      "raw_data": {
+        "product": "Microsoft Defender for Endpoint",
+        "category": "edr_xdr",
+        "detection": {
+          "found": true,
+          "processes": [],
+          "services": [
+            "sense"
+          ],
+          "registry": []
+        }
+      },
+      "timestamp": "2026-05-20T06:18:28.964707"
+    },
+    {
+      "skill": "surveillance_audit",
+      "category": "ssl_inspection",
+      "title": "Certificado raíz de inspección SSL/TLS detectado",
+      "description": "Se han encontrado certificados raíz corporativos que permiten interceptar y descifrar tráfico HTTPS.",
+      "risk_level": "orange",
+      "technical_risk": "Con este certificado instalado, un proxy corporativo puede descifrar, analizar y registrar todo el tráfico HTTPS, incluyendo contraseñas y contenido de páginas web.",
+      "legal_risk": "Requiere informar explícitamente al trabajador. Sin información previa puede vulnerar art. 87 LOPDGDD y doctrina Barbulescu II (TEDH).",
+      "what_it_is": "Un certificado raíz de inspección SSL permite al proxy corporativo actuar como intermediario en conexiones HTTPS, descifrando el tráfico para inspeccionarlo.",
+      "what_it_is_not": "No demuestra que el tráfico se esté leyendo activamente, pero sí que existe la capacidad técnica.",
+      "raw_data": {
+        "ssl_inspection_certs": [
+          "E=support@zscaler.com, CN=Zscaler Root CA, OU=Zscaler Inc., O=Zscaler Inc., L=San Jose, S=California, C=US",
+          "CN=Symantec Enterprise Mobile Root for Microsoft, O=Symantec Corporation, C=US",
+          "E=support@zscaler.com, CN=Zscaler Root CA, OU=Zscaler Inc., O=Zscaler Inc., L=San Jose, S=California, C=US"
+        ]
+      },
+      "timestamp": "2026-05-20T06:18:30.017297"
+    },
+    {
+      "skill": "surveillance_audit",
+      "category": "browser_inspection",
+      "title": "Extensiones de navegador forzadas por política corporativa",
+      "description": "El navegador tiene extensiones instaladas obligatoriamente por política corporativa.",
+      "risk_level": "orange",
+      "technical_risk": "Las extensiones forzadas pueden tener acceso completo al contenido de páginas web, historial y formularios.",
+      "legal_risk": "Depende de la funcionalidad de cada extensión. Si capturan contenido web personal, aplica LOPDGDD art. 87.",
+      "what_it_is": "Extensiones instaladas por GPO/política que el usuario no puede desinstalar.",
+      "what_it_is_not": "No implica necesariamente espionaje. Muchas son extensiones de seguridad o DLP legítimas.",
+      "raw_data": {
+        "forced_extensions": {
+          "Chrome": [
+            "maafgiompdekodanheihhgilkjchcakm;https://outlook.office.com/owa/SmimeCrxUpdate.ashx"
+          ],
+          "Edge": [
+            "maafgiompdekodanheihhgilkjchcakm;https://outlook.office.com/owa/SmimeCrxUpdate.ashx"
+          ]
+        }
+      },
+      "timestamp": "2026-05-20T06:18:30.039042"
+    },
+    {
+      "skill": "persistence_audit",
+      "category": "persistence_services",
+      "title": "Servicios con características de monitorización (25 detectados)",
+      "description": "Se han encontrado servicios de Windows con nombres o descripciones relacionadas con telemetría o monitorización.",
+      "risk_level": "yellow",
+      "technical_risk": "Los servicios de Windows se ejecutan en segundo plano con privilegios elevados y pueden monitorizar el sistema.",
+      "legal_risk": "Depende de la funcionalidad real. Requiere análisis individual de cada servicio.",
+      "what_it_is": "Servicios de Windows que se ejecutan continuamente en segundo plano.",
+      "what_it_is_not": "No todo servicio con estas palabras es espionaje. Windows incluye muchos servicios de telemetría propios.",
+      "raw_data": {
+        "services": [
+          {
+            "name": "CaptureService",
+            "displayname": "@%SystemRoot%\\system32\\CaptureService.dll,-100",
+            "description": "@%SystemRoot%\\system32\\CaptureService.dll,-101",
+            "imagepath": "%SystemRoot%\\system32\\svchost.exe -k LocalService -p",
+            "start": "3"
+          },
+          {
+            "name": "CaptureService_a83d3114",
+            "displayname": "CaptureService_a83d3114",
+            "description": "@%SystemRoot%\\system32\\CaptureService.dll,-101",
+            "imagepath": "C:\\WINDOWS\\system32\\svchost.exe -k LocalService -p",
+            "start": "3"
+          },
+          {
+            "name": "CSAgent",
+            "displayname": "CrowdStrike Falcon",
+            "imagepath": "\\??\\C:\\WINDOWS\\system32\\drivers\\CrowdStrike\\csagent.sys",
+            "start": "1"
+          },
+          {
+            "name": "csc_vpnagent",
+            "displayname": "Cisco Secure Client - AnyConnect VPN Agent",
+            "description": "Cisco Secure Client AnyConnect VPN Agent for Windows",
+            "imagepath": "\"C:\\Program Files (x86)\\Cisco\\Cisco Secure Client\\vpnagent.exe\"",
+            "start": "2"
+          },
+          {
+            "name": "DiagTrack",
+            "displayname": "@%SystemRoot%\\system32\\diagtrack.dll,-3001",
+            "description": "@%SystemRoot%\\system32\\diagtrack.dll,-3002",
+            "imagepath": "%SystemRoot%\\System32\\svchost.exe -k utcsvc -p",
+            "start": "2"
+          },
+          {
+            "name": "DialogBlockingService",
+            "displayname": "@%SystemRoot%\\system32\\DialogBlockingService.dll,-100",
+            "description": "@%SystemRoot%\\system32\\DialogBlockingService.dll,-101",
+            "imagepath": "%SystemRoot%\\system32\\svchost.exe -k DialogBlockingService",
+            "start": "4"
+          },
+          {
+            "name": "EventLog",
+            "displayname": "@%SystemRoot%\\system32\\wevtsvc.dll,-200",
+            "description": "@%SystemRoot%\\system32\\wevtsvc.dll,-201",
+            "imagepath": "%SystemRoot%\\System32\\svchost.exe -k LocalServiceNetworkRestricted -p",
+            "start": "2"
+          },
+          {
+            "name": "FrameServerMonitor",
+            "displayname": "@%systemroot%\\system32\\FrameServerMonitor.dll,-100",
+            "description": "@%systemroot%\\system32\\FrameServerMonitor.dll,-101",
+            "imagepath": "%SystemRoot%\\System32\\svchost.exe -k CameraMonitor",
+            "start": "3"
+          },
+          {
+            "name": "monitor",
+            "displayname": "@monitor.inf,%Monitor.SVCDESC%;Microsoft Monitor Class Function Driver Service",
+            "imagepath": "\\SystemRoot\\System32\\drivers\\monitor.sys",
+            "start": "3"
+          },
+          {
+            "name": "napagent"
+          },
+          {
+            "name": "Netlogon",
+            "displayname": "@%SystemRoot%\\System32\\netlogon.dll,-102",
+            "description": "@%SystemRoot%\\System32\\netlogon.dll,-103",
+            "imagepath": "%systemroot%\\system32\\lsass.exe",
+            "start": "3"
+          },
+          {
+            "name": "nvagent",
+            "displayname": "@%systemroot%\\system32\\NvAgent.dll,-100",
+            "description": "@%systemroot%\\system32\\NvAgent.dll,-101",
+            "imagepath": "%systemroot%\\system32\\svchost.exe -k NetSvcs",
+            "start": "3"
+          },
+          {
+            "name": "PolicyAgent",
+            "displayname": "@%SystemRoot%\\System32\\polstore.dll,-5010",
+            "description": "@%SystemRoot%\\system32\\polstore.dll,-5011",
+            "imagepath": "%SystemRoot%\\system32\\svchost.exe -k NetworkServiceNetworkRestricted -p",
+            "start": "3"
+          },
+          {
+            "name": "QualysAgent",
+            "displayname": "Qualys Cloud Agent",
+            "description": "Qualys Cloud Agent helps protect your computer from unauthorized access by monitoring your system to identify and report software vulnerabilities and system misconfigurations that can be exploited.",
+            "imagepath": "\"C:\\Program Files\\Qualys\\QualysAgent\\QualysAgent.exe\"",
+            "start": "2"
+          },
+          {
+            "name": "seclogon",
+            "displayname": "@%SystemRoot%\\system32\\seclogon.dll,-7001",
+            "description": "@%SystemRoot%\\system32\\seclogon.dll,-7000",
+            "imagepath": "%windir%\\system32\\svchost.exe -k netsvcs -p",
+            "start": "3"
+          },
+          {
+            "name": "SensorDataService",
+            "displayname": "@%SystemRoot%\\system32\\SensorDataService.exe,-101",
+            "description": "@%SystemRoot%\\system32\\SensorDataService.exe,-102",
+            "imagepath": "%SystemRoot%\\System32\\SensorDataService.exe",
+            "start": "3"
+          },
+          {
+            "name": "SensorService",
+            "displayname": "@%SystemRoot%\\System32\\sensorservice.dll,-1000",
+            "description": "@%SystemRoot%\\System32\\sensorservice.dll,-1001",
+            "imagepath": "%SystemRoot%\\system32\\svchost.exe -k LocalSystemNetworkRestricted -p",
+            "start": "3"
+          },
+          {
+            "name": "SnowInventoryAgent5",
+            "displayname": "Snow Inventory Agent",
+            "description": "Snow Inventory Agent for Windows",
+            "imagepath": "\"C:\\Program Files\\Snow Software\\Inventory\\Agent\\snowagent.exe\" -w \"%programfiles%\\Snow Software\\Inventory\\Agent\"",
+            "start": "2"
+          },
+          {
+            "name": "SQLAgent$SQLEXPRESS",
+            "displayname": "Agente SQL Server (SQLEXPRESS)",
+            "description": "Ejecuta tareas, realiza el seguimiento de SQL Server, activa alertas y permite la automatización de algunas tareas administrativas.",
+            "imagepath": "\"C:\\Program Files\\Microsoft SQL Server\\MSSQL12.SQLEXPRESS\\MSSQL\\Binn\\SQLAGENT.EXE\" -i SQLEXPRESS",
+            "start": "4"
+          },
+          {
+            "name": "SQLSERVERAGENT",
+            "displayname": "Agente SQL Server (MSSQLSERVER)",
+            "description": "Ejecuta tareas, realiza el seguimiento de SQL Server, activa alertas y permite la automatización de algunas tareas administrativas.",
+            "imagepath": "\"C:\\Program Files\\Microsoft SQL Server\\MSSQL16.MSSQLSERVER\\MSSQL\\Binn\\SQLAGENT.EXE\" -i MSSQLSERVER",
+            "start": "3"
+          },
+          {
+            "name": "SQLTELEMETRY",
+            "displayname": "SQL Server CEIP service (MSSQLSERVER)",
+            "description": "CEIP service for Sql server ",
+            "imagepath": "\"C:\\Program Files\\Microsoft SQL Server\\MSSQL16.MSSQLSERVER\\MSSQL\\Binn\\sqlceip.exe\" -Service ",
+            "start": "2"
+          },
+          {
+            "name": "ssh-agent",
+            "displayname": "OpenSSH Authentication Agent",
+            "description": "Agent to hold private keys used for public key authentication.",
+            "imagepath": "%SystemRoot%\\System32\\OpenSSH\\ssh-agent.exe",
+            "start": "4"
+          },
+          {
+            "name": "UevAgentDriver",
+            "displayname": "@%systemroot%\\system32\\drivers\\UevAgentDriver.sys,-101",
+            "description": "@%systemroot%\\system32\\drivers\\UevAgentDriver.sys,-102",
+            "imagepath": "\\SystemRoot\\system32\\drivers\\UevAgentDriver.sys",
+            "start": "4"
+          },
+          {
+            "name": "UevAgentService",
+            "displayname": "@%systemroot%\\system32\\AgentService.exe,-102",
+            "description": "@%systemroot%\\system32\\AgentService.exe,-101",
+            "imagepath": "%systemroot%\\system32\\AgentService.exe",
+            "start": "4"
+          },
+          {
+            "name": "VSStandardCollectorService150",
+            "displayname": "Visual Studio Standard Collector Service 150",
+            "description": "Visual Studio Data Collection Service. When running, this service collects real-time ETW events and processes them.",
+            "imagepath": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Common\\DiagnosticsHub.Collection.Service\\StandardCollector.Service.exe\"",
+            "start": "3"
+          }
+        ]
+      },
+      "timestamp": "2026-05-20T06:18:30.068490"
+    },
+    {
+      "skill": "persistence_audit",
+      "category": "persistence_drivers",
+      "title": "Drivers con características de monitorización (28)",
+      "description": "Drivers de kernel con nombres o funciones relacionadas con captura o filtrado de datos.",
+      "risk_level": "yellow",
+      "technical_risk": "Los drivers de kernel tienen acceso privilegiado a todo el sistema: red, ficheros, procesos, entrada.",
+      "legal_risk": "Depende del fabricante y función. EDR/antivirus usan drivers legítimamente.",
+      "what_it_is": "Drivers de Windows que operan a nivel de kernel para interceptar o filtrar actividad del sistema.",
+      "what_it_is_not": "La mayoría son componentes de seguridad legítimos (antivirus, EDR). No implican espionaje por definición.",
+      "raw_data": {
+        "drivers": [
+          {
+            "name": "bindflt",
+            "display": "Windows Bind Filter Driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\bindflt.sys"
+          },
+          {
+            "name": "CldFlt",
+            "display": "Windows Cloud Files Filter Driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\cldflt.sys"
+          },
+          {
+            "name": "EhStorClass",
+            "display": "Enhanced Storage Filter Driver",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\drivers\\EhStorClass.sys"
+          },
+          {
+            "name": "FileInfo",
+            "display": "File Information FS MiniFilter",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\fileinfo.sys"
+          },
+          {
+            "name": "FsDepends",
+            "display": "File System Dependency Minifilter",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\FsDepends.sys"
+          },
+          {
+            "name": "HidEventFilter",
+            "display": "Intel(R) HID Event Filter",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\DriverStore\\FileRepository\\hideventfilter.inf_amd64_50bf579d62a9971a\\HidEventFilter.sys"
+          },
+          {
+            "name": "IntelPMT",
+            "display": "Servicio de la plataforma de tecnolog¡a de monitorizaci¢n de Intel(R)",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\IntelPMT.sys"
+          },
+          {
+            "name": "IpFilterDriver",
+            "display": "Controlador de filtro de tr fico IP",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\DRIVERS\\ipfltdrv.sys"
+          },
+          {
+            "name": "ISH",
+            "display": "Intel(R) Integrated Sensor Solution",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\DriverStore\\FileRepository\\ish.inf_amd64_1a7d13466c714429\\ISH.sys"
+          },
+          {
+            "name": "LT6911Au",
+            "display": "HDMI Capture/I2S Audio Bridge (LT6911UXC)",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\DriverStore\\FileRepository\\lt6911au.inf_amd64_62449180becc5735\\LT6911Au.sys"
+          },
+          {
+            "name": "monitor",
+            "display": "Servicio de controladores de funci¢n de clase para monitores de Microsoft",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\monitor.sys"
+          },
+          {
+            "name": "mshidkmdf",
+            "display": "Pass-through HID to KMDF Filter Driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\mshidkmdf.sys"
+          },
+          {
+            "name": "Ndu",
+            "display": "Windows Network Data Usage Monitoring Driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\Ndu.sys"
+          },
+          {
+            "name": "PktMon",
+            "display": "Packet Monitor Driver",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\drivers\\PktMon.sys"
+          },
+          {
+            "name": "PktMonApi",
+            "display": "Packet Monitor Export Driver",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\drivers\\PktMonApi.sys"
+          },
+          {
+            "name": "scfilter",
+            "display": "Controlador de filtro de clase PnP de tarjeta inteligente",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\DRIVERS\\scfilter.sys"
+          },
+          {
+            "name": "ThermalFilter",
+            "display": "Controlador de filtro t‚rmico de Microsoft",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\DriverStore\\FileRepository\\c_thermal.inf_amd64_b38a77a51a7f05bf\\ThermalFilter.sys"
+          },
+          {
+            "name": "UevAgentDriver",
+            "display": "UevAgentDriver",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\drivers\\UevAgentDriver.sys"
+          },
+          {
+            "name": "VfpExt",
+            "display": "Microsoft Azure VFP Switch Filter Extension",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\vfpext.sys"
+          },
+          {
+            "name": "VMSVSF",
+            "display": "VmSwitch Extensibility Filter",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\drivers\\vmswitch.sys"
+          },
+          {
+            "name": "vwififlt",
+            "display": "Virtual WiFi Filter Driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\vwififlt.sys"
+          },
+          {
+            "name": "WdFilter",
+            "display": "Controlador de minifiltro de Antivirus de Microsoft Defender",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\drivers\\wd\\WdFilter.sys"
+          },
+          {
+            "name": "WdmCompanionFilter",
+            "display": "WdmCompanionFilter",
+            "state": "Stopped",
+            "path": "C:\\WINDOWS\\system32\\drivers\\WdmCompanionFilter.sys"
+          },
+          {
+            "name": "Wof",
+            "display": "Windows Overlay File System Filter Driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\Wof.sys"
+          },
+          {
+            "name": "WpdUpFltr",
+            "display": "WPD Upper Class Filter Driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\WpdUpFltr.sys"
+          },
+          {
+            "name": "zapprd",
+            "display": "Zscaler LightWeight Filter",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\DRIVERS\\zapprd.sys"
+          },
+          {
+            "name": "zepprotect",
+            "display": "ZEP Protect filter driver",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\zepprotect.sys"
+          },
+          {
+            "name": "ZSAWDRV",
+            "display": "Zscaler Filtering Platform (WFP)",
+            "state": "Running",
+            "path": "C:\\WINDOWS\\system32\\drivers\\zsawdrv.sys"
+          }
+        ]
+      },
+      "timestamp": "2026-05-20T06:18:51.429664"
+    }
+  ],
+  "integrity_hash": "02cdd7f85df3dc9d6f09094f3305b869fc04b4788fae9742558feab0788b0891"
+}
