@@ -1,6 +1,6 @@
 # skills/activity_monitor/activity_scanner.py
 """
-Skill 5 — Background Activity Monitor
+Skill — Background Activity Monitor
 Detecta actividad persistente, cambios recientes y
 patrones de comportamiento sospechoso en segundo plano
 """
@@ -37,7 +37,6 @@ SECURITY_EVENT_IDS = {
     7045: "Nuevo servicio instalado",
     4657: "Valor de registro modificado",
 }
-
 
 class ActivityMonitor:
     SKILL_NAME = "activity_monitor"

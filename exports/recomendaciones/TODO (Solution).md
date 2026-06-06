@@ -8,11 +8,21 @@
 
 ### Realizadas
 
-- Verificar si existe registro de accesos remotos realizados. OK
-
 ### Pendientes
 
-addon_audit — el más gordo, cubre extensiones, add-ins, VSCode, Teams
+**rdp_log_exporter**:
+
+- Verificar si existe registro de accesos remotos realizados
+- Proporcionar al trabajador un informe de accesos remotos con:
+  · fecha,
+  · hora,
+  · origen
+  · destino
+  · duración.
+
+**addon_audit**:
+
+Es el más gordo, cubre extensiones, add-ins, VSCode, Teams
 
 - Listado de add-ins forzados y su funcion + datos envian y a donde:
   · Microsof 365 (Outlook, Office, Teams...),
@@ -20,27 +30,34 @@ addon_audit — el más gordo, cubre extensiones, add-ins, VSCode, Teams
   · Corporativos (Teams, IAs, Accesos)etc
   · Herramientas de desarrollo (VSCode, JetBrains, etc)
 
-- Documentar qué carpetas están redirigidas y crear carpetas locales fuera de OneDrive para uso personal.
+**dpa_checker**:
 
-- Obtener un informe de:
+- Verificar DPA real con Microsoft
+- Que nivel de telemetría y que cubre.
+- Verificar qué experiencias conectadas están activas.
+- Solicitar DPIA si se procesan datos de categoría especial.
+- Verificar si se han usado para evaluar empleados o si hay logs de actividad personal (DPIA)
+- Desactivar experiencias conectadas no necesarias para el trabajo, la Telemetría de Windows o al menos reducirla al mínimo.
 
-  · Logs de Windows Event Forward y PowerShell Transcription para evaluar qué actividad se monitoriza y su período de retención. Verificar si se han usado para evaluar empleados o si hay logs de actividad personal (DPIA)
+**clipboard_watcher**:
+
+- Qué apps tocan el portapapeles
+- Que datos exportan y a donde
+
+Obtener:
+
+  · Qué carpetas están redirigidas y crear carpetas locales fuera de OneDrive para uso personal.
+
+  · Logs de Windows Event Forward y PowerShell Transcription para evaluar qué actividad se monitoriza y su período de retención.
 
   · Documentar estado de DiagTrack: qué datos se recopilan, con qué frecuencia y a dónde se envían.
 
   · Base legal de la telemetría de Windows que justifica esta transferencia internacional de datos personales. Verificar si se ha informado al trabajador (incluso al empleador)
 
-  · Aplicaciones que acceden al portapapeles y qué datos recopilan.
-  
-- Verificar si existe DPA con Microsoft, que nivel de telemetría y que cubre.
-
 - Intentar deshabilitar:
   · Windows Event Forwarding
   · PowerShell Transcription
   · DiagTrack
-  · Telemetría de Windows o al menos reducirla al mínimo.
-
-clipboard_watcher — qué apps tocan el portapapeles y que datos exportan y a donde
 
 ### Recomendaciones
 
@@ -51,6 +68,8 @@ clipboard_watcher — qué apps tocan el portapapeles y que datos exportan y a d
 - Solicitar al DPO:
   · Los logs de Windows Event Forwarding y PowerShell Transcription se analizan para evaluar empleados o que uso se les da. Solicitar la evaluación de impacto (DPIA) si existe.
   · Eliminacion o reducción de la telemetría de Windows. Justificación legal de esta transferencia internacional de datos personales.
+
+----
 
 ## 9. Configuraciones de seguridad básicas ausentes
 
@@ -114,28 +133,6 @@ Una cuenta habilitada con privilegios elevados y sin uso documentado puede ser u
 - [LOPDGDD Art. 87 — Derecho a la intimidad en el trabajo](https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673)
 - [RGPD Art. 32 — Seguridad del tratamiento](https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679)
 - [ET Art. 20 bis — Derechos de los trabajadores a la intimidad](https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430)
-
-## 12. Experiencias conectadas de Office enviando contenido a Microsoft
-
-- Categoría: `ai_connected_experiences`
-- Riesgo legal: **MEDIUM-HIGH**
-
-### Motivo
-
-Office 365 envía contenido de documentos a Microsoft para funciones de IA: traducción, diseño, sugerencias. Puede incluir datos personales de clientes y empleados sin base legal adecuada o sin conocimiento del trabajador.
-
-### Recomendaciones
-
-- Solicitar el DPA entre la empresa y Microsoft.
-- Verificar qué experiencias conectadas están activas.
-- Solicitar DPIA si se procesan datos de categoría especial.
-- Desactivar experiencias conectadas no necesarias para el trabajo.
-
-### Referencias
-
-- [RGPD Art. 5 — Principios del tratamiento](https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679)
-- [RGPD Art. 13 — Información al interesado](https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679)
-- [LOPDGDD Art. 87 — Derecho a la intimidad en el trabajo](https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673)
 
 ## 13. Extensiones forzadas con acceso completo al navegador
 

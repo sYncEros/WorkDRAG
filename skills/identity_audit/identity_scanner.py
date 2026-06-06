@@ -26,13 +26,13 @@ HIGH_PRIVILEGE_GROUPS = [
 
 # Procesos que pueden indicar sesión remota activa
 REMOTE_SESSION_INDICATORS = [
-    "rdpclip",       # RDP activo
-    "tstheme",       # Terminal Services
-    "dwm",           # Desktop Window Manager (puede ser remoto)
-    "winvnc",        # VNC
-    "tvnserver",     # TightVNC
-    "vncserver",     # VNC genérico
-    "screenshare",   # Compartición de pantalla
+    "rdpclip",        # RDP activo
+    "tstheme",        # Terminal Services
+    "dwm",            # Desktop Window Manager (puede ser remoto)
+    "winvnc",         # VNC
+    "tvnserver",      # TightVNC
+    "vncserver",      # VNC genérico
+    "screenshare",    # Compartición de pantalla
 ]
 
 # Tokens y credenciales almacenadas sospechosas
@@ -41,6 +41,15 @@ CREDENTIAL_STORE_PATHS = [
     Path.home() / "AppData/Local/Microsoft/Credentials",
     Path("C:/Windows/System32/config/systemprofile/AppData/Local"
          "/Microsoft/Credentials"),
+    Path("C:/Windows/System32/config/systemprofile/AppData/Roaming"
+            "/Microsoft/Credentials"),
+    Path.home() / "AppData/Roaming/Microsoft/Protect",
+    Path.home() / "AppData/Local/Microsoft/Protect",
+    Path("C:/Windows/System32/config/systemprofile/AppData/Local"
+         "/Microsoft/Protect"),
+    Path("C:/Windows/System32/config/systemprofile/AppData/Roaming"
+         "/Microsoft/Protect"),
+    
 ]
 
 

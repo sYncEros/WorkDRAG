@@ -127,28 +127,31 @@ class AuditEngine:
         from skills.data_exfiltration_audit.exfiltration_scanner import DataExfiltrationAudit
         from skills.incident_response.playbook_generator import IncidentResponsePlaybook
         from skills.event_viewer_audit.event_viewer_scanner import EventViewerAudit
+        from skills.rdp_log_exporter.rdp_log_exporter import RDPLogExporter
+            
 
         available = {
-            "mdm":              MDMAudit,
-            "surveillance":     SurveillanceAudit,
-            "persistence":      PersistenceAudit,
-            "network":          NetworkMonitor,
-            "activity":         ActivityMonitor,
-            "privacy":          PrivacyAudit,
-            "ai_telemetry":     AITelemetryAudit,
-            "cloud_sync":       CloudSyncAudit,
-            "browser":          BrowserAudit,
-            "hardening":        HardeningAudit,
-            "identity":         IdentityAudit,
-            "git_identity":     GitIdentityAudit,
-            "scheduled_tasks":  ScheduledTasksAudit,
-            "usb":              USBAudit,
-            "email":            EmailAudit,
-            "third_party_apps": ThirdPartyAppsAudit,
-            "user_behavior":      UserBehaviorAudit,
+            "mdm":                 MDMAudit,
+            "surveillance":        SurveillanceAudit,
+            "persistence":         PersistenceAudit,
+            "network":             NetworkMonitor,
+            "activity":            ActivityMonitor,
+            "privacy":             PrivacyAudit,
+            "ai_telemetry":        AITelemetryAudit,
+            "cloud_sync":          CloudSyncAudit,
+            "browser":             BrowserAudit,
+            "hardening":           HardeningAudit,
+            "identity":            IdentityAudit,
+            "git_identity":        GitIdentityAudit,
+            "scheduled_tasks":     ScheduledTasksAudit,
+            "usb":                 USBAudit,
+            "email":               EmailAudit,
+            "third_party_apps":    ThirdPartyAppsAudit,
+            "user_behavior":       UserBehaviorAudit,
             "data_exfiltration":   DataExfiltrationAudit,
             "incident_response":   IncidentResponsePlaybook,
             "event_viewer":        EventViewerAudit,
+            "rdp_logs":            RDPLogExporter,
         }
 
         to_run = skills or list(available.keys())

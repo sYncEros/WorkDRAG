@@ -69,7 +69,7 @@ def list_skills():
         "privacy", "ai_telemetry", "cloud_sync", "browser", "hardening",
         "identity", "git_identity", "scheduled_tasks", "usb", "email",
         "third_party_apps", "user_behavior", "data_exfiltration",
-        "incident_response", "event_viewer",
+        "incident_response", "event_viewer", "rdp",
     ]
     return jsonify(skills)
 

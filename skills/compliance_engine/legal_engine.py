@@ -537,65 +537,160 @@ COMPLIANCE_RULES = [
 ]
 
 class LegalEngine:
-    """Cruza hallazgos técnicos con legislación. Sin recomendaciones manuales."""
- 
-    RISK_ORDER = {"low": 0, "yellow": 1, "medium": 2,
-                  "medium-high": 3, "orange": 3, "high": 4, "very_high": 5}
- 
+    """
+    Analiza los hallazgos del audit engine y genera evaluación legal.
+    """
+
+    VALID_RECOMMENDATION_MODES = {"urgente", "completo", "personalizado"}
+
     def __init__(self, findings: list):
-        self.findings   = findings
+        self.findings = findings
         self.legal_issues = []
- 
-    def evaluate(self) -> list:
+        self.recommendation_mode = "completo"
+        self.mode_filters = {
+            "categories": [],
+            "risks": [],
+        }
+
+    def evaluate(
+        self,
+        recommendation_mode: str = "completo",
+        custom_categories: list[str] | None = None,
+        custom_risks: list[str] | None = None,
+    ) -> list:
+        """Evalúa todos los hallazgos y devuelve issues legales."""
+        normalized_mode = self._normalize_mode(recommendation_mode)
+        self.recommendation_mode = normalized_mode
+        self.mode_filters = {
+            "categories": sorted(set(custom_categories or [])),
+            "risks": sorted(set(custom_risks or [])),
+        }
+
         categories_found = {f.category for f in self.findings}
-        seen = set()
-        issues = []
- 
+        evaluated_issues = []
+
         for rule in COMPLIANCE_RULES:
-            cat = rule["category"]
-            if cat not in categories_found:
+            if rule["category"] not in categories_found:
                 continue
-            if cat in seen:
-                continue
-            seen.add(cat)
-            issues.append({
-                "category":   cat,
-                "issue":      rule["issue"],
-                "legal_risk": rule["legal_risk"],
-                "reason":     rule["reason"],
-                "references": [
-                    {"id": r, **LEGAL_FRAMEWORK.get(r, {})}
-                    for r in rule.get("references", [])
-                ],
-                       })
- 
-        self.legal_issues = sorted(
-            issues,
-            key=lambda x: self.RISK_ORDER.get(x["legal_risk"], 0),
-            reverse=True
+            for issue in rule["issues"]:
+                evaluated_issues.append({
+                    "category": rule["category"],
+                    "issue": issue["issue"],
+                    "legal_risk": issue["legal_risk"],
+                    "reason": issue["reason"],
+                    "references": [
+                        {
+                            "id": ref_id,
+                            **LEGAL_FRAMEWORK.get(ref_id, {})
+                        }
+                        for ref_id in issue["references"]
+                    ],
+                    "recommendations": issue["recommendations"],
+                })
+
+        self.legal_issues = self._apply_recommendation_mode(
+            issues=evaluated_issues,
+            mode=normalized_mode,
+            custom_categories=custom_categories,
+            custom_risks=custom_risks,
         )
         return self.legal_issues
- 
+
+    def _normalize_mode(self, recommendation_mode: str) -> str:
+        mode = (recommendation_mode or "completo").strip().lower()
+        if mode not in self.VALID_RECOMMENDATION_MODES:
+            return "completo"
+        return mode
+
+    def _risk_order(self) -> dict[str, int]:
+        return {
+            "low": 0,
+            "medium": 1,
+            "medium-high": 2,
+            "high": 3,
+            "very_high": 4,
+        }
+
+    def _sorted_issues(self, issues: list[dict]) -> list[dict]:
+        risk_order = self._risk_order()
+        return sorted(
+            issues,
+            key=lambda x: (
+                risk_order.get(x.get("legal_risk", "low"), 0),
+                x.get("issue", ""),
+            ),
+            reverse=True,
+        )
+
+    def _apply_recommendation_mode(
+        self,
+        issues: list[dict],
+        mode: str,
+        custom_categories: list[str] | None,
+        custom_risks: list[str] | None,
+    ) -> list[dict]:
+        sorted_issues = self._sorted_issues(issues)
+
+        if mode == "urgente":
+            urgent = [
+                i for i in sorted_issues
+                if i.get("legal_risk") in {"very_high", "high", "medium-high"}
+            ]
+            return urgent if urgent else sorted_issues[:5]
+
+        if mode == "personalizado":
+            categories = set(custom_categories or [])
+            risks = set(custom_risks or [])
+
+            if categories:
+                sorted_issues = [
+                    i for i in sorted_issues
+                    if i.get("category") in categories
+                ]
+            if risks:
+                sorted_issues = [
+                    i for i in sorted_issues
+                    if i.get("legal_risk") in risks
+                ]
+            return sorted_issues
+
+        return sorted_issues
+
     def summary_text(self) -> str:
         if not self.legal_issues:
-            return "Sin conflictos legales significativos detectados."
- 
-        lines = ["=== EVALUACIÓN LEGAL ===\n"]
-        for i, issue in enumerate(self.legal_issues, 1):
-            refs = ", ".join(
-                r.get("name", r.get("id", ""))
-                for r in issue["references"]
+            return (
+                "No se han detectado conflictos legales significativos. "
+                "La configuración parece corresponder a seguridad corporativa "
+                "estándar dentro de los límites habituales."
             )
+
+        risk_order = {"low": 0, "medium": 1, "medium-high": 2,
+                      "high": 3, "very_high": 4}
+        sorted_issues = sorted(
+            self.legal_issues,
+            key=lambda x: risk_order.get(x["legal_risk"], 0),
+            reverse=True
+        )
+
+        lines = ["=== EVALUACIÓN LEGAL ===\n"]
+        for i, issue in enumerate(sorted_issues, 1):
             lines.append(
                 f"{i}. [{issue['legal_risk'].upper()}] {issue['issue']}\n"
                 f"   {issue['reason']}\n"
-                f"   Referencias: {refs}\n"
             )
+            if issue["recommendations"]:
+                lines.append("   Recomendaciones:")
+                for rec in issue["recommendations"]:
+                    lines.append(f"   • {rec}")
+            lines.append("")
+
         return "\n".join(lines)
- 
+
     def to_dict(self) -> dict:
         return {
             "total_issues": len(self.legal_issues),
-            "issues":       self.legal_issues,
-            "framework":    LEGAL_FRAMEWORK,
+            "issues": self.legal_issues,
+            "framework_references": LEGAL_FRAMEWORK,
+            "recommendation_mode": self.recommendation_mode,
+            "mode_filters": self.mode_filters,
         }
