@@ -1,0 +1,13 @@
+{
+  "generated_at": "2026-06-06T07:57:44.853421",
+  "days_analyzed": 720,
+  "total_events": 0,
+  "failed_attempts": 0,
+  "network_logons": 0,
+  "after_hours": 0,
+  "external_ips": 0,
+  "events": [],
+  "failed_events": [],
+  "network_events": [],
+  "integrity_hash": "9e33e895b38650212e1396f1610a3e1504f4153825c75f71c71896030f0d7db1"
+}

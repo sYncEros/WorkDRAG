@@ -128,7 +128,13 @@ class AuditEngine:
         from skills.incident_response.playbook_generator import IncidentResponsePlaybook
         from skills.event_viewer_audit.event_viewer_scanner import EventViewerAudit
         from skills.rdp_log_exporter.rdp_log_exporter import RDPLogExporter
-            
+        from skills.addon_audit.addon_scanner import AddonAudit
+        from skills.onedrive_mapper.onedrive_mapper import OneDriveMapper
+        from skills.diagtrack_inspector.diagtrack_inspector import DiagTrackInspector
+        from skills.event_log_monitor.event_log_monitor import EventLogMonitor
+        from skills.clipboard_watcher.clipboard_watcher import ClipboardWatcher
+        from skills.dpa_checker.dpa_checker import DPAChecker
+        from skills.service_hardener.service_hardener import ServiceHardener
 
         available = {
             "mdm":                 MDMAudit,
@@ -152,6 +158,13 @@ class AuditEngine:
             "incident_response":   IncidentResponsePlaybook,
             "event_viewer":        EventViewerAudit,
             "rdp_logs":            RDPLogExporter,
+            "addon_audit":         AddonAudit,
+            "onedrive_mapper":     OneDriveMapper,
+            "diagtrack_inspector": DiagTrackInspector,
+            "event_log_monitor":   EventLogMonitor,
+            "clipboard_watcher":   ClipboardWatcher,
+            "dpa_checker":         DPAChecker,
+            "service_hardener":    ServiceHardener,
         }
 
         to_run = skills or list(available.keys())

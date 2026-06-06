@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-06-06T08:09:11.616456",
+  "days_analyzed": 720,
+  "total_events": 0,
+  "failed_attempts": 0,
+  "network_logons": 0,
+  "telemetry": {
+    "security_access": false,
+    "security_access_error": "Acceso denegado.\n\nError al abrir la consulta de evento.\nAcceso denegado.",
+    "rcm_1149_events": 0,
+    "rcm_available_ids": [
+      263,
+      20523,
+      1136,
+      258,
+      20524
+    ],
+    "lsm_raw_events": 4,
+    "lsm_filtered_events": 0
+  },
+  "after_hours": 0,
+  "external_ips": 0,
+  "events": [],
+  "failed_events": [],
+  "network_events": [],
+  "integrity_hash": "5a8be8bd5cc3e6ae9769c8ac9f789b8a09ed94113055952045e144122d6ba5b6"
+}

@@ -10,6 +10,13 @@ import hashlib
 import json
 from pathlib import Path
 from datetime import datetime
+from core.capability_intel import (
+    get_sources,
+    gpresult_summary,
+    certutil_root_summary,
+    fltmc_summary,
+    confidence_from_evidence,
+)
 
 
 class PersistenceAudit:
@@ -383,6 +390,19 @@ class PersistenceAudit:
             print(f"[Persistence] Error leyendo drivers: {e}")
 
         if monitoring_drivers:
+            sources = get_sources(
+                "endpoint_monitoring_capabilities",
+                "worker_rights_and_surveillance_context",
+            )
+            triangulation = {
+                "fltmc_filters": fltmc_summary(),
+                "gpresult": gpresult_summary(),
+            }
+            confidence = confidence_from_evidence(
+                sources,
+                triangulation,
+                direct_indicators_count=len(monitoring_drivers),
+            )
             self.engine.add_finding(AuditFinding(
                 skill=self.SKILL_NAME,
                 category="persistence_drivers",
@@ -409,7 +429,12 @@ class PersistenceAudit:
                     "La mayoría son componentes de seguridad legítimos "
                     "(antivirus, EDR). No implican espionaje por definición."
                 ),
-                raw_data={"drivers": monitoring_drivers}
+                raw_data={
+                    "drivers": monitoring_drivers,
+                    "independent_sources": sources,
+                    "triangulation": triangulation,
+                    "confidence": confidence,
+                }
             ))
 
         print(
@@ -542,6 +567,20 @@ class PersistenceAudit:
         high_severity = [r for r in hijack_risks if r.get("severity") == "high"]
         risk = "orange" if high_severity else "yellow"
 
+        sources = get_sources(
+            "endpoint_monitoring_capabilities",
+            "event_and_logging_capabilities",
+        )
+        triangulation = {
+            "fltmc_filters": fltmc_summary(),
+            "gpresult": gpresult_summary(),
+        }
+        confidence = confidence_from_evidence(
+            sources,
+            triangulation,
+            direct_indicators_count=len(hijack_risks),
+        )
+
         self.engine.add_finding(AuditFinding(
             skill=self.SKILL_NAME,
             category="persistence_dll_hijacking",
@@ -573,7 +612,12 @@ class PersistenceAudit:
                 "No toda condición de hijacking está siendo explotada. "
                 "Son debilidades de configuración que aumentan el riesgo."
             ),
-            raw_data={"hijack_vectors": hijack_risks}
+            raw_data={
+                "hijack_vectors": hijack_risks,
+                "independent_sources": sources,
+                "triangulation": triangulation,
+                "confidence": confidence,
+            }
         ))
 
     # ── Certificados raíz no confiables / no estándar ─────────────
@@ -645,6 +689,20 @@ class PersistenceAudit:
                                  if c.get("ssl_inspection_indicator")]
         risk = "orange" if ssl_inspection_certs else "yellow"
 
+        sources = get_sources(
+            "endpoint_monitoring_capabilities",
+            "worker_rights_and_surveillance_context",
+        )
+        triangulation = {
+            "certutil_root": certutil_root_summary(),
+            "gpresult": gpresult_summary(),
+        }
+        confidence = confidence_from_evidence(
+            sources,
+            triangulation,
+            direct_indicators_count=len(suspicious_certs),
+        )
+
         self.engine.add_finding(AuditFinding(
             skill=self.SKILL_NAME,
             category="persistence_untrusted_certs",
@@ -683,5 +741,8 @@ class PersistenceAudit:
                 "non_standard_certs": suspicious_certs,
                 "ssl_inspection_suspects": ssl_inspection_certs,
                 "total_root_certs": len(all_root_certs),
+                    "independent_sources": sources,
+                    "triangulation": triangulation,
+                    "confidence": confidence,
             }
         ))

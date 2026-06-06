@@ -1,659 +1,282 @@
 # skills/compliance_engine/legal_engine.py
 """
-Motor de Derechos y Cumplimiento — WorkDRAG
-Cruza hallazgos técnicos con legislación española.
-Sin recomendaciones manuales: las mitiga el auditor automáticamente.
+Skill — Motor de Derechos y Cumplimiento
+Cruza hallazgos técnicos con legislación española:
+RGPD, LOPDGDD, Estatuto de los Trabajadores, doctrina Barbulescu.
+
+Categorías verificadas contra exports de los 22 skills activos.
+Última limpieza: 2026-06-06
+Total reglas: 59 (una por categoría real verificada)
 """
- 
-# ── Marco legal de referencia ──────────────────────────────────────────────────
- 
+
 LEGAL_FRAMEWORK = {
     "rgpd_art5": {
         "name": "RGPD Art. 5 — Principios del tratamiento",
+        "summary": "Los datos personales deben tratarse de forma lícita, leal y transparente. Limitación de finalidad, minimización, exactitud, limitación del plazo de conservación e integridad.",
         "url": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679"
     },
     "rgpd_art13": {
         "name": "RGPD Art. 13 — Información al interesado",
+        "summary": "El responsable debe informar al trabajador de qué datos se tratan, con qué finalidad, base legal y período de conservación, antes de iniciar el tratamiento.",
         "url": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679"
     },
     "rgpd_art22": {
-        "name": "RGPD Art. 22 — Decisiones automatizadas y perfilado",
+        "name": "RGPD Art. 22 — Decisiones individuales automatizadas",
+        "summary": "El interesado tiene derecho a no ser objeto de decisiones basadas únicamente en tratamiento automatizado, incluida la elaboración de perfiles.",
         "url": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679"
     },
     "rgpd_art32": {
         "name": "RGPD Art. 32 — Seguridad del tratamiento",
+        "summary": "El responsable y el encargado aplicarán medidas técnicas y organizativas apropiadas para garantizar un nivel de seguridad adecuado al riesgo.",
         "url": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679"
     },
     "rgpd_art35": {
         "name": "RGPD Art. 35 — Evaluación de impacto (DPIA)",
+        "summary": "Cuando el tratamiento entrañe un alto riesgo para los derechos y libertades de las personas, el responsable debe realizar una evaluación de impacto.",
         "url": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679"
     },
     "lopdgdd_art87": {
-        "name": "LOPDGDD Art. 87 — Intimidad en el trabajo",
+        "name": "LOPDGDD Art. 87 — Derecho a la intimidad en el trabajo",
+        "summary": "Los trabajadores tienen derecho a la intimidad frente al uso de dispositivos digitales. El empleador debe establecer criterios de uso e informar a los trabajadores.",
         "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673"
     },
     "lopdgdd_art88": {
-        "name": "LOPDGDD Art. 88 — Desconexión digital",
+        "name": "LOPDGDD Art. 88 — Derecho a la desconexión digital",
+        "summary": "Los trabajadores tienen derecho a la desconexión digital fuera del horario laboral. La monitorización fuera de horario requiere justificación especial.",
         "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673"
     },
     "et_art20bis": {
-        "name": "ET Art. 20bis — Derechos digitales del trabajador",
+        "name": "ET Art. 20 bis — Derechos de los trabajadores a la intimidad",
+        "summary": "Los trabajadores tienen derecho a la intimidad en el uso de dispositivos digitales puestos a su disposición por el empleador, a la desconexión digital y a la intimidad frente a la geolocalización.",
         "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430"
     },
     "tedh_barbulescu": {
         "name": "TEDH — Doctrina Barbulescu II (2017)",
+        "summary": "La monitorización de comunicaciones laborales debe ser proporcional, limitada en alcance, con base legal, finalidad legítima e informada previamente al trabajador.",
         "url": "https://hudoc.echr.coe.int/eng?i=001-177082"
     },
     "aepd_guia_laboral": {
-        "name": "AEPD — Guía Protección de Datos en Relaciones Laborales",
+        "name": "AEPD — Guía de Protección de Datos en Relaciones Laborales",
+        "summary": "El control laboral mediante tecnología debe cumplir proporcionalidad, necesidad y transparencia. El trabajador debe ser informado con carácter previo.",
         "url": "https://www.aepd.es/guias/guia-proteccion-datos-relaciones-laborales.pdf"
     },
-    "cp_art197": {
-        "name": "CP Art. 197 — Descubrimiento y revelación de secretos",
+    "codigo_penal_art197": {
+        "name": "Código Penal Art. 197 — Descubrimiento y revelación de secretos",
+        "summary": "El que para descubrir los secretos o vulnerar la intimidad de otro, sin su consentimiento, se apodere de sus papeles, cartas, mensajes de correo electrónico o intercepte sus telecomunicaciones.",
         "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1995-25444"
     },
+    "lopdgdd_art89": {
+    "name": "LOPDGDD Art. 89 — Videovigilancia en el trabajo",
+    "summary": "El uso de sistemas de grabación o captación de imagen en el lugar de trabajo requiere informar previamente a los trabajadores y sus representantes.",
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673"
+},
 }
- 
-# ── Reglas por categoría real ──────────────────────────────────────────────────
-# Formato: { category, issue, legal_risk, reason, references[] }
-# Sin recomendaciones manuales — el auditor las automatiza.
- 
+
 COMPLIANCE_RULES = [
- 
-    # ── MDM ───────────────────────────────────────────────────────
-    {"category": "Corporate Control",
-     "issue": "Equipo bajo gestión corporativa MDM",
-     "legal_risk": "medium",
-     "reason": "MDM permite instalar software, aplicar políticas y borrar el dispositivo remotamente. Requiere información previa al trabajador sobre su alcance.",
-     "references": ["lopdgdd_art87", "rgpd_art13"]},
- 
-    {"category": "mdm_software_install_policy",
-     "issue": "Política MDM de instalación de software activa",
-     "legal_risk": "medium",
-     "reason": "La empresa puede instalar o desinstalar software silenciosamente. Cualquier agente de monitorización puede desplegarse sin acción del trabajador.",
-     "references": ["lopdgdd_art87", "rgpd_art13"]},
- 
-    {"category": "mdm_dlp_device_policy",
-     "issue": "Política MDM de DLP de dispositivo activa",
-     "legal_risk": "medium-high",
-     "reason": "DLP via MDM puede inspeccionar y bloquear transferencias de datos. La AEPD exige información previa sobre qué datos se inspeccionan.",
-     "references": ["lopdgdd_art87", "rgpd_art13", "aepd_guia_laboral"]},
- 
-    {"category": "mdm_usb_restrictions",
-     "issue": "Restricciones USB aplicadas via MDM",
-     "legal_risk": "medium",
-     "reason": "El control de USB via MDM puede registrar intentos de conexión. Si RRHH accede a esos logs se trata datos personales sin base legal clara.",
-     "references": ["lopdgdd_art87", "rgpd_art13"]},
- 
-    # ── Vigilancia ─────────────────────────────────────────────────
-    {"category": "ssl_inspection",
-     "issue": "Inspección de tráfico HTTPS activa",
-     "legal_risk": "medium-high",
-     "reason": "El proxy corporativo puede descifrar y registrar comunicaciones HTTPS. La doctrina Barbulescu II exige información previa y proporcionalidad.",
-     "references": ["lopdgdd_art87", "rgpd_art13", "tedh_barbulescu"]},
- 
-    {"category": "edr_xdr",
-     "issue": "Agente EDR/XDR corporativo activo",
-     "legal_risk": "low",
-     "reason": "Los EDR son seguridad corporativa estándar. El riesgo depende de si los datos recopilados se usan para vigilar al trabajador.",
-     "references": ["lopdgdd_art87", "rgpd_art5"]},
- 
-    {"category": "behavior_logging_capabilities",
-     "issue": "Logging centralizado de actividad del equipo",
-     "legal_risk": "high",
-     "reason": "WEF y PS Transcription centralizan toda la actividad del equipo. Su análisis puede constituir perfilado del trabajador que requiere DPIA.",
-     "references": ["lopdgdd_art87", "rgpd_art5", "rgpd_art35"]},
- 
-    # ── Red ────────────────────────────────────────────────────────
-    {"category": "network_external",
-     "issue": "Conexiones salientes activas a IPs externas",
-     "legal_risk": "yellow",
-     "reason": "Las conexiones externas pueden corresponder a agentes de monitorización enviando telemetría. El tipo de datos transmitidos determina el riesgo real.",
-     "references": ["lopdgdd_art87", "rgpd_art13"]},
- 
-    {"category": "network_dns",
-     "issue": "DNS corporativo registrando consultas de dominio",
-     "legal_risk": "medium",
-     "reason": "El DNS corporativo registra cada dominio consultado. Su análisis revela patrones de uso sin descifrar tráfico.",
-     "references": ["lopdgdd_art87", "rgpd_art5"]},
- 
-    # ── Actividad ──────────────────────────────────────────────────
-    {"category": "activity_resources",
-     "issue": "Procesos con alto consumo sostenido de recursos",
-     "legal_risk": "yellow",
-     "reason": "Procesos con consumo elevado pueden estar procesando o transmitiendo datos del trabajador en segundo plano.",
-     "references": ["lopdgdd_art87", "rgpd_art5"]},
- 
-    {"category": "activity_new_services",
-     "issue": "Servicios instalados recientemente",
-     "legal_risk": "medium",
-     "reason": "Servicios nuevos pueden incluir agentes de monitorización instalados sin conocimiento del trabajador. La fecha de instalación es evidencia forense.",
-     "references": ["lopdgdd_art87", "rgpd_art13"]},
- 
-    {"category": "activity_data_senders",
-     "issue": "Procesos con múltiples conexiones salientes simultáneas",
-     "legal_risk": "medium",
-     "reason": "Múltiples conexiones simultáneas pueden indicar envío paralelo de datos a varios servidores de monitorización.",
-     "references": ["lopdgdd_art87", "rgpd_art5"]},
- 
-    # ── Privacidad ─────────────────────────────────────────────────
-    {"category": "privacy_clipboard",
-     "issue": "Acceso al portapapeles del trabajador detectado",
-     "legal_risk": "medium-high",
-     "reason": "El portapapeles puede contener contraseñas y datos bancarios. Su acceso por software corporativo puede capturar datos especialmente sensibles bajo RGPD art. 9.",
-     "references": ["lopdgdd_art87", "rgpd_art5", "et_art20bis"]},
- 
-    {"category": "privacy_microphone",
-     "issue": "Apps no-videollamada con acceso a micrófono",
-     "legal_risk": "high",
-     "reason": "La grabación de audio sin consentimiento puede constituir delito bajo CP art. 197. El micrófono puede capturar conversaciones privadas.",
-     "references": ["lopdgdd_art87", "rgpd_art5", "cp_art197"]},
- 
-    {"category": "privacy_location",
-     "issue": "Geolocalización activa con apps autorizadas",
-     "legal_risk": "high",
-     "reason": "La geolocalización de trabajadores está regulada en ET art. 20bis y requiere base legal específica, información previa y proporcionalidad.",
-     "references": ["et_art20bis", "lopdgdd_art87", "rgpd_art5"]},
- 
-    {"category": "privacy_input_hooks",
-     "issue": "Hooks de entrada de teclado/ratón detectados",
-     "legal_risk": "very_high",
-     "reason": "Los hooks interceptan absolutamente todo lo escrito, incluyendo contraseñas. Sin consentimiento explícito puede constituir delito bajo CP art. 197.",
-     "references": ["lopdgdd_art87", "et_art20bis", "cp_art197"]},
- 
-    {"category": "privacy_screenshot",
-     "issue": "Herramientas de captura de pantalla activas",
-     "legal_risk": "high",
-     "reason": "La captura periódica de pantalla incluye comunicaciones privadas y contraseñas visibles. Es una de las formas más invasivas de vigilancia.",
-     "references": ["lopdgdd_art87", "rgpd_art5", "tedh_barbulescu"]},
- 
-    {"category": "privacy_screen_recording",
-     "issue": "Windows Recall — captura continua indexada por IA",
-     "legal_risk": "very_high",
-     "reason": "Recall captura snapshots continuos de toda la pantalla. En equipos corporativos el empleador puede acceder a esta base de datos.",
-     "references": ["lopdgdd_art87", "rgpd_art5", "et_art20bis"]},
- 
-    # ── IA y Telemetría ────────────────────────────────────────────
-    {"category": "telemetry_windows_level",
-     "issue": "Telemetría completa de Windows activa — sin política restrictiva",
-     "legal_risk": "high",
-     "reason": "Windows en nivel completo envía contenido de documentos, historial y actividad a Microsoft en EEUU. Transferencia internacional sin control del trabajador.",
-     "references": ["rgpd_art5", "rgpd_art13", "lopdgdd_art87"]},
- 
-    {"category": "telemetry_services",
-     "issue": "DiagTrack — telemetría continua activa",
-     "legal_risk": "high",
-     "reason": "DiagTrack recopila y envía datos de actividad continuamente. En equipos corporativos el empleador es corresponsable bajo RGPD art. 26.",
-     "references": ["rgpd_art5", "rgpd_art13", "lopdgdd_art87"]},
- 
-    {"category": "telemetry_office",
-     "issue": "Telemetría de Office 365 sin política restrictiva",
-     "legal_risk": "medium",
-     "reason": "Office recopila datos de uso y fragmentos de contenido. Sin GPO restrictiva aplica la configuración más permisiva por defecto.",
-     "references": ["rgpd_art5", "rgpd_art13"]},
- 
-    {"category": "ai_connected_experiences",
-     "issue": "Experiencias conectadas de Office enviando contenido a Microsoft",
-     "legal_risk": "medium-high",
-     "reason": "Office envía contenido de documentos para funciones de IA. Puede incluir datos personales de clientes o empleados sin base legal adecuada.",
-     "references": ["rgpd_art5", "rgpd_art13", "lopdgdd_art87"]},
- 
-    {"category": "ai_copilot",
-     "issue": "Microsoft Copilot con acceso a contenido laboral",
-     "legal_risk": "medium-high",
-     "reason": "Copilot accede a emails, documentos y reuniones. Requiere DPIA y base legal explícita bajo RGPD art. 35.",
-     "references": ["rgpd_art5", "rgpd_art13", "rgpd_art35"]},
- 
-    {"category": "ai_windows_recall",
-     "issue": "Windows Recall indexando actividad mediante IA local",
-     "legal_risk": "very_high",
-     "reason": "Recall indexa toda la pantalla con IA. La base de datos local es accesible para procesos con privilegios de administrador.",
-     "references": ["lopdgdd_art87", "rgpd_art5", "et_art20bis"]},
- 
-    # ── Cloud Sync ─────────────────────────────────────────────────
-    {"category": "cloud_sync_service",
-     "issue": "Servicio de sincronización en nube activo",
-     "legal_risk": "medium",
-     "reason": "La sincronización automática puede constituir transferencia internacional de datos personales sin control explícito del trabajador.",
-     "references": ["rgpd_art5", "rgpd_art13", "lopdgdd_art87"]},
- 
-    {"category": "cloud_sync_folder_redirect",
-     "issue": "Carpetas del sistema redirigidas a nube corporativa",
-     "legal_risk": "high",
-     "reason": "Todo lo guardado en Escritorio o Documentos va automáticamente a Microsoft 365 y es accesible por el empleador.",
-     "references": ["lopdgdd_art87", "et_art20bis", "rgpd_art5"]},
- 
-    {"category": "cloud_sync_policy",
-     "issue": "KFM forzado por GPO — trabajador no puede desactivar la sincronización",
-     "legal_risk": "medium-high",
-     "reason": "KFMBlockOptOut impide al trabajador controlar qué datos van a la nube corporativa. Elimina el derecho de control sobre sus propios datos.",
-     "references": ["lopdgdd_art87", "et_art20bis", "rgpd_art5"]},
- 
-    # ── Navegador ──────────────────────────────────────────────────
-    {"category": "browser_forced_extensions",
-     "issue": "Extensiones forzadas por GPO con acceso completo al navegador",
-     "legal_risk": "medium-high",
-     "reason": "Extensiones con permisos amplios pueden interceptar formularios, contraseñas y contenido web sin conocimiento del trabajador.",
-     "references": ["lopdgdd_art87", "rgpd_art13"]},
- 
-    {"category": "browser_inspection",
-     "issue": "Extensiones corporativas con acceso a contenido web",
-     "legal_risk": "medium",
-     "reason": "Extensiones con acceso a todas las páginas pueden leer formularios y contraseñas introducidas en el navegador.",
-     "references": ["lopdgdd_art87", "rgpd_art13"]},
- 
-    {"category": "browser_policies",
-     "issue": "Políticas corporativas de navegador activas",
-     "legal_risk": "medium",
-     "reason": "CloudReportingEnabled envía actividad al administrador. El bloqueo del modo incógnito elimina una herramienta de privacidad del trabajador.",
-     "references": ["lopdgdd_art87", "rgpd_art13"]},
- 
-    # ── Hardening ──────────────────────────────────────────────────
-    {"category": "hardening_missing",
-     "issue": "Configuraciones de seguridad básicas ausentes",
-     "legal_risk": "medium-high",
-     "reason": "La ausencia de medidas técnicas básicas incumple RGPD art. 32. El empleador es responsable de garantizar la seguridad de los datos tratados.",
-     "references": ["rgpd_art32", "rgpd_art5"]},
- 
-    {"category": "hardening_encryption",
-     "issue": "Cifrado de disco no activo — datos en claro",
-     "legal_risk": "high",
-     "reason": "Sin BitLocker, si el equipo se pierde o roba todos los datos son accesibles sin autenticación. Incumplimiento directo de RGPD art. 32.",
-     "references": ["rgpd_art32", "rgpd_art5"]},
- 
-    {"category": "hardening_boot",
-     "issue": "Secure Boot no activo — arranque sin verificación",
-     "legal_risk": "medium",
-     "reason": "Sin Secure Boot puede instalarse software antes del arranque de Windows, invisible para cualquier herramienta de seguridad.",
-     "references": ["rgpd_art32"]},
- 
-    {"category": "hardening_network",
-     "issue": "Cortafuegos de Windows no activo",
-     "legal_risk": "medium",
-     "reason": "Sin firewall el equipo está expuesto a conexiones entrantes desde la red corporativa sin filtrado.",
-     "references": ["rgpd_art32"]},
- 
-    {"category": "hardening_antimalware",
-     "issue": "Protección antimalware en tiempo real no activa",
-     "legal_risk": "medium",
-     "reason": "Sin protección en tiempo real, software malicioso puede ejecutarse sin detección, incluyendo keyloggers o agentes de vigilancia no autorizados.",
-     "references": ["rgpd_art32"]},
- 
-    {"category": "hardening_credentials",
-     "issue": "Protección de credenciales insuficiente (LSASS/Credential Guard)",
-     "legal_risk": "medium",
-     "reason": "Sin LSASS Protection las credenciales del trabajador son vulnerables a extracción de memoria por procesos con privilegios.",
-     "references": ["rgpd_art32"]},
- 
-    # ── Persistencia ───────────────────────────────────────────────
-    {"category": "persistence_registry",
-     "issue": "Entradas de autorun sospechosas en registro",
-     "legal_risk": "orange",
-     "reason": "Software en autorun puede ejecutarse silenciosamente al inicio de sesión. Es el vector más común para agentes de monitorización persistentes.",
-     "references": ["lopdgdd_art87", "rgpd_art13"]},
- 
-    {"category": "persistence_services",
-     "issue": "Servicios con características de monitorización activos",
-     "legal_risk": "medium",
-     "reason": "Servicios que corren en segundo plano con nombres relacionados con telemetría o monitorización pueden tratar datos del trabajador continuamente.",
-     "references": ["lopdgdd_art87", "rgpd_art5"]},
- 
-    {"category": "persistence_drivers",
-     "issue": "Drivers con características de monitorización detectados",
-     "legal_risk": "medium",
-     "reason": "Drivers de kernel con acceso privilegiado pueden interceptar cualquier actividad del sistema: red, ficheros, entrada de usuario.",
-     "references": ["lopdgdd_art87", "rgpd_art5"]},
- 
-    {"category": "persistence_dll_hijacking",
-     "issue": "Indicadores de DLL hijacking detectados",
-     "legal_risk": "high",
-     "reason": "DLL hijacking permite ejecutar código malicioso bajo la identidad de aplicaciones legítimas. Puede instalar vigilancia encubierta de forma persistente.",
-     "references": ["lopdgdd_art87", "rgpd_art32", "cp_art197"]},
- 
-    {"category": "persistence_untrusted_certs",
-     "issue": "Certificados raíz no confiables detectados",
-     "legal_risk": "high",
-     "reason": "Certificados raíz no estándar pueden permitir interceptar tráfico HTTPS cifrado. Es el mecanismo técnico detrás de la inspección SSL.",
-     "references": ["lopdgdd_art87", "tedh_barbulescu"]},
- 
-    # ── Identidad ──────────────────────────────────────────────────
-    {"category": "identity_local_accounts",
-     "issue": "Cuentas locales no documentadas con acceso al equipo",
-     "legal_risk": "medium",
-     "reason": "Cuentas habilitadas con contraseña permanente o nunca usadas pueden ser puertas traseras para acceso no autorizado.",
-     "references": ["lopdgdd_art87", "rgpd_art32"]},
- 
-    {"category": "identity_admin_group",
-     "issue": "Múltiples administradores con acceso completo al equipo",
-     "legal_risk": "medium",
-     "reason": "Administradores locales tienen acceso irrestricto a todos los archivos, credenciales y actividad del equipo del trabajador.",
-     "references": ["lopdgdd_art87", "rgpd_art32"]},
- 
-    {"category": "identity_remote_access",
-     "issue": "RDP habilitado — acceso remoto al escritorio posible",
-     "legal_risk": "high",
-     "reason": "RDP permite acceso completo al escritorio sin que el trabajador lo sepa. Acceso sin notificación puede constituir vigilancia encubierta.",
-     "references": ["lopdgdd_art87", "et_art20bis", "tedh_barbulescu"]},
- 
-    {"category": "identity_stored_credentials",
-     "issue": "Credenciales almacenadas accesibles para administradores",
-     "legal_risk": "medium-high",
-     "reason": "Credenciales en Windows Credential Manager pueden ser extraídas por administradores. Incluye posibles contraseñas personales del trabajador.",
-     "references": ["lopdgdd_art87", "rgpd_art5"]},
- 
-    {"category": "identity_service_accounts",
-     "issue": "Servicios con cuentas de usuario específicas",
-     "legal_risk": "medium",
-     "reason": "Servicios bajo cuentas de dominio tienen acceso a recursos de red con sus privilegios. Si son de monitorización, su alcance real puede ser mayor.",
-     "references": ["lopdgdd_art87", "rgpd_art32"]},
- 
-    {"category": "identity_privileged_monitoring",
-     "issue": "Agentes de monitorización con privilegios de SISTEMA",
-     "legal_risk": "medium",
-     "reason": "Procesos SYSTEM tienen acceso sin restricciones a todos los datos del equipo. Capacidad técnica de acceso total.",
-     "references": ["lopdgdd_art87", "rgpd_art5"]},
- 
-    {"category": "identity_account_profiles",
-     "issue": "Cuentas con alertas de seguridad detectadas",
-     "legal_risk": "medium",
-     "reason": "Cuentas habilitadas con privilegios elevados o nunca usadas son vectores de acceso no autorizado potencial.",
-     "references": ["lopdgdd_art87", "rgpd_art32"]},
- 
-    {"category": "identity_suspicious_account",
-     "issue": "Cuenta específica con perfil de alto riesgo",
-     "legal_risk": "medium-high",
-     "reason": "Cuenta habilitada con privilegios elevados y sin uso documentado puede ser puerta trasera para acceso no autorizado.",
-     "references": ["lopdgdd_art87", "rgpd_art32", "et_art20bis"]},
- 
-    {"category": "identity_logon_rights",
-     "issue": "Derechos de acceso remoto con alcance amplio",
-     "legal_risk": "medium",
-     "reason": "Si grupos amplios tienen SeRemoteInteractiveLogonRight, muchos usuarios pueden acceder al escritorio del trabajador sin notificación.",
-     "references": ["lopdgdd_art87", "et_art20bis"]},
- 
-    {"category": "identity_multiple_sessions",
-     "issue": "Múltiples sesiones activas simultáneas",
-     "legal_risk": "high",
-     "reason": "Sesiones simultáneas pueden indicar acceso remoto mientras el trabajador usa el equipo — vigilancia en tiempo real.",
-     "references": ["lopdgdd_art87", "et_art20bis"]},
- 
-    # ── USB ────────────────────────────────────────────────────────
-    {"category": "usb_dlp_policies",
-     "issue": "Políticas de control USB registrando conexiones",
-     "legal_risk": "medium",
-     "reason": "Las políticas USB registran intentos de conexión del trabajador. Si RRHH accede a esos logs se trata datos personales.",
-     "references": ["lopdgdd_art87", "rgpd_art13"]},
- 
-    {"category": "usb_connected_now",
-     "issue": "Dispositivo USB conectado actualmente",
-     "legal_risk": "low",
-     "reason": "La conexión de USB puede estar registrada por el DLP corporativo. El tipo de dispositivo y datos transferidos determinan el riesgo.",
-     "references": ["lopdgdd_art87", "rgpd_art5"]},
- 
-    {"category": "usb_storage_history",
-     "issue": "Historial de dispositivos USB de almacenamiento",
-     "legal_risk": "medium",
-     "reason": "El historial de USB es evidencia de qué dispositivos de almacenamiento han conectado al equipo. El DLP puede haberlo registrado.",
-     "references": ["lopdgdd_art87", "rgpd_art5"]},
- 
-    {"category": "usb_full_history",
-     "issue": "Historial completo de dispositivos USB conectados",
-     "legal_risk": "medium",
-     "reason": "El registro completo de USB puede usarse para analizar el comportamiento del trabajador con dispositivos externos.",
-     "references": ["lopdgdd_art87", "rgpd_art5"]},
- 
-    # ── Email ──────────────────────────────────────────────────────
-    {"category": "email_outlook_addins",
-     "issue": "Add-ins de Outlook con acceso al buzón corporativo",
-     "legal_risk": "high",
-     "reason": "Add-ins corporativos pueden leer, clasificar y reenviar correos. La doctrina Barbulescu exige información previa sobre el alcance.",
-     "references": ["lopdgdd_art87", "rgpd_art13", "tedh_barbulescu"]},
- 
-    {"category": "email_outlook_profiles",
-     "issue": "Perfil de Outlook configurado con cuenta corporativa",
-     "legal_risk": "medium",
-     "reason": "El perfil corporativo de Outlook puede estar bajo políticas de archivado y compliance que registran toda la actividad de email.",
-     "references": ["lopdgdd_art87", "rgpd_art13"]},
- 
-    {"category": "email_forwarding_rules",
-     "issue": "Reglas de reenvío en el buzón corporativo",
-     "legal_risk": "high",
-     "reason": "Reglas de reenvío pueden desviar correos a cuentas de compliance sin conocimiento del trabajador, vulnerando el secreto de las comunicaciones.",
-     "references": ["lopdgdd_art87", "tedh_barbulescu", "cp_art197"]},
- 
-    # ── Terceras partes ────────────────────────────────────────────
-    {"category": "third_party_apps_policies",
-     "issue": "Políticas corporativas sobre apps de terceros",
-     "legal_risk": "medium-high",
-     "reason": "Políticas GPO pueden activar grabación o transcripción en Teams/Zoom sin que el trabajador lo sepa.",
-     "references": ["lopdgdd_art87", "rgpd_art13", "tedh_barbulescu"]},
- 
-    {"category": "third_party_apps_installed",
-     "issue": "Apps de terceros con telemetría corporativa instaladas",
-     "legal_risk": "medium",
-     "reason": "Apps como Teams, Zoom o Slack envían datos de uso. El empleador puede acceder vía consolas de administración.",
-     "references": ["lopdgdd_art87", "rgpd_art13"]},
- 
-    {"category": "vscode_extensions",
-     "issue": "Extensiones de VSCode con telemetría de actividad",
-     "legal_risk": "medium",
-     "reason": "Extensiones de time tracking en VSCode pueden monitorizar tiempo de trabajo y proyectos activos sin información previa.",
-     "references": ["lopdgdd_art87", "rgpd_art13"]},
- 
-    # ── Exfiltración ───────────────────────────────────────────────
-    {"category": "exfiltration_dlp_monitoring",
-     "issue": "DLP corporativo monitorizando transferencias de datos",
-     "legal_risk": "medium-high",
-     "reason": "El DLP puede inspeccionar contenido de archivos transferidos. Si incluye archivos personales requiere información previa y base legal.",
-     "references": ["lopdgdd_art87", "rgpd_art13", "aepd_guia_laboral"]},
- 
-    {"category": "exfiltration_cloud_cli",
-     "issue": "Herramientas CLI de nube con credenciales configuradas",
-     "legal_risk": "medium",
-     "reason": "Credenciales de nube en equipo corporativo pueden ser accesibles para el empleador. Su uso puede estar monitorizado por el DLP.",
-     "references": ["lopdgdd_art87", "rgpd_art32"]},
- 
-    {"category": "exfiltration_large_files",
-     "issue": "Transferencia de archivos de gran tamaño detectada",
-     "legal_risk": "medium",
-     "reason": "Transferencias masivas son registradas por el DLP corporativo. Pueden usarse para acusaciones sin contexto del trabajador.",
-     "references": ["lopdgdd_art87", "rgpd_art5"]},
- 
-    # ── Git ────────────────────────────────────────────────────────
-    {"category": "gitconfig_recently_modified",
-     "issue": "Configuración Git modificada recientemente o con identidad incorrecta",
-     "legal_risk": "medium",
-     "reason": "Commits con identidad incorrecta pueden atribuir trabajo a otra persona. La fecha de modificación del .gitconfig es evidencia forense.",
-     "references": ["lopdgdd_art87", "et_art20bis"]},
- 
-    {"category": "ssh_config_present",
-     "issue": "Configuración SSH personalizada detectada",
-     "legal_risk": "low",
-     "reason": "La config SSH puede contener claves de acceso a servidores. En equipo corporativo, las claves privadas pueden ser accesibles para administradores.",
-     "references": ["lopdgdd_art87", "rgpd_art32"]},
- 
-    # ── Event Viewer ───────────────────────────────────────────────
-    {"category": "event_viewer_collection_status",
-     "issue": "Cobertura del Event Viewer — accesibilidad de registros",
-     "legal_risk": "medium",
-     "reason": "Registros no accesibles reducen la base forense del informe. Puede indicar restricciones activas que impiden auditar el equipo.",
-     "references": ["lopdgdd_art87", "rgpd_art13"]},
- 
-    {"category": "event_viewer_sensitive_events",
-     "issue": "Eventos críticos detectados — tareas, servicios y políticas",
-     "legal_risk": "high",
-     "reason": "Eventos de creación de tareas e instalación de servicios pueden evidenciar despliegues de monitorización sin información previa.",
-     "references": ["lopdgdd_art87", "rgpd_art13", "tedh_barbulescu"]},
- 
-    {"category": "event_viewer_collection_status",
-     "issue": "Auditoría de PowerShell registrada en Event Viewer",
-     "legal_risk": "medium-high",
-     "reason": "Script block logging reconstruye toda la actividad técnica del trabajador con alto detalle. Puede constituir perfilado que requiere DPIA.",
-     "references": ["lopdgdd_art87", "rgpd_art5", "rgpd_art35"]},
- 
-    # ── Incident Response ──────────────────────────────────────────
-    {"category": "incident_response_evidence",
-     "issue": "Evidencia de incidente de seguridad preservada",
-     "legal_risk": "medium",
-     "reason": "Un incidente puede desencadenar investigaciones forenses que acceden a todos los datos del equipo sin notificación al trabajador.",
-     "references": ["lopdgdd_art87", "rgpd_art32"]},
- 
-    {"category": "incident_response_playbook",
-     "issue": "Playbook de respuesta a incidentes activo",
-     "legal_risk": "medium",
-     "reason": "Los procedimientos de IR pueden incluir acceso completo al equipo del trabajador. El trabajador tiene derecho a conocer el alcance.",
-     "references": ["lopdgdd_art87", "rgpd_art13"]},
- 
-    {"category": "incident_response_rights",
-     "issue": "Derechos del trabajador en contexto de incidente de seguridad",
-     "legal_risk": "high",
-     "reason": "Durante una investigación de IR, el empleador puede acceder a todos los datos del equipo. Los derechos del trabajador se mantienen activos.",
-     "references": ["lopdgdd_art87", "et_art20bis", "rgpd_art5"]},
- 
-    # ── RDP Logs (skill futuro) ────────────────────────────────────
-    {"category": "rdp_access_history",
-     "issue": "Historial de accesos remotos al equipo",
-     "legal_risk": "medium",
-     "reason": "El historial RDP es evidencia de quién accedió al equipo y cuándo. El trabajador tiene derecho a conocerlo.",
-     "references": ["lopdgdd_art87", "et_art20bis", "rgpd_art32"]},
- 
-    {"category": "rdp_after_hours",
-     "issue": "Accesos remotos fuera del horario laboral",
-     "legal_risk": "high",
-     "reason": "Accesos fuera de horario violan el derecho a la desconexión digital bajo LOPDGDD art. 88.",
-     "references": ["lopdgdd_art88", "et_art20bis", "lopdgdd_art87"]},
- 
-    {"category": "rdp_external_access",
-     "issue": "Accesos RDP desde IPs externas a la red corporativa",
-     "legal_risk": "high",
-     "reason": "Accesos desde IPs externas sin notificación pueden constituir acceso no autorizado bajo CP art. 197.",
-     "references": ["lopdgdd_art87", "rgpd_art32", "cp_art197"]},
- 
-    {"category": "rdp_failed_attempts",
-     "issue": "Equipo expuesto a ataques de acceso remoto",
-     "legal_risk": "medium",
-     "reason": "Múltiples intentos fallidos indican exposición del equipo. El empleador incumple RGPD art. 32 sin medidas de protección adecuadas.",
-     "references": ["rgpd_art32", "lopdgdd_art87"]}, 
+    # activity_monitor
+    {"category": "activity_data_senders", "issues": [{"condition": "always", "issue": "Procesos enviando datos a servidores externos de forma continua", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art13", "tedh_barbulescu"], "reason": "Procesos con conexiones salientes persistentes pueden transmitir actividad del trabajador a servidores de monitorización sin su conocimiento.", "recommendations": ["Solicitar al DPO qué datos envían los procesos detectados.", "Verificar destinos de red en el informe de conexiones.", "Solicitar registro de actividades de tratamiento."]}]},
+    {"category": "activity_new_services", "issues": [{"condition": "always", "issue": "Servicios nuevos instalados recientemente", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "La instalación reciente de servicios puede indicar despliegue de software de monitorización sin notificación previa al trabajador.", "recommendations": ["Solicitar al empleador qué servicios fueron instalados y con qué finalidad.", "Verificar si hubo comunicación previa.", "Documentar la fecha de instalación como evidencia forense."]}]},
+    {"category": "activity_resources", "issues": [{"condition": "always", "issue": "Procesos con comportamiento anómalo — alto consumo o múltiples conexiones", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art5"], "reason": "Procesos con comportamiento anómalo pueden ser agentes de monitorización activos. Su presencia sin información al trabajador puede vulnerar LOPDGDD art. 87.", "recommendations": ["Identificar los procesos con mayor actividad de red.", "Correlacionar con el catálogo de software de monitorización.", "Solicitar al DPO justificación de cada proceso sospechoso."]}]},
+    # ai_telemetry_audit
+    {"category": "ai_connected_experiences", "issues": [{"condition": "always", "issue": "Experiencias conectadas de Office enviando contenido a Microsoft", "legal_risk": "medium-high", "references": ["rgpd_art5", "rgpd_art13", "lopdgdd_art87"], "reason": "Office 365 envía contenido de documentos a Microsoft para funciones de IA sin base legal adecuada o sin conocimiento del trabajador.", "recommendations": ["Solicitar el DPA entre la empresa y Microsoft.", "Verificar qué experiencias conectadas están activas.", "Solicitar DPIA si se procesan datos de categoría especial.", "Desactivar experiencias conectadas no necesarias."]}]},
+    {"category": "telemetry_office", "issues": [{"condition": "always", "issue": "Telemetría de Microsoft Office sin política restrictiva", "legal_risk": "medium", "references": ["rgpd_art5", "rgpd_art13"], "reason": "Office 365 recopila datos de uso y fragmentos de contenido por defecto. Sin política GPO restrictiva aplica la configuración más permisiva.", "recommendations": ["Solicitar a IT política GPO de privacidad de Office.", "Verificar el nivel de telemetría configurado.", "Comprobar que el DPA con Microsoft está actualizado."]}]},
+    {"category": "telemetry_services", "issues": [{"condition": "always", "issue": "Servicio DiagTrack — telemetría continua activa", "legal_risk": "high", "references": ["rgpd_art5", "rgpd_art13", "lopdgdd_art87"], "reason": "DiagTrack recopila y envía datos de actividad continuamente. El empleador es corresponsable del tratamiento bajo RGPD art. 26 y no haberlo desactivado es una omisión relevante.", "recommendations": ["Solicitar a IT que deshabilite DiagTrack via GPO.", "Verificar que la empresa tiene DPA vigente con Microsoft.", "Documentar el estado actual como evidencia."]}]},
+    {"category": "telemetry_windows_level", "issues": [{"condition": "always", "issue": "Telemetría completa de Windows activa", "legal_risk": "high", "references": ["rgpd_art5", "rgpd_art13", "lopdgdd_art87"], "reason": "Windows en nivel de telemetría completo envía datos de actividad a Microsoft en EEUU sin control explícito del trabajador. El empleador debe garantizar base legal adecuada bajo RGPD cap. V.", "recommendations": ["Solicitar al DPO la base legal de la telemetría de Windows.", "Verificar si existe DPA entre la empresa y Microsoft.", "Solicitar que IT aplique política GPO de telemetría mínima."]}]},
+    # browser_audit
+    {"category": "browser_forced_extensions", "issues": [{"condition": "always", "issue": "Extensiones forzadas con acceso completo al navegador", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "Extensiones GPO con permisos amplios pueden interceptar formularios, contraseñas y contenido web. Requieren información previa al trabajador.", "recommendations": ["Solicitar al empleador listado de extensiones forzadas y su función.", "Verificar los permisos de cada extensión en chrome://extensions.", "No introducir datos personales en formularios web en equipos corporativos."]}]},
+    {"category": "browser_policies", "issues": [{"condition": "always", "issue": "Políticas corporativas de navegador activas", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "CloudReportingEnabled envía actividad del navegador al administrador. El bloqueo del modo incógnito elimina una herramienta de privacidad del trabajador.", "recommendations": ["Verificar si CloudReporting está activo en chrome://policy.", "Solicitar al DPO qué datos de navegación se recopilan.", "No usar el navegador corporativo para asuntos personales."]}]},
+    # cloud_sync_audit
+    {"category": "cloud_sync_folder_redirect", "issues": [{"condition": "always", "issue": "Carpetas del sistema redirigidas a nube corporativa", "legal_risk": "high", "references": ["lopdgdd_art87", "et_art20bis", "rgpd_art5"], "reason": "Las carpetas principales de Windows apuntan a OneDrive/SharePoint. Todo lo guardado es inmediatamente accesible por el empleador a través de Microsoft 365.", "recommendations": ["Documentar qué carpetas están redirigidas.", "Crear carpetas locales fuera de OneDrive para uso personal.", "Consultar con asesor laboral sobre el alcance del acceso."]}]},
+    {"category": "cloud_sync_policy", "issues": [{"condition": "always", "issue": "Políticas GPO de OneDrive impidiendo desactivar sincronización", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "et_art20bis", "rgpd_art5"], "reason": "KFMBlockOptOut impide que el trabajador desactive la sincronización. El trabajador no puede controlar qué datos van a la nube corporativa.", "recommendations": ["Solicitar al empleador información sobre las políticas GPO activas.", "Verificar qué datos son accesibles por el admin de M365.", "Documentar la imposibilidad de desactivar la sincronización."]}]},
+    {"category": "cloud_sync_service", "issues": [{"condition": "always", "issue": "Servicio de sincronización en nube corporativa activo", "legal_risk": "medium", "references": ["rgpd_art5", "rgpd_art13", "lopdgdd_art87"], "reason": "La sincronización automática puede constituir transferencia internacional de datos personales bajo RGPD cap. V. El empleador debe tener DPA con el proveedor.", "recommendations": ["Solicitar al DPO el DPA con cada proveedor de nube activo.", "Verificar qué datos se sincronizan y hacia qué región.", "Solicitar el registro de actividades de tratamiento."]}]},
+    # data_exfiltration_audit
+    {"category": "exfiltration_cloud_cli", "issues": [{"condition": "always", "issue": "Herramientas CLI de nube con credenciales configuradas", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art32"], "reason": "Herramientas CLI con credenciales preconfiguradas pueden usarse para transferir datos masivamente. Su uso puede ser monitorizado por el DLP corporativo.", "recommendations": ["Verificar que las credenciales son corporativas, no personales.", "Asegurar que el uso está autorizado.", "Consultar con IT la política de uso de herramientas de nube."]}]},
+    {"category": "exfiltration_dlp_monitoring", "issues": [{"condition": "always", "issue": "Software DLP corporativo monitorizando transferencias de datos", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art13", "aepd_guia_laboral"], "reason": "El DLP puede inspeccionar el contenido de archivos y comunicaciones del trabajador. La AEPD exige informar previamente sobre el alcance.", "recommendations": ["Solicitar al DPO la política DLP y qué datos inspecciona.", "Verificar si el DLP inspecciona contenido personal.", "No almacenar datos personales en el equipo corporativo."]}]},
+    {"category": "exfiltration_large_files", "issues": [{"condition": "always", "issue": "Archivos de gran tamaño — posible alerta DLP activa", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art5"], "reason": "La presencia de archivos grandes puede activar alertas en sistemas DLP corporativos, generando registros de actividad del trabajador sin su conocimiento.", "recommendations": ["Verificar si hay política DLP sobre archivos grandes.", "Solicitar al DPO qué umbrales activan alertas DLP.", "Documentar el contexto legítimo de cualquier archivo grande."]}]},
+    # email_audit
+    {"category": "email_outlook_addins", "issues": [{"condition": "always", "issue": "Add-ins de Outlook con acceso al buzón corporativo", "legal_risk": "high", "references": ["lopdgdd_art87", "rgpd_art13", "tedh_barbulescu"], "reason": "Los add-ins de Outlook tienen acceso completo a emails, contactos y calendarios. Los add-ins corporativos forzados pueden enviar copias a sistemas de supervisión. La doctrina Barbulescu II exige información previa.", "recommendations": ["Solicitar al empleador listado de add-ins y su función.", "Verificar si envían datos a sistemas de archivado.", "No usar el email corporativo para comunicaciones privadas."]}]},
+    {"category": "email_outlook_profiles", "issues": [{"condition": "always", "issue": "Perfiles de Outlook configurados centralmente", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "Los perfiles de Outlook configurados centralmente pueden incluir reglas de archivado, reenvío o supervisión que el trabajador no conoce.", "recommendations": ["Revisar las reglas activas en Outlook > Administrar reglas.", "Verificar que no hay reenvíos a direcciones desconocidas.", "Solicitar al DPO las políticas de email aplicadas al perfil."]}]},
+    # event_viewer_audit
+    {"category": "event_viewer_collection_status", "issues": [{"condition": "always", "issue": "Cobertura de Event Viewer y accesibilidad de registros", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "El estado de cobertura indica si el informe tiene base forense suficiente o hay limitaciones de acceso que reducen la evidencia disponible.", "recommendations": ["Si hay logs no accesibles, ejecutar con permisos elevados.", "Conservar el estado de cobertura como parte de la cadena de evidencia.", "Documentar ventana temporal y alcance para trazabilidad."]}]},
+    {"category": "event_viewer_full_logs_export", "issues": [{"condition": "always", "issue": "Volcado histórico completo de logs del equipo", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art5", "rgpd_art13", "rgpd_art35"], "reason": "El volcado completo aporta evidencia exhaustiva de actividad histórica y facilita detectar patrones de vigilancia o tratamiento desproporcionado.", "recommendations": ["Conservar logs exportados fuera del equipo corporativo.", "Priorizar revisión de muestras marcadas como sospechosas.", "Solicitar al DPO base legal y finalidad de tratamientos detectados."]}]},
+    {"category": "event_viewer_full_logs_export_error", "issues": [{"condition": "always", "issue": "Error al exportar histórico completo de logs", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "Si falla la exportación el informe pierde cobertura forense. El error puede indicar restricciones activas que impiden auditar el equipo.", "recommendations": ["Repetir exportación con permisos elevados cuando proceda.", "Conservar el mensaje de error como parte del expediente."]}]},
+    {"category": "event_viewer_sensitive_events", "issues": [{"condition": "always", "issue": "Eventos sensibles — tareas, servicios y cambios de política", "legal_risk": "high", "references": ["lopdgdd_art87", "rgpd_art13", "tedh_barbulescu"], "reason": "La correlación de eventos críticos puede evidenciar despliegues de monitorización que requieren información previa y proporcionalidad.", "recommendations": ["Solicitar al DPO detalle de los cambios en la ventana temporal.", "Pedir trazabilidad de quién autorizó cada cambio.", "Preservar el informe como evidencia cronológica."]}]},
+    {"category": "event_viewer_powershell_audit", "issues": [{"condition": "always", "issue": "Auditoría detallada de PowerShell en Event Viewer", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art5", "rgpd_art35"], "reason": "El registro de script blocks permite reconstruir acciones técnicas con alto detalle. Si se usa para evaluar desempeño requiere DPIA y base legal.", "recommendations": ["Solicitar al DPO la finalidad del logging de PowerShell.", "Verificar período de retención y acceso a los logs.", "Solicitar DPIA si se usan para evaluación de desempeño."]}]},
+    {"category": "event_viewer_remote_access_patterns", "issues": [{"condition": "always", "issue": "Patrones de acceso privilegiado en Security log", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "et_art20bis", "tedh_barbulescu"], "reason": "Los eventos de credenciales explícitas y privilegios elevados pueden reflejar accesos administrativos al equipo no comunicados conforme al principio de transparencia.", "recommendations": ["Solicitar al empleador registro de accesos administrativos.", "Exigir política de notificación previa para accesos remotos.", "Contrastar eventos con ventanas de mantenimiento aprobadas."]}]},
+    {"category": "event_log_forwarding", "issues": [{"condition": "always", "issue": "Windows Event Forwarding enviando logs a servidor remoto", "legal_risk": "high", "references": ["lopdgdd_art87", "rgpd_art13", "rgpd_art5"], "reason": "WEF envía logs de actividad del trabajador a un servidor centralizado incluyendo comandos y accesos. Requiere información previa bajo LOPDGDD art. 87.", "recommendations": ["Solicitar al DPO qué logs se recopilan y quién accede.", "Verificar si los logs se usan para evaluar el desempeño.", "Intentar deshabilitar si no hay GPO que lo bloquee."]}]},
+    {"category": "powershell_transcription", "issues": [{"condition": "always", "issue": "PowerShell Transcription registrando todos los comandos", "legal_risk": "high", "references": ["lopdgdd_art87", "rgpd_art5", "et_art20bis"], "reason": "PS Transcription graba cada comando PowerShell incluyendo credenciales y actividad técnica completa. En equipos de desarrolladores el alcance es especialmente amplio.", "recommendations": ["Verificar dónde se guardan los transcripts y quién los lee.", "Solicitar período de retención al DPO.", "Intentar deshabilitar si no hay GPO que lo bloquee."]}]},
+    # git_identity_audit
+    {"category": "gitconfig_recently_modified", "issues": [{"condition": "always", "issue": "Configuración Git modificada recientemente", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art5"], "reason": "Cambios recientes en .gitconfig pueden indicar modificación de identidad por terceros con acceso al equipo, o configuración incorrecta que atribuye commits a otra persona.", "recommendations": ["Verificar qué cambió en .gitconfig y cuándo.", "Confirmar que la identidad configurada es la correcta.", "Activar git config --global user.useConfigOnly true."]}]},
+    {"category": "ssh_config_present", "issues": [{"condition": "always", "issue": "Configuración SSH con claves de acceso presentes", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art32"], "reason": "Claves SSH en equipo corporativo pueden ser accesibles para el empleador. Si son claves personales, el empleador podría acceder a sistemas externos del trabajador.", "recommendations": ["Verificar que las claves SSH son corporativas, no personales.", "No almacenar claves SSH personales en equipos corporativos.", "Usar passphrase en todas las claves SSH."]}]},
+    # hardening_audit
+    {"category": "hardening_antimalware", "issues": [{"condition": "always", "issue": "Protección antimalware ausente o deshabilitada", "legal_risk": "medium-high", "references": ["rgpd_art32", "lopdgdd_art87"], "reason": "La ausencia de antimalware activo implica que el equipo puede estar comprometido sin saberlo, exponiendo datos del trabajador. El empleador incumple RGPD art. 32.", "recommendations": ["Solicitar a IT activación inmediata de protección antimalware.", "Documentar la ausencia como incumplimiento RGPD art. 32.", "Notificar al DPO como riesgo de seguridad activo."]}]},
+    {"category": "hardening_boot", "issues": [{"condition": "always", "issue": "Arranque seguro (Secure Boot) no activo", "legal_risk": "medium", "references": ["rgpd_art32"], "reason": "Sin Secure Boot el equipo puede arrancar con software no autorizado, incluyendo herramientas de acceso o vigilancia a nivel de firmware no detectable.", "recommendations": ["Solicitar a IT activación de Secure Boot.", "Documentar la ausencia como riesgo de integridad del sistema."]}]},
+    {"category": "hardening_encryption", "issues": [{"condition": "always", "issue": "Cifrado de disco no activo — datos en claro", "legal_risk": "high", "references": ["rgpd_art32", "lopdgdd_art87"], "reason": "Sin BitLocker activo, en caso de pérdida o robo todos los datos del trabajador son accesibles sin autenticación. El empleador incumple RGPD art. 32.", "recommendations": ["Solicitar a IT la activación inmediata de BitLocker.", "Documentar la ausencia como riesgo de seguridad.", "Notificar al DPO como posible brecha de seguridad latente."]}]},
+    {"category": "hardening_missing", "issues": [{"condition": "always", "issue": "Configuraciones de seguridad básicas ausentes", "legal_risk": "medium-high", "references": ["rgpd_art32", "rgpd_art5"], "reason": "El empleador tiene obligación bajo RGPD art. 32 de implementar medidas técnicas apropiadas. La ausencia de protecciones básicas puede constituir incumplimiento.", "recommendations": ["Solicitar al empleador el plan de hardening de equipos.", "Documentar las ausencias como parte del informe forense.", "Presentar al DPO como posible incumplimiento RGPD art. 32."]}]},
+    {"category": "hardening_network", "issues": [{"condition": "always", "issue": "Configuración de red insegura — firewall o protocolos vulnerables", "legal_risk": "medium", "references": ["rgpd_art32"], "reason": "La ausencia de firewall activo o uso de protocolos vulnerables expone el equipo a accesos no autorizados. El empleador incumple su obligación bajo RGPD art. 32.", "recommendations": ["Solicitar a IT activación del firewall de Windows.", "Solicitar deshabilitación de SMBv1 si está activo.", "Documentar como incumplimiento de medidas técnicas básicas."]}]},
+    # identity_audit
+    {"category": "identity_account_profiles", "issues": [{"condition": "always", "issue": "Cuentas con alertas de seguridad sin documentar", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art32"], "reason": "Cuentas habilitadas con privilegios elevados o nunca usadas pueden ser vectores de acceso no autorizado. El trabajador tiene derecho a saber qué cuentas tienen acceso.", "recommendations": ["Solicitar inventario completo de cuentas y su justificación.", "Exigir que IT deshabilite cuentas no necesarias.", "Documentar este informe como evidencia del estado actual."]}]},
+    {"category": "identity_admin_group", "issues": [{"condition": "always", "issue": "Múltiples administradores con acceso completo al equipo", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art32"], "reason": "Un número elevado de administradores locales aumenta el riesgo de acceso no autorizado. El trabajador tiene derecho a saber quién puede acceder a su equipo.", "recommendations": ["Solicitar al empleador lista de cuentas con acceso admin.", "Verificar que el número de admins está justificado.", "Exigir registro de auditoría de accesos administrativos."]}]},
+    {"category": "identity_local_accounts", "issues": [{"condition": "always", "issue": "Cuentas locales no documentadas con acceso al equipo", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art32"], "reason": "Cuentas habilitadas con contraseña permanente o nunca usadas pueden ser puertas traseras. El trabajador tiene derecho a saber qué cuentas tienen acceso.", "recommendations": ["Solicitar inventario de cuentas locales y su función.", "Verificar si hay cuentas de soporte remoto no documentadas.", "Solicitar que IT deshabilite cuentas no necesarias."]}]},
+    {"category": "identity_privileged_monitoring", "issues": [{"condition": "always", "issue": "Agentes de monitorización con privilegios de SISTEMA", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art5"], "reason": "Procesos de SISTEMA tienen acceso sin restricciones a todos los datos del equipo. Los agentes con estos privilegios tienen capacidad técnica de acceso total.", "recommendations": ["Solicitar al DPO qué datos recopilan estos agentes.", "Verificar que existe política de uso de datos del EDR.", "Documentar qué agentes corren como SISTEMA."]}]},
+    {"category": "identity_remote_access", "issues": [{"condition": "always", "issue": "Acceso remoto habilitado al equipo del trabajador", "legal_risk": "high", "references": ["lopdgdd_art87", "et_art20bis", "tedh_barbulescu"], "reason": "RDP habilitado permite acceso completo al escritorio sin que el trabajador lo sepa. Una conexión activa sin notificación puede constituir vigilancia encubierta.", "recommendations": ["Solicitar al empleador política de acceso remoto documentada.", "Exigir notificación previa antes de cualquier acceso remoto.", "Verificar si existe registro de accesos remotos realizados.", "Consultar con asesor laboral si hay accesos no comunicados."]}]},
+    {"category": "identity_service_accounts", "issues": [{"condition": "always", "issue": "Servicios con cuentas de usuario específicas", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art32"], "reason": "Servicios que corren bajo cuentas de dominio tienen acceso a recursos de red con privilegios de esa cuenta. Si son cuentas de monitorización su alcance puede ser mayor del esperado.", "recommendations": ["Solicitar inventario de servicios y cuentas asociadas.", "Verificar que cada servicio tiene justificación documentada.", "Consultar al DPO si algún servicio trata datos del trabajador."]}]},
+    {"category": "identity_stored_credentials", "issues": [{"condition": "always", "issue": "Credenciales almacenadas accesibles para administradores", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art5"], "reason": "Las credenciales en Windows Credential Manager pueden ser extraídas por administradores. Si incluyen contraseñas personales su acceso no autorizado vulnera LOPDGDD y CP art. 197.", "recommendations": ["No guardar contraseñas personales en Windows Credential Manager.", "Usar un gestor de contraseñas personal independiente.", "Revisar qué credenciales están almacenadas con cmdkey /list."]}]},
+    {"category": "identity_suspicious_account", "issues": [{"condition": "always", "issue": "Cuenta con características de riesgo — posible puerta trasera", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art32", "et_art20bis"], "reason": "Una cuenta habilitada con privilegios elevados y sin uso documentado puede ser una puerta trasera para acceso no autorizado al equipo del trabajador.", "recommendations": ["Solicitar justificación específica de esta cuenta al empleador.", "Verificar si aparece en el inventario oficial de cuentas.", "Consultar con asesor laboral si no hay justificación.", "Preservar este informe como evidencia."]}]},
+    # incident_response
+    {"category": "incident_response_evidence", "issues": [{"condition": "always", "issue": "Evidencias de incidente de seguridad detectadas", "legal_risk": "high", "references": ["lopdgdd_art87", "rgpd_art32"], "reason": "La detección de indicadores de incidente puede desencadenar investigaciones que acceden a todos los datos del equipo. El trabajador tiene derecho a ser informado del alcance.", "recommendations": ["Documentar el estado del equipo antes de cualquier intervención de IT.", "Solicitar por escrito el alcance de cualquier investigación forense.", "Consultar asesor laboral antes de cooperar con investigación interna."]}]},
+    {"category": "incident_response_playbook", "issues": [{"condition": "always", "issue": "Playbook de respuesta a incidentes activo", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "La existencia de un playbook implica procedimientos de investigación que pueden incluir acceso a datos del trabajador. El trabajador debe conocer estos procedimientos.", "recommendations": ["Solicitar al empleador el procedimiento de respuesta a incidentes.", "Verificar qué datos se acceden durante una investigación.", "Consultar con el DPO el alcance del tratamiento en caso de incidente."]}]},
+    {"category": "incident_response_rights", "issues": [{"condition": "always", "issue": "Derechos del trabajador en caso de investigación forense", "legal_risk": "high", "references": ["lopdgdd_art87", "et_art20bis", "tedh_barbulescu"], "reason": "Durante una investigación forense el empleador puede acceder a todos los datos del equipo. El TEDH (Barbulescu II) establece límites: proporcionalidad, finalidad legítima e información previa.", "recommendations": ["Solicitar asistencia letrada antes de cualquier investigación.", "Exigir que la investigación se limite al ámbito laboral.", "Documentar cualquier acceso a datos personales durante la investigación.", "Contactar con representación sindical inmediatamente."]}]},
+    # mdm_audit
+    {"category": "Corporate Control", "issues": [{"condition": "always", "issue": "Equipo bajo gestión corporativa MDM activa", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "La inscripción MDM otorga al empleador control total sobre el dispositivo: puede instalar software, aplicar políticas y acceder a inventario. El trabajador debe ser informado del alcance.", "recommendations": ["Solicitar documentación de las políticas MDM aplicadas.", "Verificar qué datos recopila el agente MDM.", "Solicitar al DPO la base legal del tratamiento MDM."]}]},
+    {"category": "mdm_dlp_device_policy", "issues": [{"condition": "always", "issue": "Política DLP de dispositivos aplicada via MDM", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art13", "aepd_guia_laboral"], "reason": "Las políticas DLP gestionadas via MDM pueden controlar qué datos salen del dispositivo, inspeccionando transferencias a dispositivos externos o servicios cloud.", "recommendations": ["Solicitar al DPO la política DLP activa y su alcance.", "Verificar si el DLP inspecciona contenido personal.", "Solicitar base legal del tratamiento."]}]},
+    {"category": "mdm_software_install_policy", "issues": [{"condition": "always", "issue": "Política de instalación de software controlada por MDM", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "El control de instalación via MDM permite al empleador instalar software silenciosamente en el equipo del trabajador sin notificación individual.", "recommendations": ["Solicitar listado de software instalado remotamente via MDM.", "Verificar si algún software instalado tiene capacidades de monitorización.", "Exigir notificación previa de cualquier instalación remota."]}]},
+    {"category": "mdm_usb_restrictions", "issues": [{"condition": "always", "issue": "Restricciones USB aplicadas via política MDM", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "Las restricciones USB gestionadas via MDM pueden registrar intentos de conexión. Si estos logs son accesibles por RRHH requieren base legal.", "recommendations": ["Solicitar política USB y período de retención de logs.", "Verificar si los logs de USB son accesibles por RRHH.", "Solicitar base legal del registro al DPO."]}]},
+    # network_monitor
+    {"category": "network_dns", "issues": [{"condition": "always", "issue": "Servidores DNS corporativos con capacidad de registro", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "Los servidores DNS corporativos pueden registrar todas las consultas de dominio del trabajador, revelando qué sitios visita. Sin información previa vulnera LOPDGDD art. 87.", "recommendations": ["Solicitar al DPO si se registran consultas DNS y durante cuánto tiempo.", "Verificar si los logs DNS son accesibles por RRHH.", "Usar red personal para navegación privada."]}]},
+    {"category": "network_external", "issues": [{"condition": "always", "issue": "Conexiones externas activas a servidores de monitorización", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "Las conexiones salientes activas confirman la operación de software enviando datos a servidores externos. El tipo y volumen de datos determina el riesgo real.", "recommendations": ["Identificar los destinos de cada conexión activa.", "Solicitar al DPO qué datos se envían a cada destino.", "Verificar que existe registro de actividades de tratamiento."]}]},
+    # persistence_audit
+    {"category": "persistence_dll_hijacking", "issues": [{"condition": "always", "issue": "Indicadores de DLL hijacking detectados", "legal_risk": "high", "references": ["lopdgdd_art87", "rgpd_art32", "codigo_penal_art197"], "reason": "El DLL hijacking es una técnica que permite ejecutar código de forma encubierta. Su presencia puede indicar software de vigilancia no autorizado o compromiso del equipo.", "recommendations": ["Documentar técnicamente con este informe como evidencia.", "Solicitar análisis forense independiente del equipo.", "Consultar con asesor laboral si se sospecha instalación no autorizada.", "Notificar al DPO como posible brecha de seguridad."]}]},
+    {"category": "persistence_drivers", "issues": [{"condition": "always", "issue": "Drivers con características de monitorización", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art5"], "reason": "Los drivers operan a nivel de kernel con acceso sin restricciones. Drivers de monitorización a este nivel pueden capturar cualquier dato del sistema.", "recommendations": ["Solicitar al DPO qué datos recopilan los drivers detectados.", "Verificar que cada driver tiene firma digital válida.", "Documentar como evidencia forense."]}]},
+    {"category": "persistence_registry", "issues": [{"condition": "always", "issue": "Entradas de autorun sospechosas en registro de Windows", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "Las entradas de autorun garantizan ejecución persistente de software. Software de monitorización usa este mecanismo para mantenerse activo continuamente.", "recommendations": ["Identificar el origen y función de cada entrada sospechosa.", "Solicitar al empleador justificación de cada autorun no reconocido.", "Documentar con timestamp como evidencia forense."]}]},
+    {"category": "persistence_services", "issues": [{"condition": "always", "issue": "Servicios con características de monitorización activos", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "Los servicios de Windows se ejecutan continuamente en segundo plano. Los servicios de monitorización recopilan datos de actividad de forma persistente.", "recommendations": ["Solicitar inventario de servicios y justificación de cada uno.", "Verificar qué datos recopila y transmite cada servicio.", "Solicitar al DPO base legal de los servicios de monitorización."]}]},
+    {"category": "persistence_untrusted_certs", "issues": [{"condition": "always", "issue": "Certificados raíz corporativos que permiten inspección SSL", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art13", "tedh_barbulescu"], "reason": "Los certificados raíz corporativos permiten descifrar tráfico HTTPS del trabajador. La doctrina Barbulescu II exige información previa sobre el alcance.", "recommendations": ["Verificar si la empresa ha informado sobre la inspección SSL.", "Solicitar la política de uso aceptable (AUP).", "Usar red personal para comunicaciones privadas cifradas."]}]},
+    # privacy_audit
+    {"category": "privacy_clipboard", "issues": [{"condition": "always", "issue": "Acceso al portapapeles del trabajador detectado", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art5", "et_art20bis"], "reason": "El portapapeles puede contener contraseñas, tokens y datos bancarios. Su acceso por software corporativo sin consentimiento puede capturar datos especialmente sensibles.", "recommendations": ["Identificar qué aplicación accede al portapapeles.", "No copiar credenciales ni datos sensibles en equipos corporativos.", "Solicitar al DPO información sobre el tratamiento de estos datos."]}]},
+    # surveillance_audit
+    {"category": "browser_inspection", "issues": [{"condition": "always", "issue": "Extensiones de navegador con acceso a contenido web", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "Las extensiones corporativas con acceso completo a páginas web pueden leer formularios, contraseñas y contenido personal.", "recommendations": ["Identificar qué extensiones están instaladas y su editor.", "Solicitar información sobre su función a IT.", "No usar el navegador corporativo para asuntos personales."]}]},
+    {"category": "edr_xdr", "issues": [{"condition": "always", "issue": "Agente EDR/XDR corporativo activo", "legal_risk": "low", "references": ["lopdgdd_art87", "rgpd_art5"], "reason": "Los EDR son considerados seguridad corporativa estándar y generalmente cumplen el principio de proporcionalidad si están orientados a la detección de amenazas.", "recommendations": ["Verificar que existe política de seguridad documentada.", "Comprobar que el uso de datos del EDR se limita a finalidades de seguridad."]}]},
+    {"category": "ssl_inspection", "issues": [{"condition": "always", "issue": "Inspección de tráfico HTTPS activa", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art13", "tedh_barbulescu"], "reason": "La inspección SSL permite al empleador leer contenido de comunicaciones cifradas. La doctrina Barbulescu II exige informar previamente al trabajador del alcance.", "recommendations": ["Verificar si la empresa ha informado por escrito sobre la inspección.", "Solicitar la política de uso aceptable (AUP).", "Usar red personal para comunicaciones privadas."]}]},
+    # third_party_apps_audit
+    {"category": "third_party_apps_installed", "issues": [{"condition": "always", "issue": "Apps de terceros con telemetría propia instaladas", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "Apps como Teams, Zoom o Slack envían datos de uso a sus servidores. En entorno corporativo el empleador puede acceder a estos datos a través de consolas de administración.", "recommendations": ["Solicitar al DPO qué datos envía cada app y a qué región.", "Verificar si el empleador tiene acceso a la consola de admin.", "No usar apps corporativas para comunicaciones personales."]}]},
+    {"category": "third_party_apps_policies", "issues": [{"condition": "always", "issue": "Políticas corporativas activando vigilancia en apps de terceros", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art13", "tedh_barbulescu"], "reason": "Políticas GPO sobre Teams, Zoom o VSCode pueden activar grabación o transcripción sin que el trabajador lo sepa. La doctrina Barbulescu exige información previa.", "recommendations": ["Solicitar listado de políticas activas sobre apps de terceros.", "Verificar si Teams tiene Compliance Recording activo.", "Solicitar al DPO si hay grabación o transcripción automática."]}]},
+    {"category": "vscode_extensions", "issues": [{"condition": "always", "issue": "Extensiones de VSCode con telemetría de actividad", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "Extensiones de time tracking en VSCode pueden monitorizar el tiempo de trabajo y actividad del desarrollador. Si son corporativas y no informadas vulneran LOPDGDD art. 87.", "recommendations": ["Revisar qué extensiones están instaladas y su origen.", "Identificar extensiones de time tracking o productividad.", "Verificar si hay extensiones forzadas por políticas corporativas."]}]},
+    # usb_audit
+    {"category": "usb_connected_now", "issues": [{"condition": "always", "issue": "Dispositivos USB conectados actualmente al equipo", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "Los dispositivos USB conectados son visibles para el empleador a través de logs del sistema. La política USB corporativa puede registrar qué dispositivos se conectan.", "recommendations": ["Verificar si la empresa registra dispositivos USB conectados.", "No conectar dispositivos personales en equipos corporativos.", "Solicitar política USB al DPO."]}]},
+    {"category": "usb_dlp_policies", "issues": [{"condition": "always", "issue": "Políticas corporativas de control USB activas", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "Las políticas USB registran intentos de conexión del trabajador. Si estos logs son accesibles por RRHH se está tratando información personal sin base legal clara.", "recommendations": ["Solicitar política USB y período de retención de logs.", "Verificar si los logs son accesibles por RRHH.", "Solicitar base legal del registro al DPO."]}]},
+    {"category": "usb_full_history", "issues": [{"condition": "always", "issue": "Historial completo de dispositivos USB conectados", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art5"], "reason": "El historial de USBs revela patrones de uso del trabajador: qué dispositivos usa, con qué frecuencia y cuándo. Su análisis puede constituir perfilado sin base legal.", "recommendations": ["Solicitar al DPO si se analiza el historial USB del trabajador.", "Verificar período de retención del historial.", "Documentar el historial actual como evidencia del estado."]}]},
+    {"category": "usb_storage_history", "issues": [{"condition": "always", "issue": "Historial de dispositivos de almacenamiento USB", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art5", "aepd_guia_laboral"], "reason": "El historial de almacenamiento USB puede revelar si el trabajador ha transferido datos a dispositivos externos. La AEPD exige que el control sea proporcional e informado.", "recommendations": ["Solicitar al DPO la política de control de transferencias USB.", "Verificar si el DLP registra qué archivos se copian a USB.", "Consultar con asesor laboral si hay acusaciones basadas en este historial."]}]},
+    # user_behavior_audit
+    {"category": "behavior_logging_capabilities", "issues": [{"condition": "always", "issue": "Capacidades de logging centralizado de actividad activas", "legal_risk": "high", "references": ["lopdgdd_art87", "rgpd_art5", "rgpd_art35"], "reason": "WEF y PowerShell Transcription permiten centralizar toda la actividad del equipo en tiempo real. Su análisis puede constituir perfilado del trabajador que requiere DPIA.", "recommendations": ["Solicitar al DPO si los logs se analizan para evaluar empleados.", "Verificar el período de retención de los logs centralizados.", "Solicitar la evaluación de impacto (DPIA) si existe."]}]},
+    # rdp_log_exporter
+    {"category": "rdp_access_history", "issues": [{"condition": "always", "issue": "Historial de accesos remotos al equipo del trabajador", "legal_risk": "medium", "references": ["lopdgdd_art87", "et_art20bis", "rgpd_art32"], "reason": "El historial RDP es evidencia forense directa de quién ha accedido al equipo y cuándo. El trabajador tiene derecho a conocer qué cuentas han accedido.", "recommendations": ["Solicitar al empleador registro completo de accesos remotos.", "Exigir notificación previa de cualquier acceso futuro.", "Preservar este log como evidencia forense."]}]},
+    {"category": "rdp_after_hours", "issues": [{"condition": "always", "issue": "Accesos remotos fuera del horario laboral", "legal_risk": "high", "references": ["lopdgdd_art88", "et_art20bis", "lopdgdd_art87"], "reason": "Accesos al equipo fuera de horario pueden violar el derecho a la desconexión digital (LOPDGDD art. 88) y constituir vigilancia en tiempo personal.", "recommendations": ["Documentar cada acceso fuera de horario con fecha y hora exacta.", "Solicitar justificación escrita de cada acceso detectado.", "Consultar asesor laboral si hay patrón sistemático."]}]},
+    {"category": "rdp_external_access", "issues": [{"condition": "always", "issue": "Accesos RDP desde IPs externas a la red corporativa", "legal_risk": "high", "references": ["lopdgdd_art87", "rgpd_art32", "codigo_penal_art197"], "reason": "Accesos desde IPs externas sin conocimiento del trabajador tienen mayor gravedad legal y pueden constituir acceso no autorizado bajo CP art. 197.", "recommendations": ["Solicitar identificación de cada IP externa y su justificación.", "Verificar si hay VPN corporativa que justifique los accesos.", "Consultar asesor laboral si no hay justificación documentada."]}]},
+    {"category": "rdp_failed_attempts", "issues": [{"condition": "always", "issue": "Equipo expuesto a ataques de acceso remoto", "legal_risk": "medium", "references": ["rgpd_art32", "lopdgdd_art87"], "reason": "Múltiples intentos fallidos indican que el equipo está expuesto a ataques externos. El empleador incumple RGPD art. 32 si no protege adecuadamente el acceso remoto.", "recommendations": ["Solicitar a IT que limite RDP a IPs corporativas.", "Exigir autenticación de dos factores para RDP.", "Documentar la exposición como incumplimiento RGPD art. 32."]}]},
+    # scheduled_tasks_audit
+    {"category": "scheduled_tasks_monitoring", "issues": [{"condition": "always", "issue": "Tareas programadas con indicadores de monitorización", "legal_risk": "high", "references": ["lopdgdd_art87", "et_art20bis", "tedh_barbulescu"], "reason": "Tareas que ejecutan periódicamente software de monitorización sin información previa al trabajador pueden vulnerar LOPDGDD art. 87 y la doctrina Barbulescu II.", "recommendations": ["Solicitar al empleador listado de tareas y su función.", "Verificar qué datos recopila y envía cada tarea.", "Solicitar base legal documentada para cada agente."]}]},
+    {"category": "scheduled_tasks_recent", "issues": [{"condition": "always", "issue": "Tareas programadas creadas recientemente", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "La creación reciente de tareas puede ser evidencia de instalación de software de monitorización sin notificación. Cualquier nuevo tratamiento requiere información previa.", "recommendations": ["Solicitar qué software fue instalado recientemente.", "Verificar si hubo comunicación previa.", "Documentar la fecha de creación como evidencia forense."]}]},
+    {"category": "scheduled_tasks_suspicious", "issues": [{"condition": "always", "issue": "Tareas programadas con características sospechosas", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art5"], "reason": "Tareas con rutas no estándar, ejecutables sin firma o frecuencia inusual pueden ser herramientas de vigilancia instaladas sin conocimiento del trabajador.", "recommendations": ["Identificar el origen y función de cada tarea sospechosa.", "Solicitar justificación al empleador de cada tarea no reconocida.", "Preservar como evidencia forense."]}]},
+    {"category": "scheduled_tasks_unsigned", "issues": [{"condition": "always", "issue": "Ejecutables de tareas programadas sin firma digital", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art32"], "reason": "Software sin firma digital no puede verificarse como procedente de un fabricante legítimo. El empleador tiene obligación bajo RGPD art. 32 de garantizar la integridad del software.", "recommendations": ["Solicitar justificación de cada ejecutable sin firma.", "Verificar el origen y función de cada binario.", "Documentar como posible incumplimiento de RGPD art. 32."]}]},
+    # addon_audit
+    {"category": "addon_browser_permissions", "issues": [{"condition": "always", "issue": "Extensiones con permisos de vigilancia en el navegador", "legal_risk": "high", "references": ["lopdgdd_art87", "rgpd_art13", "tedh_barbulescu"], "reason": "Extensiones con permisos para interceptar tráfico, leer cookies o capturar pantalla tienen capacidad real de vigilancia. Requieren información previa bajo LOPDGDD art. 87.", "recommendations": ["Solicitar al empleador listado de extensiones y sus permisos reales.", "Verificar si alguna extensión envía datos a servidores externos.", "No introducir datos personales en formularios web desde el equipo corporativo."]}]},
+    {"category": "addon_office_capabilities", "issues": [{"condition": "always", "issue": "Add-ins de Office siempre activos con acceso al buzón", "legal_risk": "high", "references": ["lopdgdd_art87", "rgpd_art13", "tedh_barbulescu"], "reason": "Add-ins con LoadBehavior 3/9 tienen acceso permanente a emails, contactos y documentos. Los add-ins corporativos forzados pueden enviar copias a sistemas de supervisión.", "recommendations": ["Solicitar listado de add-ins corporativos y qué datos acceden.", "Verificar si algún add-in envía datos a sistemas de archivado o compliance.", "No usar el email corporativo para comunicaciones privadas."]}]},
+    {"category": "addon_vscode_trackers", "issues": [{"condition": "always", "issue": "Extensiones VSCode registrando actividad del desarrollador", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art13"], "reason": "Las extensiones de time tracking monitorizan continuamente la actividad técnica. Si son corporativas y no informadas vulneran LOPDGDD art. 87.", "recommendations": ["Identificar si las extensiones fueron instaladas por la empresa.", "Verificar a qué servidores envían datos y con qué frecuencia.", "Desinstalar extensiones de time tracking no necesarias para el trabajo."]}]},
+    {"category": "addon_teams_recording", "issues": [{"condition": "always", "issue": "Teams con grabación o compliance recording activo", "legal_risk": "high", "references": ["lopdgdd_art87", "lopdgdd_art89", "tedh_barbulescu"], "reason": "El Compliance Recording graba todas las llamadas del trabajador. Requiere información previa bajo LOPDGDD art. 87 y art. 89. La doctrina Barbulescu exige proporcionalidad.", "recommendations": ["Solicitar al DPO si está activo el Compliance Recording.", "Exigir información escrita sobre qué reuniones se graban y quién accede.", "Consultar con asesor laboral si no hay información previa."]}]},
+    # onedrive_mapper
+    {"category": "onedrive_folder_map", "issues": [{"condition": "always", "issue": "Carpetas del sistema sincronizadas a nube corporativa", "legal_risk": "high", "references": ["lopdgdd_art87", "et_art20bis", "rgpd_art5"], "reason": "Todo archivo guardado en carpetas redirigidas es accesible por el empleador a través de M365. Sin información previa vulnera LOPDGDD art. 87.", "recommendations": ["Mover archivos personales a la carpeta TrabajoLocal creada por esta herramienta.", "No guardar documentos personales en Escritorio, Documentos o Imágenes.", "Solicitar al empleador política de acceso a OneDrive corporativo."]}]},
+    {"category": "onedrive_kfm_block", "issues": [{"condition": "always", "issue": "GPO impide desactivar sincronización OneDrive", "legal_risk": "high", "references": ["lopdgdd_art87", "rgpd_art5", "et_art20bis"], "reason": "KFMBlockOptOut impide que el trabajador controle qué datos van a la nube corporativa, vulnerando el principio de control del interesado.", "recommendations": ["Solicitar al empleador información sobre esta política GPO.", "Documentar la imposibilidad de desactivar la sincronización como evidencia.", "Consultar con asesor laboral sobre el alcance del acceso corporativo."]}]},
+    {"category": "onedrive_personal_exposure", "issues": [{"condition": "always", "issue": "Archivos personales expuestos en nube corporativa", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art5"], "reason": "Archivos personales en carpetas sincronizadas son técnicamente accesibles por el administrador de M365 sin conocimiento del trabajador.", "recommendations": ["Mover archivos personales a C:\\TrabajoLocal\\Documentos_Personales.", "Verificar qué archivos personales están en OneDrive con el informe generado.", "Solicitar al DPO política de acceso a archivos de trabajadores en M365."]}]},
+    # diagtrack_inspector
+    {"category": "diagtrack_active", "issues": [{"condition": "always", "issue": "Servicio DiagTrack activo enviando telemetría a Microsoft", "legal_risk": "high", "references": ["rgpd_art5", "rgpd_art13", "lopdgdd_art87"], "reason": "DiagTrack recopila datos de actividad del trabajador continuamente. El empleador es corresponsable del tratamiento bajo RGPD art. 26 y debe tener DPA vigente con Microsoft.", "recommendations": ["Solicitar a IT que deshabilite DiagTrack via GPO.", "Verificar que existe DPA vigente con Microsoft.", "Documentar el estado actual como evidencia."]}]},
+    {"category": "diagtrack_no_policy", "issues": [{"condition": "always", "issue": "Sin política GPO que restrinja telemetría de Windows", "legal_risk": "high", "references": ["rgpd_art32", "rgpd_art5", "lopdgdd_art87"], "reason": "La ausencia de política restrictiva implica nivel de telemetría Completo por defecto. El empleador incumple RGPD art. 32 al no aplicar medidas de minimización.", "recommendations": ["Solicitar a IT aplicación de GPO AllowTelemetry=0 o =1.", "Solicitar al DPO justificación del nivel de telemetría actual.", "Documentar la ausencia de política como incumplimiento RGPD art. 32."]}]},
+    {"category": "diagtrack_logs", "issues": [{"condition": "always", "issue": "Logs de telemetría DiagTrack presentes en el equipo", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art5"], "reason": "Los archivos ETL de DiagTrack son evidencia forense del tratamiento de datos en curso. Su existencia confirma recopilación activa.", "recommendations": ["Conservar referencia de los logs como evidencia.", "Solicitar al DPO qué datos contienen y durante cuánto tiempo se conservan."]}]},
+    {"category": "diagtrack_connections", "issues": [{"condition": "always", "issue": "DiagTrack transmitiendo datos activamente a Microsoft", "legal_risk": "medium-high", "references": ["rgpd_art5", "rgpd_art13"], "reason": "Conexiones activas confirman transmisión en curso a servidores de Microsoft en EEUU sin control explícito del trabajador.", "recommendations": ["Documentar las IPs de destino como evidencia.", "Solicitar al DPO base legal de la transferencia internacional."]}]},
+    # event_log_monitor
+    {"category": "wef_active", "issues": [{"condition": "always", "issue": "Windows Event Forwarding enviando logs a servidor corporativo", "legal_risk": "high", "references": ["lopdgdd_art87", "rgpd_art13", "rgpd_art35"], "reason": "WEF replica en tiempo real toda la actividad del equipo a un servidor centralizado. Incluye eventos de sesión, comandos y accesos. Requiere información previa y DPIA si se usa para evaluar empleados.", "recommendations": ["Solicitar al DPO qué logs se recopilan y quién accede.", "Verificar si los logs se usan para evaluar desempeño.", "Solicitar DPIA si hay análisis automatizado de los logs.", "Intentar deshabilitar si no hay GPO que lo bloquee."]}]},
+    {"category": "ps_transcription_active", "issues": [{"condition": "always", "issue": "PowerShell Transcription grabando todos los comandos ejecutados", "legal_risk": "high", "references": ["lopdgdd_art87", "rgpd_art5", "et_art20bis"], "reason": "PS Transcription graba cada comando con su salida completa, incluyendo credenciales en texto plano. En desarrolladores cubre prácticamente toda la actividad técnica.", "recommendations": ["Solicitar al DPO período de retención y acceso a transcripts.", "Intentar deshabilitar si no hay GPO.", "Documentar la activación como evidencia forense."]}]},
+    {"category": "ps_scriptblock_logging", "issues": [{"condition": "always", "issue": "PowerShell ScriptBlock Logging registrando código ejecutado", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art5"], "reason": "ScriptBlock Logging registra el código fuente completo de cada script. Combinado con WEF se envía al servidor corporativo.", "recommendations": ["Solicitar al DPO finalidad del logging de PowerShell.", "Verificar período de retención de los logs."]}]},
+    {"category": "ps_transcripts_found", "issues": [{"condition": "always", "issue": "Archivos de transcript de PowerShell encontrados en el equipo", "legal_risk": "medium", "references": ["lopdgdd_art87", "rgpd_art5"], "reason": "Los transcripts son evidencia de monitorización activa. Contienen historial completo de sesiones de PowerShell con comandos y salidas.", "recommendations": ["Conservar referencia como evidencia forense.", "Solicitar al DPO quién tiene acceso a estos archivos."]}]},
+    {"category": "wef_ps_not_detected", "issues": [{"condition": "always", "issue": "WEF y PowerShell Logging no detectados por GPO", "legal_risk": "low", "references": ["lopdgdd_art87"], "reason": "Sin WEF ni PS Logging activos el riesgo de monitorización centralizada de actividad técnica es bajo.", "recommendations": ["Mantener esta auditoría periódica para detectar cambios futuros."]}]},
+    # clipboard_watcher
+    {"category": "clipboard_known_monitor", "issues": [{"condition": "always", "issue": "Software de monitorización con acceso al portapapeles", "legal_risk": "high", "references": ["lopdgdd_art87", "rgpd_art5", "et_art20bis"], "reason": "Software corporativo con acceso al portapapeles puede capturar contraseñas, tokens y datos bancarios. Sin información previa vulnera LOPDGDD art. 87 y RGPD art. 9.", "recommendations": ["Solicitar al DPO qué datos captura este software.", "No copiar credenciales ni datos sensibles en equipos corporativos.", "Consultar asesor laboral si no hay información previa."]}]},
+    {"category": "clipboard_suspicious_access", "issues": [{"condition": "always", "issue": "Accesos al portapapeles por procesos no estándar", "legal_risk": "medium-high", "references": ["lopdgdd_art87", "rgpd_art5"], "reason": "Procesos no identificados accediendo al portapapeles pueden capturar datos sensibles del trabajador sin su conocimiento.", "recommendations": ["Identificar los procesos detectados y su función.", "Solicitar al DPO información sobre software con acceso al portapapeles.", "No copiar datos sensibles en equipos corporativos."]}]},
+    {"category": "clipboard_rdp_shared", "issues": [{"condition": "always", "issue": "Portapapeles accesible durante sesiones RDP", "legal_risk": "medium", "references": ["lopdgdd_art87", "et_art20bis"], "reason": "Con RDP clipboard habilitado, cualquier admin con acceso RDP puede leer el portapapeles del trabajador durante una sesión remota.", "recommendations": ["Solicitar política de acceso remoto documentada.", "No copiar credenciales mientras hay sesiones RDP activas.", "Verificar si hay sesiones RDP activas con 'query session'."]}]},
+    {"category": "clipboard_cross_device", "issues": [{"condition": "always", "issue": "Portapapeles sincronizado entre dispositivos", "legal_risk": "medium", "references": ["rgpd_art5", "lopdgdd_art87"], "reason": "El contenido del portapapeles se envía a servidores de Microsoft para sincronización. Transferencia internacional de datos sin control del trabajador.", "recommendations": ["Desactivar portapapeles cross-device en Configuración > Sistema > Portapapeles.", "No copiar datos sensibles si está activo."]}]},
+    {"category": "clipboard_clean", "issues": [{"condition": "always", "issue": "Sin accesos sospechosos al portapapeles detectados", "legal_risk": "low", "references": ["lopdgdd_art87"], "reason": "Sin evidencia de monitorización activa del portapapeles en el período analizado.", "recommendations": ["Mantener buenas prácticas: no copiar credenciales en equipos corporativos.", "Repetir auditoría periódicamente para detectar cambios."]}]},
+    # dpa_checker
+    {"category": "dpa_tenant_identified", "issues": [{"condition": "always", "issue": "Equipo vinculado a tenant corporativo Microsoft 365", "legal_risk": "medium", "references": ["rgpd_art13", "lopdgdd_art87"], "reason": "La vinculación al tenant corporativo da al administrador acceso potencial a emails, documentos, Teams y telemetría del trabajador. El trabajador tiene derecho a conocer qué datos se procesan.", "recommendations": ["Solicitar al DPO qué datos son accesibles por el administrador de M365.", "Solicitar copia del DPA con Microsoft.", "Verificar registro de actividades de tratamiento."]}]},
+    {"category": "dpa_telemetry_noncompliant", "issues": [{"condition": "always", "issue": "Nivel de telemetría no conforme con recomendación AEPD", "legal_risk": "high", "references": ["rgpd_art5", "rgpd_art32", "lopdgdd_art87"], "reason": "La AEPD recomienda nivel 1 (Básico) en entornos corporativos. Nivel superior implica transferencia de datos del trabajador más allá de lo necesario, incumpliendo principio de minimización.", "recommendations": ["Solicitar a IT aplicación de GPO AllowTelemetry=1.", "Solicitar al DPO copia del DPA con Microsoft que incluya restricción de telemetría.", "Documentar incumplimiento como parte del expediente."]}]},
+    {"category": "dpa_office_no_policy", "issues": [{"condition": "always", "issue": "Office 365 sin política de privacidad GPO configurada", "legal_risk": "medium-high", "references": ["rgpd_art32", "rgpd_art5", "lopdgdd_art87"], "reason": "Sin política GPO de privacidad Office opera con máxima telemetría. El empleador incumple su obligación de aplicar medidas técnicas bajo RGPD art. 32.", "recommendations": ["Solicitar a IT política GPO de privacidad de Office nivel 2 o inferior.", "Solicitar al DPO qué datos envía Office y bajo qué base legal.", "Verificar DPIA para experiencias conectadas de IA."]}]},
+    {"category": "dpa_additional_providers", "issues": [{"condition": "always", "issue": "Proveedores cloud adicionales activos sin DPA verificado", "legal_risk": "medium", "references": ["rgpd_art13", "lopdgdd_art87"], "reason": "Cada proveedor cloud que procesa datos del trabajador requiere DPA específico bajo RGPD art. 28. El trabajador tiene derecho a conocer todos los subencargados.", "recommendations": ["Solicitar al DPO listado completo de subencargados y sus DPAs.", "Verificar que Nexthink y CrowdStrike tienen DPA actualizado.", "Solicitar registro de actividades de tratamiento actualizado."]}]},
+    {"category": "dpa_verification_needed", "issues": [{"condition": "always", "issue": "Verificación manual de DPA requerida", "legal_risk": "medium", "references": ["rgpd_art13", "rgpd_art5"], "reason": "La validez del DPA no es verificable técnicamente. El empleador debe acreditar su existencia y adecuación ante el trabajador y la AEPD.", "recommendations": ["Solicitar formalmente al DPO copia del DPA con Microsoft.", "Verificar fecha de revisión del DPA (posterior a nov 2023).", "Solicitar listado de subencargados aprobados por Microsoft.", "Solicitar registro de actividades de tratamiento (RAT)."]}]},
+    # legal_engine
+    {"category": "hardener_actions_taken", "issues": [{"condition": "always", "issue": "Medidas de endurecimiento aplicadas en el equipo", "legal_risk": "low", "references": ["rgpd_art32", "lopdgdd_art87"], "reason": "El trabajador ha ejercido su derecho a reducir la telemetría cuando el empleador no aplicó las medidas técnicas adecuadas bajo RGPD art. 32.", "recommendations": ["Conservar registro de cambios aplicados como evidencia.", "Informar al DPO de las medidas adoptadas.", "Verificar que los cambios persisten tras reinicios."]}]},
+    {"category": "hardener_gpo_blocked", "issues": [{"condition": "always", "issue": "GPO corporativa impide reducir telemetría y logging", "legal_risk": "high", "references": ["rgpd_art5", "rgpd_art32", "lopdgdd_art87"], "reason": "El bloqueo activo por GPO de la capacidad del trabajador de reducir la telemetría es evidencia de una decisión activa del empleador que puede incumplir el principio de minimización del RGPD art. 5.", "recommendations": ["Documentar el bloqueo GPO como evidencia forense.", "Solicitar al DPO justificación legal de cada bloqueo.", "Presentar a la AEPD si no hay justificación proporcionada."]}]},
+    {"category": "hardener_needs_admin", "issues": [{"condition": "always", "issue": "Endurecimiento parcial — acciones requieren administrador", "legal_risk": "medium", "references": ["rgpd_art32", "lopdgdd_art87"], "reason": "La imposibilidad de aplicar medidas de protección por falta de permisos refuerza la responsabilidad del empleador de aplicarlas bajo RGPD art. 32.", "recommendations": ["Solicitar a IT que aplique AllowTelemetry=1 via GPO.", "Solicitar deshabilitación de DiagTrack via política corporativa.", "Documentar la solicitud por email para evidencia."]}]},
+    {"category": "hardener_already_ok", "issues": [{"condition": "always", "issue": "Configuraciones de telemetría ya en estado correcto", "legal_risk": "low", "references": ["rgpd_art32"], "reason": "Las configuraciones auditadas ya estaban en estado óptimo antes de la intervención.", "recommendations": ["Mantener auditorías periódicas para detectar cambios.", "Verificar que las configuraciones persisten tras actualizaciones de Windows."]}]},
 ]
 
 class LegalEngine:
     """
-    Analiza los hallazgos del audit engine y genera evaluación legal.
+    Cruza hallazgos técnicos con legislación española.
+    Solo evalúa categorías verificadas contra los 22 skills activos.
     """
 
-    VALID_RECOMMENDATION_MODES = {"urgente", "completo", "personalizado"}
+    VALID_MODES = {"urgente", "completo", "personalizado"}
 
     def __init__(self, findings: list):
         self.findings = findings
         self.legal_issues = []
         self.recommendation_mode = "completo"
-        self.mode_filters = {
-            "categories": [],
-            "risks": [],
-        }
 
     def evaluate(
         self,
         recommendation_mode: str = "completo",
-        custom_categories: list[str] | None = None,
-        custom_risks: list[str] | None = None,
+        custom_categories: list | None = None,
+        custom_risks: list | None = None,
     ) -> list:
-        """Evalúa todos los hallazgos y devuelve issues legales."""
-        normalized_mode = self._normalize_mode(recommendation_mode)
-        self.recommendation_mode = normalized_mode
-        self.mode_filters = {
-            "categories": sorted(set(custom_categories or [])),
-            "risks": sorted(set(custom_risks or [])),
-        }
+        mode = (recommendation_mode or "completo").strip().lower()
+        if mode not in self.VALID_MODES:
+            mode = "completo"
+        self.recommendation_mode = mode
 
         categories_found = {f.category for f in self.findings}
-        evaluated_issues = []
+        evaluated = []
 
         for rule in COMPLIANCE_RULES:
             if rule["category"] not in categories_found:
                 continue
             for issue in rule["issues"]:
-                evaluated_issues.append({
-                    "category": rule["category"],
-                    "issue": issue["issue"],
-                    "legal_risk": issue["legal_risk"],
-                    "reason": issue["reason"],
+                evaluated.append({
+                    "category":        rule["category"],
+                    "issue":           issue["issue"],
+                    "legal_risk":      issue["legal_risk"],
+                    "reason":          issue["reason"],
                     "references": [
-                        {
-                            "id": ref_id,
-                            **LEGAL_FRAMEWORK.get(ref_id, {})
-                        }
+                        {"id": ref_id, **LEGAL_FRAMEWORK.get(ref_id, {})}
                         for ref_id in issue["references"]
                     ],
                     "recommendations": issue["recommendations"],
                 })
 
-        self.legal_issues = self._apply_recommendation_mode(
-            issues=evaluated_issues,
-            mode=normalized_mode,
-            custom_categories=custom_categories,
-            custom_risks=custom_risks,
-        )
+        self.legal_issues = self._apply_mode(evaluated, mode, custom_categories, custom_risks)
         return self.legal_issues
 
-    def _normalize_mode(self, recommendation_mode: str) -> str:
-        mode = (recommendation_mode or "completo").strip().lower()
-        if mode not in self.VALID_RECOMMENDATION_MODES:
-            return "completo"
-        return mode
+    def _risk_order(self) -> dict:
+        return {"low": 0, "medium": 1, "medium-high": 2, "high": 3, "very_high": 4}
 
-    def _risk_order(self) -> dict[str, int]:
-        return {
-            "low": 0,
-            "medium": 1,
-            "medium-high": 2,
-            "high": 3,
-            "very_high": 4,
-        }
-
-    def _sorted_issues(self, issues: list[dict]) -> list[dict]:
-        risk_order = self._risk_order()
+    def _sorted(self, issues: list) -> list:
+        ro = self._risk_order()
         return sorted(
             issues,
-            key=lambda x: (
-                risk_order.get(x.get("legal_risk", "low"), 0),
-                x.get("issue", ""),
-            ),
+            key=lambda x: (ro.get(x.get("legal_risk", "low"), 0), x.get("issue", "")),
             reverse=True,
         )
 
-    def _apply_recommendation_mode(
-        self,
-        issues: list[dict],
-        mode: str,
-        custom_categories: list[str] | None,
-        custom_risks: list[str] | None,
-    ) -> list[dict]:
-        sorted_issues = self._sorted_issues(issues)
-
+    def _apply_mode(self, issues, mode, custom_categories, custom_risks) -> list:
+        sorted_issues = self._sorted(issues)
         if mode == "urgente":
-            urgent = [
-                i for i in sorted_issues
-                if i.get("legal_risk") in {"very_high", "high", "medium-high"}
-            ]
-            return urgent if urgent else sorted_issues[:5]
-
+            urgent = [i for i in sorted_issues
+                      if i["legal_risk"] in {"very_high", "high", "medium-high"}]
+            return urgent or sorted_issues[:5]
         if mode == "personalizado":
-            categories = set(custom_categories or [])
+            cats  = set(custom_categories or [])
             risks = set(custom_risks or [])
-
-            if categories:
-                sorted_issues = [
-                    i for i in sorted_issues
-                    if i.get("category") in categories
-                ]
+            if cats:
+                sorted_issues = [i for i in sorted_issues if i["category"] in cats]
             if risks:
-                sorted_issues = [
-                    i for i in sorted_issues
-                    if i.get("legal_risk") in risks
-                ]
-            return sorted_issues
-
+                sorted_issues = [i for i in sorted_issues if i["legal_risk"] in risks]
         return sorted_issues
 
     def summary_text(self) -> str:
@@ -663,34 +286,22 @@ class LegalEngine:
                 "La configuración parece corresponder a seguridad corporativa "
                 "estándar dentro de los límites habituales."
             )
-
-        risk_order = {"low": 0, "medium": 1, "medium-high": 2,
-                      "high": 3, "very_high": 4}
-        sorted_issues = sorted(
-            self.legal_issues,
-            key=lambda x: risk_order.get(x["legal_risk"], 0),
-            reverse=True
-        )
-
+        ro = self._risk_order()
+        issues = sorted(self.legal_issues, key=lambda x: ro.get(x["legal_risk"], 0), reverse=True)
         lines = ["=== EVALUACIÓN LEGAL ===\n"]
-        for i, issue in enumerate(sorted_issues, 1):
-            lines.append(
-                f"{i}. [{issue['legal_risk'].upper()}] {issue['issue']}\n"
-                f"   {issue['reason']}\n"
-            )
+        for i, issue in enumerate(issues, 1):
+            lines.append(f"{i}. [{issue['legal_risk'].upper()}] {issue['issue']}\n   {issue['reason']}\n")
             if issue["recommendations"]:
                 lines.append("   Recomendaciones:")
                 for rec in issue["recommendations"]:
                     lines.append(f"   • {rec}")
             lines.append("")
-
         return "\n".join(lines)
 
     def to_dict(self) -> dict:
         return {
-            "total_issues": len(self.legal_issues),
-            "issues": self.legal_issues,
+            "total_issues":         len(self.legal_issues),
+            "issues":               self.legal_issues,
             "framework_references": LEGAL_FRAMEWORK,
-            "recommendation_mode": self.recommendation_mode,
-            "mode_filters": self.mode_filters,
+            "recommendation_mode":  self.recommendation_mode,
         }

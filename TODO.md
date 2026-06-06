@@ -1,6 +1,33 @@
 # TODO
 
-## Skills & Knowledge Areas
+## Punto 1 — poner el TODO al día
+
+### ✅ Ya verificado en el código
+
+- **Ejecutar skills específicos** ya existe en `main.py` mediante `--skills` y también desde la UI vía `/api/run`.
+- **Versión CLI** ya existe en `main.py` con argumentos para skills, PDF, guardado y recomendaciones.
+- **Comparación entre auditorías** ya tiene una primera implementación en `/api/compare` y en la sección **Comparar** de la UI.
+- **Validación de esquema JSON** ya está implementada en `core/audit_engine.py` y expuesta en `/api/validate/<filename>`.
+- **Tests automáticos** ya tienen base inicial en `tests/test_audit_engine.py` y `tests/test_api.py`.
+- **Gráfico de riesgo** ya está implementado en la UI con Chart.js.
+- **Modo oscuro** ya existe en la UI.
+- **Vista detalle de `raw_data`** ya tiene soporte inicial en la UI de hallazgos.
+
+### 🟡 En progreso real
+
+- **`rdp_log_exporter`** ya existe como skill integrada, pero aún le faltan cruces históricos y análisis más fino por cuenta/admin.
+- **Comparación visual** existe en versión básica; aún puede mejorarse el diff por campos y la UX.
+- **Tests** existen, pero falta ampliar cobertura de integración y casos reales de exportación/skills.
+
+### 🎯 Prioridad sugerida para seguir punto a punto
+
+1. **Limpiar duplicados y estados del TODO** para que lo pendiente sea fiable.
+2. **Completar `addon_audit`** porque desbloquea varios hallazgos de navegador, Office, VSCode, Teams y EDR.
+3. **Completar `onedrive_mapper`** porque cubre varios hallazgos de alto riesgo y es muy tangible para usuario final.
+4. **Completar `event_log_monitor`** porque reutiliza infraestructura ya presente de `event_viewer_audit`.
+5. **Mejorar `account_profiler`** porque afecta a varias categorías de identidad sin crear skill nueva desde cero.
+
+## Revisar Skills & Knowledge Areas
 
 - **Scheduled Tasks Deep Audit** — análisis profundo de tareas programadas: quién las creó, cuándo, qué ejecutan, si tienen firmas válidas
 
@@ -32,7 +59,7 @@
 
 ## Skills nuevos a desarrollar para automatizar recomendaciones
 
-| Skill   | Qué automatiza  | Estado actual |
+| Skill   | Qué automatiza  | Estado actual  |
 | ------- | --------------- | -------------- |
 | `addon_audit` | Listado de add-ins de Office, Teams, VSCode, navegadores | Pendiente |
 | `onedrive_mapper` | Documenta carpetas redirigidas y crea carpetas locales seguras | Pendiente |
@@ -41,7 +68,7 @@
 | `clipboard_watcher` | Qué apps acceden al portapapeles y con qué frecuencia | Pendiente |
 | `dpa_checker` | Verifica nivel de telemetría real vs DPA declarado con Microsoft | Pendiente |
 | `service_hardener` | Intenta deshabilitar DiagTrack, WEF, PS Transcription | Pendiente |
-| `rdp_log_exporter` | Exporta logs de accesos RDP con timestamps y usuarios | Hecho |
+| `rdp_log_exporter` | Exporta logs de accesos RDP con timestamps y usuarios | En Desarrollo |
 
 ---
 
@@ -78,24 +105,24 @@
 
 - Categoría: `telemetry_services` — Riesgo: **HIGH**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta si DiagTrack está en estado Running
 - Detecta otros servicios de telemetría activos
 
-### 🔧 Pendiente — skill `service_hardener`
+🔧 Pendiente — skill `service_hardener`
 
 - Intentar deshabilitar DiagTrack si no hay política que lo impida
 - Si falla (bloqueado por GPO), documentar el bloqueo como evidencia
 - Registrar intento + resultado en el informe forense
 
-### 🔧 Pendiente — skill `diagtrack_inspector`
+🔧 Pendiente — skill `diagtrack_inspector`
 
 - Extraer logs de DiagTrack de Event Viewer (canal ETW)
 - Documentar últimas transmisiones: timestamp, destino, volumen
 - Exportar como evidencia con hash SHA-256
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar a IT deshabilitación via GPO
 - Si se niegan, documentar la negativa por escrito
@@ -106,19 +133,19 @@
 
 - Categoría: `cloud_sync_folder_redirect` — Riesgo: **HIGH**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta carpetas Shell redirigidas a OneDrive/SharePoint
 - Cuenta y lista las 7 carpetas afectadas
 
-### 🔧 Pendiente — skill `onedrive_mapper`
+🔧 Pendiente — skill `onedrive_mapper`
 
 - Listar contenido de cada carpeta redirigida (solo metadatos: nombres, fechas, tamaños)
 - Crear automáticamente `C:\TrabajoLocal\` fuera de OneDrive
 - Generar script de migración segura para el usuario
 - Documentar qué hay en nube que no debería estar
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Mover documentos personales fuera de carpetas redirigidas
 - No guardar nada en Escritorio, Documentos o Imágenes hasta resolver
@@ -129,19 +156,19 @@
 
 - Categoría: `hardening_encryption` — Riesgo: **HIGH**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta ausencia de BitLocker via PowerShell
 - Lo reporta como hallazgo crítico con referencia RGPD art. 32
 
-### 🔧 Pendiente — skill `service_hardener`
+🔧 Pendiente — skill `service_hardener`
 
 - Verificar si TPM está disponible para activar BitLocker
 - Intentar activar BitLocker si hay permisos
 - Si no hay permisos, generar solicitud formal documentada a IT
 - Registrar el intento y resultado como evidencia
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar a IT activación inmediata
 - Si hay datos sensibles en el disco, avisar al DPO como brecha latente
@@ -152,12 +179,12 @@
 
 - Categoría: `identity_remote_access` — Riesgo: **HIGH**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta si RDP está habilitado
 - Detecta conexiones RDP activas en el momento de la auditoría
 
-### 🔧 Pendiente — skill `rdp_log_exporter`
+🔧 Pendiente — skill `rdp_log_exporter`
 
 - Extraer log completo de accesos RDP históricos (Event ID 4624, 4778, 4779)
 - Para cada acceso: usuario, IP origen, timestamp, duración
@@ -165,7 +192,7 @@
 - Exportar como evidencia con hash SHA-256
 - Alertar si hay IPs externas que hayan accedido
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar política de acceso remoto documentada
 - Exigir notificación previa antes de cualquier acceso futuro
@@ -176,18 +203,18 @@
 
 - Categoría: `privacy_clipboard` — Riesgo: **MEDIUM-HIGH**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta apps con acceso al portapapeles via registro y procesos
 
-### 🔧 Pendiente — skill `clipboard_watcher`
+🔧 Pendiente — skill `clipboard_watcher`
 
 - Monitorizar en tiempo real qué procesos leen el portapapeles
 - Registrar: proceso, PID, timestamp, frecuencia de acceso
 - Ejecutar durante 5 minutos y generar informe de actividad
 - Detectar si algún proceso envía datos de portapapeles a red
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - No copiar contraseñas, tokens ni datos bancarios en el equipo corporativo
 - Solicitar al DPO qué app accede y con qué finalidad
@@ -198,19 +225,19 @@
 
 - Categoría: `hardening_missing` — Riesgo: **MEDIUM-HIGH**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Verifica 14 configuraciones de seguridad
 - Detecta 8 ausentes con nivel de importancia
 - Genera hallazgos individuales para críticos y altos
 
-### 🔧 Pendiente — skill `service_hardener`
+🔧 Pendiente — skill `service_hardener`
 
 - Para cada configuración ausente, intentar activarla automáticamente
 - Registrar éxito o fracaso con el motivo (sin permisos, bloqueado por GPO)
 - Si bloqueado por GPO, documentar que la empresa impide la protección
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar plan de hardening al empleador
 - Presentar lista de ausencias al DPO como incumplimiento RGPD art. 32
@@ -221,18 +248,18 @@
 
 - Categoría: `identity_stored_credentials` — Riesgo: **MEDIUM-HIGH**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Cuenta y lista credenciales almacenadas (42 detectadas)
 - Identifica credenciales corporativas de acceso remoto
 
-### 🔧 Pendiente — skill `addon_audit`
+🔧 Pendiente — skill `addon_audit`
 
 - Clasificar cada credencial: corporativa vs personal vs desconocida
 - Detectar credenciales de servicios externos no corporativos
 - Alertar si hay credenciales personales (banco, email privado) almacenadas
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Ejecutar `cmdkey /list` y eliminar credenciales personales
 - Usar gestor de contraseñas personal independiente (Bitwarden)
@@ -243,19 +270,19 @@
 
 - Categoría: `identity_suspicious_account` — Riesgo: **MEDIUM-HIGH**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Perfila cuentas: DevToolsUser, EMEAL-IT, Local-Admin
 - Muestra grupos, último acceso, servicios que ejecuta, alertas
 
-### 🔧 Pendiente — `account_profiler` (mejorar existente)
+🔧 Pendiente — `account_profiler` (mejorar existente)
 
 - Añadir historial de accesos de los últimos 30 días por cuenta
 - Detectar si alguna cuenta accedió fuera de horario laboral
 - Cruzar con logs RDP para ver si alguna entró remotamente
 - Generar ficha individual exportable por cuenta sospechosa
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar justificación escrita de Local-Admin y DevToolsUser
 - Consultar asesor laboral si no hay respuesta en 15 días
@@ -266,23 +293,23 @@
 
 - Categoría: `ai_connected_experiences` — Riesgo: **MEDIUM-HIGH**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta si experiencias conectadas están activas sin política restrictiva
 - Detecta nivel de telemetría de Office
 
-### 🔧 Pendiente — skill `addon_audit`
+🔧 Pendiente — skill `addon_audit`
 
 - Listar qué experiencias conectadas específicas están activas
 - Detectar si Editor IA, PowerPoint Designer, Traducción automática están enviando datos
 - Intentar desactivar experiencias no esenciales via registro si hay permisos
 
-### 🔧 Pendiente — skill `dpa_checker`
+🔧 Pendiente — skill `dpa_checker`
 
 - Verificar si el DPA empresa-Microsoft cubre el procesamiento de IA
 - Comprobar si existe DPIA para experiencias conectadas
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar DPA actualizado al DPO
 - Desactivar manualmente: Archivo > Opciones > Centro de confianza > Experiencias conectadas
@@ -293,19 +320,19 @@
 
 - Categoría: `browser_forced_extensions` — Riesgo: **MEDIUM-HIGH**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta extensiones forzadas por GPO en Chrome, Edge, Firefox
 - Identifica extensiones conocidas de vigilancia en catálogo
 
-### 🔧 Pendiente — skill `addon_audit`
+🔧 Pendiente — skill `addon_audit`
 
 - Para cada extensión forzada: nombre, editor, versión, permisos completos
 - Detectar si la extensión tiene acceso a `webRequest` (puede interceptar tráfico)
 - Verificar si la extensión envía datos a servidores externos
 - Comparar con base de datos de extensiones de monitorización conocidas
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Abrir `chrome://extensions` > Detalles de cada extensión forzada > anotar permisos
 - Solicitar al DPO función y datos que recopila cada extensión
@@ -316,18 +343,18 @@
 
 - Categoría: `ssl_inspection` — Riesgo: **MEDIUM-HIGH**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta certificados raíz corporativos que permiten inspección SSL
 - Identifica certificados de vendors conocidos (Netskope, Zscaler, etc.)
 
-### 🔧 Pendiente — skill `dpa_checker`
+🔧 Pendiente — skill `dpa_checker`
 
 - Verificar si hay proxy activo en la red actual
 - Detectar si el tráfico HTTPS está siendo descifrado (test de certificado)
 - Documentar qué certificados raíz corporativos están instalados con thumbprint
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar política AUP por escrito
 - Usar datos móviles personales para cualquier comunicación privada
@@ -338,19 +365,19 @@
 
 - Categoría: `cloud_sync_policy` — Riesgo: **MEDIUM-HIGH**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta KFMSilentOptIn y KFMBlockOptOut via registro
 - Confirma que el trabajador no puede desactivar la sincronización
 
-### 🔧 Pendiente — skill `onedrive_mapper`
+🔧 Pendiente — skill `onedrive_mapper`
 
 - Documentar exactamente qué carpetas están en KFM
 - Calcular volumen total de datos sincronizados a Microsoft
 - Detectar si hay archivos personales ya en OneDrive corporativo
 - Generar evidencia de que la desactivación está bloqueada por GPO
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar al empleador información sobre políticas GPO
 - Documentar la imposibilidad de desactivar como evidencia
@@ -361,19 +388,19 @@
 
 - Categoría: `browser_policies` — Riesgo: **MEDIUM**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta políticas activas en los 3 navegadores
 - Identifica CloudReportingEnabled y bloqueo de modo incógnito
 
-### 🔧 Pendiente — skill `addon_audit`
+🔧 Pendiente — skill `addon_audit`
 
 - Extraer listado completo de todas las políticas activas con su valor
 - Identificar cuáles afectan a privacidad vs cuáles son de seguridad
 - Detectar si hay URLBlocklist que impida acceso a sindicatos o recursos laborales
 - Exportar como evidencia el volcado completo de `chrome://policy`
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Verificar `chrome://policy` manualmente y hacer captura
 - No usar navegador corporativo para comunicaciones con sindicato o asesor
@@ -384,11 +411,11 @@
 
 - Categoría: `browser_inspection` — Riesgo: **MEDIUM**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Ya cubierto por hallazgo #11
 
-### 🔧 Pendiente
+🔧 Pendiente
 
 - Consolidar en el mismo hallazgo para evitar duplicidad en el informe
 
@@ -398,11 +425,11 @@
 
 - Categoría: `third_party_apps_policies` — Riesgo: **MEDIUM-HIGH**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - El skill `third_party_apps_audit` detecta apps con telemetría
 
-### 🔧 Pendiente — skill `addon_audit`
+🔧 Pendiente — skill `addon_audit`
 
 - Para Teams: detectar si Compliance Recording está activo
 - Para VSCode: listar extensiones instaladas y detectar time trackers
@@ -410,7 +437,7 @@
 - Para JetBrains: detectar si hay plugins de monitorización de actividad
 - Documentar configuración de privacidad de cada app
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar al DPO listado de políticas activas sobre cada app
 - Verificar en Teams > Configuración si hay grabación o transcripción automática
@@ -421,17 +448,17 @@
 
 - Categoría: `exfiltration_dlp_monitoring` — Riesgo: **MEDIUM-HIGH**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - El skill `surveillance_audit` detecta presencia de DLP (Purview, Forcepoint, etc.)
 
-### 🔧 Pendiente — skill `addon_audit`
+🔧 Pendiente — skill `addon_audit`
 
 - Detectar qué tipos de datos inspecciona el DLP (emails, archivos, USB)
 - Verificar si el DLP tiene acceso a contenido de documentos personales
 - Detectar si hay reglas DLP que registren intentos de envío de datos
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar al DPO política DLP y qué datos inspecciona
 - No transferir datos personales mediante canales corporativos
@@ -442,18 +469,18 @@
 
 - Categoría: `identity_privileged_monitoring` — Riesgo: **MEDIUM**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta CrowdStrike, MSSense y similares corriendo como SYSTEM
 - Confirma nivel de privilegio
 
-### 🔧 Pendiente — `account_profiler` (mejorar)
+🔧 Pendiente — `account_profiler` (mejorar)
 
 - Para cada agente SYSTEM: listar endpoints de red a los que se conecta
 - Detectar si envía datos fuera del horario laboral
 - Cruzar con el catálogo de surveillance para evaluar capacidades reales
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar al DPO qué datos recopila CrowdStrike y quién tiene acceso
 - Pedir política de uso de datos del EDR por escrito
@@ -464,17 +491,17 @@
 
 - Categoría: `identity_account_profiles` — Riesgo: **MEDIUM**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Perfila 5 cuentas con alertas, 3 de alto riesgo
 - Genera hallazgo resumen y hallazgos individuales
 
-### 🔧 Pendiente — `account_profiler` (mejorar)
+🔧 Pendiente — `account_profiler` (mejorar)
 
 - Monitorización temporal: detectar si alguna cuenta nueva aparece entre auditorías
 - Alertar si una cuenta deshabilitada se habilita entre dos auditorías
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar inventario oficial de cuentas con justificación
 
@@ -484,7 +511,7 @@
 
 - Categoría: `identity_local_accounts` — Riesgo: **MEDIUM**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta 8 cuentas locales, 2 sospechosas
 - Analiza flags: contraseña permanente, nunca usada, nombre sospechoso
@@ -495,7 +522,7 @@
 - Comparar con fecha de incorporación del trabajador
 - Alertar si hay cuentas creadas después del inicio de una disputa laboral
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar inventario y justificación de cada cuenta local
 
@@ -505,18 +532,18 @@
 
 - Categoría: `vscode_extensions` — Riesgo: **MEDIUM**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - El skill `third_party_apps_audit` detecta VSCode
 
-### 🔧 Pendiente — skill `addon_audit`
+🔧 Pendiente — skill `addon_audit`
 
 - Listar todas las extensiones de VSCode instaladas
 - Clasificar: productividad, time tracking, corporativas, personales
 - Detectar extensiones conocidas de monitorización (WakaTime, CodeTime, etc.)
 - Verificar si hay extensiones forzadas via `settings.json` corporativo
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Abrir VSCode > Extensiones > revisar cuáles no reconoces
 - Desinstalar time trackers si no son necesarios para el trabajo
@@ -527,17 +554,17 @@
 
 - Categoría: `exfiltration_cloud_cli` — Riesgo: **MEDIUM**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - El skill `data_exfiltration_audit` detecta rclone, AWS CLI, etc.
 
-### 🔧 Pendiente — skill `addon_audit`
+🔧 Pendiente — skill `addon_audit`
 
 - Verificar si las credenciales configuradas son personales o corporativas
 - Detectar si hay tokens de acceso personal (PAT) almacenados
 - Alertar si hay herramientas de transferencia masiva no autorizadas
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Verificar que todas las credenciales configuradas son corporativas
 - Consultar con IT si el uso está autorizado
@@ -548,18 +575,18 @@
 
 - Categoría: `identity_admin_group` — Riesgo: **MEDIUM**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta 4 administradores locales
 - Lista miembros del grupo con tipo y origen
 
-### 🔧 Pendiente — skill `rdp_log_exporter`
+🔧 Pendiente — skill `rdp_log_exporter`
 
 - Para cada admin: ¿ha accedido remotamente alguna vez?
 - Exportar historial de accesos por cuenta de admin
 - Detectar accesos de admins fuera de horario laboral
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar justificación de cada cuenta admin
 - Exigir registro de auditoría de accesos administrativos
@@ -570,18 +597,18 @@
 
 - Categoría: `usb_dlp_policies` — Riesgo: **MEDIUM**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - El skill `usb_audit` detecta políticas de control USB
 
-### 🔧 Pendiente — skill `event_log_monitor`
+🔧 Pendiente — skill `event_log_monitor`
 
 - Extraer log de intentos de conexión USB (Event ID 2003, 2100)
 - Para cada intento: dispositivo, timestamp, usuario, resultado
 - Detectar si RRHH tiene acceso a estos logs
 - Exportar como evidencia
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar política USB y período de retención de logs
 - Consultar si los intentos de conexión se reportan a RRHH
@@ -592,19 +619,19 @@
 
 - Categoría: `cloud_sync_service` — Riesgo: **MEDIUM**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta OneDrive y SharePoint activos
 - Detecta KFM forzado por GPO
 
-### 🔧 Pendiente — skill `onedrive_mapper`
+🔧 Pendiente — skill `onedrive_mapper`
 
 - Calcular volumen total de datos sincronizados
 - Detectar si hay archivos personales en la nube corporativa
 - Generar lista de archivos en OneDrive con metadatos (no contenido)
 - Verificar a qué tenant/región van los datos
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar DPA con Microsoft actualizado
 - Verificar región de almacenamiento (UE vs EEUU)
@@ -615,11 +642,11 @@
 
 - Categoría: `browser_policies` — Riesgo: **MEDIUM**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Ya cubierto en hallazgo #14 — consolidar
 
-### 🔧 Pendiente
+🔧 Pendiente
 
 - Unificar hallazgos de políticas de navegador para evitar duplicidad
 
@@ -629,18 +656,18 @@
 
 - Categoría: `identity_service_accounts` — Riesgo: **MEDIUM**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta 8 servicios con cuentas no-sistema
 - Lista nombre, display y cuenta de cada uno
 
-### 🔧 Pendiente — `account_profiler` (mejorar)
+🔧 Pendiente — `account_profiler` (mejorar)
 
 - Para cada cuenta de servicio: qué recursos de red accede
 - Detectar si alguna cuenta de servicio tiene acceso a datos del usuario
 - Cruzar con catálogo de surveillance
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar inventario de servicios y su justificación al DPO
 
@@ -650,18 +677,18 @@
 
 - Categoría: `telemetry_office` — Riesgo: **MEDIUM**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta ausencia de política GPO restrictiva de Office
 - Detecta experiencias conectadas activas
 
-### 🔧 Pendiente — skill `dpa_checker`
+🔧 Pendiente — skill `dpa_checker`
 
 - Verificar nivel de telemetría real de Office via registro
 - Detectar si hay Add-ins que envían datos adicionales
 - Comparar configuración actual con configuración mínima recomendada AEPD
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar a IT política GPO de privacidad de Office
 - Desactivar manualmente experiencias conectadas no esenciales
@@ -672,34 +699,32 @@
 
 - Categoría: `edr_xdr` — Riesgo: **LOW**
 
-### ✅ Automatizado
+✅ Automatizado
 
 - Detecta CrowdStrike Falcon y Microsoft Defender for Endpoint
 - Confirma que son seguridad corporativa estándar
 - Documenta con contexto legal apropiado (bajo riesgo)
 
-### 🔧 Pendiente — skill `addon_audit`
+🔧 Pendiente — skill `addon_audit`
 
 - Detectar qué módulos específicos de CrowdStrike están activos
 - Verificar si el módulo de Identity Protection está habilitado
 - Documentar capacidades reales vs capacidades activadas
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar política de uso de datos del EDR
 - Verificar que el uso se limita a finalidades de seguridad
 
 ---
 
-## 30. Windows Event Forwarding y PowerShell Transcription
+## 30. Windows Event Forwarding y PowerShell Transcription *(Hallazgo transversal — aparece en múltiples skills)*
 
-*(Hallazgo transversal — aparece en múltiples skills)*
-
-### ✅ Automatizado
+✅ Automatizado
 
 - Parcialmente detectado via `event_viewer_audit`
 
-### 🔧 Pendiente — skill `event_log_monitor`
+🔧 Pendiente — skill `event_log_monitor`
 
 - Detectar si WEF está activo y a qué servidor reenvía los logs
 - Detectar si PowerShell Transcription está habilitada y dónde guarda los transcripts
@@ -708,7 +733,7 @@
 - Intentar deshabilitar si no hay GPO que lo bloquee
 - Si hay GPO: documentar que la empresa registra toda la actividad PowerShell
 
-### 📋 Recomendación manual
+📋 Recomendación manual
 
 - Solicitar al DPO qué se hace con los logs de WEF
 - Solicitar DPIA si los logs se usan para evaluar empleados

@@ -12,6 +12,12 @@ import json
 import psutil
 from datetime import datetime
 from pathlib import Path
+from core.capability_intel import (
+    get_sources,
+    gpresult_summary,
+    fltmc_summary,
+    confidence_from_evidence,
+)
 
 
 # Cuentas y grupos de alto privilegio a vigilar
@@ -396,6 +402,20 @@ class IdentityAudit:
 
         if rdp_enabled or remote_indicators or rdp_connections:
             risk = "red" if rdp_connections else "orange"
+            sources = get_sources(
+                "event_and_logging_capabilities",
+                "worker_rights_and_surveillance_context",
+            )
+            triangulation = {
+                "gpresult": gpresult_summary(),
+                "fltmc_filters": fltmc_summary(),
+            }
+            direct_count = len(remote_indicators) + len(rdp_connections) + (1 if rdp_enabled else 0)
+            confidence = confidence_from_evidence(
+                sources,
+                triangulation,
+                direct_indicators_count=direct_count,
+            )
             self.engine.add_finding(AuditFinding(
                 skill=self.SKILL_NAME,
                 category="identity_remote_access",
@@ -441,7 +461,10 @@ class IdentityAudit:
                 raw_data={
                     "rdp_enabled": rdp_enabled,
                     "remote_processes": remote_indicators,
-                    "active_rdp_connections": rdp_connections
+                    "active_rdp_connections": rdp_connections,
+                    "independent_sources": sources,
+                    "triangulation": triangulation,
+                    "confidence": confidence,
                 }
             ))
             print(
@@ -759,6 +782,19 @@ class IdentityAudit:
                 monitoring_elevated.append(name)
 
         if monitoring_elevated:
+            sources = get_sources(
+                "endpoint_monitoring_capabilities",
+                "worker_rights_and_surveillance_context",
+            )
+            triangulation = {
+                "gpresult": gpresult_summary(),
+                "fltmc_filters": fltmc_summary(),
+            }
+            confidence = confidence_from_evidence(
+                sources,
+                triangulation,
+                direct_indicators_count=len(monitoring_elevated),
+            )
             self.engine.add_finding(AuditFinding(
                 skill=self.SKILL_NAME,
                 category="identity_privileged_monitoring",
@@ -794,7 +830,10 @@ class IdentityAudit:
                     "de seguridad, no indica uso indebido."
                 ),
                 raw_data={
-                    "monitoring_as_system": monitoring_elevated
+                    "monitoring_as_system": monitoring_elevated,
+                    "independent_sources": sources,
+                    "triangulation": triangulation,
+                    "confidence": confidence,
                 }
             ))
     

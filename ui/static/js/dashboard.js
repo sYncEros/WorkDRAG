@@ -35,6 +35,13 @@ const SKILL_ICONS = {
   incident_response:      '🚨',
   event_viewer:           '🧾',
   rdp_log_exporter:       '🔓',
+  addon_audit:            '🧩',
+  onedrive_mapper:        '📁',
+  diagtrack_inspector:    '📡',
+  event_log_monitor:      '📋',
+  clipboard_watcher:      '📋',
+  dpa_checker:            '📄',
+  service_hardener:       '🔧',
 };
 
 const SKILL_LABELS = {
@@ -59,6 +66,13 @@ const SKILL_LABELS = {
   incident_response:      'IR Playbook',
   event_viewer:           'Event Viewer',
   rdp_log_exporter:       'RDP Logs',
+  addon_audit:            'Add-ins',
+  onedrive_mapper:        'OneDrive Map',
+  diagtrack_inspector:    'DiagTrackInspector',
+  event_log_monitor:      'Event Logs',
+  clipboard_watcher:      'Clipboard',
+  dpa_checker:            'DPA Checker',
+  service_hardener:       'Hardener',
 };
 
 let _donutChart = null;

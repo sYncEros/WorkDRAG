@@ -9,7 +9,14 @@ import winreg
 import subprocess
 import json
 import psutil
+import ipaddress
 from pathlib import Path
+from core.capability_intel import (
+    get_sources,
+    certutil_root_summary,
+    fltmc_summary,
+    gpresult_summary,
+)
 
 
 # Catálogo de productos conocidos por categoría
@@ -149,6 +156,21 @@ class SurveillanceAudit:
         self._check_ssl_inspection()
         self._check_browser_extensions_policy()
         self._check_input_monitoring()
+        self._check_capability_based_signals()
+
+    def _is_external_ip(self, ip: str) -> bool:
+        ip = str(ip or "").strip()
+        if not ip:
+            return False
+        try:
+            parsed = ipaddress.ip_address(ip)
+            return not (
+                parsed.is_private or parsed.is_loopback or
+                parsed.is_link_local or parsed.is_multicast or
+                parsed.is_reserved
+            )
+        except ValueError:
+            return False
 
     # ── Procesos activos ───────────────────────────────────────────
 
@@ -459,3 +481,155 @@ class SurveillanceAudit:
                 ),
                 raw_data={"suspicious_processes": found}
             ))
+
+    # ── Señales por capacidad (no por fabricante) ─────────────────
+
+    def _check_capability_based_signals(self):
+        from core.audit_engine import AuditFinding
+
+        # 1) Drivers con altitud de filtro (capacidad de interceptar I/O)
+        filter_drivers = []
+        try:
+            result = subprocess.run(
+                ["powershell", "-NoProfile", "-Command",
+                 "Get-ChildItem 'HKLM:\\SYSTEM\\CurrentControlSet\\Services' -ErrorAction SilentlyContinue | "
+                 "ForEach-Object { "
+                 "  $p = $_.PSPath + '\\Instances'; "
+                 "  if (Test-Path $p) { "
+                 "    $v = Get-ItemProperty -Path $p -ErrorAction SilentlyContinue; "
+                 "    if ($v.DefaultInstance) { "
+                 "      $instPath = $p + '\\' + $v.DefaultInstance; "
+                 "      if (Test-Path $instPath) { "
+                 "        $inst = Get-ItemProperty -Path $instPath -ErrorAction SilentlyContinue; "
+                 "        if ($inst.Altitude) { "
+                 "          [pscustomobject]@{ Driver=$_.PSChildName; Altitude=[string]$inst.Altitude } "
+                 "        } "
+                 "      } "
+                 "    } "
+                 "  } "
+                 "} | ConvertTo-Json -Depth 3"],
+                capture_output=True, text=True, timeout=25
+            )
+            if result.returncode == 0 and result.stdout.strip():
+                data = json.loads(result.stdout)
+                if isinstance(data, dict):
+                    data = [data]
+                filter_drivers = data or []
+        except Exception:
+            pass
+
+        # 2) Procesos SYSTEM con conexiones externas establecidas
+        system_external = []
+        try:
+            for conn in psutil.net_connections(kind="tcp"):
+                if conn.status != psutil.CONN_ESTABLISHED:
+                    continue
+                if not conn.raddr:
+                    continue
+                remote_ip = conn.raddr.ip
+                if not self._is_external_ip(remote_ip):
+                    continue
+                pid = conn.pid
+                if not pid:
+                    continue
+                try:
+                    proc = psutil.Process(pid)
+                    username = (proc.username() or "").lower()
+                    if "system" not in username:
+                        continue
+                    system_external.append({
+                        "pid": pid,
+                        "name": proc.name(),
+                        "username": proc.username(),
+                        "remote_ip": remote_ip,
+                        "remote_port": conn.raddr.port,
+                        "local_port": conn.laddr.port if conn.laddr else None,
+                    })
+                except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                    continue
+        except Exception:
+            pass
+
+        # 3) Extensiones forzadas por política (capacidad de control del navegador)
+        forced_count = 0
+        try:
+            for reg_path in [
+                r"SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist",
+                r"SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallForcelist",
+            ]:
+                for hive in (winreg.HKEY_LOCAL_MACHINE, winreg.HKEY_CURRENT_USER):
+                    try:
+                        key = winreg.OpenKey(hive, reg_path, 0, winreg.KEY_READ)
+                        idx = 0
+                        while True:
+                            try:
+                                winreg.EnumValue(key, idx)
+                                forced_count += 1
+                                idx += 1
+                            except OSError:
+                                break
+                        winreg.CloseKey(key)
+                    except (FileNotFoundError, PermissionError, OSError):
+                        pass
+        except Exception:
+            pass
+
+        if not filter_drivers and not system_external and forced_count == 0:
+            return
+
+        sources = get_sources(
+            "endpoint_monitoring_capabilities",
+            "worker_rights_and_surveillance_context",
+        )
+        triangulation = {
+            "certutil_root": certutil_root_summary(),
+            "fltmc_filters": fltmc_summary(),
+            "gpresult": gpresult_summary(),
+        }
+
+        risk = "yellow"
+        if system_external or forced_count >= 3:
+            risk = "orange"
+        if system_external and forced_count >= 3:
+            risk = "red"
+
+        self.engine.add_finding(AuditFinding(
+            skill=self.SKILL_NAME,
+            category="surveillance_capability_signals",
+            title=(
+                "Señales de capacidad de monitorización detectadas "
+                f"(drivers filtro={len(filter_drivers)}, "
+                f"SYSTEM->externo={len(system_external)}, "
+                f"extensiones forzadas={forced_count})"
+            ),
+            description=(
+                "Detección basada en capacidades técnicas (intercepción a nivel "
+                "driver, procesos privilegiados con salida externa y control del "
+                "navegador por GPO), independiente del fabricante."
+            ),
+            risk_level=risk,
+            technical_risk=(
+                "Estas capacidades pueden habilitar visibilidad profunda del equipo "
+                "del trabajador incluso cuando no se identifica el nombre comercial "
+                "del producto."
+            ),
+            legal_risk=(
+                "La presencia de capacidades de monitorización requiere transparencia, "
+                "finalidad legítima y proporcionalidad bajo LOPDGDD art. 87 y RGPD."
+            ),
+            what_it_is=(
+                "Indicadores técnicos de capacidad de control/observación en endpoint "
+                "detectados por comportamiento y configuración."
+            ),
+            what_it_is_not=(
+                "No prueba por sí solo uso indebido; requiere contraste con política "
+                "interna, finalidad y evidencias complementarias."
+            ),
+            raw_data={
+                "filter_drivers_with_altitude": filter_drivers[:40],
+                "system_external_connections": system_external[:40],
+                "forced_extensions_count": forced_count,
+                "independent_sources": sources,
+                "triangulation": triangulation,
+            }
+        ))

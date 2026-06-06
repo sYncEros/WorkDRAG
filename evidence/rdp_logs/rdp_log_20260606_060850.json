@@ -1,0 +1,60 @@
+{
+  "generated_at": "2026-06-06T06:08:50.070149",
+  "days_analyzed": 720,
+  "total_events": 4,
+  "failed_attempts": 0,
+  "after_hours": 4,
+  "external_ips": 0,
+  "events": [
+    {
+      "timestamp": "2032-05-31T06:33:03.024000",
+      "timestamp_raw": "/Date(1969590783024)/",
+      "user": "USERSAD\\jnavaqui",
+      "domain": "",
+      "ip": "LOCAL",
+      "event_type": "Inicio de sesión",
+      "event_id": 4624,
+      "after_hours": true,
+      "external_ip": false,
+      "reason": ""
+    },
+    {
+      "timestamp": "2032-05-31T06:22:37.146000",
+      "timestamp_raw": "/Date(1969590157146)/",
+      "user": "USERSAD\\jnavaqui",
+      "domain": "",
+      "ip": "LOCAL",
+      "event_type": "Inicio de sesión",
+      "event_id": 4624,
+      "after_hours": true,
+      "external_ip": false,
+      "reason": ""
+    },
+    {
+      "timestamp": "2026-06-02T21:23:05.891000",
+      "timestamp_raw": "/Date(1780428185891)/",
+      "user": "USERSAD\\jnavaqui",
+      "domain": "",
+      "ip": "LOCAL",
+      "event_type": "Inicio de sesión",
+      "event_id": 4624,
+      "after_hours": true,
+      "external_ip": false,
+      "reason": ""
+    },
+    {
+      "timestamp": "2026-06-02T01:04:33.088000",
+      "timestamp_raw": "/Date(1780355073088)/",
+      "user": "USERSAD\\jnavaqui",
+      "domain": "",
+      "ip": "LOCAL",
+      "event_type": "Inicio de sesión",
+      "event_id": 4624,
+      "after_hours": true,
+      "external_ip": false,
+      "reason": ""
+    }
+  ],
+  "failed_events": [],
+  "integrity_hash": "fe231abf0fc6be23753264eecc3b177e2413218a3a32fca9ed6b151d5992e8c4"
+}

@@ -10,6 +10,7 @@ import subprocess
 import winreg
 from pathlib import Path
 from datetime import datetime
+from core.capability_intel import get_sources, gpresult_summary, fltmc_summary
 
 
 class ScheduledTasksAudit:
@@ -45,11 +46,119 @@ class ScheduledTasksAudit:
             return
 
         self._analyze_non_microsoft_tasks(tasks)
+        self._analyze_capability_based_tasks(tasks)
         self._analyze_monitoring_tasks(tasks)
         self._analyze_recent_tasks(tasks)
         self._analyze_unsigned_executables(tasks)
         self._analyze_task_history(tasks)
         print(f"[ScheduledTasks] Completado — {len(tasks)} tareas analizadas.")
+
+    # ── Análisis por capacidad (independiente de fabricante) ─────
+
+    def _analyze_capability_based_tasks(self, tasks: list[dict]):
+        from core.audit_engine import AuditFinding
+
+        capability_hits = []
+
+        for task in tasks:
+            if str(task.get("TaskPath", "")).startswith("\\Microsoft\\"):
+                continue
+
+            score = 0
+            reasons = []
+
+            run_as = str(task.get("RunAsUser", "") or "").lower()
+            if any(x in run_as for x in ["system", "localsystem", "nt authority\\system"]):
+                score += 2
+                reasons.append("ejecución como SYSTEM")
+
+            run_level = str(task.get("RunLevel", "") or "").lower()
+            if "highest" in run_level:
+                score += 2
+                reasons.append("RunLevel=Highest")
+
+            exe = self._extract_executable(task)
+            sig = self._check_signature(exe) if exe else None
+            if sig and sig.get("status") not in ("Valid", "NotApplicable"):
+                score += 2
+                reasons.append(f"firma no válida ({sig.get('status')})")
+
+            if exe:
+                exe_low = exe.lower()
+                if any(x in exe_low for x in ["\\users\\", "\\appdata\\", "\\temp\\", "\\downloads\\"]):
+                    score += 1
+                    reasons.append("ejecutable en ruta de usuario/escritura frecuente")
+
+            state = str(task.get("State", "") or "").lower()
+            if state in ("running", "ready"):
+                score += 1
+                reasons.append(f"estado activo ({task.get('State')})")
+
+            if score >= 4:
+                capability_hits.append({
+                    "task": task.get("TaskName"),
+                    "path": task.get("TaskPath"),
+                    "author": task.get("Author"),
+                    "run_as": task.get("RunAsUser"),
+                    "run_level": task.get("RunLevel"),
+                    "state": task.get("State"),
+                    "executable": exe,
+                    "signature": sig,
+                    "score": score,
+                    "reasons": reasons,
+                })
+
+        if not capability_hits:
+            return
+
+        sources = get_sources(
+            "endpoint_monitoring_capabilities",
+            "event_and_logging_capabilities",
+        )
+        triangulation = {
+            "gpresult": gpresult_summary(),
+            "fltmc_filters": fltmc_summary(),
+        }
+
+        risk = "orange"
+        if any(h["score"] >= 6 for h in capability_hits):
+            risk = "red"
+
+        self.engine.add_finding(AuditFinding(
+            skill=self.SKILL_NAME,
+            category="scheduled_tasks_capability_risk",
+            title=f"Tareas con capacidad técnica elevada detectadas ({len(capability_hits)})",
+            description=(
+                "Detección por capacidad (privilegios, firma y ruta de ejecución), "
+                "sin depender de nombres de fabricante o palabras clave."
+            ),
+            risk_level=risk,
+            technical_risk=(
+                "Tareas fuera de Microsoft ejecutándose con privilegios altos y/o "
+                "binarios sin firma aumentan el riesgo de ejecución persistente "
+                "de software no autorizado."
+            ),
+            legal_risk=(
+                "En contexto laboral, estas capacidades exigen justificación, "
+                "trazabilidad y comunicación previa cuando impliquen monitorización "
+                "del trabajador."
+            ),
+            what_it_is=(
+                "Análisis de capacidad operativa de tareas programadas: qué pueden "
+                "hacer técnicamente, no cómo se llaman."
+            ),
+            what_it_is_not=(
+                "No prueba por sí solo un uso ilegítimo; requiere contraste con "
+                "finalidad corporativa y documentación de cambios."
+            ),
+            raw_data={
+                "hits": capability_hits,
+                "threshold": 4,
+                "max_score": max(h["score"] for h in capability_hits),
+                "independent_sources": sources,
+                "triangulation": triangulation,
+            }
+        ))
 
     # ── Obtención de todas las tareas ──────────────────────────────
 
