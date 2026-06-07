@@ -12,6 +12,7 @@ import hashlib
 import datetime
 import os
 from pathlib import Path
+from collections import defaultdict
 
 
 # ── Configuración ──────────────────────────────────────────────────────────────
@@ -48,6 +49,7 @@ LOGON_TYPES = {
 }
 
 DAYS_BACK = 720  # Histórico de los últimos 720 días
+ADMIN_KEYWORDS = ["admin", "administrator", "it", "soporte", "helpdesk"]
 
 
 class RDPLogExporter:
@@ -59,8 +61,23 @@ class RDPLogExporter:
         self.failed_events = []
         self.network_logons = []
         self.lsm_raw_events = []
+        self.admin_accounts = set()
+        self.historical_context = {
+            "files_analyzed": 0,
+            "snapshots": [],
+            "events": [],
+        }
+        self.account_analysis = {
+            "by_account": [],
+            "admin_accounts": [],
+            "crosses": {
+                "users_seen_current_and_historical": [],
+                "ips_seen_current_and_historical": [],
+            },
+        }
         self.after_hours  = []
         self.external_ips = []
+        self.evidence_dir = Path("evidence") / "rdp_logs"
         self.telemetry = {
             "security_access": None,
             "security_access_error": "",
@@ -77,6 +94,8 @@ class RDPLogExporter:
         self._collect_failed_attempts()
         self._collect_reconnections()
         self._collect_network_logons()
+        self._collect_admin_accounts()
+        self._load_historical_evidence()
         self._analyze_and_report()
 
     def _preflight_security_access(self):
@@ -348,6 +367,197 @@ class RDPLogExporter:
         except Exception as e:
             print(f"[RDP] Error leyendo logons de red: {e}")
 
+    def _collect_admin_accounts(self):
+        """Detecta cuentas administradoras locales para cruce de riesgo."""
+        accounts = set()
+
+        # Ruta principal: Get-LocalGroupMember (PowerShell 5+)
+        try:
+            result = subprocess.run(
+                ["powershell", "-NoProfile", "-Command",
+                 "Get-LocalGroupMember -Group 'Administrators' "
+                 "-ErrorAction SilentlyContinue | "
+                 "Select-Object -ExpandProperty Name | ConvertTo-Json -Depth 2"],
+                capture_output=True,
+                text=True,
+                timeout=20,
+            )
+            if result.returncode == 0 and result.stdout.strip():
+                data = json.loads(result.stdout)
+                if isinstance(data, str):
+                    data = [data]
+                if isinstance(data, list):
+                    for acc in data:
+                        val = str(acc or "").strip()
+                        if val:
+                            accounts.add(val)
+                            accounts.add(val.split("\\")[-1])
+        except Exception:
+            pass
+
+        # Fallback: heurísticas a partir de eventos actuales
+        if not accounts:
+            for ev in self.rdp_events:
+                user = str(ev.get("user", "")).strip()
+                if user:
+                    u = user.lower()
+                    if any(k in u for k in ADMIN_KEYWORDS):
+                        accounts.add(user)
+                        accounts.add(user.split("\\")[-1])
+
+        self.admin_accounts = {a.lower() for a in accounts if a}
+        if self.admin_accounts:
+            print(f"[RDP] Cuentas admin detectadas para cruce: {len(self.admin_accounts)}")
+
+    def _load_historical_evidence(self):
+        """Carga evidencias previas para cruces históricos por cuenta/IP."""
+        try:
+            if not self.evidence_dir.exists():
+                return
+
+            files = sorted(self.evidence_dir.glob("rdp_log_*.json"))[-60:]
+            snapshots = []
+            history_events = []
+
+            for path in files:
+                try:
+                    payload = json.loads(path.read_text(encoding="utf-8"))
+                except Exception:
+                    continue
+
+                generated_at = str(payload.get("generated_at", ""))
+                events = payload.get("events") or []
+                if not isinstance(events, list):
+                    events = []
+
+                snapshots.append({
+                    "file": str(path.name),
+                    "generated_at": generated_at,
+                    "total_events": int(payload.get("total_events", len(events)) or 0),
+                })
+
+                for ev in events:
+                    if isinstance(ev, dict):
+                        history_events.append(ev)
+
+            self.historical_context = {
+                "files_analyzed": len(snapshots),
+                "snapshots": snapshots,
+                "events": history_events,
+            }
+            if snapshots:
+                print(
+                    f"[RDP] Cruce histórico activo: {len(snapshots)} "
+                    f"evidencias, {len(history_events)} eventos"
+                )
+        except Exception as e:
+            print(f"[RDP] Error cargando histórico RDP: {e}")
+
+    def _is_admin_user(self, user: str) -> bool:
+        if not user:
+            return False
+        short = user.split("\\")[-1].strip().lower()
+        full = user.strip().lower()
+        if short in self.admin_accounts or full in self.admin_accounts:
+            return True
+        return any(k in short for k in ADMIN_KEYWORDS)
+
+    def _build_account_analysis(self):
+        """Construye análisis detallado por cuenta y cruces con histórico."""
+        history_events = self.historical_context.get("events", [])
+
+        per_account = defaultdict(lambda: {
+            "account": "",
+            "is_admin": False,
+            "current_events": 0,
+            "historical_events": 0,
+            "total_events": 0,
+            "after_hours": 0,
+            "external_ip_events": 0,
+            "ips": set(),
+            "first_seen": "",
+            "last_seen": "",
+        })
+
+        def ingest(ev: dict, source: str):
+            user = str(ev.get("user", "") or "").strip()
+            if not user:
+                return
+            row = per_account[user]
+            row["account"] = user
+            row["is_admin"] = row["is_admin"] or self._is_admin_user(user)
+            row["total_events"] += 1
+            if source == "current":
+                row["current_events"] += 1
+            else:
+                row["historical_events"] += 1
+
+            if ev.get("after_hours"):
+                row["after_hours"] += 1
+            if ev.get("external_ip"):
+                row["external_ip_events"] += 1
+
+            ip = str(ev.get("ip", "") or "").strip()
+            if ip:
+                row["ips"].add(ip)
+
+            ts = str(ev.get("timestamp", "") or "").strip()
+            if ts:
+                first = row["first_seen"]
+                last = row["last_seen"]
+                row["first_seen"] = ts if not first or ts < first else first
+                row["last_seen"] = ts if not last or ts > last else last
+
+        for ev in self.rdp_events:
+            ingest(ev, "current")
+        for ev in history_events:
+            ingest(ev, "historical")
+
+        normalized = []
+        for row in per_account.values():
+            row["ips"] = sorted(row["ips"])
+            normalized.append(row)
+
+        normalized.sort(
+            key=lambda x: (
+                0 if x["is_admin"] else 1,
+                -x["current_events"],
+                -x["historical_events"],
+                x["account"].lower(),
+            )
+        )
+
+        current_users = {
+            str(e.get("user", "") or "").strip()
+            for e in self.rdp_events
+            if str(e.get("user", "") or "").strip()
+        }
+        history_users = {
+            str(e.get("user", "") or "").strip()
+            for e in history_events
+            if str(e.get("user", "") or "").strip()
+        }
+
+        current_ips = {
+            str(e.get("ip", "") or "").strip()
+            for e in self.rdp_events
+            if str(e.get("ip", "") or "").strip()
+        }
+        history_ips = {
+            str(e.get("ip", "") or "").strip()
+            for e in history_events
+            if str(e.get("ip", "") or "").strip()
+        }
+
+        self.account_analysis = {
+            "by_account": normalized,
+            "admin_accounts": [x for x in normalized if x["is_admin"]],
+            "crosses": {
+                "users_seen_current_and_historical": sorted(current_users & history_users),
+                "ips_seen_current_and_historical": sorted(current_ips & history_ips),
+            },
+        }
+
     # ── Análisis ────────────────────────────────────────────────────────────────
 
     def _normalize_event(self, raw: dict) -> dict:
@@ -422,6 +632,8 @@ class RDPLogExporter:
         """Analiza los eventos y genera hallazgos."""
         from core.audit_engine import AuditFinding
 
+        self._build_account_analysis()
+
         after_hours  = [e for e in self.rdp_events if e["after_hours"]]
         external_ips = [e for e in self.rdp_events if e["external_ip"]]
         local_rdp_events = [
@@ -444,6 +656,112 @@ class RDPLogExporter:
 
         unique_users = list({e["user"] for e in self.rdp_events if e["user"]})
         unique_ips   = list({e["ip"]   for e in self.rdp_events if e["ip"]})
+
+        history_files = int(self.historical_context.get("files_analyzed", 0))
+        overlaps_users = self.account_analysis.get("crosses", {}).get(
+            "users_seen_current_and_historical", []
+        )
+        overlaps_ips = self.account_analysis.get("crosses", {}).get(
+            "ips_seen_current_and_historical", []
+        )
+        admin_activity = self.account_analysis.get("admin_accounts", [])
+
+        # ── Hallazgo H1: Cruce histórico ────────────────────────────────────
+        if history_files:
+            risk = "yellow"
+            if overlaps_ips:
+                risk = "orange"
+            if any(a.get("external_ip_events", 0) > 0 for a in admin_activity):
+                risk = "red"
+
+            self.engine.add_finding(AuditFinding(
+                skill=self.SKILL_NAME,
+                category="rdp_historical_correlation",
+                title=(
+                    f"Cruce histórico RDP: {history_files} evidencias previas "
+                    f"y {len(overlaps_users)} cuentas recurrentes"
+                ),
+                description=(
+                    "Se correlacionó la ejecución actual con evidencias RDP "
+                    "exportadas anteriormente para identificar recurrencia "
+                    "por cuenta e IP."
+                ),
+                risk_level=risk,
+                technical_risk=(
+                    "La recurrencia histórica en cuentas/IPs permite detectar "
+                    "patrones persistentes de acceso remoto y priorizar revisión "
+                    "de identidades con actividad repetida."
+                ),
+                legal_risk=(
+                    "El cruce temporal fortalece trazabilidad probatoria, "
+                    "especialmente si existen accesos reiterados sin "
+                    "justificación documentada."
+                ),
+                what_it_is=(
+                    "Correlación entre eventos RDP actuales y snapshots "
+                    "históricos de evidencia local."
+                ),
+                what_it_is_not=(
+                    "No sustituye cadena de custodia formal de logs origen; "
+                    "es una capa analítica adicional sobre evidencia exportada."
+                ),
+                raw_data={
+                    "historical_files": history_files,
+                    "historical_events": len(self.historical_context.get("events", [])),
+                    "overlap_users": overlaps_users,
+                    "overlap_ips": overlaps_ips,
+                    "top_accounts": self.account_analysis.get("by_account", [])[:15],
+                    "snapshots": self.historical_context.get("snapshots", [])[-15:],
+                }
+            ))
+
+        # ── Hallazgo H2: Actividad de cuentas admin ────────────────────────
+        if admin_activity:
+            admin_after_hours = sum(a.get("after_hours", 0) for a in admin_activity)
+            admin_external = sum(a.get("external_ip_events", 0) for a in admin_activity)
+            risk = "yellow"
+            if admin_after_hours:
+                risk = "orange"
+            if admin_external:
+                risk = "red"
+
+            self.engine.add_finding(AuditFinding(
+                skill=self.SKILL_NAME,
+                category="rdp_admin_account_activity",
+                title=(
+                    f"Actividad RDP en cuentas admin: {len(admin_activity)} "
+                    "cuentas con trazas"
+                ),
+                description=(
+                    "Se identificaron cuentas administrativas con actividad "
+                    "RDP y se perfiló su comportamiento (histórico, horario, IP)."
+                ),
+                risk_level=risk,
+                technical_risk=(
+                    "Las cuentas admin concentran mayor impacto potencial. "
+                    "Actividad fuera de horario o desde IP externa incrementa "
+                    "riesgo operativo y de exposición de datos."
+                ),
+                legal_risk=(
+                    "El acceso administrativo remoto debe estar plenamente "
+                    "justificado, registrado y sujeto a controles de necesidad "
+                    "y proporcionalidad."
+                ),
+                what_it_is=(
+                    "Perfilado por cuenta admin con métricas de recurrencia y "
+                    "contexto temporal/de red."
+                ),
+                what_it_is_not=(
+                    "No presume mala fe de administradores; prioriza cuentas "
+                    "que requieren revisión de legitimidad documental."
+                ),
+                raw_data={
+                    "admin_accounts_detected": [a.get("account") for a in admin_activity],
+                    "admin_after_hours_events": admin_after_hours,
+                    "admin_external_ip_events": admin_external,
+                    "admin_profiles": admin_activity[:20],
+                }
+            ))
 
         # ── Hallazgo 0: Cobertura/limitaciones de telemetría ────────────────
         if not self.rdp_events and not self.failed_events and not self.network_logons:
@@ -548,6 +866,11 @@ class RDPLogExporter:
                     "after_hours":     len(after_hours),
                     "external_ips":    len(external_ips),
                     "days_analyzed":   DAYS_BACK,
+                    "account_breakdown": self.account_analysis.get("by_account", [])[:20],
+                    "admin_accounts_with_activity": [
+                        a.get("account")
+                        for a in self.account_analysis.get("admin_accounts", [])
+                    ],
                     "events_sample":   self.rdp_events[:25],
                 }
             ))
@@ -787,7 +1110,7 @@ class RDPLogExporter:
     def _export_evidence(self) -> Path | None:
         """Exporta los logs como evidencia forense con hash SHA-256."""
         try:
-            evidence_dir = Path("evidence") / "rdp_logs"
+            evidence_dir = self.evidence_dir
             evidence_dir.mkdir(parents=True, exist_ok=True)
 
             timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -800,6 +1123,12 @@ class RDPLogExporter:
                 "failed_attempts": len(self.failed_events),
                 "network_logons":  len(self.network_logons),
                 "telemetry":       self.telemetry,
+                "historical_context": {
+                    "files_analyzed": self.historical_context.get("files_analyzed", 0),
+                    "events_analyzed": len(self.historical_context.get("events", [])),
+                    "crosses": self.account_analysis.get("crosses", {}),
+                },
+                "account_analysis": self.account_analysis,
                 "after_hours":     len([e for e in self.rdp_events
                                         if e["after_hours"]]),
                 "external_ips":    len([e for e in self.rdp_events

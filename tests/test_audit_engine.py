@@ -357,7 +357,10 @@ class TestSkillsSmoke(unittest.TestCase):
                 self.assertGreater(len(new_findings), 0)
 
     def test_event_viewer_smoke(self):
-        from skills.event_viewer_audit.event_viewer_scanner import EventViewerAudit, EventQueryResult
+        from skills.event_logs.event_viewer_scanner import (
+            EventQueryResult,
+            EventViewerAudit,
+        )
 
         def fake_query(self, log_name, event_ids, source_label):
             return EventQueryResult(
@@ -370,8 +373,8 @@ class TestSkillsSmoke(unittest.TestCase):
                 error="",
             )
 
-           with patch.object(EventViewerAudit, "_query_log", new=fake_query), \
-               patch.object(EventViewerAudit, "_export_full_logs_report", new=lambda self: None):
+        with patch.object(EventViewerAudit, "_query_log", new=fake_query), \
+             patch.object(EventViewerAudit, "_export_full_logs_report", new=lambda self: None):
             self._run_skill(EventViewerAudit)
 
 

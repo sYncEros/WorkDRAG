@@ -3,7 +3,7 @@
 
 import argparse
 import datetime
-import json
+import json as _json
 import sys
 from dataclasses import asdict
 from pathlib import Path
@@ -35,7 +35,9 @@ ALL_SKILLS = [
     "privacy", "ai_telemetry", "cloud_sync", "browser", "hardening",
     "identity", "git_identity", "scheduled_tasks", "usb", "email",
     "third_party_apps", "user_behavior", "data_exfiltration",
-    "incident_response", "event_viewer", "rdp_logs"
+    "incident_response", "event_viewer", "rdp_logs", "addon_audit", 
+    "onedrive_mapper", "diagtrack_inspector", "event_log_monitor", 
+    "clipboard_watcher", "dpa_checker", "service_hardener",
 ]
 
 
@@ -72,7 +74,6 @@ def _normalized_findings(findings: list[dict]) -> list[dict]:
         )
     )
 
-
 def _current_signature(engine: AuditEngine) -> dict:
     findings = [asdict(f) for f in engine.findings]
     return {
@@ -96,7 +97,7 @@ def _is_identical_to_latest(engine: AuditEngine) -> tuple[bool, Path | None]:
         return False, None
 
     try:
-        report = json.loads(latest.read_text(encoding="utf-8"))
+        report = _json.loads(latest.read_text(encoding="utf-8"))
     except Exception:
         return False, latest
 
@@ -127,151 +128,184 @@ def run_audit(skills: list = None, no_pdf: bool = False,
     if not quiet:
         print("\n" + legal.summary_text())
 
+    # ── Decidir si guardar ─────────────────────────────────────────────────────
     should_save = True
     is_identical, latest_path = _is_identical_to_latest(engine)
     if is_identical:
         if latest_path:
-            print(
-                "[=] Auditoría idéntica a la anterior: "
-                f"{latest_path.relative_to(EXPORTS_PATH)}"
-            )
+            print(f"[=] Auditoría idéntica a la anterior: {latest_path.relative_to(EXPORTS_PATH)}")
         if force_save:
             should_save = True
-            print("[=] --force-save activo: se guardarán JSON/PDF aunque sea idéntica.")
+            print("[=] --force-save activo: se guardan igualmente.")
         elif no_interactive:
             should_save = False
-            print("[=] Modo no interactivo: no se guardan JSON/PDF al ser idéntica.")
+            print("[=] Modo no interactivo: no se guardan archivos al ser idéntica.")
         else:
-            ans = input("¿Deseas guardar igualmente JSON y PDF? [y/N]: ").strip().lower()
+            ans = input("¿Deseas guardar igualmente? [y/N]: ").strip().lower()
             should_save = ans in {"y", "yes", "s", "si", "sí"}
-
+    
     if not should_save:
         if not quiet:
             print("[i] Informe no guardado por ser idéntico al último.")
         return engine.findings, issues, None
 
-    prefix = output or _default_output_prefix()
+    # ── Exportar ───────────────────────────────────────────────────────────────
+    prefix   = output or _default_output_prefix()
+    findings_dict = [asdict(f) for f in engine.findings]
+
+    # 1. audit.json — informe técnico original con hash
     json_out = engine.export_json(filename=prefix)
-
+        
     if not no_pdf:
-        from core.pdf_exporter import export_pdf
-        EXPORTS_PATH.mkdir(parents=True, exist_ok=True)
-        pdf_out = EXPORTS_PATH / f"{prefix}.pdf"
-        pdf_out.parent.mkdir(parents=True, exist_ok=True)
-        export_pdf(
-            engine.findings,
-            issues,
-            pdf_out,
-            recommendation_context={
-                "mode": recommendation_mode,
-                "categories": recommendation_categories or [],
-                "risks": recommendation_risks or [],
-            },
-        )
+        # 2. informe_resumen.pdf — versión clara para el trabajador
+        try:
+            from core.pdf_resumen import export_pdf_resumen
+            pdf_resumen = json_out.parent / "audit_resumen.pdf"            
+            _data = _json.loads(json_out.read_text(encoding="utf-8"))
+            export_pdf_trabajador(
+                findings=findings_dict,
+                legal_issues=issues,
+                output_path=pdf_resumen,
+                audit_hash=_data.get("integrity_hash", ""),
+                generated_at=datetime.datetime.now().isoformat(),
+            )
+            if not quiet:
+                print(f"[+] PDF Resumen:  {pdf_resumen}")
+        except Exception as e:
+            print(f"[!] PDF Resumen: {e}")
+
+        # 3. informe_completo.pdf — versión técnica para sindicato
+        try:
+            from core.pdf_completo import export_pdf
+            pdf_completo = json_out.parent / "audit_completo.pdf"
+            _data = _json.loads(json_out.read_text(encoding="utf-8"))            
+            export_pdf(
+                engine.findings,
+                issues,
+                pdf_completo,
+                recommendation_context={
+                    "mode": recommendation_mode,
+                    "categories": recommendation_categories or [],
+                    "risks": recommendation_risks or [],
+                },
+            )
+            if not quiet:
+                print(f"[+] PDF Sindicato:   {pdf_completo}")
+        except Exception as e:
+            print(f"[!] PDF Sindicato: {e}")
+
+        # 4. dossier_*.zip — paquete completo para abogado/perito
+        try:
+            from skills.evidence_packager.evidence_packager import EvidencePackager
+            EvidencePackager().package(json_out.parent)
+        except Exception as e:
+            print(f"[!] Evidence packager: {e}")
+
         if not quiet:
-            print(f"[+] PDF guardado en: {pdf_out}")
+            print(f"\n[+] Completado — {len(engine.findings)} hallazgos")
+            print(f"[+] Exportado en: {json_out.parent}")
 
-    return engine.findings, issues, json_out
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Worker Digital Rights Audit Agent",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=f"Skills disponibles: {', '.join(ALL_SKILLS)}"
-    )
-    parser.add_argument(
-        "--skills", "-s",
-        nargs="+", metavar="SKILL",
-        choices=ALL_SKILLS + [None],  # None para modo interactivo
-        help="Skills a ejecutar. Si se omite, se ejecutan todos.",
-    )
-    parser.add_argument(
-        "--list-skills", "-l",
-        action="store_true",
-        help="Mostrar skills disponibles y salir.",
-    )
-    parser.add_argument(
-        "--no-pdf",
-        action="store_true",
-        help="No generar exportación en PDF.",
-    )
-    parser.add_argument(
-        "--output", "-o",
-        metavar="PREFIX",
-        help="Prefijo del archivo de salida (default: audit_FECHA)",
-    )
-    parser.add_argument(
-        "--quiet", "-q",
-        action="store_true",
-        help="Modo silencioso: no mostrar resumen en consola.",
-    )
-    parser.add_argument(
-        "--no-interactive",
-        action="store_true",
-        help="No pedir confirmación antes de iniciar.",
-    )
-    parser.add_argument(
-        "--force-save",
-        action="store_true",
-        help="Guardar informe aunque sea idéntico al último.",
-    )
-    parser.add_argument(
-        "--recommendation-mode",
-        choices=["urgente", "completo", "personalizado"],
-        default="completo",
-        help=(
-            "Modo de recomendaciones legales previo a exportar PDF: "
-            "urgente, completo o personalizado."
-        ),
-    )
-    parser.add_argument(
-        "--recommendation-categories",
-        nargs="+",
-        metavar="CATEGORY",
-        help="Categorías legales a incluir en modo personalizado.",
-    )
-    parser.add_argument(
-        "--recommendation-risks",
-        nargs="+",
-        choices=["low", "medium", "medium-high", "high", "very_high"],
-        metavar="RISK",
-        help="Niveles de riesgo legal a incluir en modo personalizado.",
-    )
-
-    # Si se llama sin argumentos: modo interactivo original
-    if len(sys.argv) == 1:
-        print(BANNER)
-        input("Pulsa ENTER para iniciar la auditoría...")
-        run_audit()
-        return
-
-    args = parser.parse_args()
-
-    if args.list_skills:
-        print("Skills disponibles:")
-        for s in ALL_SKILLS:
-            print(f"  {s}")
-        return
-
-    if not args.no_interactive and not args.quiet:
-        print(BANNER)
-        skills_str = ", ".join(args.skills) if args.skills else "todos"
-        print(f"Skills a ejecutar: {skills_str}")
-        input("Pulsa ENTER para continuar o Ctrl+C para cancelar...")
-
-    run_audit(
-        skills=args.skills,
-        no_pdf=args.no_pdf,
-        output=args.output,
-        quiet=args.quiet,
-        no_interactive=args.no_interactive,
-        force_save=args.force_save,
-        recommendation_mode=args.recommendation_mode,
-        recommendation_categories=args.recommendation_categories,
-        recommendation_risks=args.recommendation_risks,
-    )
+        return engine.findings, issues, json_out
 
 
-if __name__ == "__main__":
-    main()
+    def main():
+        parser = argparse.ArgumentParser(
+            description="Worker Digital Rights Audit Agent",
+            formatter_class=argparse.RawDescriptionHelpFormatter,
+            epilog=f"Skills disponibles: {', '.join(ALL_SKILLS)}"
+        )
+        parser.add_argument(
+            "--skills", "-s",
+            nargs="+", metavar="SKILL",
+            choices=ALL_SKILLS + [None],  # None para modo interactivo
+            help="Skills a ejecutar. Si se omite, se ejecutan todos.",
+        )
+        parser.add_argument(
+            "--list-skills", "-l",
+            action="store_true",
+            help="Mostrar skills disponibles y salir.",
+        )
+        parser.add_argument(
+            "--no-pdf",
+            action="store_true",
+            help="No generar exportación en PDF.",
+        )
+        parser.add_argument(
+            "--output", "-o",
+            metavar="PREFIX",
+            help="Prefijo del archivo de salida (default: audit_FECHA)",
+        )
+        parser.add_argument(
+            "--quiet", "-q",
+            action="store_true",
+            help="Modo silencioso: no mostrar resumen en consola.",
+        )
+        parser.add_argument(
+            "--no-interactive",
+            action="store_true",
+            help="No pedir confirmación antes de iniciar.",
+        )
+        parser.add_argument(
+            "--force-save",
+            action="store_true",
+            help="Guardar informe aunque sea idéntico al último.",
+        )
+        parser.add_argument(
+            "--recommendation-mode",
+            choices=["urgente", "completo", "personalizado"],
+            default="completo",
+            help=(
+                "Modo de recomendaciones legales previo a exportar PDF: "
+                "urgente, completo o personalizado."
+            ),
+        )
+        parser.add_argument(
+            "--recommendation-categories",
+            nargs="+",
+            metavar="CATEGORY",
+            help="Categorías legales a incluir en modo personalizado.",
+        )
+        parser.add_argument(
+            "--recommendation-risks",
+            nargs="+",
+            choices=["low", "medium", "medium-high", "high", "very_high"],
+            metavar="RISK",
+            help="Niveles de riesgo legal a incluir en modo personalizado.",
+        )
+
+        # Si se llama sin argumentos: modo interactivo original
+        if len(sys.argv) == 1:
+            print(BANNER)
+            input("Pulsa ENTER para iniciar la auditoría...")
+            run_audit()
+            return
+
+        args = parser.parse_args()
+
+        if args.list_skills:
+            print("Skills disponibles:")
+            for s in ALL_SKILLS:
+                print(f"  {s}")
+            return
+
+        if not args.no_interactive and not args.quiet:
+            print(BANNER)
+            skills_str = ", ".join(args.skills) if args.skills else "todos"
+            print(f"Skills a ejecutar: {skills_str}")
+            input("Pulsa ENTER para continuar o Ctrl+C para cancelar...")
+
+        run_audit(
+            skills=args.skills,
+            no_pdf=args.no_pdf,
+            output=args.output,
+            quiet=args.quiet,
+            no_interactive=args.no_interactive,
+            force_save=args.force_save,
+            recommendation_mode=args.recommendation_mode,
+            recommendation_categories=args.recommendation_categories,
+            recommendation_risks=args.recommendation_risks,
+        )
+
+
+    if __name__ == "__main__":
+        main()

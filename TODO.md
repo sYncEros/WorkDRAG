@@ -2,20 +2,8 @@
 
 ## Punto 1 — poner el TODO al día
 
-### ✅ Ya verificado en el código
-
-- **Ejecutar skills específicos** ya existe en `main.py` mediante `--skills` y también desde la UI vía `/api/run`.
-- **Versión CLI** ya existe en `main.py` con argumentos para skills, PDF, guardado y recomendaciones.
-- **Comparación entre auditorías** ya tiene una primera implementación en `/api/compare` y en la sección **Comparar** de la UI.
-- **Validación de esquema JSON** ya está implementada en `core/audit_engine.py` y expuesta en `/api/validate/<filename>`.
-- **Tests automáticos** ya tienen base inicial en `tests/test_audit_engine.py` y `tests/test_api.py`.
-- **Gráfico de riesgo** ya está implementado en la UI con Chart.js.
-- **Modo oscuro** ya existe en la UI.
-- **Vista detalle de `raw_data`** ya tiene soporte inicial en la UI de hallazgos.
-
 ### 🟡 En progreso real
 
-- **`rdp_log_exporter`** ya existe como skill integrada, pero aún le faltan cruces históricos y análisis más fino por cuenta/admin.
 - **Comparación visual** existe en versión básica; aún puede mejorarse el diff por campos y la UX.
 - **Tests** existen, pero falta ampliar cobertura de integración y casos reales de exportación/skills.
 
@@ -24,20 +12,16 @@
 1. **Limpiar duplicados y estados del TODO** para que lo pendiente sea fiable.
 2. **Completar `addon_audit`** porque desbloquea varios hallazgos de navegador, Office, VSCode, Teams y EDR.
 3. **Completar `onedrive_mapper`** porque cubre varios hallazgos de alto riesgo y es muy tangible para usuario final.
-4. **Completar `event_log_monitor`** porque reutiliza infraestructura ya presente de `event_viewer_audit`.
+4. **Completar correlación temporal avanzada en `event_logs`** (WEF/PowerShell/USB por ventana e identidad) para reforzar trazabilidad forense.
 5. **Mejorar `account_profiler`** porque afecta a varias categorías de identidad sin crear skill nueva desde cero.
 
-## Revisar Skills & Knowledge Areas
+## Mejoras
 
-- **Scheduled Tasks Deep Audit** — análisis profundo de tareas programadas: quién las creó, cuándo, qué ejecutan, si tienen firmas válidas
+- **Email Client Audit** — Queda como mejora concreta la detección explícita de delegaciones de buzón (SendAs / FullAccess / SendOnBehalf).
 
-- **USB & Peripheral Audit** — dispositivos conectados históricamente, políticas de bloqueo de USB, DLP de dispositivos
+- **Third Party Apps Audit** — ampliar el mapeo de permisos por app/extensión/add-in y añadir tests por perfiles simulados.
 
-- **Email Client Audit** — Outlook con add-ins corporativos, reglas de reenvío automático, acceso de terceros al buzón
-
-- **Third Party Apps Audit** — apps instaladas con telemetría propia: Slack, Zoom, Teams, VSCode, con sus endpoints y permisos
-
-- **User Behavior Analysis** — patrones de uso inusuales, como horas de actividad, acceso a recursos sensibles, uso de herramientas de administración
+- **User Behavior Analysis** — ampliar pruebas funcionales con datos simulados (eventos de horario/anomalía y objetos sensibles) para robustecer evidencia reproducible.
 
 - **Data Exfiltration Detection** — monitoreo de tráfico saliente, uso de herramientas de transferencia de archivos, análisis de logs de red
 
@@ -64,7 +48,7 @@
 | `addon_audit` | Listado de add-ins de Office, Teams, VSCode, navegadores | Pendiente |
 | `onedrive_mapper` | Documenta carpetas redirigidas y crea carpetas locales seguras | Pendiente |
 | `diagtrack_inspector` | Estado de DiagTrack, qué envía, con qué frecuencia | Pendiente |
-| `event_log_monitor` | Windows Event Forwarding y PowerShell Transcription activos | Pendiente |
+| `event_log_monitor` | Windows Event Forwarding y PowerShell Transcription activos | En Desarrollo |
 | `clipboard_watcher` | Qué apps acceden al portapapeles y con qué frecuencia | Pendiente |
 | `dpa_checker` | Verifica nivel de telemetría real vs DPA declarado con Microsoft | Pendiente |
 | `service_hardener` | Intenta deshabilitar DiagTrack, WEF, PS Transcription | Pendiente |
@@ -845,3 +829,8 @@ Cubre: hallazgos 5, 23
 - **Empaquetado** — script de instalación para distribuir a técnicos o sindicatos
 - **Integración con SIEM** — exportar resultados en formato compatible para ingestión en sistemas SIEM corporativos
 - **Divulgación** — crear materiales de divulgación para sindicatos y trabajadores sobre la importancia de la auditoría de seguridad interna y cómo usar la herramienta
+
+⏳ Mejora del PDF para presentación sindical
+⏳ Ejecutar main_auto.py y generar informe completo actualizado
+⏳ Refactorización de skills grandes
+⏳ Modo portable — PyInstaller .exe para USB

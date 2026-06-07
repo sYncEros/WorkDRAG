@@ -126,12 +126,12 @@ class AuditEngine:
         from skills.user_behavior_audit.behavior_scanner import UserBehaviorAudit
         from skills.data_exfiltration_audit.exfiltration_scanner import DataExfiltrationAudit
         from skills.incident_response.playbook_generator import IncidentResponsePlaybook
-        from skills.event_viewer_audit.event_viewer_scanner import EventViewerAudit
+        from skills.event_logs.event_viewer_scanner import EventViewerAudit
         from skills.rdp_log_exporter.rdp_log_exporter import RDPLogExporter
         from skills.addon_audit.addon_scanner import AddonAudit
         from skills.onedrive_mapper.onedrive_mapper import OneDriveMapper
         from skills.diagtrack_inspector.diagtrack_inspector import DiagTrackInspector
-        from skills.event_log_monitor.event_log_monitor import EventLogMonitor
+        from skills.event_logs.event_log_monitor import EventLogMonitor
         from skills.clipboard_watcher.clipboard_watcher import ClipboardWatcher
         from skills.dpa_checker.dpa_checker import DPAChecker
         from skills.service_hardener.service_hardener import ServiceHardener

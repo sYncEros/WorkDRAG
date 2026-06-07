@@ -12,3 +12,6 @@ logs/
 .DS_Store
 Thumbs.db
 
+# Exported Data
+exports/
+evidence/
