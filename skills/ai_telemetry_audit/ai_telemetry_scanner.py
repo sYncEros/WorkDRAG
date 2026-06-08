@@ -83,6 +83,25 @@ AI_PROCESSES = {
     "cortana":           "Cortana (AI Assistant)",
     "searchapp":         "Windows Search (con AI)",
     "phi":               "Microsoft Phi (LLM local)",
+    "openai":            "OpenAI local client",
+    "openai-agent":      "OpenAI local agent",
+    "anthropic":         "Anthropic local client",
+    "claude":            "Anthropic Claude",
+    "ollama":            "Ollama local model runner",
+    "ollamadrive":       "Ollama runtime",
+    "axet":              "Axet corporate AI client",
+    "gaia":              "Gaia corporate AI client",
+    "oasis":             "Oasis corporate AI client",
+}
+
+# Servicios de cliente/servicio de IA locales
+AI_SERVICES = {
+    "OpenAI":    "OpenAI local service",
+    "Anthropic": "Anthropic local service",
+    "Ollama":    "Ollama local model service",
+    "Axet":      "Axet corporate AI service",
+    "Gaia":      "Gaia corporate AI service",
+    "Oasis":     "Oasis corporate AI service",
 }
 
 
@@ -98,6 +117,7 @@ class AITelemetryAudit:
         self._check_windows_telemetry_level()
         self._check_telemetry_services()
         self._check_copilot_recall()
+        self._check_ai_services()
         self._check_ai_processes()
         self._check_office_telemetry()
         self._check_diagnostic_data_export()
@@ -422,6 +442,53 @@ class AITelemetryAudit:
                     "son locales y no transmiten datos personales."
                 ),
                 raw_data={"ai_processes": found}
+            ))
+
+    # ── Servicios de IA locales ─────────────────────────────────────
+
+    def _check_ai_services(self):
+        from core.audit_engine import AuditFinding
+
+        active_services = {}
+        for svc_name, description in AI_SERVICES.items():
+            try:
+                result = subprocess.run(
+                    ["powershell", "-NoProfile", "-Command",
+                     f"(Get-Service -Name '{svc_name}' -ErrorAction SilentlyContinue).Status"],
+                    capture_output=True, text=True, timeout=8
+                )
+                status = result.stdout.strip()
+                if status == "Running":
+                    active_services[svc_name] = description
+            except Exception:
+                pass
+
+        if active_services:
+            self.engine.add_finding(AuditFinding(
+                skill=self.SKILL_NAME,
+                category="ai_services",
+                title=f"Servicios de IA locales activos ({len(active_services)})",
+                description=(
+                    "Se han detectado servicios locales de inteligencia artificial "
+                    "activos en el sistema."
+                ),
+                risk_level="orange",
+                technical_risk=(
+                    "Los servicios de IA locales pueden procesar contenido del equipo "
+                    "y trasladarlo a motores de inferencia locales o remotos."
+                ),
+                legal_risk=(
+                    "El uso de servicios de IA locales en entornos de trabajo puede "
+                    "implicar tratamiento de datos personales y propiedad intelectual."
+                ),
+                what_it_is=(
+                    "Servicios locales que ejecutan o coordinan clientes de IA "
+                    "como OpenAI, Anthropic, Ollama o herramientas corporativas."
+                ),
+                what_it_is_not=(
+                    "No indica necesariamente que los datos se envíen fuera del dispositivo. "
+                    "Es un indicador de exposición de IA local.") ,
+                raw_data={"ai_services": active_services}
             ))
 
     # ── Telemetría de Office ───────────────────────────────────────

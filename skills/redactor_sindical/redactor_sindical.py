@@ -127,25 +127,25 @@ REPLACEMENTS = {
 FIELDS_BY_LEVEL = {
     "PUBLICO": {
         # Redacta absolutamente todo
-        "redact_all_paths":    True,
+        "redact_all_paths":     True,
         "redact_account_names": True,
-        "redact_tenant":       True,
-        "redact_ips":          True,
-        "redact_raw_data":     True,  # elimina raw_data completo
+        "redact_tenant":        True,
+        "redact_ips":           True,
+        "redact_raw_data":      True,  # elimina raw_data completo
     },
     "SINDICATO": {
-        "redact_all_paths":    True,
+        "redact_all_paths":     True,
         "redact_account_names": True,
-        "redact_tenant":       True,
-        "redact_ips":          True,
-        "redact_raw_data":     False,  # mantiene raw_data pero redactado
+        "redact_tenant":        True,
+        "redact_ips":           True,
+        "redact_raw_data":      False,  # mantiene raw_data pero redactado
     },
     "PERICIAL": {
-        "redact_all_paths":    True,
+        "redact_all_paths":     True,
         "redact_account_names": False,  # preserva nombres de cuentas
-        "redact_tenant":       False,   # preserva tenant para perito
-        "redact_ips":          True,
-        "redact_raw_data":     False,
+        "redact_tenant":        False,   # preserva tenant para perito
+        "redact_ips":           True,
+        "redact_raw_data":      False,
     },
 }
 

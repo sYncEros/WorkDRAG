@@ -181,3 +181,38 @@ except SyntaxError as e:
         print(f'{i+1}: {lines[i]}')
 "
 ```
+
+## Regenerar PDF completo desde JSON de exportación
+
+```bash
+cd C:\WorkDRAG
+C:\WorkDRAG\python_portable\python.exe -c "
+import sys, json
+sys.path.insert(0, r'C:\WorkDRAG')
+from pathlib import Path
+import glob
+
+# Carga el ultimo audit
+files = sorted(glob.glob(r'C:\WorkDRAG\exports\**\audit.json', recursive=True), key=lambda f: Path(f).stat().st_mtime, reverse=True)
+data = json.loads(Path(files[0]).read_text(encoding='utf-8'))
+findings = data.get('findings', [])
+out_dir = Path(files[0]).parent
+print(f'Usando: {files[0]}')
+
+# PDF Resumen
+from core.pdf_trabajador import export_pdf_trabajador
+export_pdf_trabajador(
+    findings=findings,
+    legal_issues=[],
+    output_path=out_dir / 'audit_resumen.pdf',
+    audit_hash=data.get('integrity_hash', ''),
+    generated_at=data.get('generated_at', ''),
+)
+
+# PDF Completo
+from core.pdf_exporter import export_pdf
+export_pdf(findings, [], out_dir / 'audit_completo.pdf')
+
+print('OK — PDFs generados en', out_dir)
+"
+```

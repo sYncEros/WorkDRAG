@@ -27,14 +27,14 @@ class EventViewerAudit:
     # y es lo que provocaba esperas larguísimas. Por eso el valor seguro es
     # 'recent'. (Aun en 'full', _query_log sólo trae los IDs de la allow-list.)
     SCAN_SCOPE = "recent"
-    HOURS_BACK = 168          # 7 días
-    MAX_EVENTS = 2000         # tope de seguridad para el escaneo dirigido
-    DETAILED_EXPORT = False   # volcado forense masivo: OPT-IN y siempre acotado
+    HOURS_BACK = 17520          # 720 días
+    MAX_EVENTS = 2000           # tope de seguridad para el escaneo dirigido
+    DETAILED_EXPORT = False     # volcado forense masivo: OPT-IN y siempre acotado
 
     # --- Parámetros del volcado forense (sólo si DETAILED_EXPORT = True) ---
-    EXPORT_DAYS_BACK = 90     # ventana del volcado (0 = todo el histórico; NO recomendado)
-    EXPORT_MAX_PER_LOG = 5000 # tope de eventos por log (0 = sin tope; NO recomendado)
-    EXPORT_TIMEOUT = 180      # segundos; si se supera, NO cuelga: corta y avisa
+    EXPORT_DAYS_BACK = 90       # ventana del volcado (0 = todo el histórico; NO recomendado)
+    EXPORT_MAX_PER_LOG = 5000   # tope de eventos por log (0 = sin tope; NO recomendado)
+    EXPORT_TIMEOUT = 180        # segundos; si se supera, NO cuelga: corta y avisa
 
     # Eventos relevantes (Windows Event IDs)
     SECURITY_IDS = [4624, 4625, 4648, 4672, 4688, 4698, 4702, 4719]

@@ -123,7 +123,6 @@ class EvidencePackager:
             f"[Packager] ✅ Paquete generado: {output_path.name} "
             f"({size_mb:.1f} MB) — SHA-256: {self.package_hash[:16]}..."
         )
-        return output_path
 
         cleanup_files = [
             "audit_anonimizado_publico.json",
@@ -137,6 +136,8 @@ class EvidencePackager:
             if f.exists():
                 f.unlink()
                 print(f"[Packager] Limpiado: {filename}")
+                
+        return output_path
 
     # ── Anonimización ──────────────────────────────────────────────────────────
     def _ensure_anonymized_versions(self, export_dir: Path):

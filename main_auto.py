@@ -2,6 +2,8 @@
 import argparse
 import datetime
 import sys
+import json as _json
+from dataclasses import asdict
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -43,27 +45,49 @@ def run(
         custom_risks=recommendation_risks,
     )
 
-    prefix = output_prefix or _default_output_prefix()
-    engine.export_json(filename=prefix)
+    prefix   = output_prefix or _default_output_prefix()
+    json_out = engine.export_json(filename=prefix)
+    _data    = _json.loads(json_out.read_text(encoding="utf-8"))
 
-    from core.pdf_exporter import export_pdf
-    EXPORTS_PATH.mkdir(parents=True, exist_ok=True)
-    pdf_out = EXPORTS_PATH / f"{prefix}.pdf"
-    pdf_out.parent.mkdir(parents=True, exist_ok=True)
-    export_pdf(
-        engine.findings,
-        issues,
-        pdf_out,
-        recommendation_context={
-            "mode": recommendation_mode,
-            "categories": recommendation_categories or [],
-            "risks": recommendation_risks or [],
-        },
-    )
+    # PDF Resumen — para el trabajador
+    try:
+        from core.pdf_trabajador import export_pdf_trabajador
+        export_pdf_trabajador(
+            findings=[asdict(f) for f in engine.findings],
+            legal_issues=issues,
+            output_path=json_out.parent / "audit_resumen.pdf",
+            audit_hash=_data.get("integrity_hash", ""),
+            generated_at=_data.get("generated_at", ""),
+        )
+    except Exception as e:
+        print(f"[!] PDF Resumen: {e}")
+
+    # PDF Completo — para sindicato
+    try:
+        from core.pdf_exporter import export_pdf
+        export_pdf(
+            engine.findings,
+            issues,
+            json_out.parent / "audit_completo.pdf",
+            recommendation_context={
+                "mode": recommendation_mode,
+                "categories": recommendation_categories or [],
+                "risks": recommendation_risks or [],
+            },
+        )
+    except Exception as e:
+        print(f"[!] PDF Completo: {e}")
+
+    # Dossier ZIP — para abogado/perito
+    try:
+        from skills.evidence_packager.evidence_packager import EvidencePackager
+        EvidencePackager().package(json_out.parent)
+    except Exception as e:
+        print(f"[!] Evidence packager: {e}")
 
     print(f"[+] Completado — {len(engine.findings)} hallazgos")
+    print(f"[+] Exportado en: {json_out.parent}")
     return engine.findings, issues
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(

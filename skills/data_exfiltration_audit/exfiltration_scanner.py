@@ -10,6 +10,7 @@ import winreg
 import subprocess
 import json
 from pathlib import Path
+from datetime import datetime
 
 
 class DataExfiltrationAudit:
@@ -521,3 +522,109 @@ class DataExfiltrationAudit:
             ),
             raw_data={"cli_tools": cli_tools, "configured": configured}
         ))
+
+    # ── Correlación temporal de señales de exfiltración ───────────
+
+    def _build_temporal_correlation(self, transfer_tools, connections, large_files, cli_tools, dlp_indicators=None, window_minutes: int = 60):
+        """Construye una secuencia temporal de señales y marca si forman una cadena compatible con exfiltración.
+
+        Se usa para pruebas y para análisis forense de extremo a extremo cuando
+        los datasets incluyen timestamps observables.
+        """
+
+        def _parse_ts(value):
+            if not value:
+                return None
+            if isinstance(value, datetime):
+                return value
+            text = str(value)
+            try:
+                return datetime.fromisoformat(text[:19])
+            except (TypeError, ValueError):
+                return None
+
+        timeline = []
+
+        for tool in transfer_tools or []:
+            timeline.append({
+                "type": "transfer_tool",
+                "timestamp": _parse_ts(tool.get("observed_at") or tool.get("installed_at") or tool.get("install_date")),
+                "label": tool.get("product") or tool.get("installed_name") or tool.get("tool"),
+                "details": tool,
+            })
+
+        for conn in connections or []:
+            timeline.append({
+                "type": "suspicious_connection",
+                "timestamp": _parse_ts(conn.get("observed_at") or conn.get("timestamp")),
+                "label": f"{conn.get('process', 'unknown')} -> {conn.get('remote_ip', '')}:{conn.get('remote_port', '')}",
+                "details": conn,
+            })
+
+        for file_item in large_files or []:
+            timeline.append({
+                "type": "large_file",
+                "timestamp": _parse_ts(file_item.get("observed_at") or file_item.get("mtime") or file_item.get("modified_at")),
+                "label": file_item.get("name") or file_item.get("path"),
+                "details": file_item,
+            })
+
+        for cli in cli_tools or []:
+            timeline.append({
+                "type": "cloud_cli",
+                "timestamp": _parse_ts(cli.get("observed_at") or cli.get("timestamp")),
+                "label": cli.get("tool") or cli.get("path"),
+                "details": cli,
+            })
+
+        for dlp in dlp_indicators or []:
+            timeline.append({
+                "type": "dlp",
+                "timestamp": _parse_ts(dlp.get("observed_at") or dlp.get("timestamp")),
+                "label": dlp.get("product") or dlp.get("process"),
+                "details": dlp,
+            })
+
+        ordered = sorted([item for item in timeline if item.get("timestamp") is not None], key=lambda x: x["timestamp"])
+
+        if not ordered:
+            return {
+                "correlated": False,
+                "window_minutes": window_minutes,
+                "ordered_events": [],
+                "span_minutes": None,
+                "sequence": [],
+            }
+
+        types_present = {item["type"] for item in ordered}
+        start = ordered[0]["timestamp"]
+        end = ordered[-1]["timestamp"]
+        span_minutes = int((end - start).total_seconds() / 60) if start and end else None
+
+        # Cadena mínima útil para validar exfiltración: herramienta + conexión + archivo grande o CLI
+        required_sets = [
+            {"transfer_tool", "suspicious_connection", "large_file"},
+            {"transfer_tool", "suspicious_connection", "cloud_cli"},
+            {"transfer_tool", "suspicious_connection", "dlp"},
+        ]
+        correlated = False
+        for required in required_sets:
+            if required.issubset(types_present) and span_minutes is not None and span_minutes <= window_minutes:
+                correlated = True
+                break
+
+        return {
+            "correlated": correlated,
+            "window_minutes": window_minutes,
+            "ordered_events": [
+                {
+                    "type": item["type"],
+                    "timestamp": item["timestamp"].isoformat() if item.get("timestamp") else None,
+                    "label": item["label"],
+                }
+                for item in ordered
+            ],
+            "span_minutes": span_minutes,
+            "sequence": [item["type"] for item in ordered],
+            "types_present": sorted(types_present),
+        }
