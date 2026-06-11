@@ -29,9 +29,10 @@ from typing import Optional
 
 # Prefijos de tareas corporativas/sistema conocidas — no se alertan
 KNOWN_SAFE_PREFIXES = [
-    r"\Microsoft\\",
-    r"\Microsoft\",
-    r"Microsoft\",
+    r"\microsoft\windows",
+    r"\microsoft\office",
+    r"\windowsupdate",
+    r"\windowsdefender",
 ]
 
 KNOWN_SAFE_TASK_NAMES = {
@@ -146,38 +147,114 @@ def _match_monitoring_tool(task_name: str) -> Optional[dict]:
             return info
     return None
 
+def _run_ps_file(script: str, timeout: int = 30) -> str:
+    """Ejecuta un script PowerShell desde archivo temporal."""
+    import tempfile
+    tmp = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode='w', suffix='.ps1', delete=False, encoding='utf-8'
+        ) as f:
+            f.write(script)
+            tmp = f.name
+        r = subprocess.run(
+            ["powershell", "-NoProfile", "-NonInteractive",
+             "-ExecutionPolicy", "Bypass", "-File", tmp],
+            capture_output=True, text=True, timeout=timeout
+        )
+        return r.stdout.strip()
+    except Exception:
+        return ""
+    finally:
+        if tmp:
+            try:
+                os.unlink(tmp)
+            except Exception:
+                pass
 
 # ── Recolección de tareas ─────────────────────────────────────────────────────
 
 def _get_all_tasks_powershell() -> list[dict]:
-    """
-    Obtiene todas las tareas programadas via Get-ScheduledTask.
-    Incluye acciones, triggers, estado y metadatos.
-    """
-    output = _ps(
-        "Get-ScheduledTask | "
-        "Select-Object TaskName, TaskPath, State, Description, "
-        "@{N='Execute';E={if($_.Actions){$_.Actions[0].Execute}else{''}}}, "
-        "@{N='Arguments';E={if($_.Actions){$_.Actions[0].Arguments}else{''}}}, "
-        "@{N='WorkingDir';E={if($_.Actions){$_.Actions[0].WorkingDirectory}else{''}}}, "
-        "@{N='TriggerStart';E={if($_.Triggers){$_.Triggers[0].StartBoundary}else{''}}}, "
-        "@{N='TriggerType';E={if($_.Triggers){$_.Triggers[0].GetType().Name}else{''}}}, "
-        "@{N='RunAs';E={$_.Principal.UserId}}, "
-        "@{N='RunLevel';E={$_.Principal.RunLevel}} | "
-        "ConvertTo-Json -Depth 3",
-        timeout=30,
-    )
+    """Dos pasos via temp file — probado funcional."""
+    import tempfile
 
-    if not output:
+    # Paso 1: nombres y rutas (simple, probado)
+    script1 = "Get-ScheduledTask | Select-Object TaskName,TaskPath,State | ConvertTo-Json -Depth 2\n"
+    out1 = _run_ps_file(script1, timeout=30)
+    if not out1:
         return []
-
     try:
-        data = json.loads(output)
-        if isinstance(data, dict):
-            data = [data]
-        return data or []
+        basic = json.loads(out1)
+        if isinstance(basic, dict):
+            basic = [basic]
     except Exception:
         return []
+
+    # Paso 2: enriquecer solo las no-Microsoft en un solo batch
+    non_ms = [
+        t for t in basic
+        if not _is_known_safe(
+            str(t.get("TaskName", "") or ""),
+            str(t.get("TaskPath", "") or "")
+        )
+    ]
+    if not non_ms:
+        return []
+
+    # Construir filtro por nombres
+    names_ps = ", ".join(
+        f'"{str(t.get("TaskName","")).replace(chr(34), "")}"'
+        for t in non_ms
+    )
+
+    script2 = """
+$result = New-Object System.Collections.ArrayList
+Get-ScheduledTask | ForEach-Object {
+    $execute = ""; $arguments = ""; $workdir = ""; $ts = ""; $tt = ""
+    if ($_.Actions -and $_.Actions.Count -gt 0) {
+        $execute = [string]$_.Actions[0].Execute
+        $arguments = [string]$_.Actions[0].Arguments
+        $workdir = [string]$_.Actions[0].WorkingDirectory
+    }
+    if ($_.Triggers -and $_.Triggers.Count -gt 0) {
+        $ts = [string]$_.Triggers[0].StartBoundary
+        $tt = $_.Triggers[0].GetType().Name
+    }
+    [void]$result.Add([PSCustomObject]@{
+        TaskName = [string]$_.TaskName
+        TaskPath = [string]$_.TaskPath
+        State    = [string]$_.State
+        Execute  = $execute
+        Arguments = $arguments
+        WorkingDir = $workdir
+        TriggerStart = $ts
+        TriggerType = $tt
+        RunAs    = [string]$_.Principal.UserId
+        RunLevel = [string]$_.Principal.RunLevel
+        Description = [string]$_.Description
+    })
+}
+$result | ConvertTo-Json -Depth 2
+"""
+    out2 = _run_ps_file(script2, timeout=35)
+    if not out2:
+        return [dict(t) for t in non_ms]
+
+    try:
+        all_enriched = json.loads(out2)
+        if isinstance(all_enriched, dict):
+            all_enriched = [all_enriched]
+        # Filtrar solo las no-Microsoft
+        non_ms_names = {
+            str(t.get("TaskName", "")) for t in non_ms
+        }
+        return [
+            t for t in (all_enriched or [])
+            if str(t.get("TaskName", "")) in non_ms_names
+        ]
+    except Exception:
+        return [dict(t) for t in non_ms]
+
 
 
 def _get_protected_tasks() -> list[str]:

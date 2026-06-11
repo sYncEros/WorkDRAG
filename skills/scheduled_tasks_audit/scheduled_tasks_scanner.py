@@ -6,6 +6,7 @@ y si el ejecutable tiene firma digital válida.
 """
 
 import json
+import os
 import subprocess
 import winreg
 from pathlib import Path
@@ -35,6 +36,18 @@ class ScheduledTasksAudit:
         "sentinelone", "cybereason",
     ]
 
+    INTERPRETER_EXECUTABLES = {
+        "powershell.exe", "pwsh.exe", "cmd.exe",
+        "wscript.exe", "cscript.exe", "mshta.exe",
+        "rundll32.exe", "regsvr32.exe",
+    }
+
+    SUSPICIOUS_ARGUMENT_PATTERNS = [
+        "-encodedcommand", "frombase64string", "iex",
+        "invoke-expression", "downloadstring", "downloadfile",
+        "http://", "https://", "\\\\", "/c", "-nop", "-w hidden",
+    ]
+
     def __init__(self, engine):
         self.engine = engine
 
@@ -48,6 +61,7 @@ class ScheduledTasksAudit:
         self._analyze_non_microsoft_tasks(tasks)
         self._analyze_capability_based_tasks(tasks)
         self._analyze_monitoring_tasks(tasks)
+        self._analyze_interpreter_tasks(tasks)
         self._analyze_recent_tasks(tasks)
         self._analyze_unsigned_executables(tasks)
         self._analyze_task_history(tasks)
@@ -226,6 +240,7 @@ $tasks | ConvertTo-Json -Depth 5
         for task in non_ms:
             exe = self._extract_executable(task)
             signature = self._check_signature(exe) if exe else None
+            action_details = self._extract_action_details(task)
             enriched.append({
                 "name": task.get("TaskName"),
                 "path": task.get("TaskPath"),
@@ -240,6 +255,7 @@ $tasks | ConvertTo-Json -Depth 5
                 "last_result": task.get("LastResult"),
                 "next_run": task.get("NextRunTime"),
                 "missed_runs": task.get("NumberOfMissed"),
+                "actions": action_details,
             })
 
         self.engine.add_finding(AuditFinding(
@@ -281,7 +297,9 @@ $tasks | ConvertTo-Json -Depth 5
             name = str(task.get("TaskName", "")).lower()
             desc = str(task.get("Description", "")).lower()
             exe = self._extract_executable(task) or ""
-            combined = name + desc + exe.lower()
+            action_details = self._extract_action_details(task)
+            action_text = " ".join(a.get("command_line", "") for a in action_details).lower()
+            combined = name + " " + desc + " " + exe.lower() + " " + action_text
 
             if any(k in combined for k in self.MONITORING_KEYWORDS):
                 suspicious.append({
@@ -291,6 +309,7 @@ $tasks | ConvertTo-Json -Depth 5
                     "created": task.get("Date"),
                     "run_as": task.get("RunAsUser"),
                     "executable": exe,
+                    "actions": action_details,
                     "matched_keywords": [
                         k for k in self.MONITORING_KEYWORDS if k in combined
                     ],
@@ -328,6 +347,71 @@ $tasks | ConvertTo-Json -Depth 5
                 "legítimas usan estos términos: antivirus, SIEM, auditoría de TI."
             ),
             raw_data={"suspicious_tasks": suspicious}
+        ))
+
+    # ── Tareas con intérpretes y argumentos potencialmente riesgosos ──────────
+
+    def _analyze_interpreter_tasks(self, tasks: list[dict]):
+        from core.audit_engine import AuditFinding
+
+        risky = []
+        for task in tasks:
+            if str(task.get("TaskPath", "")).startswith("\\Microsoft\\"):
+                continue
+
+            actions = self._extract_action_details(task)
+            risky_actions = [
+                a for a in actions
+                if a.get("is_interpreter") and a.get("suspicious_patterns")
+            ]
+            if not risky_actions:
+                continue
+
+            risky.append({
+                "name": task.get("TaskName"),
+                "path": task.get("TaskPath"),
+                "author": task.get("Author"),
+                "created": task.get("Date"),
+                "run_as": task.get("RunAsUser"),
+                "run_level": task.get("RunLevel"),
+                "risky_actions": risky_actions,
+                "last_run": task.get("LastRunTime"),
+                "last_result": task.get("LastResult"),
+            })
+
+        if not risky:
+            return
+
+        self.engine.add_finding(AuditFinding(
+            skill=self.SKILL_NAME,
+            category="scheduled_tasks_interpreters",
+            title=(
+                f"Tareas de terceros que usan intérpretes con argumentos sensibles ({len(risky)})"
+            ),
+            description=(
+                "Se detectaron tareas que ejecutan intérpretes del sistema "
+                "(PowerShell, cmd, wscript, etc.) con argumentos potencialmente "
+                "sensibles (comandos codificados, descargas remotas o ejecución oculta)."
+            ),
+            risk_level="orange",
+            technical_risk=(
+                "El uso programado de intérpretes permite ejecutar scripts dinámicos "
+                "más difíciles de auditar que binarios estáticos."
+            ),
+            legal_risk=(
+                "Si esos scripts implementan observación del trabajador sin "
+                "transparencia previa, puede haber impacto en LOPDGDD art. 87 "
+                "y ET art. 20bis."
+            ),
+            what_it_is=(
+                "Evidencia técnica de tareas no-Microsoft que usan intérpretes "
+                "con patrones de argumento que merecen revisión forense."
+            ),
+            what_it_is_not=(
+                "No implica por sí mismo malware o espionaje; muchos scripts "
+                "administrativos corporativos usan intérpretes legítimamente."
+            ),
+            raw_data={"interpreter_tasks": risky}
         ))
 
     # ── Tareas creadas recientemente (últimas 72h) ─────────────────
@@ -527,6 +611,40 @@ $tasks | ConvertTo-Json -Depth 5
             if exe:
                 return exe.strip('"').strip("'")
         return None
+
+    def _extract_action_details(self, task: dict) -> list[dict]:
+        """Normaliza acciones con command line completo y señales de riesgo."""
+        actions = task.get("Actions") or []
+        if isinstance(actions, dict):
+            actions = [actions]
+
+        details = []
+        for action in actions:
+            execute = str(action.get("Execute") or "").strip().strip('"').strip("'")
+            arguments = str(action.get("Arguments") or "").strip()
+            working_dir = str(action.get("WorkingDir") or "").strip()
+
+            command_line = " ".join(part for part in [execute, arguments] if part).strip()
+            basename = os.path.basename(execute).lower() if execute else ""
+            is_interpreter = basename in self.INTERPRETER_EXECUTABLES
+
+            suspicious_patterns = []
+            lower_cmd = command_line.lower()
+            for pattern in self.SUSPICIOUS_ARGUMENT_PATTERNS:
+                if pattern in lower_cmd:
+                    suspicious_patterns.append(pattern)
+
+            details.append({
+                "execute": execute,
+                "arguments": arguments,
+                "working_dir": working_dir,
+                "command_line": command_line,
+                "is_interpreter": is_interpreter,
+                "interpreter": basename if is_interpreter else None,
+                "suspicious_patterns": suspicious_patterns,
+            })
+
+        return details
 
     def _check_signature(self, exe_path: str) -> dict | None:
         """Verifica la firma digital de un ejecutable."""

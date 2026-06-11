@@ -19,13 +19,15 @@ El flujo principal ejecuta varios módulos de auditoría y consolida los hallazg
 ### Módulos principales
 
 - `main.py` — punto de entrada de la aplicación.
+- `main_auto.py` — modo automático para la UI y ejecución sin interacción.
+- `mini_console.pyw` — mini consola gráfica sin ventana de terminal.
 - `core/audit_engine.py` — orquesta los análisis, guarda hallazgos y exporta resultados.
 - `core/pdf_exporter.py` — genera informe PDF forense a partir de hallazgos y evaluación legal.
 - `skills/mdm_audit/mdm_scanner.py` — detecta gestión corporativa y MDM.
 - `skills/surveillance_audit/surveillance_scanner.py` — busca herramientas de monitorización, proxy, DLP, soporte remoto y señales de inspección.
 - `skills/persistence_audit/persistence_scanner.py` — revisa persistencia en registro, servicios, tareas, WMI y drivers.
 - `skills/compliance_engine/legal_engine.py` — cruza hallazgos técnicos con normativa española y europea.
-- `ui/server.py` — servidor web para visualizar resultados en interfaz HTML.
+- `ui/server.py` — servidor web para visualizar resultados en interfaz HTML y en el espacio "El Espejo".
 
 ---
 
@@ -108,6 +110,25 @@ Notas:
 - Requiere conexión a Internet la primera vez (para descargar `get-pip.py` y paquetes).
 - Después de la primera instalación, puede ejecutarse de forma local con el runtime portable.
 
+### Mini consola portable (sin terminal visible)
+
+Si la persona usuaria no quiere abrir PowerShell o no sabe usar comandos, hay una
+mini consola gráfica pensada para doble clic:
+
+1. Ejecuta `scripts\build_mini_console_exe.bat` para generar `release\WorkDRAG_Mini.exe`.
+2. Copia `release\WorkDRAG_Mini.exe` junto con la carpeta del proyecto si quieres llevarlo en USB.
+3. Abre `mini_console.pyw` directamente o usa `scripts\portable\start_mini_console.vbs` si prefieres el arranque silencioso desde la carpeta completa.
+
+La mini consola permite:
+
+- iniciar la auditoría completa sin terminal visible,
+- abrir el dashboard web,
+- acceder a `El Espejo`,
+- y guardar resultados en `exports/`.
+
+> Para el uso diario no técnico, la vía más simple es: abrir la mini consola o
+> abrir el dashboard web.
+
 ---
 
 ## Cómo se ejecuta
@@ -120,8 +141,7 @@ Desde la raíz del proyecto:
 cd C:\worker-rights-agent
 ```
 
-> En PowerShell, `run.bat` sin ruta puede no resolverse. Usa siempre
-> `& .\scripts\run.bat ...` (o entra en `scripts` y ejecuta `& .\run.bat ...`).
+> En PowerShell, usa siempre la ruta explícita del lanzador portable.
 
 Auditoría completa:
 
@@ -143,7 +163,30 @@ Variantes útiles:
 
 # Solo JSON (sin PDF)
 & .\scripts\run.bat --no-interactive --quiet --no-pdf
+
+# Abrir la mini consola portátil (sin terminal visible)
+Start-Process .\mini_console.pyw
+
+# Generar el EXE portable de la mini consola
+& .\scripts\build_mini_console_exe.bat
 ```
+
+### Modo dashboard web
+
+Si prefieres una interfaz visual local:
+
+```powershell
+& .\scripts\run.bat --no-interactive --quiet
+& .\python_portable\python.exe .\ui\server.py
+```
+
+El dashboard incluye:
+
+- resumen ejecutivo,
+- hallazgos detallados,
+- evaluación legal,
+- comparación de informes,
+- y `El Espejo`, pensado para devolver el contexto colectivo de forma anónima.
 
 Para listar resultados:
 
@@ -153,7 +196,7 @@ Get-ChildItem .\exports -Recurse -File
 
 ### Modo consola (auditoría completa)
 
-1. Abre una terminal en la raíz del proyecto.
+1. Abre una terminal en la raíz del proyecto, o usa la mini consola si prefieres no ver la terminal.
 2. Ejecuta `scripts\run.bat` con las opciones deseadas.
 3. En modo interactivo, confirma cuando se solicite.
 
