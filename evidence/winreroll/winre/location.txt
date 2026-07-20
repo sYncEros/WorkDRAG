@@ -1,0 +1,4 @@
+[WinRE Location]
+Partition offset=510989959168
+Relative path=\Recovery\WindowsRE
+OS Guid={5B169935-459E-11F0-BBC1-E3B84AF6A041}

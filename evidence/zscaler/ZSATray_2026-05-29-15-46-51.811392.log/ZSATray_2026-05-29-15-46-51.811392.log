@@ -1,0 +1,1499 @@
+2026-05-29 15:46:51.815483(+0200)[14860:14864] INF Timezone: Hora de verano romance, Offset: 7200, Standard Name: Hora estándar romance, UTC Offset: 3600
+2026-05-29 15:46:51.930483(+0200)[14860:14864] INF ZSATray App Version  : 4.7.0.88
+2026-05-29 15:46:51.930483(+0200)[14860:14864] INF ZSATray Architecture : x64
+2026-05-29 15:46:51.930483(+0200)[14860:14864] INF ZSATray GIT Hash     : 765b06539d23ee7f68cb091fc448312c8b9cbaa1
+2026-05-29 15:46:51.944063(+0200)[14860:14864] INF Language for ZCC     : [Code:es, Name:English]
+2026-05-29 15:46:52.757172(+0200)[14860:14864] INF Main service already running
+2026-05-29 15:46:53.193971(+0200)[14860:14864] INF Starting RPC server
+2026-05-29 15:46:53.195980(+0200)[14860:14864] INF ZSATray RPC server started
+2026-05-29 15:46:53.198021(+0200)[14860:14864] INF Sending process Id: 14860
+2026-05-29 15:46:53.534698(+0200)[14860:14864] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 15:46:53.534698(+0200)[14860:14864] INF Process Id sent
+2026-05-29 15:46:54.105062(+0200)[14860:14864] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 15:46:54.105062(+0200)[14860:14864] INF Pulling tray policy.
+2026-05-29 15:46:54.287325(+0200)[14860:12616] INF RPC notification code: ZSATRAYMANAGER_UPDATE_TRAY_POLICY_RESPONSE
+2026-05-29 15:46:54.364486(+0200)[14860:14368] INF Skipping tunnel status processing as mainform is not instantiated.
+2026-05-29 15:46:55.423092(+0200)[14860:16128] DBG InstallWebView2 policy changed. OldValue: False, NewValue: True
+2026-05-29 15:46:55.450015(+0200)[14860:16128] INF Client policy ZPN enabled. Broker Cloud: prod.zpath.net
+2026-05-29 15:46:55.450015(+0200)[14860:16128] INF Client policy enableZpaAuthUserName: False
+2026-05-29 15:46:55.450015(+0200)[14860:16128] DBG processZPAPart: domain: emeal.nttdata.com
+2026-05-29 15:46:55.450015(+0200)[14860:16128] INF ZPA Auto reauth state: False
+2026-05-29 15:46:56.241919(+0200)[14860:14368] INF Skipping tunnel status processing as mainform is not instantiated.
+2026-05-29 15:46:56.714246(+0200)[14860:16128] DBG [processLoginHint] url: https://samlsp.private.zscaler.com/auth/v2/login?domain=emeal.nttdata.com&redrurl=https:%2f%2fmobile.zscalerthree.net%2ftest.html&code_challenge=&code_challenge_method=S256
+2026-05-29 15:46:56.714246(+0200)[14860:16128] INF ProcessZPAPart completed
+2026-05-29 15:46:56.854007(+0200)[14860:16128] DBG Partner Login : Updating user allow partner tenant list
+2026-05-29 15:46:56.854007(+0200)[14860:16128] INF processCommonPolicy completed
+2026-05-29 15:46:56.854007(+0200)[14860:16128] INF configureLogger
+2026-05-29 15:46:56.943856(+0200)[14860:16128] INF maxCompositeSize has been updated to 10MB, triggering cleanup...
+2026-05-29 15:46:56.943856(+0200)[14860:16128] INF processClientPolicy: ZSAAuth.clientPolicy.strictEnforcement=False
+2026-05-29 15:46:56.943856(+0200)[14860:16128] INF configureLogger completed
+2026-05-29 15:46:57.002916(+0200)[14860:16128] INF ZSATrayForm.updatePolicy
+2026-05-29 15:46:57.002916(+0200)[14860:16128] INF processClientPolicy completed
+2026-05-29 15:46:57.002916(+0200)[14860:16128] INF Tray Policy received.
+2026-05-29 15:46:57.002916(+0200)[14860:16128] DBG Main tenant Browser auth: false
+2026-05-29 15:46:57.065743(+0200)[14860:16128] INF togglePartnerZPAActiveTunnel: Partner Tenant list is empty
+2026-05-29 15:46:57.102627(+0200)[14860:14864] INF updatePartnerTenantObservalbleList entry
+2026-05-29 15:46:57.102627(+0200)[14860:14864] INF clear partnerTenantObservableList
+2026-05-29 15:46:57.102627(+0200)[14860:14864] INF updatePartnerTenantObservalbleList exit
+2026-05-29 15:46:57.102627(+0200)[14860:14864] INF Pulled tray policy.
+2026-05-29 15:46:57.205875(+0200)[14860:16128] DBG PolicyChangeController: Client policy updated.
+2026-05-29 15:46:57.584210(+0200)[14860:14368] INF RPC notification code: ZSATRAYMANAGER_SEND_NOTIFICATION_HISTORY
+2026-05-29 15:46:57.607919(+0200)[14860:14864] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 15:46:57.734142(+0200)[14860:16172] INF Parsing notification history: found 100 notifications
+2026-05-29 15:46:57.786495(+0200)[14860:14864] INF Failed to set WBC emulation mode: No value exists with that name.
+2026-05-29 15:46:57.828263(+0200)[14860:14368] INF Skipping tunnel status processing as mainform is not instantiated.
+2026-05-29 15:46:58.234494(+0200)[14860:16172] DBG ZSANotificationButton: no action found.
+2026-05-29 15:46:58.248749(+0200)[14860:16172] DBG ZSANotificationButton: no action found.
+2026-05-29 15:46:58.248749(+0200)[14860:16172] DBG ZSANotificationButton: no action found.
+2026-05-29 15:46:58.436531(+0200)[14860:16116] INF RPC notification code: ZSATRAYMANAGER_AT_MODE_STATUS
+2026-05-29 15:47:00.330062(+0200)[14860:14864] INF Init main window
+2026-05-29 15:47:00.575745(+0200)[14860:12616] INF Skipping tunnel status processing as mainform is not instantiated.
+2026-05-29 15:47:00.869283(+0200)[14860:14864] INF Performing initialization
+2026-05-29 15:47:01.938723(+0200)[14860:14360] INF [LogMon] Logger monitor woke up, clean up triggered. Size 5029
+2026-05-29 15:47:02.015647(+0200)[14860:12616] DBG [findFilesAndOperateV2] Operating on C:\Users\jnavaqui\AppData\Local\Zscaler
+2026-05-29 15:47:02.157575(+0200)[14860:12616] DBG [findFilesAndOperateV2] Operation done on C:\Users\jnavaqui\AppData\Local\Zscaler
+2026-05-29 15:47:02.159603(+0200)[14860:16116] INF Skipping tunnel status processing as mainform is not instantiated.
+2026-05-29 15:47:02.213640(+0200)[14860:12616] DBG [findFilesAndOperateV2] Operating on C:\Users\jnavaqui\AppData\Roaming\..\Local\Zscaler
+2026-05-29 15:47:02.223542(+0200)[14860:12616] DBG [findFilesAndOperateV2] Operation done on C:\Users\jnavaqui\AppData\Roaming\..\Local\Zscaler
+2026-05-29 15:47:02.263620(+0200)[14860:12616] DBG called removeDumpFile for [dumpFiles:0, dwMaxDumpToRetain:10, bDeleteOldDump:1]
+2026-05-29 15:47:02.263620(+0200)[14860:12616] DBG called removeDumpFile for [dumpFiles:0, dwMaxDumpToRetain:10, bDeleteOldDump:0]
+2026-05-29 15:47:02.620984(+0200)[14860:14360] DBG [LogMon] [createZipAndReplace] Successfully compressed C:\Users\jnavaqui\AppData\Local\Zscaler/ZSATray_2026-05-29-03-35-34.784845.log to C:\Users\jnavaqui\AppData\Local\Zscaler/ZSATray_2026-05-29-03-35-34.784845.log.zip
+2026-05-29 15:47:02.627025(+0200)[14860:14360] DBG [LogMon] [findFilesAndOperateV2] Operating on C:\Users\jnavaqui\AppData\Local\Zscaler
+2026-05-29 15:47:02.629041(+0200)[14860:14360] DBG [LogMon] [findFilesAndOperateV2] Operation done on C:\Users\jnavaqui\AppData\Local\Zscaler
+2026-05-29 15:47:02.629041(+0200)[14860:14360] DBG [LogMon] [logCleanUp] maxCompositeSize: 10485760, Current compositeSize: 989699, skippedFiles: ZSATray_2026-05-29-15-46-51.811392.log
+2026-05-29 15:47:03.711679(+0200)[14860:12616] INF Skipping tunnel status processing as mainform is not instantiated.
+2026-05-29 15:47:05.321763(+0200)[14860:12616] INF Skipping tunnel status processing as mainform is not instantiated.
+2026-05-29 15:47:06.906549(+0200)[14860:14864] INF Loading Main Form as user is Enrolled
+2026-05-29 15:47:06.912592(+0200)[14860:14864] DBG Started listening for Quit Event
+2026-05-29 15:47:06.912592(+0200)[14860:12616] INF Skipping tunnel status processing as mainform is not instantiated.
+2026-05-29 15:47:08.098973(+0200)[14860:12616] INF RPC notification code: ZSATUNNEL_START_COMPLETE
+2026-05-29 15:47:08.467247(+0200)[14860:12616] INF Skipping tunnel status processing as mainform is not instantiated.
+2026-05-29 15:47:10.016614(+0200)[14860:12616] INF Skipping tunnel status processing as mainform is not instantiated.
+2026-05-29 15:47:11.357155(+0200)[14860:14864] INF UI: Opening App briefly
+2026-05-29 15:47:11.357155(+0200)[14860:14864] INF UI: Closing the app
+2026-05-29 15:47:11.370347(+0200)[14860:14864] INF Updating username after update client policy
+2026-05-29 15:47:11.370347(+0200)[14860:14864] INF ZSAMainForm not created yet!!
+2026-05-29 15:47:11.376182(+0200)[14860:14864] INF ZSATrayForm.policyDelegate delegate not present
+2026-05-29 15:47:11.384290(+0200)[14860:14864] INF ZSAMainForm is not initialized. Skipping Tamper protection status update.
+2026-05-29 15:47:11.398223(+0200)[14860:14864] INF Instantiating ZSAMainForm...
+2026-05-29 15:47:11.879561(+0200)[14860:16116] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 15:47:12.189480(+0200)[14860:14368] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 15:47:12.283318(+0200)[14860:16172] INF Notified proxy settings changes
+2026-05-29 15:47:12.289181(+0200)[14860:16128] INF Notified proxy settings changes
+2026-05-29 15:47:12.301164(+0200)[14860:16172] INF Refreshed proxy settings changes
+2026-05-29 15:47:12.313373(+0200)[14860:16128] INF Refreshed proxy settings changes
+2026-05-29 15:47:13.226198(+0200)[14860:14864] INF SSIT: show popup toggle visible? False
+2026-05-29 15:47:13.270398(+0200)[14860:14864] INF UI: Main Form, Snooze Menu initialized.
+2026-05-29 15:47:13.288270(+0200)[14860:14864] INF UI: Main Form, Notifications resumed.
+2026-05-29 15:47:13.336039(+0200)[14860:14864] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 15:47:13.350188(+0200)[14860:14864] INF Popup Manager: stopped snoozing notifications
+2026-05-29 15:47:14.034184(+0200)[14860:17068] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-29 15:47:14.432568(+0200)[14860:16844] INF Network address changed.
+2026-05-29 15:47:14.434598(+0200)[14860:16844] INF Posture Check called on Network Change
+2026-05-29 15:47:14.512441(+0200)[14860:16844] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 15:47:14.514465(+0200)[14860:16844] INF Evaluated Device Postures
+2026-05-29 15:47:16.165427(+0200)[14860:16840] INF Network address changed.
+2026-05-29 15:47:16.165427(+0200)[14860:16840] INF Posture Check called on Network Change
+2026-05-29 15:47:16.227058(+0200)[14860:16840] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 15:47:16.229079(+0200)[14860:16840] INF Evaluated Device Postures
+2026-05-29 15:47:17.119183(+0200)[14860:16116] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-29 15:47:18.700776(+0200)[14860:16844] INF Network address changed.
+2026-05-29 15:47:18.700776(+0200)[14860:16844] INF Posture Check called on Network Change
+2026-05-29 15:47:18.750837(+0200)[14860:16844] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 15:47:18.750837(+0200)[14860:16844] INF Evaluated Device Postures
+2026-05-29 15:47:19.883941(+0200)[14860:14864] INF UI: Main Form, Log Level initialized
+2026-05-29 15:47:19.888010(+0200)[14860:14864] INF UI: Main Form, Log Level Changed
+2026-05-29 15:47:19.888010(+0200)[14860:14864] INF UI: Log level init
+2026-05-29 15:47:20.645732(+0200)[14860:14864] DBG Filling all the 3rd party library data into list.
+2026-05-29 15:47:20.795658(+0200)[14860:14864] INF ZSAMainForm is activeDelegate
+2026-05-29 15:47:20.846788(+0200)[14860:14864] INF SSIT: show popup toggle visible? False
+2026-05-29 15:47:20.854911(+0200)[14860:14864] INF policyUpdate: supportEnabled=0
+2026-05-29 15:47:20.854911(+0200)[14860:14864] INF policyUpdate: strictEnforcement=False
+2026-05-29 15:47:20.856958(+0200)[14860:14864] INF HighLightActiveControl for accessibility is Disabled
+2026-05-29 15:47:20.879031(+0200)[14860:14864] INF UI: Update text styles for accessibility
+2026-05-29 15:47:21.463543(+0200)[14860:17460] INF RPC notification code: ZSATRAYMANAGER_AT_MODE_STATUS
+2026-05-29 15:47:21.465580(+0200)[14860:14864] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 15:47:21.465580(+0200)[14860:14864] INF ++ Tunnel Status changed ++Connecting...
+2026-05-29 15:47:21.465580(+0200)[14860:14864] INF ++ updateAutomationPropertyZSAMFWebSecurityStatus Tunnel Network status ++Connecting...
+2026-05-29 15:47:21.467598(+0200)[14860:14864] INF ++ updateAutomationPropertyZSAMFMonitoringServiceStatus Tunnel Network status ++
+2026-05-29 15:47:21.469635(+0200)[14860:14864] INF ++ Private Access Status changed ++Connecting...
+2026-05-29 15:47:21.473726(+0200)[14860:14864] DBG ViewController: 1
+2026-05-29 15:47:21.473726(+0200)[14860:14864] INF ZSAMainForm instantiated.
+2026-05-29 15:47:21.499620(+0200)[14860:14864] INF Auth delegate not present
+2026-05-29 15:47:21.503661(+0200)[14860:14864] INF Tray form visible
+2026-05-29 15:47:21.516905(+0200)[14860:16116] DBG ZIAProtocol changed from: [-] To: [v2.0 - DTLS]
+2026-05-29 15:47:21.516905(+0200)[14860:16116] INF ZIA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-29 15:47:21.518925(+0200)[14860:12616] DBG ZIAProtocol changed from: [-] To: [v2.0 - DTLS]
+2026-05-29 15:47:21.520960(+0200)[14860:12616] INF ZIA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-29 15:47:21.713315(+0200)[14860:16116] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-29 15:47:21.727289(+0200)[14860:18972] INF sendKeepAliveResponse: {"error":0,"errorMessage":"","loginName":"###","success":true,"userAllowedToAddPartner":true}
+2026-05-29 15:47:21.739209(+0200)[14860:18972] INF KeepAliveResponse ZSAAuth.clientPolicy.userEnrolled: true
+2026-05-29 15:47:21.743279(+0200)[14860:18972] INF UI: ZSATrayForm showActive
+2026-05-29 15:47:22.005458(+0200)[14860:14864] INF SlidingMenu_Loaded: strictEnforcement=False
+2026-05-29 15:47:22.044589(+0200)[14860:14864] INF Tray form hidden
+2026-05-29 15:47:22.084755(+0200)[14860:16128] DBG Notification popup suppressed: Internet Security is Connected.
+2026-05-29 15:47:22.084755(+0200)[14860:16140] DBG Notification popup suppressed: Private Access is Connected.
+2026-05-29 15:47:22.084755(+0200)[14860:14864] INF Tamper protection is enabled and protecting.
+2026-05-29 15:47:22.084755(+0200)[14860:14864] DBG Tamper protection: Toggling link's visibility on Tray to True
+2026-05-29 15:47:23.061546(+0200)[14860:16116] INF ZPA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-29 15:47:23.064572(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 15:47:24.589808(+0200)[14860:14864] INF Updating username after update client policy
+2026-05-29 15:47:24.591842(+0200)[14860:14864] INF UI: ZSATrayForm activeDelegate: ZSATray.ZSAMainForm
+2026-05-29 15:47:24.675159(+0200)[14860:14864] INF Updating link to Disable Tamper Protection
+2026-05-29 15:47:24.677197(+0200)[14860:14864] INF Updating link to Disable Tamper Protection
+2026-05-29 15:47:41.354663(+0200)[14860:16116] INF ZPA state changed, From: TUNNEL_FORWARDING To: CONNECTING
+2026-05-29 15:47:41.356692(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 15:47:44.438651(+0200)[14860:16116] INF ZPA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-29 15:47:44.438651(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 15:54:51.591723(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-29 15:54:52.455742(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-29 16:13:28.012001(+0200)[14860:8748] INF RPC notification code: ZSATRAYMANAGER_AT_MODE_STATUS
+2026-05-29 16:13:28.012001(+0200)[14860:14864] INF Tamper protection is enabled and protecting.
+2026-05-29 16:13:28.012001(+0200)[14860:14864] DBG Tamper protection: Toggling link's visibility on Tray to True
+2026-05-29 16:13:28.012001(+0200)[14860:14864] INF Updating link to Disable Tamper Protection
+2026-05-29 16:13:28.059568(+0200)[14860:8108] INF RPC notification code: ZSATRAYMANAGER_INSTALL_FIREFOX_CERT
+2026-05-29 16:13:28.202601(+0200)[14860:16140] INF Installing certificates for FireFox, Cert Thumbprint: 0D23EE8F0F0560B9F68F2437C526D3CDF1FAF0C5
+2026-05-29 16:13:28.463900(+0200)[14860:16140] INF Mozilla certificate installed. Key: 0D23EE8F0F0560B9F68F2437C526D3CDF1FAF0C5, dbType: 
+2026-05-29 16:13:28.614067(+0200)[14860:16140] INF Mozilla certificate installed. Key: 0D23EE8F0F0560B9F68F2437C526D3CDF1FAF0C5, dbType: 
+2026-05-29 16:13:28.756722(+0200)[14860:16140] INF Mozilla certificate installed. Key: 0D23EE8F0F0560B9F68F2437C526D3CDF1FAF0C5, dbType: 
+2026-05-29 16:13:28.903564(+0200)[14860:16140] INF Mozilla certificate installed. Key: 0D23EE8F0F0560B9F68F2437C526D3CDF1FAF0C5, dbType: sql:
+2026-05-29 16:13:29.058393(+0200)[14860:16140] INF Mozilla certificate installed. Key: 0D23EE8F0F0560B9F68F2437C526D3CDF1FAF0C5, dbType: sql:
+2026-05-29 16:13:29.233356(+0200)[14860:16140] INF Mozilla certificate installed. Key: 0D23EE8F0F0560B9F68F2437C526D3CDF1FAF0C5, dbType: sql:
+2026-05-29 16:13:29.233356(+0200)[14860:16140] INF Done with installFirefoxCerts. isSuccess: [True]
+2026-05-29 16:14:19.960663(+0200)[14860:8748] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 16:14:19.967655(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 16:14:19.978685(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 16:14:20.020563(+0200)[14860:8748] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 16:14:20.029145(+0200)[14860:18972] INF Notified proxy settings changes
+2026-05-29 16:14:20.031159(+0200)[14860:18972] INF Refreshed proxy settings changes
+2026-05-29 16:14:22.026673(+0200)[14860:8108] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 16:14:22.035980(+0200)[14860:8108] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-29 16:14:22.035980(+0200)[14860:16128] INF Notified proxy settings changes
+2026-05-29 16:14:22.035980(+0200)[14860:18976] INF sendKeepAliveResponse: {"error":0,"errorMessage":"","loginName":"###","success":true,"userAllowedToAddPartner":true}
+2026-05-29 16:14:22.035980(+0200)[14860:18976] INF KeepAliveResponse ZSAAuth.clientPolicy.userEnrolled: true
+2026-05-29 16:14:22.035980(+0200)[14860:18976] INF UI: ZSATrayForm showActive
+2026-05-29 16:14:22.035980(+0200)[14860:14864] INF Updating username after update client policy
+2026-05-29 16:14:22.044931(+0200)[14860:14864] INF UI: ZSATrayForm activeDelegate: ZSATray.ZSAMainForm
+2026-05-29 16:14:22.063047(+0200)[14860:16128] INF Refreshed proxy settings changes
+2026-05-29 16:14:22.171665(+0200)[14860:8108] INF RPC notification code: ZSATRAYMANAGER_TRIGGER_POLICY_CHANGE
+2026-05-29 16:14:22.176952(+0200)[14860:8748] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 16:14:22.181687(+0200)[14860:8748] INF RPC notification code: ZSATRAYMANAGER_UPDATE_TRAY_POLICY_RESPONSE
+2026-05-29 16:14:22.181687(+0200)[14860:16172] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 16:14:22.181687(+0200)[14860:18968] INF Client policy ZPN enabled. Broker Cloud: prod.zpath.net
+2026-05-29 16:14:22.181687(+0200)[14860:18968] INF Client policy enableZpaAuthUserName: False
+2026-05-29 16:14:22.181687(+0200)[14860:14864] INF Updating username after update client policy
+2026-05-29 16:14:22.181687(+0200)[14860:18968] DBG processZPAPart: domain: emeal.nttdata.com
+2026-05-29 16:14:22.181687(+0200)[14860:18968] INF ZPA Auto reauth state: False
+2026-05-29 16:14:22.181687(+0200)[14860:16172] INF Pulling tray policy.
+2026-05-29 16:14:22.181687(+0200)[14860:18968] DBG [processLoginHint] url: https://samlsp.private.zscaler.com/auth/v2/login?domain=emeal.nttdata.com&redrurl=https:%2f%2fmobile.zscalerthree.net%2ftest.html&code_challenge=&code_challenge_method=S256
+2026-05-29 16:14:22.181687(+0200)[14860:18968] INF ProcessZPAPart completed
+2026-05-29 16:14:22.181687(+0200)[14860:18968] DBG Partner Login : Updating user allow partner tenant list
+2026-05-29 16:14:22.181687(+0200)[14860:18968] INF processCommonPolicy completed
+2026-05-29 16:14:22.181687(+0200)[14860:18968] INF configureLogger
+2026-05-29 16:14:22.181687(+0200)[14860:18968] INF maxCompositeSize has been updated to 10MB, triggering cleanup...
+2026-05-29 16:14:22.181687(+0200)[14860:18968] INF processClientPolicy: ZSAAuth.clientPolicy.strictEnforcement=False
+2026-05-29 16:14:22.181687(+0200)[14860:18968] INF configureLogger completed
+2026-05-29 16:14:22.181687(+0200)[14860:18968] INF ZSATrayForm.updatePolicy
+2026-05-29 16:14:22.183708(+0200)[14860:18968] INF processClientPolicy completed
+2026-05-29 16:14:22.183708(+0200)[14860:18968] INF Tray Policy received.
+2026-05-29 16:14:22.183708(+0200)[14860:18968] DBG Main tenant Browser auth: false
+2026-05-29 16:14:22.183708(+0200)[14860:18968] DBG PolicyChangeController: Client policy updated.
+2026-05-29 16:14:22.183708(+0200)[14860:14864] INF updatePartnerTenantObservalbleList entry
+2026-05-29 16:14:22.183708(+0200)[14860:14864] INF clear partnerTenantObservableList
+2026-05-29 16:14:22.183708(+0200)[14860:14864] INF updatePartnerTenantObservalbleList exit
+2026-05-29 16:14:22.183708(+0200)[14860:16172] INF Pulled tray policy.
+2026-05-29 16:14:22.183708(+0200)[14860:14864] INF SSIT: show popup toggle visible? False
+2026-05-29 16:14:22.184759(+0200)[14860:14864] INF policyUpdate: supportEnabled=0
+2026-05-29 16:14:22.184759(+0200)[14860:14864] INF policyUpdate: strictEnforcement=False
+2026-05-29 16:14:22.184759(+0200)[14860:14864] INF HighLightActiveControl for accessibility is Disabled
+2026-05-29 16:14:22.184759(+0200)[14860:14864] INF SSIT: show popup toggle visible? False
+2026-05-29 16:14:22.184759(+0200)[14860:14864] INF policyUpdate: supportEnabled=0
+2026-05-29 16:14:22.184759(+0200)[14860:14864] INF policyUpdate: strictEnforcement=False
+2026-05-29 16:14:22.184759(+0200)[14860:14864] INF HighLightActiveControl for accessibility is Disabled
+2026-05-29 16:14:22.189013(+0200)[14860:18976] INF Notified proxy settings changes
+2026-05-29 16:14:22.192802(+0200)[14860:18976] INF Refreshed proxy settings changes
+2026-05-29 16:14:22.230987(+0200)[14860:8748] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 16:14:22.230987(+0200)[14860:16140] INF Notified proxy settings changes
+2026-05-29 16:14:22.243146(+0200)[14860:16140] INF Refreshed proxy settings changes
+2026-05-29 16:14:24.172393(+0200)[14860:14360] INF [LogMon] Logger monitor woke up, clean up triggered. Size 22105
+2026-05-29 16:14:24.176692(+0200)[14860:14360] DBG [LogMon] [findFilesAndOperateV2] Operating on C:\Users\jnavaqui\AppData\Local\Zscaler
+2026-05-29 16:14:24.188324(+0200)[14860:14360] DBG [LogMon] [findFilesAndOperateV2] Operation done on C:\Users\jnavaqui\AppData\Local\Zscaler
+2026-05-29 16:14:24.188324(+0200)[14860:14360] DBG [LogMon] [logCleanUp] maxCompositeSize: 10485760, Current compositeSize: 989699, skippedFiles: ZSATray_2026-05-29-15-46-51.811392.log
+2026-05-29 17:26:11.680736(+0200)[14860:20244] INF ZPA state changed, From: TUNNEL_FORWARDING To: SERVICE_DOWN_ERROR
+2026-05-29 17:26:11.684843(+0200)[14860:20244] INF ZIA state changed, From: TUNNEL_FORWARDING To: SERVICE_DOWN_ERROR
+2026-05-29 17:26:11.709579(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 17:26:15.402880(+0200)[14860:20244] INF ZPA state changed, From: SERVICE_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 17:26:15.413698(+0200)[14860:20244] INF ZIA state changed, From: SERVICE_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 17:26:15.442876(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 17:26:49.869216(+0200)[14860:20244] INF ZPA state changed, From: TUNNEL_FORWARDING To: SERVICE_DOWN_ERROR
+2026-05-29 17:26:49.869216(+0200)[14860:20244] INF ZIA state changed, From: TUNNEL_FORWARDING To: SERVICE_DOWN_ERROR
+2026-05-29 17:26:50.524117(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 17:26:50.855623(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 17:26:50.877965(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 17:26:55.255964(+0200)[14860:20244] INF ZPA state changed, From: SERVICE_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 17:26:55.351856(+0200)[14860:20244] INF ZIA state changed, From: SERVICE_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 17:26:55.433840(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 17:27:36.191833(+0200)[14860:20244] INF ZPA state changed, From: TUNNEL_FORWARDING To: SERVICE_DOWN_ERROR
+2026-05-29 17:27:36.191833(+0200)[14860:20244] INF ZIA state changed, From: TUNNEL_FORWARDING To: SERVICE_DOWN_ERROR
+2026-05-29 17:27:36.204289(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 17:27:40.899336(+0200)[14860:20244] INF ZPA state changed, From: SERVICE_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 17:27:40.957277(+0200)[14860:20244] INF ZIA state changed, From: SERVICE_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 17:27:41.066978(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 17:28:14.540011(+0200)[14860:20244] INF ZPA state changed, From: TUNNEL_FORWARDING To: SERVICE_DOWN_ERROR
+2026-05-29 17:28:14.540011(+0200)[14860:20244] INF ZIA state changed, From: TUNNEL_FORWARDING To: SERVICE_DOWN_ERROR
+2026-05-29 17:28:14.560246(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 17:28:15.063100(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 17:28:17.239986(+0200)[14860:20244] INF ZPA state changed, From: SERVICE_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 17:28:17.239986(+0200)[14860:20244] INF ZIA state changed, From: SERVICE_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 17:28:17.297889(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 17:28:51.364497(+0200)[14860:20244] INF ZPA state changed, From: TUNNEL_FORWARDING To: SERVICE_DOWN_ERROR
+2026-05-29 17:28:51.364497(+0200)[14860:20244] INF ZIA state changed, From: TUNNEL_FORWARDING To: SERVICE_DOWN_ERROR
+2026-05-29 17:28:51.367599(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 17:29:02.434159(+0200)[14860:20244] INF ZPA state changed, From: SERVICE_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 17:29:02.453934(+0200)[14860:20244] INF ZIA state changed, From: SERVICE_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 17:29:04.138862(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 17:37:09.191650(+0200)[14860:14864] INF User session switch: SessionLock
+2026-05-29 17:37:17.972012(+0200)[14860:22628] INF ZPA state changed, From: TUNNEL_FORWARDING To: SERVICE_DOWN_ERROR
+2026-05-29 17:37:17.972012(+0200)[14860:22628] INF ZIA state changed, From: TUNNEL_FORWARDING To: SERVICE_DOWN_ERROR
+2026-05-29 17:37:17.984205(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 17:37:19.789825(+0200)[14860:22628] INF ZPA state changed, From: SERVICE_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 17:37:19.789825(+0200)[14860:22628] INF ZIA state changed, From: SERVICE_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 17:37:19.805745(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 17:53:40.026236(+0200)[14860:7072] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-29 17:53:40.027165(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":0,"errorMessage":"","loginName":"###","success":true,"userAllowedToAddPartner":true}
+2026-05-29 17:53:40.028591(+0200)[14860:16164] INF KeepAliveResponse ZSAAuth.clientPolicy.userEnrolled: true
+2026-05-29 17:53:40.028591(+0200)[14860:16164] INF UI: ZSATrayForm showActive
+2026-05-29 17:53:40.028591(+0200)[14860:14864] INF Updating username after update client policy
+2026-05-29 17:53:40.028591(+0200)[14860:14864] INF UI: ZSATrayForm activeDelegate: ZSATray.ZSAMainForm
+2026-05-29 18:01:44.676227(+0200)[14860:14864] INF User session switch: SessionUnlock
+2026-05-29 18:10:42.147275(+0200)[14860:13836] INF ZPA state changed, From: TUNNEL_FORWARDING To: SERVICE_DOWN_ERROR
+2026-05-29 18:10:42.148261(+0200)[14860:13836] INF ZIA state changed, From: TUNNEL_FORWARDING To: SERVICE_DOWN_ERROR
+2026-05-29 18:10:42.163251(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 18:10:43.920297(+0200)[14860:13836] INF ZPA state changed, From: SERVICE_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 18:10:43.924624(+0200)[14860:13836] INF ZIA state changed, From: SERVICE_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 18:10:43.929688(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 18:43:54.468600(+0200)[14860:14864] INF User session switch: SessionLock
+2026-05-29 19:22:16.739709(+0200)[14860:14864] INF User session switch: SessionUnlock
+2026-05-29 19:34:58.464789(+0200)[14860:6900] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-29 19:34:58.480761(+0200)[14860:18976] INF sendKeepAliveResponse: {"error":0,"errorMessage":"","loginName":"###","success":true,"userAllowedToAddPartner":true}
+2026-05-29 19:34:58.480761(+0200)[14860:18976] INF KeepAliveResponse ZSAAuth.clientPolicy.userEnrolled: true
+2026-05-29 19:34:58.480761(+0200)[14860:18976] INF UI: ZSATrayForm showActive
+2026-05-29 19:34:58.480761(+0200)[14860:14864] INF Updating username after update client policy
+2026-05-29 19:34:58.480761(+0200)[14860:14864] INF UI: ZSATrayForm activeDelegate: ZSATray.ZSAMainForm
+2026-05-29 19:41:38.621532(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-29 19:46:56.894446(+0200)[14860:14864] INF User session switch: SessionLock
+2026-05-29 19:57:32.285994(+0200)[14860:14864] INF User session switch: SessionUnlock
+2026-05-29 19:57:47.999429(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-29 19:57:48.851618(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-29 21:01:36.638828(+0200)[14860:14864] INF User session switch: SessionLock
+2026-05-29 21:20:18.143192(+0200)[14860:1796] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-29 21:20:18.143192(+0200)[14860:16128] INF sendKeepAliveResponse: {"error":0,"errorMessage":"","loginName":"###","success":true,"userAllowedToAddPartner":true}
+2026-05-29 21:20:18.143192(+0200)[14860:16128] INF KeepAliveResponse ZSAAuth.clientPolicy.userEnrolled: true
+2026-05-29 21:20:18.143192(+0200)[14860:16128] INF UI: ZSATrayForm showActive
+2026-05-29 21:20:18.145219(+0200)[14860:14864] INF Updating username after update client policy
+2026-05-29 21:20:18.145219(+0200)[14860:14864] INF UI: ZSATrayForm activeDelegate: ZSATray.ZSAMainForm
+2026-05-29 21:51:05.794624(+0200)[14860:20664] INF Network changed, available: False
+2026-05-29 21:51:05.794624(+0200)[14860:20664] INF Network address changed.
+2026-05-29 21:51:06.133539(+0200)[14860:21864] DBG ZIAProtocol changed from: [v2.0 - DTLS] To: [v2.0 - TLS]
+2026-05-29 21:51:06.135568(+0200)[14860:21864] INF ZPA state changed, From: TUNNEL_FORWARDING To: ADAPTER_DOWN_ERROR
+2026-05-29 21:51:06.135568(+0200)[14860:21864] INF ZIA state changed, From: TUNNEL_FORWARDING To: ADAPTER_DOWN_ERROR
+2026-05-29 21:51:06.135568(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 21:51:06.705976(+0200)[14860:23228] INF Network address changed.
+2026-05-29 21:51:07.683747(+0200)[14860:21864] DBG ZIAProtocol changed from: [v2.0 - TLS] To: [v1.0]
+2026-05-29 21:51:17.996302(+0200)[14860:19864] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-29 21:51:17.996302(+0200)[14860:16172] DBG Notification popup suppressed: Services are down because the network is disconnected.
+2026-05-29 21:52:48.958379(+0200)[14860:23228] INF Network changed, available: True
+2026-05-29 21:52:48.958379(+0200)[14860:23228] INF Network address changed.
+2026-05-29 21:52:48.958379(+0200)[14860:23228] INF Posture Check called on Network Change
+2026-05-29 21:52:49.109625(+0200)[14860:23228] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:52:49.109625(+0200)[14860:23228] INF Evaluated Device Postures
+2026-05-29 21:52:49.109625(+0200)[14860:19864] INF ZPA state changed, From: ADAPTER_DOWN_ERROR To: SERVER_DOWN_ERROR
+2026-05-29 21:52:49.109625(+0200)[14860:19864] INF ZIA state changed, From: ADAPTER_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 21:52:49.109625(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 21:52:50.520247(+0200)[14860:19864] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:52:50.533518(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 21:52:50.537547(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 21:52:50.665035(+0200)[14860:19864] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:52:50.674830(+0200)[14860:23192] INF ZPA state changed, From: SERVER_DOWN_ERROR To: CONNECTING
+2026-05-29 21:52:50.678849(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 21:52:50.682609(+0200)[14860:18976] INF Notified proxy settings changes
+2026-05-29 21:52:50.690653(+0200)[14860:18976] INF Refreshed proxy settings changes
+2026-05-29 21:52:52.074380(+0200)[14860:14288] INF Network address changed.
+2026-05-29 21:52:52.074380(+0200)[14860:14288] INF Posture Check called on Network Change
+2026-05-29 21:52:52.106050(+0200)[14860:14288] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:52:52.106050(+0200)[14860:14288] INF Evaluated Device Postures
+2026-05-29 21:52:52.216813(+0200)[14860:21864] INF ZPA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-29 21:52:52.216813(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 21:52:53.750348(+0200)[14860:21864] DBG ZIAProtocol changed from: [v1.0] To: [v2.0 - DTLS]
+2026-05-29 21:52:59.155103(+0200)[14860:14288] INF Network address changed.
+2026-05-29 21:52:59.155103(+0200)[14860:14288] INF Posture Check called on Network Change
+2026-05-29 21:52:59.186858(+0200)[14860:14288] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:52:59.186858(+0200)[14860:14288] INF Evaluated Device Postures
+2026-05-29 21:53:01.360350(+0200)[14860:14288] INF Network address changed.
+2026-05-29 21:53:01.360350(+0200)[14860:14288] INF Posture Check called on Network Change
+2026-05-29 21:53:01.389971(+0200)[14860:14288] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:53:01.389971(+0200)[14860:14288] INF Evaluated Device Postures
+2026-05-29 21:53:01.766483(+0200)[14860:24280] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-29 21:53:01.766483(+0200)[14860:16172] DBG Notification popup suppressed: Private Access is Connected.
+2026-05-29 21:53:02.797624(+0200)[14860:24280] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-29 21:53:02.797624(+0200)[14860:18976] DBG Notification popup suppressed: Internet Security is Connected.
+2026-05-29 21:53:17.952485(+0200)[14860:24280] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:53:17.954482(+0200)[14860:16160] INF Notified proxy settings changes
+2026-05-29 21:53:17.970220(+0200)[14860:16160] INF Refreshed proxy settings changes
+2026-05-29 21:53:18.014215(+0200)[14860:23908] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:53:18.022444(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 21:53:18.033956(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 21:53:18.069218(+0200)[14860:23908] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:53:18.073448(+0200)[14860:16128] INF Notified proxy settings changes
+2026-05-29 21:53:18.078223(+0200)[14860:16128] INF Refreshed proxy settings changes
+2026-05-29 21:53:21.006324(+0200)[14860:24428] DBG ZIAProtocol changed from: [v2.0 - DTLS] To: [v2.0 - TLS]
+2026-05-29 21:53:21.006324(+0200)[14860:24428] INF ZPA state changed, From: TUNNEL_FORWARDING To: ADAPTER_DOWN_ERROR
+2026-05-29 21:53:21.006324(+0200)[14860:24428] INF ZIA state changed, From: TUNNEL_FORWARDING To: ADAPTER_DOWN_ERROR
+2026-05-29 21:53:21.012873(+0200)[14860:21164] INF Network changed, available: False
+2026-05-29 21:53:21.012873(+0200)[14860:21164] INF Network address changed.
+2026-05-29 21:53:21.017412(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 21:53:22.390371(+0200)[14860:24532] INF Network address changed.
+2026-05-29 21:53:24.096939(+0200)[14860:21864] DBG ZIAProtocol changed from: [v2.0 - TLS] To: [v1.0]
+2026-05-29 21:53:31.665773(+0200)[14860:23908] INF ZPA state changed, From: ADAPTER_DOWN_ERROR To: CONNECTING
+2026-05-29 21:53:31.665773(+0200)[14860:23908] INF ZIA state changed, From: ADAPTER_DOWN_ERROR To: CONNECTING
+2026-05-29 21:53:31.666770(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 21:53:31.871812(+0200)[14860:21164] INF Network changed, available: True
+2026-05-29 21:53:31.871812(+0200)[14860:21164] INF Network address changed.
+2026-05-29 21:53:31.871812(+0200)[14860:21164] INF Posture Check called on Network Change
+2026-05-29 21:53:31.896885(+0200)[14860:21164] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:53:31.896885(+0200)[14860:21164] INF Evaluated Device Postures
+2026-05-29 21:53:32.995069(+0200)[14860:23908] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:53:33.000087(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 21:53:33.013539(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 21:53:33.057702(+0200)[14860:23908] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:53:33.075493(+0200)[14860:16172] INF Notified proxy settings changes
+2026-05-29 21:53:33.077508(+0200)[14860:16172] INF Refreshed proxy settings changes
+2026-05-29 21:53:34.826697(+0200)[14860:21864] INF ZPA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-29 21:53:34.846811(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 21:53:36.424717(+0200)[14860:21164] INF Network address changed.
+2026-05-29 21:53:36.424717(+0200)[14860:21164] INF Posture Check called on Network Change
+2026-05-29 21:53:36.449729(+0200)[14860:21164] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:53:36.450729(+0200)[14860:21164] INF Evaluated Device Postures
+2026-05-29 21:53:36.493581(+0200)[14860:21864] DBG ZIAProtocol changed from: [v1.0] To: [v2.0 - DTLS]
+2026-05-29 21:53:36.493581(+0200)[14860:21864] INF ZIA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-29 21:53:36.497314(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 21:53:44.913515(+0200)[14860:21864] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-29 21:53:44.915526(+0200)[14860:16128] DBG Notification popup suppressed: Internet Security is Connected.
+2026-05-29 21:53:51.534359(+0200)[14860:14288] INF Network address changed.
+2026-05-29 21:53:51.534359(+0200)[14860:14288] INF Posture Check called on Network Change
+2026-05-29 21:53:51.563479(+0200)[14860:14288] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:53:51.563479(+0200)[14860:14288] INF Evaluated Device Postures
+2026-05-29 21:54:08.626966(+0200)[14860:14288] INF Network address changed.
+2026-05-29 21:54:08.626966(+0200)[14860:14288] INF Posture Check called on Network Change
+2026-05-29 21:54:08.658812(+0200)[14860:14288] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:54:08.658812(+0200)[14860:14288] INF Evaluated Device Postures
+2026-05-29 21:54:08.692063(+0200)[14860:24428] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:54:08.721876(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 21:54:08.739103(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 21:54:08.799211(+0200)[14860:24428] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:54:08.808182(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-29 21:54:08.820665(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-29 21:54:08.915418(+0200)[14860:19864] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:54:08.923758(+0200)[14860:16172] INF Notified proxy settings changes
+2026-05-29 21:54:08.926759(+0200)[14860:16172] INF Refreshed proxy settings changes
+2026-05-29 21:54:09.188290(+0200)[14860:21164] INF Network address changed.
+2026-05-29 21:54:09.188290(+0200)[14860:21164] INF Posture Check called on Network Change
+2026-05-29 21:54:09.219510(+0200)[14860:21164] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:54:09.219510(+0200)[14860:21164] INF Evaluated Device Postures
+2026-05-29 21:54:10.932768(+0200)[14860:21864] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:54:10.954856(+0200)[14860:16172] INF Notified proxy settings changes
+2026-05-29 21:54:10.958953(+0200)[14860:16172] INF Refreshed proxy settings changes
+2026-05-29 21:54:11.020631(+0200)[14860:21864] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:54:11.034595(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 21:54:11.040658(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 21:54:11.096651(+0200)[14860:21864] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:54:11.103098(+0200)[14860:16128] INF Notified proxy settings changes
+2026-05-29 21:54:11.106119(+0200)[14860:16128] INF Refreshed proxy settings changes
+2026-05-29 21:54:14.309514(+0200)[14860:14288] INF Network address changed.
+2026-05-29 21:54:14.311540(+0200)[14860:14288] INF Posture Check called on Network Change
+2026-05-29 21:54:14.345181(+0200)[14860:14288] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:54:14.345181(+0200)[14860:14288] INF Evaluated Device Postures
+2026-05-29 21:54:15.068830(+0200)[14860:21164] INF Network address changed.
+2026-05-29 21:54:15.068830(+0200)[14860:21164] INF Posture Check called on Network Change
+2026-05-29 21:54:15.115315(+0200)[14860:21164] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:54:15.115315(+0200)[14860:21164] INF Evaluated Device Postures
+2026-05-29 21:54:16.787927(+0200)[14860:21164] INF Network address changed.
+2026-05-29 21:54:16.787927(+0200)[14860:21164] INF Posture Check called on Network Change
+2026-05-29 21:54:16.802148(+0200)[14860:21164] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:54:16.802965(+0200)[14860:21164] INF Evaluated Device Postures
+2026-05-29 21:54:36.102235(+0200)[14860:21164] INF Network changed, available: False
+2026-05-29 21:54:36.102235(+0200)[14860:21164] INF Network address changed.
+2026-05-29 21:54:36.660812(+0200)[14860:14288] INF Network address changed.
+2026-05-29 21:54:37.101377(+0200)[14860:19864] DBG ZIAProtocol changed from: [v2.0 - DTLS] To: [v2.0 - TLS]
+2026-05-29 21:54:37.101377(+0200)[14860:19864] INF ZPA state changed, From: TUNNEL_FORWARDING To: ADAPTER_DOWN_ERROR
+2026-05-29 21:54:37.105646(+0200)[14860:19864] INF ZIA state changed, From: TUNNEL_FORWARDING To: ADAPTER_DOWN_ERROR
+2026-05-29 21:54:37.105646(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 21:54:38.658555(+0200)[14860:19864] DBG ZIAProtocol changed from: [v2.0 - TLS] To: [v1.0]
+2026-05-29 21:54:48.515291(+0200)[14860:24428] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-29 21:54:48.515291(+0200)[14860:18976] DBG Notification popup suppressed: Services are down because the network is disconnected.
+2026-05-29 21:55:42.359804(+0200)[14860:14288] INF Network changed, available: True
+2026-05-29 21:55:42.359804(+0200)[14860:14288] INF Network address changed.
+2026-05-29 21:55:42.359804(+0200)[14860:14288] INF Posture Check called on Network Change
+2026-05-29 21:55:42.393162(+0200)[14860:14288] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:55:42.393162(+0200)[14860:14288] INF Evaluated Device Postures
+2026-05-29 21:55:43.688497(+0200)[14860:24280] INF ZPA state changed, From: ADAPTER_DOWN_ERROR To: CONNECTING
+2026-05-29 21:55:43.688497(+0200)[14860:24280] INF ZIA state changed, From: ADAPTER_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 21:55:43.694564(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 21:55:43.968807(+0200)[14860:24428] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:55:43.987901(+0200)[14860:16128] INF Notified proxy settings changes
+2026-05-29 21:55:43.991288(+0200)[14860:16128] INF Refreshed proxy settings changes
+2026-05-29 21:55:44.054698(+0200)[14860:24428] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:55:44.069513(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-29 21:55:44.072511(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-29 21:55:45.262546(+0200)[14860:24428] INF ZPA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-29 21:55:45.264576(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 21:55:45.753524(+0200)[14860:3316] INF Network address changed.
+2026-05-29 21:55:45.753524(+0200)[14860:3316] INF Posture Check called on Network Change
+2026-05-29 21:55:45.778013(+0200)[14860:3316] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:55:45.778013(+0200)[14860:3316] INF Evaluated Device Postures
+2026-05-29 21:55:46.814107(+0200)[14860:24428] DBG ZIAProtocol changed from: [v1.0] To: [v2.0 - DTLS]
+2026-05-29 21:55:50.285915(+0200)[14860:3316] INF Network address changed.
+2026-05-29 21:55:50.285915(+0200)[14860:3316] INF Posture Check called on Network Change
+2026-05-29 21:55:50.313486(+0200)[14860:3316] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:55:50.313486(+0200)[14860:3316] INF Evaluated Device Postures
+2026-05-29 21:55:51.296790(+0200)[14860:14288] INF Network address changed.
+2026-05-29 21:55:51.297790(+0200)[14860:14288] INF Posture Check called on Network Change
+2026-05-29 21:55:51.328873(+0200)[14860:14288] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:55:51.328873(+0200)[14860:14288] INF Evaluated Device Postures
+2026-05-29 21:55:52.697950(+0200)[14860:14288] INF Network address changed.
+2026-05-29 21:55:52.697950(+0200)[14860:14288] INF Posture Check called on Network Change
+2026-05-29 21:55:52.729794(+0200)[14860:14288] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 21:55:52.729794(+0200)[14860:14288] INF Evaluated Device Postures
+2026-05-29 21:55:54.121595(+0200)[14860:23908] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-29 21:55:54.123596(+0200)[14860:16172] DBG Notification popup suppressed: Private Access is Connected.
+2026-05-29 21:55:56.152796(+0200)[14860:23908] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-29 21:55:56.154818(+0200)[14860:18976] DBG Notification popup suppressed: Internet Security is Connected.
+2026-05-29 21:56:15.289547(+0200)[14860:23908] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:56:15.304906(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 21:56:15.319055(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 21:56:15.387556(+0200)[14860:23908] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 21:56:15.392810(+0200)[14860:16160] INF Notified proxy settings changes
+2026-05-29 21:56:15.396857(+0200)[14860:16160] INF Refreshed proxy settings changes
+2026-05-29 22:06:58.855796(+0200)[14860:23908] INF ZIA state changed, From: TUNNEL_FORWARDING To: SERVER_DOWN_ERROR
+2026-05-29 22:06:58.858391(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:07:00.385199(+0200)[14860:23908] DBG ZIAProtocol changed from: [v2.0 - DTLS] To: [v1.0]
+2026-05-29 22:07:00.385199(+0200)[14860:23908] INF ZIA state changed, From: SERVER_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-29 22:07:00.385199(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:07:09.650431(+0200)[14860:23908] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-29 22:07:09.650431(+0200)[14860:16128] DBG Notification popup suppressed: Internet Security is Disconnected.
+2026-05-29 22:07:12.510619(+0200)[14860:23908] INF ZIA state changed, From: TUNNEL_FORWARDING To: SERVER_DOWN_ERROR
+2026-05-29 22:07:12.510619(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:08:05.593744(+0200)[14860:23908] INF ZPA state changed, From: TUNNEL_FORWARDING To: CONNECTING
+2026-05-29 22:08:05.595744(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:08:07.044318(+0200)[14860:14652] INF Network address changed.
+2026-05-29 22:08:07.044318(+0200)[14860:14652] INF Posture Check called on Network Change
+2026-05-29 22:08:07.072579(+0200)[14860:14652] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 22:08:07.072579(+0200)[14860:14652] INF Evaluated Device Postures
+2026-05-29 22:08:09.278639(+0200)[14860:23908] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:08:09.289212(+0200)[14860:18976] INF Notified proxy settings changes
+2026-05-29 22:08:09.299351(+0200)[14860:18976] INF Refreshed proxy settings changes
+2026-05-29 22:08:09.338571(+0200)[14860:23908] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:08:09.348572(+0200)[14860:16128] INF Notified proxy settings changes
+2026-05-29 22:08:09.360274(+0200)[14860:16128] INF Refreshed proxy settings changes
+2026-05-29 22:08:09.442805(+0200)[14860:23908] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:08:09.451788(+0200)[14860:16172] INF Notified proxy settings changes
+2026-05-29 22:08:09.454792(+0200)[14860:16172] INF Refreshed proxy settings changes
+2026-05-29 22:08:10.170144(+0200)[14860:18328] INF ZIA state changed, From: SERVER_DOWN_ERROR To: CONNECTING
+2026-05-29 22:08:10.173625(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:08:38.964372(+0200)[14860:24544] INF ZIA state changed, From: CONNECTING To: SERVER_DOWN_ERROR
+2026-05-29 22:08:38.964372(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:08:57.137457(+0200)[14860:24544] INF ZPA state changed, From: CONNECTING To: SERVER_DOWN_ERROR
+2026-05-29 22:08:57.137457(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:09:06.302347(+0200)[14860:18328] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-29 22:09:06.305146(+0200)[14860:18976] DBG Notification popup suppressed: Private Access is Disconnected.
+2026-05-29 22:09:19.901315(+0200)[14860:18328] INF ZPA state changed, From: SERVER_DOWN_ERROR To: CONNECTING
+2026-05-29 22:09:19.901315(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:09:41.123159(+0200)[14860:18328] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:09:41.125178(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:10:17.467016(+0200)[14860:18328] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:10:17.469030(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:10:38.684601(+0200)[14860:18328] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:10:38.687097(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:11:10.528277(+0200)[14860:18328] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:11:10.532667(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:11:33.262836(+0200)[14860:18328] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:11:33.262836(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:12:08.083343(+0200)[14860:18328] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:12:08.085360(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:12:42.935940(+0200)[14860:18328] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:12:42.935940(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:13:14.765074(+0200)[14860:18328] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:13:14.765074(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:13:37.533632(+0200)[14860:18328] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:13:37.534631(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:14:09.389518(+0200)[14860:18328] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:14:09.391538(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:14:44.251756(+0200)[14860:18328] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:14:44.251756(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:15:19.094049(+0200)[14860:18328] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:15:19.094049(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:15:28.210076(+0200)[14860:18328] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:15:28.210076(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:16:01.550414(+0200)[14860:18328] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:16:01.552446(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:16:22.770136(+0200)[14860:18328] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:16:22.770136(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:16:59.115499(+0200)[14860:18328] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:16:59.117493(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:17:08.220351(+0200)[14860:18328] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:17:08.220351(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:17:40.079173(+0200)[14860:18328] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:17:40.079173(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:18:02.817845(+0200)[14860:18328] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:18:02.818836(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:18:37.660096(+0200)[14860:18328] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:18:37.660096(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:18:48.318049(+0200)[14860:18328] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:18:48.319051(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:19:20.117624(+0200)[14860:22188] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:19:20.118613(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:19:54.990931(+0200)[14860:22188] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:19:54.991932(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:20:26.830814(+0200)[14860:22188] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:20:26.830814(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:20:49.548936(+0200)[14860:22188] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:20:49.548936(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:21:24.410497(+0200)[14860:22188] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:21:24.410497(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:21:57.784951(+0200)[14860:22188] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:21:57.784951(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:22:31.132377(+0200)[14860:22188] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:22:31.134400(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:22:52.352996(+0200)[14860:22188] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:22:52.355018(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:23:27.197215(+0200)[14860:22188] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:23:27.198220(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:23:49.945759(+0200)[14860:22188] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:23:49.945759(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:24:21.749712(+0200)[14860:22188] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:24:21.750711(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:24:56.614055(+0200)[14860:22188] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:24:56.614055(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:25:31.459881(+0200)[14860:22188] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:25:31.459881(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:25:54.212453(+0200)[14860:22188] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:25:54.214481(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:26:29.041635(+0200)[14860:22188] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:26:29.043668(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:26:51.787761(+0200)[14860:22188] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:26:51.787761(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:27:23.636462(+0200)[14860:22188] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:27:23.638463(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:27:34.288559(+0200)[14860:22188] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:27:34.293868(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:28:09.150157(+0200)[14860:20936] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:28:09.152153(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:28:42.496387(+0200)[14860:22188] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:28:42.497384(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:29:15.870184(+0200)[14860:22188] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:29:15.872182(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:29:49.214504(+0200)[14860:22188] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:29:49.216505(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:30:21.035153(+0200)[14860:22188] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:30:21.035153(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:30:43.778844(+0200)[14860:22188] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:30:43.779854(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:31:18.649683(+0200)[14860:22188] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:31:18.649683(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:31:41.340670(+0200)[14860:22188] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:31:41.340670(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:32:16.183130(+0200)[14860:22188] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:32:16.187177(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:32:26.810247(+0200)[14860:20720] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:32:26.812245(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:32:58.636807(+0200)[14860:20720] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:32:58.636807(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:33:33.482308(+0200)[14860:20720] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:33:33.484305(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:34:05.311874(+0200)[14860:20720] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:34:05.312873(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:34:26.525930(+0200)[14860:20720] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:34:26.525930(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:35:02.936122(+0200)[14860:20720] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:35:02.937128(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:35:24.099115(+0200)[14860:20720] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:35:24.099115(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:35:58.963408(+0200)[14860:20720] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:35:58.963408(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:36:33.791850(+0200)[14860:20720] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:36:33.791850(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:37:08.682625(+0200)[14860:20720] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:37:08.686214(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:37:31.458094(+0200)[14860:20720] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:37:31.460091(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:38:06.322582(+0200)[14860:20720] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:38:06.322582(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:38:41.201116(+0200)[14860:20720] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:38:41.203142(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:39:13.031786(+0200)[14860:20720] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:39:13.033804(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:39:46.408594(+0200)[14860:20720] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:39:46.408594(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:40:22.766032(+0200)[14860:20720] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:40:22.768083(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:40:44.012905(+0200)[14860:20720] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:40:44.012905(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:41:17.374375(+0200)[14860:20720] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:41:17.374375(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:41:38.624295(+0200)[14860:20720] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:41:38.624295(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:42:13.514269(+0200)[14860:20720] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:42:13.514269(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:42:36.231655(+0200)[14860:20720] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:42:36.231655(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:43:08.094077(+0200)[14860:11260] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:43:08.094077(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:43:42.921133(+0200)[14860:11260] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:43:42.924029(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:44:17.764731(+0200)[14860:11260] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:44:17.766752(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:44:52.611223(+0200)[14860:11260] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:44:52.613249(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:45:24.441250(+0200)[14860:11260] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:45:24.443273(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:45:45.653500(+0200)[14860:11260] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:45:45.653500(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:46:18.985962(+0200)[14860:23056] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:46:18.988956(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:46:20.133033(+0200)[14860:22952] INF Network changed, available: False
+2026-05-29 22:46:20.134031(+0200)[14860:22952] INF Network address changed.
+2026-05-29 22:46:20.524794(+0200)[14860:23568] INF ZPA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-29 22:46:20.526817(+0200)[14860:23568] INF ZIA state changed, From: SERVER_DOWN_ERROR To: ADAPTER_DOWN_ERROR
+2026-05-29 22:46:20.526817(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:46:37.568394(+0200)[14860:11260] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-29 22:46:37.570420(+0200)[14860:18968] DBG Notification popup suppressed: Services are down because the network is disconnected.
+2026-05-29 22:48:04.327359(+0200)[14860:22952] INF Network changed, available: True
+2026-05-29 22:48:04.327359(+0200)[14860:22952] INF Network address changed.
+2026-05-29 22:48:04.327359(+0200)[14860:22952] INF Posture Check called on Network Change
+2026-05-29 22:48:04.349138(+0200)[14860:22952] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 22:48:04.349138(+0200)[14860:22952] INF Evaluated Device Postures
+2026-05-29 22:48:05.141477(+0200)[14860:23056] INF ZPA state changed, From: ADAPTER_DOWN_ERROR To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:48:05.141477(+0200)[14860:23056] INF ZIA state changed, From: ADAPTER_DOWN_ERROR To: SERVER_DOWN_ERROR
+2026-05-29 22:48:05.141477(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:48:05.602433(+0200)[14860:23056] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:48:05.611758(+0200)[14860:16172] INF Notified proxy settings changes
+2026-05-29 22:48:05.617349(+0200)[14860:16172] INF Refreshed proxy settings changes
+2026-05-29 22:48:05.675984(+0200)[14860:11260] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:48:05.686997(+0200)[14860:18976] INF Notified proxy settings changes
+2026-05-29 22:48:05.691011(+0200)[14860:18976] INF Refreshed proxy settings changes
+2026-05-29 22:48:06.687984(+0200)[14860:23056] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:48:06.687984(+0200)[14860:23056] INF ZIA state changed, From: SERVER_DOWN_ERROR To: CONNECTING
+2026-05-29 22:48:06.690051(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:48:28.546986(+0200)[14860:23056] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:48:28.560790(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 22:48:28.584745(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 22:48:28.654203(+0200)[14860:23056] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:48:28.664049(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-29 22:48:28.670082(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-29 22:48:28.707540(+0200)[14860:23056] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:48:28.713569(+0200)[14860:16160] INF Notified proxy settings changes
+2026-05-29 22:48:28.718502(+0200)[14860:16160] INF Refreshed proxy settings changes
+2026-05-29 22:48:36.185677(+0200)[14860:24088] INF Network changed, available: False
+2026-05-29 22:48:36.185677(+0200)[14860:24088] INF Network address changed.
+2026-05-29 22:48:37.004725(+0200)[14860:11260] INF ZPA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-29 22:48:37.004725(+0200)[14860:11260] INF ZIA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-29 22:48:37.006718(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:48:41.009480(+0200)[14860:24088] INF Network changed, available: True
+2026-05-29 22:48:41.009480(+0200)[14860:24088] INF Network address changed.
+2026-05-29 22:48:41.009480(+0200)[14860:24088] INF Posture Check called on Network Change
+2026-05-29 22:48:41.033632(+0200)[14860:24088] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 22:48:41.034627(+0200)[14860:24088] INF Evaluated Device Postures
+2026-05-29 22:48:41.604532(+0200)[14860:11260] INF ZPA state changed, From: ADAPTER_DOWN_ERROR To: CONNECTING
+2026-05-29 22:48:41.604532(+0200)[14860:11260] INF ZIA state changed, From: ADAPTER_DOWN_ERROR To: CONNECTING
+2026-05-29 22:48:41.604532(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:48:53.971506(+0200)[14860:11260] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:48:53.984315(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 22:48:54.001975(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 22:48:54.053658(+0200)[14860:11260] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:48:54.065581(+0200)[14860:16172] INF Notified proxy settings changes
+2026-05-29 22:48:54.071568(+0200)[14860:16172] INF Refreshed proxy settings changes
+2026-05-29 22:48:54.119324(+0200)[14860:23568] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:48:54.125536(+0200)[14860:16128] INF Notified proxy settings changes
+2026-05-29 22:48:54.128533(+0200)[14860:16128] INF Refreshed proxy settings changes
+2026-05-29 22:49:16.448662(+0200)[14860:23568] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:49:16.468732(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-29 22:49:16.487721(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-29 22:49:16.549529(+0200)[14860:23568] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:49:16.560380(+0200)[14860:16172] INF Notified proxy settings changes
+2026-05-29 22:49:16.560380(+0200)[14860:16172] INF Refreshed proxy settings changes
+2026-05-29 22:49:16.632204(+0200)[14860:23568] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:49:16.639253(+0200)[14860:16160] INF Notified proxy settings changes
+2026-05-29 22:49:16.644634(+0200)[14860:16160] INF Refreshed proxy settings changes
+2026-05-29 22:49:41.625763(+0200)[14860:23476] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:49:41.640700(+0200)[14860:16172] INF Notified proxy settings changes
+2026-05-29 22:49:41.652909(+0200)[14860:16172] INF Refreshed proxy settings changes
+2026-05-29 22:49:41.706587(+0200)[14860:23476] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:49:41.712587(+0200)[14860:18976] INF Notified proxy settings changes
+2026-05-29 22:49:41.715590(+0200)[14860:18976] INF Refreshed proxy settings changes
+2026-05-29 22:49:45.429217(+0200)[14860:24088] INF Network changed, available: False
+2026-05-29 22:49:45.429217(+0200)[14860:24088] INF Network address changed.
+2026-05-29 22:49:46.772009(+0200)[14860:23568] INF ZPA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-29 22:49:46.772009(+0200)[14860:23568] INF ZIA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-29 22:49:46.782137(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:50:51.732227(+0200)[14860:22104] INF Network changed, available: True
+2026-05-29 22:50:51.732227(+0200)[14860:22104] INF Network address changed.
+2026-05-29 22:50:51.732227(+0200)[14860:22104] INF Posture Check called on Network Change
+2026-05-29 22:50:51.766318(+0200)[14860:22104] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 22:50:51.766318(+0200)[14860:22104] INF Evaluated Device Postures
+2026-05-29 22:50:51.908111(+0200)[14860:23568] INF ZPA state changed, From: ADAPTER_DOWN_ERROR To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:50:51.908111(+0200)[14860:23568] INF ZIA state changed, From: ADAPTER_DOWN_ERROR To: SERVER_DOWN_ERROR
+2026-05-29 22:50:51.910123(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:50:53.106639(+0200)[14860:23056] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:50:53.115408(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 22:50:53.124738(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 22:50:53.176686(+0200)[14860:23568] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:50:53.189195(+0200)[14860:16128] INF Notified proxy settings changes
+2026-05-29 22:50:53.200178(+0200)[14860:16128] INF Refreshed proxy settings changes
+2026-05-29 22:50:53.304893(+0200)[14860:23568] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:50:53.312137(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 22:50:53.314624(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 22:50:53.442976(+0200)[14860:23056] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:50:53.442976(+0200)[14860:23056] INF ZIA state changed, From: SERVER_DOWN_ERROR To: CONNECTING
+2026-05-29 22:50:53.444995(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:51:13.744454(+0200)[14860:23476] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:51:13.757635(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-29 22:51:13.774276(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-29 22:51:13.832245(+0200)[14860:23476] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:51:13.850003(+0200)[14860:16160] INF Notified proxy settings changes
+2026-05-29 22:51:13.867227(+0200)[14860:16160] INF Refreshed proxy settings changes
+2026-05-29 22:51:13.961102(+0200)[14860:23476] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:51:13.971158(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 22:51:13.973166(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 22:51:41.957552(+0200)[14860:23056] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:51:41.957552(+0200)[14860:23056] INF ZIA state changed, From: CONNECTING To: SERVER_DOWN_ERROR
+2026-05-29 22:51:41.957552(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:52:07.783917(+0200)[14860:23568] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-29 22:52:07.783917(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:52:10.793600(+0200)[14860:22104] INF Network changed, available: False
+2026-05-29 22:52:10.793600(+0200)[14860:22104] INF Network address changed.
+2026-05-29 22:52:12.345457(+0200)[14860:23056] INF ZPA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-29 22:52:12.345457(+0200)[14860:23056] INF ZIA state changed, From: SERVER_DOWN_ERROR To: ADAPTER_DOWN_ERROR
+2026-05-29 22:52:12.347468(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:52:16.787626(+0200)[14860:22104] INF Network changed, available: True
+2026-05-29 22:52:16.789654(+0200)[14860:22104] INF Network address changed.
+2026-05-29 22:52:16.789654(+0200)[14860:22104] INF Posture Check called on Network Change
+2026-05-29 22:52:16.813463(+0200)[14860:22104] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 22:52:16.813463(+0200)[14860:22104] INF Evaluated Device Postures
+2026-05-29 22:52:16.912239(+0200)[14860:23568] INF ZPA state changed, From: ADAPTER_DOWN_ERROR To: CONNECTING
+2026-05-29 22:52:16.912239(+0200)[14860:23568] INF ZIA state changed, From: ADAPTER_DOWN_ERROR To: CONNECTING
+2026-05-29 22:52:16.914260(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:52:17.882150(+0200)[14860:23568] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:52:17.892686(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-29 22:52:17.906035(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-29 22:52:17.958113(+0200)[14860:23568] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:52:17.966166(+0200)[14860:16172] INF Notified proxy settings changes
+2026-05-29 22:52:17.977166(+0200)[14860:16172] INF Refreshed proxy settings changes
+2026-05-29 22:52:18.073504(+0200)[14860:23568] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:52:18.081206(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 22:52:18.084526(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 22:52:25.773735(+0200)[14860:11260] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:52:25.791219(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 22:52:25.805322(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 22:52:25.880498(+0200)[14860:11260] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:52:25.888661(+0200)[14860:18976] INF Notified proxy settings changes
+2026-05-29 22:52:25.890673(+0200)[14860:18976] INF Refreshed proxy settings changes
+2026-05-29 22:52:48.479435(+0200)[14860:23584] INF Network changed, available: False
+2026-05-29 22:52:48.479435(+0200)[14860:23584] INF Network address changed.
+2026-05-29 22:52:50.268219(+0200)[14860:21456] INF ZPA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-29 22:52:50.268219(+0200)[14860:21456] INF ZIA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-29 22:52:50.268219(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:52:53.975614(+0200)[14860:23584] INF Network changed, available: True
+2026-05-29 22:52:53.975614(+0200)[14860:23584] INF Network address changed.
+2026-05-29 22:52:53.975614(+0200)[14860:23584] INF Posture Check called on Network Change
+2026-05-29 22:52:54.003975(+0200)[14860:23584] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 22:52:54.003975(+0200)[14860:23584] INF Evaluated Device Postures
+2026-05-29 22:52:54.833673(+0200)[14860:23568] INF ZPA state changed, From: ADAPTER_DOWN_ERROR To: CONNECTING
+2026-05-29 22:52:54.833673(+0200)[14860:23568] INF ZIA state changed, From: ADAPTER_DOWN_ERROR To: CONNECTING
+2026-05-29 22:52:54.835694(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:52:55.414671(+0200)[14860:23568] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:52:55.421680(+0200)[14860:16160] INF Notified proxy settings changes
+2026-05-29 22:52:55.421680(+0200)[14860:16160] INF Refreshed proxy settings changes
+2026-05-29 22:52:55.494505(+0200)[14860:23568] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:52:55.500614(+0200)[14860:16128] INF Notified proxy settings changes
+2026-05-29 22:52:55.502624(+0200)[14860:16128] INF Refreshed proxy settings changes
+2026-05-29 22:53:15.787699(+0200)[14860:23568] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:53:15.806954(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 22:53:15.824347(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 22:53:15.874877(+0200)[14860:23568] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:53:15.878845(+0200)[14860:16160] INF Notified proxy settings changes
+2026-05-29 22:53:15.894924(+0200)[14860:16160] INF Refreshed proxy settings changes
+2026-05-29 22:53:15.978946(+0200)[14860:23568] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:53:15.990603(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-29 22:53:15.994704(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-29 22:53:43.335046(+0200)[14860:23056] INF ZPA state changed, From: CONNECTING To: INTERNET_UNREACHABLE_ERROR
+2026-05-29 22:53:43.335046(+0200)[14860:23056] INF ZIA state changed, From: CONNECTING To: SERVER_DOWN_ERROR
+2026-05-29 22:53:43.335046(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:53:58.345725(+0200)[14860:23584] INF Network changed, available: False
+2026-05-29 22:53:58.345725(+0200)[14860:23584] INF Network address changed.
+2026-05-29 22:53:58.515907(+0200)[14860:23476] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: ADAPTER_DOWN_ERROR
+2026-05-29 22:53:58.515907(+0200)[14860:23476] INF ZIA state changed, From: SERVER_DOWN_ERROR To: ADAPTER_DOWN_ERROR
+2026-05-29 22:53:58.515907(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:56:36.737788(+0200)[14860:23584] INF Network changed, available: True
+2026-05-29 22:56:36.737788(+0200)[14860:23584] INF Network address changed.
+2026-05-29 22:56:36.737788(+0200)[14860:23584] INF Posture Check called on Network Change
+2026-05-29 22:56:36.767974(+0200)[14860:23584] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-29 22:56:36.767974(+0200)[14860:23584] INF Evaluated Device Postures
+2026-05-29 22:56:37.569324(+0200)[14860:23056] INF ZPA state changed, From: ADAPTER_DOWN_ERROR To: CONNECTING
+2026-05-29 22:56:37.569324(+0200)[14860:23056] INF ZIA state changed, From: ADAPTER_DOWN_ERROR To: CONNECTING
+2026-05-29 22:56:37.569324(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 22:56:37.832209(+0200)[14860:23056] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:56:37.838881(+0200)[14860:16160] INF Notified proxy settings changes
+2026-05-29 22:56:37.844084(+0200)[14860:16160] INF Refreshed proxy settings changes
+2026-05-29 22:56:37.893845(+0200)[14860:23056] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-29 22:56:37.902497(+0200)[14860:16172] INF Notified proxy settings changes
+2026-05-29 22:56:37.904506(+0200)[14860:16172] INF Refreshed proxy settings changes
+2026-05-29 22:56:52.735252(+0200)[14860:23512] INF Network changed, available: False
+2026-05-29 22:56:52.735252(+0200)[14860:23512] INF Network address changed.
+2026-05-29 22:56:52.769055(+0200)[14860:22420] INF ZPA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-29 22:56:52.769055(+0200)[14860:22420] INF ZIA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-29 22:56:52.769055(+0200)[14860:16168] INF Registry changed: 1
+2026-05-29 23:02:05.073951(+0200)[14860:14864] INF User session switch: SessionUnlock
+2026-05-29 23:06:30.566668(+0200)[14860:4364] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-29 23:06:30.566668(+0200)[14860:18976] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-29 23:06:30.566668(+0200)[14860:18976] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-29 23:07:51.856886(+0200)[14860:23056] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-29 23:07:51.857889(+0200)[14860:16128] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-29 23:07:51.858792(+0200)[14860:16128] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-29 23:09:11.329772(+0200)[14860:20280] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-29 23:09:11.329772(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-29 23:09:11.329772(+0200)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-29 23:10:13.976222(+0200)[14860:14864] INF UI: Tray Icon, Clicked
+2026-05-29 23:10:30.489180(+0200)[14860:23056] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-29 23:10:30.489180(+0200)[14860:18968] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-29 23:10:30.489180(+0200)[14860:18968] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-29 23:11:48.590138(+0200)[14860:20280] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-29 23:11:48.591140(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-29 23:11:48.591140(+0200)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-29 23:40:22.580423(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-30 00:00:06.029262(+0200)[14860:14864] INF User session switch: SessionLock
+2026-05-30 00:18:34.369485(+0200)[14860:14864] INF User session switch: SessionUnlock
+2026-05-30 00:28:30.544200(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-30 00:28:31.416208(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-30 00:58:27.673185(+0200)[14860:13084] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 00:58:27.685303(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 00:58:27.685303(+0200)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 00:59:47.090550(+0200)[14860:13084] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 00:59:47.090550(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 00:59:47.090550(+0200)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 01:01:08.282169(+0200)[14860:13084] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 01:01:08.282735(+0200)[14860:18968] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 01:01:08.282735(+0200)[14860:18968] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 01:02:26.696749(+0200)[14860:19636] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 01:02:26.696749(+0200)[14860:16172] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 01:02:26.696749(+0200)[14860:16172] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 01:03:46.389284(+0200)[14860:19636] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 01:03:46.389284(+0200)[14860:16172] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 01:03:46.389284(+0200)[14860:16172] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 01:41:06.785135(+0200)[14860:14864] INF User session switch: SessionLock
+2026-05-30 01:50:42.427911(+0200)[14860:14864] INF User session switch: SessionUnlock
+2026-05-30 02:48:31.615494(+0200)[14860:14864] INF User session switch: SessionLock
+2026-05-30 02:51:12.941260(+0200)[14860:20656] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 02:51:12.941260(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 02:51:12.941260(+0200)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 02:52:33.374242(+0200)[14860:20656] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 02:52:33.374242(+0200)[14860:16160] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 02:52:33.374242(+0200)[14860:16160] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 02:53:53.490283(+0200)[14860:18672] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 02:53:53.490283(+0200)[14860:16172] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 02:53:53.490283(+0200)[14860:16172] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 02:55:14.105058(+0200)[14860:18672] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 02:55:14.105058(+0200)[14860:18976] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 02:55:14.105058(+0200)[14860:18976] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 02:56:34.652673(+0200)[14860:18672] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 02:56:34.652673(+0200)[14860:16172] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 02:56:34.652673(+0200)[14860:16172] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 03:56:27.756549(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-30 04:44:47.514241(+0200)[14860:23632] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 04:44:47.514241(+0200)[14860:16128] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 04:44:47.514241(+0200)[14860:16128] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 04:46:08.838154(+0200)[14860:20384] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 04:46:08.838154(+0200)[14860:16160] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 04:46:08.838154(+0200)[14860:16160] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 04:47:29.650173(+0200)[14860:20384] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 04:47:29.650173(+0200)[14860:16160] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 04:47:29.650173(+0200)[14860:16160] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 04:48:50.815782(+0200)[14860:20384] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 04:48:50.815782(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 04:48:50.815782(+0200)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 04:50:12.081985(+0200)[14860:20384] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 04:50:12.096957(+0200)[14860:16160] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 04:50:12.096957(+0200)[14860:16160] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 06:39:42.301212(+0200)[14860:12232] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 06:39:42.301212(+0200)[14860:16128] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 06:39:42.301212(+0200)[14860:16128] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 06:41:03.878731(+0200)[14860:12232] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 06:41:03.879876(+0200)[14860:18968] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 06:41:03.879876(+0200)[14860:18968] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 06:42:25.111104(+0200)[14860:12232] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 06:42:25.111104(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 06:42:25.111104(+0200)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 06:43:46.401003(+0200)[14860:12232] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 06:43:46.401003(+0200)[14860:18968] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 06:43:46.401003(+0200)[14860:18968] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 06:45:07.672723(+0200)[14860:12232] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 06:45:07.672723(+0200)[14860:16128] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 06:45:07.672723(+0200)[14860:16128] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 08:33:54.524296(+0200)[14860:15208] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 08:33:54.524296(+0200)[14860:16172] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 08:33:54.524296(+0200)[14860:16172] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 08:35:16.223412(+0200)[14860:15208] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 08:35:16.223412(+0200)[14860:18968] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 08:35:16.223412(+0200)[14860:18968] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 08:36:37.805358(+0200)[14860:4344] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 08:36:37.805358(+0200)[14860:16128] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 08:36:37.805358(+0200)[14860:16128] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 08:37:58.917871(+0200)[14860:15208] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 08:37:58.917871(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 08:37:58.917871(+0200)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 08:39:20.241295(+0200)[14860:4344] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 08:39:20.247607(+0200)[14860:16172] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 08:39:20.247607(+0200)[14860:16172] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 10:28:21.495669(+0200)[14860:13324] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 10:28:21.495669(+0200)[14860:18968] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 10:28:21.496669(+0200)[14860:18968] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 10:29:43.301124(+0200)[14860:13324] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 10:29:43.301124(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 10:29:43.301124(+0200)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 10:31:04.424054(+0200)[14860:25180] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 10:31:04.424054(+0200)[14860:18976] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 10:31:04.424054(+0200)[14860:18976] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 10:32:25.802927(+0200)[14860:13324] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 10:32:25.804955(+0200)[14860:18976] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 10:32:25.804955(+0200)[14860:18976] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 10:33:47.248466(+0200)[14860:13324] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 10:33:47.248466(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 10:33:47.248466(+0200)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 12:23:02.354344(+0200)[14860:22612] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 12:23:02.354344(+0200)[14860:18976] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 12:23:02.354344(+0200)[14860:18976] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 12:24:21.561253(+0200)[14860:25184] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 12:24:21.561253(+0200)[14860:16172] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 12:24:21.561253(+0200)[14860:16172] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 12:25:40.949837(+0200)[14860:25184] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 12:25:40.951603(+0200)[14860:18976] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 12:25:40.951603(+0200)[14860:18976] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 12:27:00.181462(+0200)[14860:15752] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 12:27:00.181462(+0200)[14860:16160] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 12:27:00.181462(+0200)[14860:16160] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 12:28:19.353786(+0200)[14860:25184] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 12:28:19.369805(+0200)[14860:16160] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 12:28:19.369805(+0200)[14860:16160] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 14:16:47.006111(+0200)[14860:24332] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 14:16:47.007122(+0200)[14860:16128] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 14:16:47.008117(+0200)[14860:16128] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 14:18:08.764901(+0200)[14860:24332] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 14:18:08.764901(+0200)[14860:16160] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 14:18:08.764901(+0200)[14860:16160] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 14:19:29.908497(+0200)[14860:24332] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 14:19:29.908497(+0200)[14860:16160] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 14:19:29.908497(+0200)[14860:16160] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 14:20:51.168050(+0200)[14860:24332] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 14:20:51.168050(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 14:20:51.168050(+0200)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 14:22:12.509216(+0200)[14860:24332] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 14:22:12.509216(+0200)[14860:6156] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 14:22:12.509216(+0200)[14860:6156] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 16:11:51.289690(+0200)[14860:18136] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 16:11:51.289690(+0200)[14860:18968] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 16:11:51.289690(+0200)[14860:18968] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 16:13:13.276408(+0200)[14860:18136] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 16:13:13.276408(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 16:13:13.276408(+0200)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 16:14:35.338457(+0200)[14860:18136] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 16:14:35.338457(+0200)[14860:16160] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 16:14:35.340479(+0200)[14860:16160] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 16:15:56.990422(+0200)[14860:18136] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 16:15:56.990422(+0200)[14860:16160] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 16:15:56.990422(+0200)[14860:16160] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 16:17:18.382330(+0200)[14860:18488] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 16:17:18.382330(+0200)[14860:16160] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 16:17:18.382330(+0200)[14860:16160] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 18:06:16.593074(+0200)[14860:6752] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 18:06:16.608927(+0200)[14860:16172] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 18:06:16.608927(+0200)[14860:16172] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 18:07:38.320174(+0200)[14860:22684] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 18:07:38.320174(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 18:07:38.320174(+0200)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 18:08:59.769875(+0200)[14860:22684] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 18:08:59.769875(+0200)[14860:18976] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 18:08:59.771903(+0200)[14860:18976] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 18:10:21.057103(+0200)[14860:22684] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 18:10:21.057103(+0200)[14860:16160] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 18:10:21.057103(+0200)[14860:16160] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 18:11:42.637530(+0200)[14860:11608] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 18:11:42.637530(+0200)[14860:16172] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 18:11:42.637530(+0200)[14860:16172] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 20:00:12.357635(+0200)[14860:21648] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 20:00:12.359650(+0200)[14860:18976] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 20:00:12.359650(+0200)[14860:18976] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 20:01:33.866689(+0200)[14860:21648] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 20:01:33.868715(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 20:01:33.868715(+0200)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 20:02:55.383208(+0200)[14860:21648] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 20:02:55.383208(+0200)[14860:16128] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 20:02:55.383208(+0200)[14860:16128] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 20:04:16.914460(+0200)[14860:21648] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 20:04:16.914460(+0200)[14860:16160] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 20:04:16.916487(+0200)[14860:16160] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 20:05:38.385864(+0200)[14860:21648] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 20:05:38.385864(+0200)[14860:16128] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 20:05:38.385864(+0200)[14860:16128] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 20:38:56.098090(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-30 20:39:05.739924(+0200)[14860:14864] INF User session switch: ConsoleDisconnect
+2026-05-30 21:03:16.076720(+0200)[14860:24852] INF ZPA state changed, From: ADAPTER_DOWN_ERROR To: INTERNET_UNREACHABLE_ERROR
+2026-05-30 21:03:16.076720(+0200)[14860:24852] INF ZIA state changed, From: ADAPTER_DOWN_ERROR To: SERVER_DOWN_ERROR
+2026-05-30 21:03:16.078730(+0200)[14860:16168] INF Registry changed: 1
+2026-05-30 21:03:16.275423(+0200)[14860:12128] INF Network changed, available: True
+2026-05-30 21:03:16.275423(+0200)[14860:12128] INF Network address changed.
+2026-05-30 21:03:16.275423(+0200)[14860:12128] INF Posture Check called on Network Change
+2026-05-30 21:03:16.429585(+0200)[14860:12128] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-30 21:03:16.429585(+0200)[14860:12128] INF Evaluated Device Postures
+2026-05-30 21:03:17.849401(+0200)[14860:11984] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-30 21:03:17.849401(+0200)[14860:11984] INF ZIA state changed, From: SERVER_DOWN_ERROR To: CONNECTING
+2026-05-30 21:03:17.912100(+0200)[14860:16168] INF Registry changed: 1
+2026-05-30 21:03:18.967150(+0200)[14860:5456] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 21:03:19.233336(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-30 21:03:19.261354(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-30 21:03:20.116297(+0200)[14860:5456] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 21:03:20.174308(+0200)[14860:16160] INF Notified proxy settings changes
+2026-05-30 21:03:20.198371(+0200)[14860:16160] INF Refreshed proxy settings changes
+2026-05-30 21:03:43.024352(+0200)[14860:5456] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 21:03:43.040896(+0200)[14860:6156] INF Notified proxy settings changes
+2026-05-30 21:03:43.049889(+0200)[14860:6156] INF Refreshed proxy settings changes
+2026-05-30 21:03:43.125221(+0200)[14860:5456] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 21:03:43.162866(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-30 21:03:43.178343(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-30 21:04:04.549270(+0200)[14860:12128] INF Network changed, available: False
+2026-05-30 21:04:04.549270(+0200)[14860:12128] INF Network address changed.
+2026-05-30 21:04:05.569789(+0200)[14860:24852] INF ZPA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-30 21:04:05.569789(+0200)[14860:24852] INF ZIA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-30 21:04:05.575589(+0200)[14860:16168] INF Registry changed: 1
+2026-05-30 21:04:10.268223(+0200)[14860:5456] INF ZPA state changed, From: ADAPTER_DOWN_ERROR To: INTERNET_UNREACHABLE_ERROR
+2026-05-30 21:04:10.268223(+0200)[14860:5456] INF ZIA state changed, From: ADAPTER_DOWN_ERROR To: SERVER_DOWN_ERROR
+2026-05-30 21:04:10.277073(+0200)[14860:16168] INF Registry changed: 1
+2026-05-30 21:04:10.884834(+0200)[14860:15752] INF Network changed, available: True
+2026-05-30 21:04:10.884834(+0200)[14860:15752] INF Network address changed.
+2026-05-30 21:04:10.884834(+0200)[14860:15752] INF Posture Check called on Network Change
+2026-05-30 21:04:10.938296(+0200)[14860:15752] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-30 21:04:10.938296(+0200)[14860:15752] INF Evaluated Device Postures
+2026-05-30 21:04:11.424412(+0200)[14860:5456] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 21:04:11.521407(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-30 21:04:11.566698(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-30 21:04:11.853681(+0200)[14860:11984] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-30 21:04:11.853681(+0200)[14860:11984] INF ZIA state changed, From: SERVER_DOWN_ERROR To: CONNECTING
+2026-05-30 21:04:11.857734(+0200)[14860:16168] INF Registry changed: 1
+2026-05-30 21:04:11.917870(+0200)[14860:5456] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 21:04:11.947984(+0200)[14860:6156] INF Notified proxy settings changes
+2026-05-30 21:04:11.961006(+0200)[14860:6156] INF Refreshed proxy settings changes
+2026-05-30 21:04:20.034843(+0200)[14860:12128] INF Network changed, available: False
+2026-05-30 21:04:20.034843(+0200)[14860:12128] INF Network address changed.
+2026-05-30 21:04:21.013628(+0200)[14860:8088] INF ZPA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-30 21:04:21.013628(+0200)[14860:8088] INF ZIA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-30 21:04:21.030223(+0200)[14860:16168] INF Registry changed: 1
+2026-05-30 21:40:22.526705(+0200)[14860:14864] INF User session switch: ConsoleConnect
+2026-05-30 21:40:22.595684(+0200)[14860:14864] INF User session switch: SessionUnlock
+2026-05-30 21:40:22.698245(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-30 21:40:22.705217(+0200)[14860:14864] INF UI: Update text styles for accessibility
+2026-05-30 21:40:28.560398(+0200)[14860:14864] INF SlidingMenu_Loaded: strictEnforcement=False
+2026-05-30 21:44:58.011732(+0200)[14860:24772] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 21:44:58.021657(+0200)[14860:18968] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 21:44:58.021657(+0200)[14860:18968] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 21:46:01.274253(+0200)[14860:24772] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 21:46:01.276282(+0200)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 21:46:01.276282(+0200)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 21:47:08.468333(+0200)[14860:24772] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 21:47:08.484197(+0200)[14860:16172] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 21:47:08.484197(+0200)[14860:16172] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 21:48:27.461330(+0200)[14860:24772] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 21:48:27.461330(+0200)[14860:16128] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 21:48:27.461330(+0200)[14860:16128] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 21:49:36.321723(+0200)[14860:24772] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 21:49:36.321723(+0200)[14860:16128] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-30 21:49:36.321723(+0200)[14860:16128] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-30 22:10:24.475604(+0200)[14860:9152] INF ZPA state changed, From: ADAPTER_DOWN_ERROR To: INTERNET_UNREACHABLE_ERROR
+2026-05-30 22:10:24.477655(+0200)[14860:9152] INF ZIA state changed, From: ADAPTER_DOWN_ERROR To: SERVER_DOWN_ERROR
+2026-05-30 22:10:24.488578(+0200)[14860:16168] INF Registry changed: 1
+2026-05-30 22:10:27.415187(+0200)[14860:24776] INF Network changed, available: True
+2026-05-30 22:10:27.415187(+0200)[14860:24776] INF Network address changed.
+2026-05-30 22:10:27.451520(+0200)[14860:24776] INF Posture Check called on Network Change
+2026-05-30 22:10:28.269716(+0200)[14860:28168] INF ZPA state changed, From: INTERNET_UNREACHABLE_ERROR To: CONNECTING
+2026-05-30 22:10:28.269716(+0200)[14860:28168] INF ZIA state changed, From: SERVER_DOWN_ERROR To: CONNECTING
+2026-05-30 22:10:28.282919(+0200)[14860:16168] INF Registry changed: 1
+2026-05-30 22:10:28.552424(+0200)[14860:24776] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-30 22:10:28.552424(+0200)[14860:24776] INF Evaluated Device Postures
+2026-05-30 22:10:30.523734(+0200)[14860:28168] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 22:10:30.561594(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-30 22:10:30.580058(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-30 22:10:30.823578(+0200)[14860:28168] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 22:10:30.862513(+0200)[14860:18976] INF Notified proxy settings changes
+2026-05-30 22:10:30.881973(+0200)[14860:18976] INF Refreshed proxy settings changes
+2026-05-30 22:10:33.495605(+0200)[14860:27620] INF Network address changed.
+2026-05-30 22:10:33.495605(+0200)[14860:27620] INF Posture Check called on Network Change
+2026-05-30 22:10:33.550823(+0200)[14860:27620] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-30 22:10:33.550823(+0200)[14860:27620] INF Evaluated Device Postures
+2026-05-30 22:10:34.754581(+0200)[14860:15044] DBG ZIAProtocol changed from: [v1.0] To: [v2.0 - DTLS]
+2026-05-30 22:10:34.754581(+0200)[14860:15044] INF ZPA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-30 22:10:34.762083(+0200)[14860:15044] INF ZIA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-30 22:10:34.764096(+0200)[14860:16168] INF Registry changed: 1
+2026-05-30 22:10:34.773071(+0200)[14860:16168] INF Registry changed: 1
+2026-05-30 22:10:35.648281(+0200)[14860:16908] INF Network address changed.
+2026-05-30 22:10:35.648281(+0200)[14860:16908] INF Posture Check called on Network Change
+2026-05-30 22:10:35.687848(+0200)[14860:16908] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-30 22:10:35.687848(+0200)[14860:16908] INF Evaluated Device Postures
+2026-05-30 22:10:38.667094(+0200)[14860:24776] INF Network address changed.
+2026-05-30 22:10:38.668299(+0200)[14860:24776] INF Posture Check called on Network Change
+2026-05-30 22:10:38.681260(+0200)[14860:24776] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-30 22:10:38.681260(+0200)[14860:24776] INF Evaluated Device Postures
+2026-05-30 22:10:44.064124(+0200)[14860:15044] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-30 22:10:44.068169(+0200)[14860:16128] DBG Notification popup suppressed: Private Access is Connected.
+2026-05-30 22:10:44.124717(+0200)[14860:15044] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-30 22:10:44.129796(+0200)[14860:18976] DBG Notification popup suppressed: Internet Security is Connected.
+2026-05-30 22:10:45.251867(+0200)[14860:16908] INF Network address changed.
+2026-05-30 22:10:45.251867(+0200)[14860:16908] INF Posture Check called on Network Change
+2026-05-30 22:10:45.287645(+0200)[14860:16908] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-30 22:10:45.287645(+0200)[14860:16908] INF Evaluated Device Postures
+2026-05-30 22:11:05.834094(+0200)[14860:15044] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 22:11:05.872661(+0200)[14860:18976] INF Notified proxy settings changes
+2026-05-30 22:11:05.892708(+0200)[14860:18976] INF Refreshed proxy settings changes
+2026-05-30 22:11:06.554981(+0200)[14860:15044] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 22:11:06.600252(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-30 22:11:06.615131(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-30 22:11:17.110893(+0200)[14860:7428] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 22:11:17.206403(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-30 22:11:17.221547(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-30 22:11:18.112939(+0200)[14860:7428] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 22:11:18.286380(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-30 22:11:18.330342(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-30 22:41:34.205912(+0200)[14860:27408] DBG ZIAProtocol changed from: [v2.0 - DTLS] To: [v2.0 - TLS]
+2026-05-30 22:41:34.206908(+0200)[14860:27408] INF ZPA state changed, From: TUNNEL_FORWARDING To: CONNECTING
+2026-05-30 22:41:34.209914(+0200)[14860:27408] INF ZIA state changed, From: TUNNEL_FORWARDING To: CONNECTING
+2026-05-30 22:41:34.220403(+0200)[14860:16168] INF Registry changed: 1
+2026-05-30 22:41:35.124242(+0200)[14860:25952] INF Network changed, available: False
+2026-05-30 22:41:35.125237(+0200)[14860:25952] INF Network address changed.
+2026-05-30 22:41:35.933033(+0200)[14860:27408] DBG ZIAProtocol changed from: [v2.0 - TLS] To: [v1.0]
+2026-05-30 22:41:35.933033(+0200)[14860:27408] INF ZPA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-30 22:41:35.933033(+0200)[14860:27408] INF ZIA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-30 22:41:35.945589(+0200)[14860:16168] INF Registry changed: 1
+2026-05-30 22:41:38.403948(+0200)[14860:15712] INF Network address changed.
+2026-05-30 22:41:39.601619(+0200)[14860:14688] INF Network address changed.
+2026-05-30 22:41:47.917228(+0200)[14860:25640] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-30 22:41:47.919226(+0200)[14860:16164] DBG Notification popup suppressed: Services are down because the network is disconnected.
+2026-05-30 22:48:48.543155(+0200)[14860:13332] INF Network changed, available: True
+2026-05-30 22:48:48.543155(+0200)[14860:13332] INF Network address changed.
+2026-05-30 22:48:48.543155(+0200)[14860:13332] INF Posture Check called on Network Change
+2026-05-30 22:48:48.571053(+0200)[14860:13332] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-30 22:48:48.571053(+0200)[14860:13332] INF Evaluated Device Postures
+2026-05-30 22:48:49.125787(+0200)[14860:12908] INF ZPA state changed, From: ADAPTER_DOWN_ERROR To: CONNECTING
+2026-05-30 22:48:49.125787(+0200)[14860:12908] INF ZIA state changed, From: ADAPTER_DOWN_ERROR To: TUNNEL_FORWARDING
+2026-05-30 22:48:49.129833(+0200)[14860:16168] INF Registry changed: 1
+2026-05-30 22:48:51.327177(+0200)[14860:12976] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 22:48:51.390365(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-30 22:48:51.443018(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-30 22:48:52.252155(+0200)[14860:12976] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 22:48:52.300323(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-30 22:48:52.320427(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-30 22:48:54.363555(+0200)[14860:26532] INF ZPA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-30 22:48:54.381302(+0200)[14860:16168] INF Registry changed: 1
+2026-05-30 22:48:54.889205(+0200)[14860:25088] INF Network address changed.
+2026-05-30 22:48:54.889205(+0200)[14860:25088] INF Posture Check called on Network Change
+2026-05-30 22:48:54.976283(+0200)[14860:25088] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-30 22:48:54.976283(+0200)[14860:25088] INF Evaluated Device Postures
+2026-05-30 22:48:55.957417(+0200)[14860:26532] DBG ZIAProtocol changed from: [v1.0] To: [v2.0 - DTLS]
+2026-05-30 22:48:58.255356(+0200)[14860:13332] INF Network address changed.
+2026-05-30 22:48:58.255356(+0200)[14860:13332] INF Posture Check called on Network Change
+2026-05-30 22:48:58.288654(+0200)[14860:13332] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-30 22:48:58.288654(+0200)[14860:13332] INF Evaluated Device Postures
+2026-05-30 22:49:00.283781(+0200)[14860:27360] INF Network address changed.
+2026-05-30 22:49:00.283781(+0200)[14860:27360] INF Posture Check called on Network Change
+2026-05-30 22:49:00.317872(+0200)[14860:27360] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-30 22:49:00.317872(+0200)[14860:27360] INF Evaluated Device Postures
+2026-05-30 22:49:01.733428(+0200)[14860:13332] INF Network address changed.
+2026-05-30 22:49:01.734426(+0200)[14860:13332] INF Posture Check called on Network Change
+2026-05-30 22:49:01.769004(+0200)[14860:13332] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-30 22:49:01.769004(+0200)[14860:13332] INF Evaluated Device Postures
+2026-05-30 22:49:04.400129(+0200)[14860:16144] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-30 22:49:04.401131(+0200)[14860:16160] DBG Notification popup suppressed: Internet Security is Connected.
+2026-05-30 22:49:04.423217(+0200)[14860:16144] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-30 22:49:04.424239(+0200)[14860:6156] DBG Notification popup suppressed: Private Access is Connected.
+2026-05-30 22:49:15.642460(+0200)[14860:16144] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 22:49:15.662749(+0200)[14860:16160] INF Notified proxy settings changes
+2026-05-30 22:49:15.672324(+0200)[14860:16160] INF Refreshed proxy settings changes
+2026-05-30 22:49:15.754716(+0200)[14860:12976] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 22:49:15.795464(+0200)[14860:18976] INF Notified proxy settings changes
+2026-05-30 22:49:15.808293(+0200)[14860:18976] INF Refreshed proxy settings changes
+2026-05-30 22:49:26.297973(+0200)[14860:16144] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 22:49:26.349651(+0200)[14860:6156] INF Notified proxy settings changes
+2026-05-30 22:49:26.424868(+0200)[14860:6156] INF Refreshed proxy settings changes
+2026-05-30 22:49:27.445413(+0200)[14860:16144] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 22:49:27.534550(+0200)[14860:6156] INF Notified proxy settings changes
+2026-05-30 22:49:27.560172(+0200)[14860:6156] INF Refreshed proxy settings changes
+2026-05-30 22:49:28.805783(+0200)[14860:16144] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-30 22:49:28.935393(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-30 22:49:28.974323(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-30 23:30:44.902013(+0200)[14860:24884] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-30 23:30:44.903026(+0200)[14860:16128] INF sendKeepAliveResponse: {"error":0,"errorMessage":"","loginName":"###","success":true,"userAllowedToAddPartner":true}
+2026-05-30 23:30:44.903026(+0200)[14860:16128] INF KeepAliveResponse ZSAAuth.clientPolicy.userEnrolled: true
+2026-05-30 23:30:44.903026(+0200)[14860:16128] INF UI: ZSATrayForm showActive
+2026-05-30 23:30:44.903026(+0200)[14860:14864] INF Updating username after update client policy
+2026-05-30 23:30:44.903026(+0200)[14860:14864] INF UI: ZSATrayForm activeDelegate: ZSATray.ZSAMainForm
+2026-05-31 00:06:58.817560(+0200)[14860:4320] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 00:06:58.829245(+0200)[14860:16160] INF Notified proxy settings changes
+2026-05-31 00:06:58.829245(+0200)[14860:16160] INF Refreshed proxy settings changes
+2026-05-31 00:06:58.930706(+0200)[14860:4320] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 00:06:58.945633(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-31 00:06:58.951669(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-31 00:06:59.495880(+0200)[14860:23420] INF Network address changed.
+2026-05-31 00:06:59.495880(+0200)[14860:23420] INF Posture Check called on Network Change
+2026-05-31 00:06:59.638844(+0200)[14860:23420] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-31 00:06:59.638844(+0200)[14860:23420] INF Evaluated Device Postures
+2026-05-31 00:07:01.513370(+0200)[14860:3560] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 00:07:01.599342(+0200)[14860:6156] INF Notified proxy settings changes
+2026-05-31 00:07:01.664575(+0200)[14860:3560] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 00:07:01.678243(+0200)[14860:6156] INF Refreshed proxy settings changes
+2026-05-31 00:07:01.773258(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-31 00:07:01.773258(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-31 00:07:04.560618(+0200)[14860:23420] INF Network address changed.
+2026-05-31 00:07:04.560618(+0200)[14860:23420] INF Posture Check called on Network Change
+2026-05-31 00:07:04.613893(+0200)[14860:23420] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-31 00:07:04.613893(+0200)[14860:23420] INF Evaluated Device Postures
+2026-05-31 00:07:14.901406(+0200)[14860:30280] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 00:07:14.910706(+0200)[14860:16160] INF Notified proxy settings changes
+2026-05-31 00:07:14.920547(+0200)[14860:16160] INF Refreshed proxy settings changes
+2026-05-31 00:07:14.980265(+0200)[14860:30280] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 00:07:14.992109(+0200)[14860:6156] INF Notified proxy settings changes
+2026-05-31 00:07:15.006210(+0200)[14860:6156] INF Refreshed proxy settings changes
+2026-05-31 00:07:15.187267(+0200)[14860:30280] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 00:07:15.210376(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-31 00:07:15.218163(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-31 00:34:21.261867(+0200)[14860:6428] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 00:34:21.382778(+0200)[14860:6156] INF Notified proxy settings changes
+2026-05-31 00:34:21.425418(+0200)[14860:6156] INF Refreshed proxy settings changes
+2026-05-31 00:34:23.558833(+0200)[14860:6428] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 00:34:23.645787(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-31 00:34:23.683461(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-31 00:34:23.774498(+0200)[14860:29532] INF Network address changed.
+2026-05-31 00:34:23.774498(+0200)[14860:29532] INF Posture Check called on Network Change
+2026-05-31 00:34:23.993281(+0200)[14860:29532] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-31 00:34:23.993281(+0200)[14860:29532] INF Evaluated Device Postures
+2026-05-31 00:34:27.483550(+0200)[14860:26320] INF Network address changed.
+2026-05-31 00:34:27.483550(+0200)[14860:26320] INF Posture Check called on Network Change
+2026-05-31 00:34:27.507110(+0200)[14860:26320] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-31 00:34:27.507110(+0200)[14860:26320] INF Evaluated Device Postures
+2026-05-31 00:34:50.672701(+0200)[14860:2556] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 00:34:50.688855(+0200)[14860:18976] INF Notified proxy settings changes
+2026-05-31 00:34:50.715294(+0200)[14860:18976] INF Refreshed proxy settings changes
+2026-05-31 00:34:50.870446(+0200)[14860:2556] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 00:34:50.887757(+0200)[14860:6156] INF Notified proxy settings changes
+2026-05-31 00:34:50.906683(+0200)[14860:6156] INF Refreshed proxy settings changes
+2026-05-31 00:34:51.316681(+0200)[14860:2556] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 00:34:51.378583(+0200)[14860:16128] INF Notified proxy settings changes
+2026-05-31 00:34:51.398943(+0200)[14860:16128] INF Refreshed proxy settings changes
+2026-05-31 01:12:08.044141(+0200)[14860:13068] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-31 01:12:08.045267(+0200)[14860:18968] INF sendKeepAliveResponse: {"error":0,"errorMessage":"","loginName":"###","success":true,"userAllowedToAddPartner":true}
+2026-05-31 01:12:08.045267(+0200)[14860:18968] INF KeepAliveResponse ZSAAuth.clientPolicy.userEnrolled: true
+2026-05-31 01:12:08.045267(+0200)[14860:18968] INF UI: ZSATrayForm showActive
+2026-05-31 01:12:08.045267(+0200)[14860:14864] INF Updating username after update client policy
+2026-05-31 01:12:08.045267(+0200)[14860:14864] INF UI: ZSATrayForm activeDelegate: ZSATray.ZSAMainForm
+2026-05-31 01:35:03.938870(+0200)[14860:8468] INF RPC notification code: ZSATRAYMANAGER_RESTART_ZSATUNNEL_SERVICE_RESPONSE
+2026-05-31 01:35:03.955177(+0200)[14860:16164] INF restartZSATunnelResponse: {"error":0,"success":true}
+2026-05-31 01:35:03.964198(+0200)[14860:16164] INF UI: ZSATrayForm showActive
+2026-05-31 01:35:03.964198(+0200)[14860:14864] INF UI: ZSATrayForm activeDelegate: ZSATray.ZSAMainForm
+2026-05-31 01:35:07.863556(+0200)[14860:8468] DBG ZIAProtocol changed from: [v2.0 - DTLS] To: [v1.0]
+2026-05-31 01:35:07.863556(+0200)[14860:8468] INF ZPA state changed, From: TUNNEL_FORWARDING To: CONNECTING
+2026-05-31 01:35:07.868586(+0200)[14860:8468] INF ZIA state changed, From: TUNNEL_FORWARDING To: CONNECTING
+2026-05-31 01:35:07.869581(+0200)[14860:16168] INF Registry changed: 1
+2026-05-31 01:35:15.616201(+0200)[14860:1056] DBG ZIAProtocol changed from: [v1.0] To: [v2.0 - DTLS]
+2026-05-31 01:35:15.616201(+0200)[14860:1056] INF ZIA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-31 01:35:15.620426(+0200)[14860:16168] INF Registry changed: 1
+2026-05-31 01:35:25.150197(+0200)[14860:27964] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-31 01:35:25.153963(+0200)[14860:16164] DBG Notification popup suppressed: Internet Security is Connected.
+2026-05-31 01:35:25.463953(+0200)[14860:27964] INF RPC notification code: ZSATUNNEL_START_COMPLETE
+2026-05-31 01:35:25.465281(+0200)[14860:14864] INF Auth delegate not present
+2026-05-31 01:35:26.003850(+0200)[14860:27964] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 01:35:26.035234(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-31 01:35:26.046846(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-31 01:35:26.394531(+0200)[14860:27964] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 01:35:26.443720(+0200)[14860:16172] INF Notified proxy settings changes
+2026-05-31 01:35:26.466467(+0200)[14860:16172] INF Refreshed proxy settings changes
+2026-05-31 01:35:28.782039(+0200)[14860:28216] INF Network address changed.
+2026-05-31 01:35:28.782039(+0200)[14860:28216] INF Posture Check called on Network Change
+2026-05-31 01:35:29.123787(+0200)[14860:28216] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-31 01:35:29.123787(+0200)[14860:28216] INF Evaluated Device Postures
+2026-05-31 01:35:31.219571(+0200)[14860:17440] INF Network address changed.
+2026-05-31 01:35:31.219571(+0200)[14860:17440] INF Posture Check called on Network Change
+2026-05-31 01:35:31.240665(+0200)[14860:17440] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-31 01:35:31.240665(+0200)[14860:17440] INF Evaluated Device Postures
+2026-05-31 01:35:33.290229(+0200)[14860:13668] INF Network address changed.
+2026-05-31 01:35:33.290229(+0200)[14860:13668] INF Posture Check called on Network Change
+2026-05-31 01:35:33.312597(+0200)[14860:13668] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-31 01:35:33.312597(+0200)[14860:13668] INF Evaluated Device Postures
+2026-05-31 01:35:38.647004(+0200)[14860:1056] INF ZPA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-31 01:35:38.657817(+0200)[14860:16168] INF Registry changed: 1
+2026-05-31 01:35:48.123219(+0200)[14860:1056] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-31 01:35:48.124216(+0200)[14860:16128] DBG Notification popup suppressed: Private Access is Connected.
+2026-05-31 01:35:58.615263(+0200)[14860:27964] INF ZPA state changed, From: TUNNEL_FORWARDING To: CONNECTING
+2026-05-31 01:35:58.623491(+0200)[14860:16168] INF Registry changed: 1
+2026-05-31 01:36:00.158073(+0200)[14860:27964] INF ZPA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-31 01:36:00.161069(+0200)[14860:16168] INF Registry changed: 1
+2026-05-31 02:49:18.604366(+0200)[14860:22152] INF ZPA state changed, From: TUNNEL_FORWARDING To: CONNECTING
+2026-05-31 02:49:18.618057(+0200)[14860:16168] INF Registry changed: 1
+2026-05-31 02:49:20.271931(+0200)[14860:22152] INF ZPA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-31 02:49:20.290678(+0200)[14860:16168] INF Registry changed: 1
+2026-05-31 02:51:37.840612(+0200)[14860:17296] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-31 02:51:37.840612(+0200)[14860:16160] INF sendKeepAliveResponse: {"error":0,"errorMessage":"","loginName":"###","success":true,"userAllowedToAddPartner":true}
+2026-05-31 02:51:37.840612(+0200)[14860:16160] INF KeepAliveResponse ZSAAuth.clientPolicy.userEnrolled: true
+2026-05-31 02:51:37.840612(+0200)[14860:16160] INF UI: ZSATrayForm showActive
+2026-05-31 02:51:37.840612(+0200)[14860:14864] INF Updating username after update client policy
+2026-05-31 02:51:37.845400(+0200)[14860:14864] INF UI: ZSATrayForm activeDelegate: ZSATray.ZSAMainForm
+2026-05-31 04:31:03.014967(+0200)[14860:22652] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-31 04:31:03.016983(+0200)[14860:6156] INF sendKeepAliveResponse: {"error":0,"errorMessage":"","loginName":"###","success":true,"userAllowedToAddPartner":true}
+2026-05-31 04:31:03.017505(+0200)[14860:6156] INF KeepAliveResponse ZSAAuth.clientPolicy.userEnrolled: true
+2026-05-31 04:31:03.017505(+0200)[14860:6156] INF UI: ZSATrayForm showActive
+2026-05-31 04:31:03.017505(+0200)[14860:14864] INF Updating username after update client policy
+2026-05-31 04:31:03.018523(+0200)[14860:14864] INF UI: ZSATrayForm activeDelegate: ZSATray.ZSAMainForm
+2026-05-31 04:37:56.901369(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 04:37:56.922767(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 04:39:48.864729(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 04:40:22.883211(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 04:40:33.770755(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 04:58:46.781652(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:02:06.607493(+0200)[14860:20540] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 05:02:06.661501(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-31 05:02:06.678039(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-31 05:02:07.704887(+0200)[14860:19484] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 05:02:07.842399(+0200)[14860:18968] INF Notified proxy settings changes
+2026-05-31 05:02:07.905406(+0200)[14860:18968] INF Refreshed proxy settings changes
+2026-05-31 05:02:08.755038(+0200)[14860:5660] INF Network address changed.
+2026-05-31 05:02:08.755038(+0200)[14860:5660] INF Posture Check called on Network Change
+2026-05-31 05:02:14.063036(+0200)[14860:5660] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-31 05:02:14.065090(+0200)[14860:5660] INF Evaluated Device Postures
+2026-05-31 05:02:47.872488(+0200)[14860:30108] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 05:02:47.903702(+0200)[14860:6156] INF Notified proxy settings changes
+2026-05-31 05:02:47.957681(+0200)[14860:6156] INF Refreshed proxy settings changes
+2026-05-31 05:02:48.316648(+0200)[14860:30108] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 05:02:48.389499(+0200)[14860:6156] INF Notified proxy settings changes
+2026-05-31 05:02:48.419204(+0200)[14860:6156] INF Refreshed proxy settings changes
+2026-05-31 05:02:49.457894(+0200)[14860:20540] INF RPC notification code: ZSATRAYMANAGER_BROADCAST_PROXY_CHANGE
+2026-05-31 05:02:49.510101(+0200)[14860:16164] INF Notified proxy settings changes
+2026-05-31 05:02:49.524888(+0200)[14860:16164] INF Refreshed proxy settings changes
+2026-05-31 05:04:08.653157(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:04:17.373341(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:06:16.836990(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:06:34.767117(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:06:48.036359(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:06:57.812957(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:07:06.783504(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:07:17.107319(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:08:49.433850(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:09:25.532761(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:09:48.752465(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:13:37.442190(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:14:20.643779(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:17:06.581835(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:18:06.265053(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:21:01.070560(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:21:51.541749(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:21:54.033861(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:21:56.447598(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:22:51.426431(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:23:27.967411(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:23:29.675275(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:23:32.302112(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:23:34.449633(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:25:40.543808(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:25:50.289175(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:25:55.349878(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:26:04.324053(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:26:16.414130(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:26:26.617872(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:26:39.903812(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:26:49.565684(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:26:59.985933(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:27:06.061289(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:27:38.563864(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:27:51.209844(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:28:00.576324(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:28:06.282183(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:28:22.414754(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:28:29.390428(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:28:33.984607(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:28:42.987324(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:32:56.648229(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:36:46.313563(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:37:24.945509(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:37:51.624436(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:38:49.710514(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:38:59.324443(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 05:39:13.167035(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:07:44.889670(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:08:24.259442(+0200)[14860:12720] INF ZPA state changed, From: TUNNEL_FORWARDING To: CONNECTING
+2026-05-31 06:08:24.263485(+0200)[14860:12720] INF ZIA state changed, From: TUNNEL_FORWARDING To: CONNECTING
+2026-05-31 06:08:24.267509(+0200)[14860:16168] INF Registry changed: 1
+2026-05-31 06:08:25.914191(+0900)[14860:12720] DBG ZIAProtocol changed from: [v2.0 - DTLS] To: [v1.0]
+2026-05-31 06:08:25.914191(+0900)[14860:12720] INF ZIA state changed, From: CONNECTING To: TUNNEL_FORWARDING
+2026-05-31 06:08:25.940083(+0900)[14860:16168] INF Registry changed: 1
+2026-05-31 06:08:26.575413(+0900)[14860:29132] INF Network address changed.
+2026-05-31 06:08:26.575413(+0900)[14860:29132] INF Posture Check called on Network Change
+2026-05-31 06:08:26.905406(+0900)[14860:29132] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-31 06:08:26.905406(+0900)[14860:29132] INF Evaluated Device Postures
+2026-05-31 06:08:27.509788(+0900)[14860:10232] INF ZPA state changed, From: CONNECTING To: ADAPTER_DOWN_ERROR
+2026-05-31 06:08:27.509788(+0900)[14860:10232] INF ZIA state changed, From: TUNNEL_FORWARDING To: ADAPTER_DOWN_ERROR
+2026-05-31 06:08:27.513837(+0900)[14860:16168] INF Registry changed: 1
+2026-05-31 06:08:28.260076(+0900)[14860:28268] INF Network address changed.
+2026-05-31 06:08:28.260076(+0900)[14860:28268] INF Posture Check called on Network Change
+2026-05-31 06:08:28.282859(+0900)[14860:28268] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-31 06:08:28.282859(+0900)[14860:28268] INF Evaluated Device Postures
+2026-05-31 06:08:29.326248(+0900)[14860:19508] INF Network address changed.
+2026-05-31 06:08:29.326248(+0900)[14860:19508] INF Posture Check called on Network Change
+2026-05-31 06:08:29.358121(+0900)[14860:19508] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-31 06:08:29.358121(+0900)[14860:19508] INF Evaluated Device Postures
+2026-05-31 06:08:38.692681(+0900)[14860:26688] INF RPC notification code: ZSATRAYMANAGER_NOTIFY_USER
+2026-05-31 06:08:38.696733(+0900)[14860:6156] DBG Notification popup suppressed: Services are down because the network is disconnected.
+2026-05-31 06:10:11.559310(+0900)[14860:12720] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-31 06:10:11.559310(+0900)[14860:16164] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-31 06:10:11.559310(+0900)[14860:16164] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-31 06:11:29.705716(+0900)[14860:12720] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-31 06:11:29.707024(+0900)[14860:6156] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-31 06:11:29.707024(+0900)[14860:6156] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-31 06:12:46.607842(+0900)[14860:12720] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-31 06:12:46.608512(+0900)[14860:18976] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-31 06:12:46.608512(+0900)[14860:18976] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-31 06:14:04.286023(+0200)[14860:3532] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-31 06:14:04.287136(+0200)[14860:18976] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-31 06:14:04.288135(+0200)[14860:18976] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-31 06:14:52.312603(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:15:23.260901(+0200)[14860:3532] INF RPC notification code: ZSATRAYMANAGER_SEND_KEEPALIVE_RESPONSE
+2026-05-31 06:15:23.260901(+0200)[14860:16128] INF sendKeepAliveResponse: {"error":-13,"errorMessage":"","loginName":"###","success":false,"userAllowedToAddPartner":false}
+2026-05-31 06:15:23.260901(+0200)[14860:16128] INF Keep Alive failed: {"error":-13,"errorMessage":"","loginName":"jnavaqui@emeal.nttdata.com","success":false,"userAllowedToAddPartner":false}
+2026-05-31 06:16:01.806909(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:16:06.083095(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:20:08.727259(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:20:09.554649(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:20:12.822423(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:20:29.900672(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:20:32.463987(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:22:56.834158(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:22:58.553727(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:23:19.172172(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:43:55.116896(+0200)[14860:14864] INF User session switch: SessionLock
+2026-05-31 06:49:53.569926(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:50:16.560157(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:50:18.076230(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:53:16.609529(+0200)[14860:14864] INF User session switch: ConsoleDisconnect
+2026-05-31 06:56:42.961200(+0200)[14860:14864] INF User session switch: ConsoleConnect
+2026-05-31 06:56:43.501614(+0200)[14860:14864] INF User session switch: SessionUnlock
+2026-05-31 06:56:43.547901(+0200)[14860:14864] INF Popup Manager: rerendering popups on screen res change!
+2026-05-31 06:56:43.549167(+0200)[14860:14864] INF UI: Update text styles for accessibility
+2026-05-31 06:56:43.580773(+0200)[14860:14864] INF SlidingMenu_Loaded: strictEnforcement=False
+2026-05-31 07:36:23.131097(+0200)[14860:14864] INF User session switch: SessionLock
+2026-05-31 07:41:52.563148(+0200)[14860:14864] INF User session switch: ConsoleDisconnect
+2026-05-31 07:42:51.711939(+0200)[14860:14864] INF User session ending: Shutdown
+2026-05-31 07:42:51.714947(+0200)[14860:14864] INF Performing exit clean up
+2026-05-31 07:42:51.981342(+0200)[14860:14864] INF sendZSATrayManagerCommandHelper retVal: STATUS_SUCCESS
+2026-05-31 07:42:51.982340(+0200)[14860:14864] INF Removing Zscaler system tray icon
+2026-05-31 07:42:52.892343(+0200)[14860:14864] INF sessionCleanUp: Done with Session Cleanup
