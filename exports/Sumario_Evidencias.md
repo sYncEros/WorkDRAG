@@ -50,3 +50,11 @@ Luego, podemos pasar a correlacionar todos estos puntos en un timeline más deta
     *   *Realidad:* La empresa eliminó las protecciones locales para facilitar el acceso remoto y la monitorización sin bloqueos.
 *   **Evidencia F.4 (Bloqueo de Comandos Administrativos):** Denegación de acceso a `ADMIN$` y fallos en el apagado de WSL (`SharedADMIN & ShutDownWSL_NoPermision.png`).
     *   *Realidad:* La trabajadora fue despojada del control administrativo de su propio equipo, el cual fue transferido a una entidad remota.
+
+#### **Bloque G: Evidencia Técnica de Rollback Programado (WinREAgent)**
+*   **Evidencia G.1 (Sesión de Limpieza Programada):** Archivo `WinREServicingManager.xml` con estado `Scheduled="True"` y operación `CleanupScratch`.
+    *   *Realidad:* Prueba técnica de que el sistema fue programado deliberadamente para realizar una limpieza de archivos y una reconfiguración del entorno de recuperación.
+*   **Evidencia G.2 (Estado de Operación de Recuperación):** Archivo `ReAgent.xml` con `ScheduledOperation state="5"`.
+    *   *Realidad:* Confirma que el sistema estaba en un estado de "espera de ejecución" de una tarea de recuperación, lo cual es consistente con un rollback forzado.
+*   **Evidencia G.3 (Rastros de Backup de WinRE):** Archivo `RollbackInfo.ini` registrando la creación de imágenes `.wim` de respaldo.
+    *   *Realidad:* Indica una intervención profunda en el núcleo del sistema operativo para asegurar la persistencia de los cambios realizados durante la limpieza.
